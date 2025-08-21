@@ -1,0 +1,41 @@
+---
+import "@/styles/global.css";
+import { Button } from "@/components/ui/button";
+import { NavbarDemo } from "@/components/ui/navbar";
+import { BackgroundRippleEffectDemo } from "@/components/ui/bg-ripple";
+import { FloatingDockDemo } from "@/components/ui/nav-dock";
+
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		 <script is:inline>
+      (() => {
+        try {
+          const root = document.documentElement;
+          const stored = localStorage.getItem("theme"); // 'light' | 'dark'
+          const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          const theme = stored ?? (systemDark ? "dark" : "light");
+          root.classList.toggle("dark", theme === "dark");
+
+          // Keep localStorage in sync when the class changes
+          new MutationObserver(() => {
+            localStorage.setItem("theme", root.classList.contains("dark") ? "dark" : "light");
+          }).observe(root, { attributes: true, attributeFilter: ["class"] });
+        } catch {}
+      })();
+    </script>
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro</title>
+	</head>
+	<body class="bg-white dark:bg-black">
+		<FloatingDockDemo client:load />
+	<!-- <NavbarDemo client:load />   -->
+		<BackgroundRippleEffectDemo client:load class="z-[-10]" />
+		<h1 class="text-7xl font-bold ">Interactive Background Boxes Ripple Effect</h1>
+		<Button client:load>Say hi</Button>
+	</body>
+</html>
