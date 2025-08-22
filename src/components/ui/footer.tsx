@@ -84,7 +84,7 @@ export default function Footer({
 
   return (
     <footer className="relative w-full border-t bg-neutral-50/60 py-12 text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100">
-      <div className="mx-auto max-w-6xl px-4">
+      <div className="mx-26">
         {/* Top grid: 3 columns */}
         <nav aria-label="Footer" className="grid gap-10 sm:grid-cols-2 md:grid-cols-3">
           {columns.map((col) => (
@@ -114,11 +114,8 @@ export default function Footer({
           {/* Left: copyright block */}
           <div className="col-span-2 md:col-span-2">
             <p className="text-2xl font-extrabold leading-tight md:text-3xl">
-              © {year}
-              <br />
-              {name}
-              <br />
-              <span className="font-medium">All rights reserved.</span>
+              © {year} {name}
+              <span className="font-medium"> All rights reserved.</span>
             </p>
             <LocalTime />
           </div>
