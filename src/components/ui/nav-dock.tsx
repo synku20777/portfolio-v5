@@ -14,7 +14,7 @@ export function FloatingDockDemo() {
   const links = [
     {
       title: "Home",
-      icon: (
+      node: (
         <IconHome className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
       href: "#",
@@ -22,21 +22,21 @@ export function FloatingDockDemo() {
 
     {
       title: "Products",
-      icon: (
+      node: (
         <IconTerminal2 className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
       href: "#",
     },
     {
       title: "Components",
-      icon: (
+      node: (
         <IconNewSection className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
       href: "#",
     },
     {
       title: "Aceternity UI",
-      icon: (
+      node: (
         <img
           src="https://assets.aceternity.com/logo-dark.png"
           width={20}
@@ -48,7 +48,7 @@ export function FloatingDockDemo() {
     },
     {
       title: "Changelog",
-      icon: (
+      node: (
         <IconExchange className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
       href: "#",
@@ -56,21 +56,21 @@ export function FloatingDockDemo() {
 
     {
       title: "Twitter",
-      icon: (
+      node: (
         <IconBrandX className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
       href: "#",
     },
     {
       title: "GitHub",
-      icon: (
+      node: (
         <IconBrandGithub className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
       href: "#",
     },
     {
       title: "Mode",
-      icon: <ModeToggle />,
+      node: <ModeToggle />,
       href: "#",
     },
   ];

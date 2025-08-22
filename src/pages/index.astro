@@ -1,9 +1,11 @@
 ---
-import "@/styles/global.css";
+import "@/styles/globals.css";
 import { Button } from "@/components/ui/button";
 import { BackgroundRippleEffectDemo } from "@/components/ui/bg-ripple";
 import { FloatingDockDemo } from "@/components/ui/nav-dock";
-
+import { FilesystemItemAnimatedDemo } from "@/components/ui/file-projects";
+import { LayoutGridDemo } from "@/components/ui/project-preview";
+import Footer from "@/components/ui/footer";
 ---
 
 <html lang="en">
@@ -36,6 +38,31 @@ import { FloatingDockDemo } from "@/components/ui/nav-dock";
 		<FloatingDockDemo client:load />
 	<!-- <NavbarDemo client:load />   -->
 		<BackgroundRippleEffectDemo client:load />
-
+		<section class="bg-neutral-100 w-full py-4 dark:bg-neutral-900">
+			<div class="mt-32 mx-26 flex-col gap-3 items-start justify-start ">
+			<div class="flex items-end">
+				<h2 class="text-nowrap text-left text-2xl font-black tracking-tight text-neutral-800  dark: md:text-4xl lg:text-7xl/14 dark:text-neutral-100">Selected Works</h2>
+				<hr class="w-full border-t-2 border-black border-neutral-300 dark:border-neutral-700" />
+			</div>
+			<div id="projects" class="mt-10 flex gap-18">
+				<div id="file-scroller" class="sticky w-2xs top-0">
+					<FilesystemItemAnimatedDemo client:load/>
+				</div>
+				<div id="gallery" class="w-full rounded-xl">
+					<LayoutGridDemo client:load />
+				</div>
+			</div>
+			</div>
+		</section>
+		<section class="w-full py-4 ">
+			<div class="mt-32 mx-26">
+				<h3>Services</h3>
+			</div>
+		</section>
+		<footer>
+			<div class="mt-32 mx-26">
+				<Footer name="Nest" />
+			</div>
+		</footer>
 	</body>
 </html>
