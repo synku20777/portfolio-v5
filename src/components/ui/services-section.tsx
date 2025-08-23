@@ -5,19 +5,19 @@ import { StickyScroll } from "@/components/ui/sticky-scroll";
 
 const content = [
   {
-    title: "Collaborative Editing",
+    title: "Product design",
     description:
-      "Work together in real time with your team, clients, and stakeholders. Collaborate on documents, share ideas, and make decisions quickly. With our platform, you can streamline your workflow and increase productivity.",
+      "Full product development lifecycle service where we go from market research to MVP.",
     content: (
       <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))] text-white">
-        Collaborative Editing
+        Product design
       </div>
     ),
   },
   {
-    title: "Real time changes",
+    title: "Design Systems",
     description:
-      "See changes as they happen. With our platform, you can track every modification in real time. No more confusion about the latest version of your project. Say goodbye to the chaos of version control and embrace the simplicity of real-time updates.",
+      "A well-defined design system is the backbone of any successful product. I help you create a cohesive design language that enhances collaboration and ensures consistency across all touchpoints. I do everything from branding to tokens, UI components and documentation.",
     content: (
       <div className="flex h-full w-full items-center justify-center text-white">
         <img
@@ -25,36 +25,39 @@ const content = [
           width={300}
           height={300}
           className="h-full w-full object-cover"
-          alt="linear board demo"
+          alt="Design Systems"
         />
       </div>
     ),
   },
   {
-    title: "Version control",
+    title: "Web Development",
     description:
-      "Experience real-time updates and never stress about version control again. Our platform ensures that you're always working on the most recent version of your project, eliminating the need for constant manual updates. Stay in the loop, keep your team aligned, and maintain the flow of your work without any interruptions.",
+      "A website developed to captivate and convert can elevate your brand to new heights. My custom-coded sites are meticulously crafted to reflect your unique identity, delivering seamless experiences with a focus on animation—keeping your audience engaged and returning.",
     content: (
       <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--orange-500),var(--yellow-500))] text-white">
-        Version control
+        Web Development
       </div>
     ),
   },
   {
-    title: "Running out of content",
+    title: "SEO & Analytics",
     description:
-      "Experience real-time updates and never stress about version control again. Our platform ensures that you're always working on the most recent version of your project, eliminating the need for constant manual updates. Stay in the loop, keep your team aligned, and maintain the flow of your work without any interruptions.",
+      "Unlock the full potential of your website with our SEO and analytics services. I help you optimize your content for search engines, ensuring that your target audience can easily find you. My analytics tools provide valuable insights into user behavior, allowing you to make data-driven decisions.",
     content: (
       <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))] text-white">
-        Running out of content
+        SEO & Analytics
       </div>
     ),
   },
 ];
 export function StickyScrollRevealDemo() {
   return (
-    <div className="w-full py-4">
-      <StickyScroll content={content} />
+    <div className="py-20 mx-26">
+      <h3 className="text-nowrap text-left text-2xl font-black tracking-tight text-neutral-400  dark: md:text-4xl lg:text-7xl/14 dark:text-neutral-100">How I can help you</h3>
+      <div className="mt-6 w-full">
+        <StickyScroll content={content} />
+      </div>
     </div>
   );
 }

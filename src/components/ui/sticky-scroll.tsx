@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 export const StickyScroll = ({
   content,
   contentClassName,
+  triggerOffset = 0.12, // + = earlier, - = later
 }: {
   content: {
     title: string;
@@ -14,23 +15,29 @@ export const StickyScroll = ({
     content?: React.ReactNode | any;
   }[];
   contentClassName?: string;
+  triggerOffset?: number;
 }) => {
   const [activeCard, setActiveCard] = React.useState(0);
   const ref = useRef<any>(null);
   const { scrollYProgress } = useScroll({
-    // uncomment line 22 and comment line 23 if you DONT want the overflow container and want to have it change on the entire page scroll
-    // target: ref
-    container: ref,
-    offset: ["start start", "end start"],
+    target: ref,
+    // container: ref,
+    // Start mapping a bit earlier and end a bit earlier within the viewport
+    offset: ["start 0.1", "end 0.05"],
   });
   const cardLength = content.length;
 
+  const clamp01 = (v: number) => Math.max(0, Math.min(1, v));
+
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    // Bias forward so the next card activates sooner
+    const p = clamp01(latest + triggerOffset);
+
     const cardsBreakpoints = content.map((_, index) => index / cardLength);
     const closestBreakpointIndex = cardsBreakpoints.reduce(
       (acc, breakpoint, index) => {
-        const distance = Math.abs(latest - breakpoint);
-        if (distance < Math.abs(latest - cardsBreakpoints[acc])) {
+        const distance = Math.abs(p - breakpoint);
+        if (distance < Math.abs(p - cardsBreakpoints[acc])) {
           return index;
         }
         return acc;
@@ -55,33 +62,24 @@ export const StickyScroll = ({
   }, [activeCard]);
 
   return (
-    <motion.div
-      className="relative flex mt-8 gap-16 rounded-md"
+    <div
+      className="mx-auto flex w-full max-w-7xl items-start gap-16 rounded-md py-16"
       ref={ref}
     >
-      <div className="sticky top-0 flex items-start">
-        <div className="min-w-sm max-w-2xl">
+        <div className="min-w-md max-w-2xl flex flex-col gap-24">
           {content.map((item, index) => (
-            <div key={item.title + index} className="my-20">
+            <div key={item.title + index}>
               <motion.h4
-                initial={{
-                  opacity: 0,
-                }}
-                animate={{
-                  opacity: activeCard === index ? 1 : 0.3,
-                }}
-                className="text-2xl font-bold text-neutral-100"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: activeCard === index ? 1 : 0.3 }}
+                className="text-2xl font-bold text-slate-100"
               >
                 {item.title}
               </motion.h4>
               <motion.p
-                initial={{
-                  opacity: 0,
-                }}
-                animate={{
-                  opacity: activeCard === index ? 1 : 0.3,
-                }}
-                className="text-kg mt-10 max-w-sm text-neutral-300"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: activeCard === index ? 1 : 0.3 }}
+                className="text-kg mt-10 max-w-sm text-slate-300"
               >
                 {item.description}
               </motion.p>
@@ -89,16 +87,16 @@ export const StickyScroll = ({
           ))}
           <div className="h-40" />
         </div>
-      </div>
       <div
+        id="sticky-gradient"
         style={{ background: backgroundGradient }}
         className={cn(
-          "sticky top-24 hidden h-68 w-full overflow-hidden rounded-md bg-white scroll-hidden lg:block",
+          "sticky top-12 self-start h-[70dvh] w-full rounded-md bg-white lg:block",
           contentClassName,
         )}
       >
         {content[activeCard].content ?? null}
       </div>
-    </motion.div>
+    </div>
   );
 };

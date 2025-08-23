@@ -75,11 +75,11 @@ export function FloatingDockDemo() {
     },
   ];
   return (
-    <div className="fixed z-100 bottom-5 flex items-center justify-center w-full">
+    <nav className="fixed z-100 bottom-5 flex items-center justify-center w-full">
       <FloatingDock
         mobileClassName="translate-y-20"
         items={links}
       />
-    </div>
+    </nav>
   );
 }
