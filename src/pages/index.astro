@@ -6,6 +6,8 @@ import { FloatingDockDemo } from "@/components/ui/nav-dock";
 import { FilesystemItemAnimatedDemo } from "@/components/ui/file-projects";
 import { LayoutGridDemo } from "@/components/ui/project-preview";
 import Footer from "@/components/ui/footer";
+import { StickyScrollRevealDemo } from "@/components/ui/services-section";
+import type { loadRenderers } from "astro:container";
 ---
 
 <html lang="en">
@@ -39,7 +41,7 @@ import Footer from "@/components/ui/footer";
 	<!-- <NavbarDemo client:load />   -->
 		<BackgroundRippleEffectDemo client:load />
 		<section class="bg-neutral-100 w-full py-4 dark:bg-neutral-900">
-			<div class="mt-32 mx-26 flex-col gap-3 items-start justify-start ">
+			<div class="my-32 mx-26 flex-col gap-3 items-start justify-start ">
 			<div class="flex items-end">
 				<h2 class="text-nowrap text-left text-2xl font-black tracking-tight text-neutral-800  dark: md:text-4xl lg:text-7xl/14 dark:text-neutral-100">Selected Works</h2>
 				<hr class="w-full border-t-2 border-black border-neutral-300 dark:border-neutral-700" />
@@ -54,142 +56,10 @@ import Footer from "@/components/ui/footer";
 			</div>
 			</div>
 		</section>
-		<section id="services" class="bg-neutral-950 text-zinc-100 rounded-t-3xl">
-			<div class="mx-auto max-w-7xl px-6 py-24 sm:px-8 lg:px-12">
-				<!-- Heading -->
-				<h2 class="max-w-[18ch] text-4xl font-semibold tracking-tight text-neutral-200 sm:text-5xl">
-				How I can help you focus on growing your business.
-				</h2>
-
-				<!-- Services list -->
-				<div class="mt-12 space-y-16">
-
-				<!-- (01) Web Development -->
-				<div>
-					<!-- sticky header -->
-					<div class="sticky top-20 z-20 border-t border-zinc-800 bg-neutral-950/95 backdrop-blur">
-						<div class="grid grid-cols-12 items-center gap-x-4 py-4">
-							<span class="col-span-2 text-neutral-200 text-xl font-semibold">(01)</span>
-							<h3 class="col-span-6 col-start-6 text-2xl sm:text-3xl font-semibold text-neutral-200">
-							Web Development
-							</h3>
-							<div class="hidden xl:block justify-self-end opacity-30">
-							<svg aria-hidden="true" class="h-6 w-6" viewBox="0 0 24 24" fill="none">
-								<path d="M8 7l-5 5 5 5M16 7l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-							</svg>
-							</div>
-						</div>
-					</div>
-
-					<!-- body -->
-					<div class="grid gap-6 md:grid-cols-12">
-						<!-- media / image -->
-						<div class="md:col-span-5">
-							<div class="aspect-[4/3] overflow-hidden rounded-lg ring-1 ring-zinc-800">
-							<img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1600&auto=format&fit=crop"
-								alt="Code editor on screen"
-								class="h-full w-full object-cover object-center">
-							</div>
-						</div>
-
-						<!-- text + features -->
-						<div class="md:col-span-7 md:col-start-6 flex flex-col gap-4 pt-2">
-							<p class="max-w-prose text-base text-zinc-300">
-							Custom-coded sites that reflect your brand, feel buttery-smooth, and convert visitors through thoughtful interaction and motion.
-							</p>
-							<ol class="divide-y divide-zinc-800 text-zinc-100">
-							<li class="flex items-start gap-4 py-3"><span class="font-mono text-zinc-500">01</span> CMS Integration</li>
-							<li class="flex items-start gap-4 py-3"><span class="font-mono text-zinc-500">02</span> Motion & Animations</li>
-							<li class="flex items-start gap-4 py-3"><span class="font-mono text-zinc-500">03</span> 3D Development</li>
-							</ol>
-						</div>
-					</div>
-				</div>
-
-				<!-- (02) Web Design -->
-				<div>
-					<!-- sticky header -->
-					<div class="sticky top-20 z-20 border-t border-zinc-800 bg-neutral-950/95 backdrop-blur">
-						<div class="grid grid-cols-12 items-center gap-x-4 py-4">
-							<span class="col-span-2 text-neutral-200 text-xl font-semibold">(02)</span>
-							<h3 class="col-span-6 col-start-6 text-2xl sm:text-3xl font-semibold text-neutral-200">
-							Web Design
-							</h3>
-							<div class="hidden xl:block justify-self-end opacity-30">
-							<svg aria-hidden="true" class="h-6 w-6" viewBox="0 0 24 24" fill="none">
-								<circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
-							</svg>
-							</div>
-						</div>
-					</div>
-
-					<!-- body -->
-					<div class="grid gap-6 md:grid-cols-12">
-					<!-- media / image -->
-						<div class="md:col-span-5">
-							<div class="aspect-[4/3] overflow-hidden rounded-lg ring-1 ring-zinc-800">
-								<img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?q=80&w=1600&auto=format&fit=crop"
-							alt="Design mockups"
-							class="h-full w-full object-cover object-center">
-						</div>
-					</div>
-
-					<!-- text + features -->
-					<div class="md:col-span-7 md:col-start-6 flex flex-col gap-4 pt-2">
-						<p class="max-w-prose text-base text-zinc-300">
-						Story-driven, high-converting designs that resonate with your audience and align tightly with your goals.
-						</p>
-						<ol class="divide-y divide-zinc-800 text-zinc-100">
-						<li class="flex items-start gap-4 py-3"><span class="font-mono text-zinc-500">01</span> Responsive Design</li>
-						<li class="flex items-start gap-4 py-3"><span class="font-mono text-zinc-500">02</span> Interactions & Motion</li>
-						<li class="flex items-start gap-4 py-3"><span class="font-mono text-zinc-500">03</span> Design Systems & UI Kits</li>
-						</ol>
-					</div>
-					</div>
-				</div>
-
-				<!-- (03) SEO -->
-				<div>
-					<!-- sticky header -->
-					<div class="sticky top-20 z-20 border-t border-zinc-800 bg-neutral-950/95 backdrop-blur">
-					<div class="grid grid-cols-12 items-center gap-x-4 py-4">
-						<span class="col-span-2 text-neutral-200 text-xl font-semibold">(03)</span>
-						<h3 class="col-span-6 col-start-6 text-2xl sm:text-3xl font-semibold text-neutral-200">
-						SEO
-						</h3>
-						<div class="hidden xl:block justify-self-end opacity-30">
-						<svg aria-hidden="true" class="h-6 w-6" viewBox="0 0 24 24" fill="none">
-							<path d="M3 17l6-6 4 4 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-						</svg>
-						</div>
-					</div>
-					</div>
-
-					<!-- body -->
-					<div class="grid gap-6 md:grid-cols-12">
-					<!-- media / image -->
-					<div class="md:col-span-5">
-						<div class="aspect-[4/3] overflow-hidden rounded-lg ring-1 ring-zinc-800">
-						<img src="https://images.unsplash.com/photo-1454165205744-3b78555e5572?q=80&w=1600&auto=format&fit=crop"
-							alt="Analytics dashboard"
-							class="h-full w-full object-cover object-center">
-						</div>
-					</div>
-
-					<!-- text + features -->
-					<div class="md:col-span-7 md:col-start-6 flex flex-col gap-4 pt-2">
-						<p class="max-w-prose text-base text-zinc-300">
-						Elevate visibility and attract the right audience with solid technical foundations and clear on-page structure.
-						</p>
-						<ol class="divide-y divide-zinc-800 text-zinc-100">
-						<li class="flex items-start gap-4 py-3"><span class="font-mono text-zinc-500">01</span> Technical SEO</li>
-						<li class="flex items-start gap-4 py-3"><span class="font-mono text-zinc-500">02</span> On-Page Optimization</li>
-						<li class="flex items-start gap-4 py-3"><span class="font-mono text-zinc-500">03</span> SEO Audits & Analysis</li>
-						</ol>
-					</div>
-						</div>
-					</div>
-				</div>
+		<section class="bg-neutral-900 w-full py-4 h-[60dvh] overflow-y-auto dark:bg-neutral-900">
+			<div class="mx-26">
+				<h3 class="text-nowrap sticky top-4 text-left text-2xl font-black tracking-tight text-neutral-800  dark: md:text-4xl lg:text-7xl/14 dark:text-neutral-100">How I can help you</h3>
+				<StickyScrollRevealDemo client:load/>
 			</div>
 		</section>
 		<Footer name="Nest" />
