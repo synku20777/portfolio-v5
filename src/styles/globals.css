@@ -3,19 +3,19 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @font-face {
-  font-family: "Montreal";
-  src: url('/font/PPNeueMontreal-Variable.woff2') format('woff2');
+  font-family: "Jakarta";
+  src: url('/font/font.woff2') format('woff2');
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
 
 :root {
-  font-family: "Montreal", sans-serif;
+  font-family: "Jakarta", sans-serif;
   font-size: 16px;
   line-height: 1;
   font-synthesis: none;
-  font-feature-settings: "ss01";
+  /* font-feature-settings: "ss02", "ss03"; */
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
