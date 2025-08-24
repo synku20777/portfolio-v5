@@ -14,10 +14,10 @@ const SkeletonOne = () => {
   return (
     <div>
       <p className="font-bold md:text-xl text-md text-white">
-        Web design
+        Mobile app design
       </p>
       <p className="font-normal text-sm my-2 max-w-lg text-neutral-200">
-        Modern webpages with a sleek and minimalist design, imporved user experience and faster shipping times.
+        Modern mobile apps with a sleek and minimalist design, improved user experience and faster shipping times.
       </p>
     </div>
   );
@@ -41,11 +41,10 @@ const SkeletonThree = () => {
   return (
     <div>
       <p className="font-bold md:text-xl text-md text-white">
-        Responsive design
+        Information architecture
       </p>
       <p className="font-normal text-sm my-2 max-w-lg text-neutral-200">
-        A responsive design adapts seamlessly to different screen sizes and
-        orientations, ensuring a great user experience on all devices.
+        Information architecture involves organizing and structuring content in a way that makes it easy for users to find and understand. This includes creating clear navigation, labeling, and categorization.
       </p>
     </div>
   );
@@ -54,10 +53,10 @@ const SkeletonFour = () => {
   return (
     <div>
       <p className="font-bold md:text-xl text-md text-white">
-        Design System
+        Prototypes
       </p>
       <p className="font-normal text-sm my-2 max-w-lg text-neutral-200">
-        A design system is a collection of reusable components, guidelines, and best practices that help teams create consistent and efficient user interfaces.
+        Prototypes are early samples or models of a product used to test a concept or process. They help designers explore ideas and gather feedback before finalizing the design.
       </p>
     </div>
   );

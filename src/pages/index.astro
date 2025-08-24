@@ -4,8 +4,11 @@ import { Button } from "@/components/ui/button";
 import { BackgroundRippleEffectDemo } from "@/components/ui/bg-ripple";
 import { FloatingDockDemo } from "@/components/ui/nav-dock";
 import { FilesystemItemAnimatedDemo } from "@/components/ui/file-projects";
-import { LayoutGridDemo } from "@/components/ui/previews/UxUnite-preview";
+import { LayoutGridDemo as UXUniteDemo } from "@/components/ui/previews/UxUnite-preview";
 import { LayoutGridDemo as ArtsyLayoutGridDemo } from "@/components/ui/previews/Artsy-preview";
+import { LayoutGridDemo as CloudFirstLayoutGridDemo } from "@/components/ui/previews/CloudFirst-preview";
+import { LayoutGridDemo as FireflyLayoutGridDemo } from "@/components/ui/previews/Firefly-preview";
+
 import Footer from "@/components/ui/footer";
 import { StickyScrollRevealDemo } from "@/components/ui/services-section";
 // import type { loadRenderers } from "astro:container";
@@ -57,8 +60,10 @@ import { StickyScrollRevealDemo } from "@/components/ui/services-section";
 					<FilesystemItemAnimatedDemo client:load/>
 				</div>
 				<div id="gallery" class="w-full flex flex-col gap-8 rounded-xl">
-					<LayoutGridDemo client:load />
+					<UXUniteDemo client:load />
 					<ArtsyLayoutGridDemo client:load />
+					<CloudFirstLayoutGridDemo client:load />
+					<FireflyLayoutGridDemo client:load />
 				</div>
 			</div>
 			</div>
