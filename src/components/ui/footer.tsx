@@ -84,9 +84,9 @@ export default function Footer({
 
   return (
     <footer className="relative w-full border-t bg-neutral-50/60 py-12 text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100">
-      <div className="mx-26">
+      <div className="mx-auto max-w-7xl px-6 py-12 sm:py-8">
         {/* Top grid: 3 columns */}
-        <nav aria-label="Footer" className="grid gap-10 sm:grid-cols-2 md:grid-cols-3">
+        <nav aria-label="Footer" className="grid gap-10 grid-cols-2 md:grid-cols-3">
           {columns.map((col) => (
             <div key={col.title}>
               <h3 className="text-sm font-semibold">{col.title}</h3>

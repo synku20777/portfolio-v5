@@ -48,7 +48,7 @@ export function FilesystemItem({
               animate={{ height: "auto" }}
               exit={{ height: 0 }}
               transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-              className="pl-6 overflow-hidden flex flex-col justify-end"
+              className="pl-2 md:pl-6 overflow-hidden flex flex-col justify-end"
             >
               {children}
             </motion.ul>
@@ -57,12 +57,12 @@ export function FilesystemItem({
       )
     }
 
-    return isOpen && <ul className="pl-6">{children}</ul>
+    return isOpen && <ul className="pl-2 md:pl-6">{children}</ul>
   }
 
   return (
     <li key={node.name}>
-      <span className="flex text-lg text-black dark:text-white items-center gap-1.5 py-1">
+      <span className="flex text-sm text-black dark:text-white md:text-base lg:text-lg items-center gap-1.5 py-1">
         {node.nodes && node.nodes.length > 0 && (
           <button onClick={() => setIsOpen(!isOpen)} className="p-1 -m-1">
             <ChevronIcon />
@@ -72,11 +72,11 @@ export function FilesystemItem({
         {node.nodes ? (
           <IconFolder
             className={`size-6 text-orange-300 fill-orange-300 ${
-              node.nodes.length === 0 ? "ml-[22px]" : ""
+              node.nodes.length === 0 ? "ml-4 md:ml-12" : ""
             }`}
           />
         ) : (
-          <IconFile className="ml-[22px] size-6 text-sky-500 dark:text-sky-400" />
+          <IconFile className="ml-4 size-6 text-sky-500 dark:text-sky-400" />
         )}
         {node.name}
       </span>

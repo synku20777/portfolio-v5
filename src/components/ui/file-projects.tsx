@@ -35,7 +35,7 @@ const nodes: Node[] = [
     name: 'Projects',
     nodes: [
         {
-            name: 'DesignSystems',
+            name: 'DS',
             nodes: [
               { name: 'UxUnite.ds' },
               { name: 'Aurora.ds' },
@@ -68,7 +68,7 @@ const nodes: Node[] = [
         name: 'Media',
         nodes: [
           { name: 'Posters', nodes: [] },
-          { name: 'Photography', nodes: [] },
+          { name: 'Photos', nodes: [] },
         ],
       },
     ],

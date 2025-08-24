@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils";
-import { IconLayoutNavbarCollapse } from "@tabler/icons-react";
 import {
   AnimatePresence,
   MotionValue,
@@ -8,7 +7,6 @@ import {
   useSpring,
   useTransform,
 } from "motion/react";
-
 import { useRef, useState } from "react";
 
 export const FloatingDock = ({
@@ -22,67 +20,50 @@ export const FloatingDock = ({
 }) => {
   return (
     <>
+      <FloatingDockSmall items={items} className={mobileClassName} />
       <FloatingDockDesktop items={items} className={desktopClassName} />
-      <FloatingDockMobile items={items} className={mobileClassName} />
     </>
   );
 };
 
-const FloatingDockMobile = ({
+/**
+ * Small screens: two-row grid.
+ * - Exactly two rows via `grid-rows-2 grid-flow-col`
+ * - Horizontal scroll if there are many items
+ * - Fixed-size icons (no magnify) for stable layout on touch
+ */
+const FloatingDockSmall = ({
   items,
   className,
 }: {
   items: { title: string; node: React.ReactNode; href: string }[];
   className?: string;
 }) => {
-  const [open, setOpen] = useState(false);
   return (
-    <div className={cn("relative block md:hidden", className)}>
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            layoutId="nav"
-            className="absolute inset-x-0 bottom-full mb-2 flex flex-col gap-2"
-          >
-            {items.map((item, idx) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{
-                  opacity: 1,
-                  y: 0,
-                }}
-                exit={{
-                  opacity: 0,
-                  y: 10,
-                  transition: {
-                    delay: idx * 0.05,
-                  },
-                }}
-                transition={{ delay: (items.length - 1 - idx) * 0.05 }}
-              >
-                <a
-                  href={item.href}
-                  key={item.title}
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-50 dark:bg-neutral-900"
-                >
-                  <div className="h-4 w-4">{item.node}</div>
-                </a>
-              </motion.div>
-            ))}
-          </motion.div>
-        )}
-      </AnimatePresence>
-      <button
-        onClick={() => setOpen(!open)}
-        className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-50 dark:bg-neutral-800"
-      >
-        <IconLayoutNavbarCollapse className="h-5 w-5 text-neutral-500 dark:text-neutral-400" />
-      </button>
+    <div className={cn("mx-auto block md:hidden", className)}>
+      <div className="mx-auto w-full max-w-md overflow-x-auto">
+        <div className="grid grid-rows-2 grid-flow-col auto-cols-max gap-3 rounded-2xl bg-white/10 p-3 shadow-md backdrop-blur-sm dark:bg-neutral-900/10">
+          {items.map((item) => (
+            <motion.a
+              key={item.title}
+              href={item.href}
+              whileTap={{ scale: 0.95 }}
+              className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-200 outline-none ring-offset-2 transition dark:bg-neutral-800 focus-visible:ring-2 focus-visible:ring-neutral-500"
+              aria-label={item.title}
+              title={item.title}
+            >
+              <div className="h-6 w-6">{item.node}</div>
+            </motion.a>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
 
+/**
+ * Desktop: original hover-magnify row.
+ */
 const FloatingDockDesktop = ({
   items,
   className,
@@ -90,14 +71,14 @@ const FloatingDockDesktop = ({
   items: { title: string; node: React.ReactNode; href: string }[];
   className?: string;
 }) => {
-  let mouseX = useMotionValue(Infinity);
+  const mouseX = useMotionValue(Infinity);
   return (
     <motion.div
       onMouseMove={(e) => mouseX.set(e.pageX)}
       onMouseLeave={() => mouseX.set(Infinity)}
       className={cn(
-        "mx-auto hidden h-16 shadow-md items-end gap-4 rounded-2xl px-4 pb-3 md:flex backdrop-blur-sm bg-white/10 dark:bg-neutral-900/10",
-        className
+        "mx-auto hidden h-16 items-end gap-4 rounded-2xl bg-white/10 px-4 pb-3 shadow-md backdrop-blur-sm dark:bg-neutral-900/10 md:flex",
+        className,
       )}
     >
       {items.map((item) => (
@@ -118,41 +99,44 @@ function IconContainer({
   node: React.ReactNode;
   href: string;
 }) {
-  let ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
-  let distance = useTransform(mouseX, (val) => {
-    let bounds = ref.current?.getBoundingClientRect() ?? { x: 0, width: 0 };
-
+  const distance = useTransform(mouseX, (val) => {
+    const bounds = ref.current?.getBoundingClientRect() ?? { x: 0, width: 0 };
     return val - bounds.x - bounds.width / 2;
   });
 
-  let widthTransform = useTransform(distance, [-150, 0, 150], [40, 80, 40]);
-  let heightTransform = useTransform(distance, [-150, 0, 150], [40, 80, 40]);
+  const widthTransform = useTransform(distance, [-150, 0, 150], [40, 80, 40]);
+  const heightTransform = useTransform(distance, [-150, 0, 150], [40, 80, 40]);
 
-  let widthTransformIcon = useTransform(distance, [-150, 0, 150], [20, 40, 20]);
-  let heightTransformIcon = useTransform(
+  const widthTransformIcon = useTransform(
     distance,
     [-150, 0, 150],
-    [20, 40, 20]
+    [20, 40, 20],
+  );
+  const heightTransformIcon = useTransform(
+    distance,
+    [-150, 0, 150],
+    [20, 40, 20],
   );
 
-  let width = useSpring(widthTransform, {
+  const width = useSpring(widthTransform, {
     mass: 0.1,
     stiffness: 150,
     damping: 12,
   });
-  let height = useSpring(heightTransform, {
+  const height = useSpring(heightTransform, {
     mass: 0.1,
     stiffness: 150,
     damping: 12,
   });
 
-  let widthIcon = useSpring(widthTransformIcon, {
+  const widthIcon = useSpring(widthTransformIcon, {
     mass: 0.1,
     stiffness: 150,
     damping: 12,
   });
-  let heightIcon = useSpring(heightTransformIcon, {
+  const heightIcon = useSpring(heightTransformIcon, {
     mass: 0.1,
     stiffness: 150,
     damping: 12,
@@ -161,7 +145,7 @@ function IconContainer({
   const [hovered, setHovered] = useState(false);
 
   return (
-    <a href={href}>
+    <a href={href} aria-label={title} title={title}>
       <motion.div
         ref={ref}
         style={{ width, height }}
@@ -175,7 +159,7 @@ function IconContainer({
               initial={{ opacity: 0, y: 10, x: "-50%" }}
               animate={{ opacity: 1, y: 0, x: "-50%" }}
               exit={{ opacity: 0, y: 2, x: "-50%" }}
-              className="absolute -top-8 left-1/2 w-fit rounded-md border border-gray-200 bg-gray-100 px-2 py-0.5 text-xs whitespace-pre text-neutral-700 dark:border-neutral-900 dark:bg-neutral-800 dark:text-white"
+              className="absolute -top-8 left-1/2 w-fit whitespace-pre rounded-md border border-gray-200 bg-gray-100 px-2 py-0.5 text-xs text-neutral-700 dark:border-neutral-900 dark:bg-neutral-800 dark:text-white"
             >
               {title}
             </motion.div>

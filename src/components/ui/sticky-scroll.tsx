@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import { useMotionValueEvent, useScroll } from "motion/react";
-import { motion } from "motion/react";
+import { useMotionValueEvent, useScroll, motion } from "motion/react";
 import { cn } from "@/lib/utils";
 
 export const StickyScroll = ({
@@ -21,7 +20,6 @@ export const StickyScroll = ({
   const ref = useRef<any>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    // container: ref,
     // Start mapping a bit earlier and end a bit earlier within the viewport
     offset: ["start 0.1", "end 0.05"],
   });
@@ -63,39 +61,44 @@ export const StickyScroll = ({
 
   return (
     <div
-      className="mx-auto flex w-full max-w-7xl items-start gap-16 rounded-md py-16"
       ref={ref}
+      className="mx-auto flex w-full max-w-7xl items-start rounded-md py-10 gap-8 flex-col lg:flex-row lg:gap-16 lg:py-16"
     >
-        <div className="min-w-md max-w-2xl flex flex-col gap-24">
-          {content.map((item, index) => (
-            <div key={item.title + index}>
-              <motion.h4
-                initial={{ opacity: 0 }}
-                animate={{ opacity: activeCard === index ? 1 : 0.3 }}
-                className="text-2xl font-bold text-slate-100"
-              >
-                {item.title}
-              </motion.h4>
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: activeCard === index ? 1 : 0.3 }}
-                className="text-kg mt-10 max-w-sm text-slate-300"
-              >
-                {item.description}
-              </motion.p>
-            </div>
-          ))}
-          <div className="h-40" />
-        </div>
+      {/* Image / sticky panel FIRST on mobile, SECOND on large screens */}
       <div
         id="sticky-gradient"
         style={{ background: backgroundGradient }}
         className={cn(
-          "sticky top-12 self-start h-[70dvh] w-full rounded-md bg-white lg:block",
+          // Mobile: not sticky, full width, reasonable height
+          // Desktop: sticky, tall viewport height
+          "order-1 w-full rounded-md bg-white h-64 sm:h-80 md:h-[50dvh] lg:h-[70dvh] lg:sticky lg:top-12 lg:order-2",
           contentClassName,
         )}
       >
         {content[activeCard].content ?? null}
+      </div>
+
+      {/* Text column SECOND on mobile, FIRST on large screens */}
+      <div className="order-2 w-full max-w-2xl flex flex-col gap-12 lg:order-1 lg:gap-24">
+        {content.map((item, index) => (
+          <div key={item.title + index}>
+            <motion.h4
+              initial={{ opacity: 0 }}
+              animate={{ opacity: activeCard === index ? 1 : 0.3 }}
+              className="text-xl font-bold text-slate-100 md:text-2xl lg:text-3xl"
+            >
+              {item.title}
+            </motion.h4>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: activeCard === index ? 1 : 0.3 }}
+              className="text-md mt-6 max-w-prose text-slate-300 md:text-lg lg:text-xl"
+            >
+              {item.description}
+            </motion.p>
+          </div>
+        ))}
+        <div className="h-40" />
       </div>
     </div>
   );

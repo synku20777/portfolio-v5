@@ -53,8 +53,8 @@ const content = [
 ];
 export function StickyScrollRevealDemo() {
   return (
-    <div className="py-20 mx-26">
-      <h3 className="text-nowrap text-left text-2xl font-black tracking-tight text-neutral-400  dark: md:text-4xl lg:text-7xl/14 dark:text-neutral-100">How I can help you</h3>
+    <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32">
+      <h3 className="text-left text-5xl font-black tracking-tight text-neutral-400  dark: md:text-6xl lg:text-7xl/14 dark:text-neutral-100">How I can help you</h3>
       <div className="mt-6 w-full">
         <StickyScroll content={content} />
       </div>
