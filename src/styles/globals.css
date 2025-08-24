@@ -22,6 +22,27 @@
   --animate-cell-ripple: cell-ripple var(--duration, 200ms) ease-out none 1 var(--delay, 0ms);
 }
 
+#gallery {
+  position: relative;
+  min-height: 40vh; /* prevents layout jump between cases */
+}
+#gallery [data-case] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  pointer-events: none; /* Keep elements from interfering when hidden */
+}
+#gallery [data-case][data-active="true"] {
+  pointer-events: auto;
+}
+/* Reduce motion preference */
+@media (prefers-reduced-motion: reduce) {
+  #gallery [data-case] {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
 @keyframes cell-ripple {
   0% {
     opacity: 0.4;

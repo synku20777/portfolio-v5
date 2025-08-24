@@ -18,7 +18,17 @@ export function FilesystemItem({
 }: FilesystemItemProps) {
   let [isOpen, setIsOpen] = useState(false)
 
-  // Общий контент для обоих вариантов
+  const isFolder = !!(node.nodes && node.nodes.length > 0)
+
+  const handleOpenCase = () => {
+    if (isFolder) return
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(
+        new CustomEvent("case:open", { detail: { name: node.name } })
+      )
+    }
+  }
+
   const ChevronIcon = () =>
     animated ? (
       <motion.span
@@ -35,8 +45,8 @@ export function FilesystemItem({
     )
 
   const ChildrenList = () => {
-    const children = node.nodes?.map((node) => (
-      <FilesystemItem node={node} key={node.name} animated={animated} />
+    const children = node.nodes?.map((n) => (
+      <FilesystemItem node={n} key={n.name} animated={animated} />
     ))
 
     if (animated) {
@@ -62,26 +72,42 @@ export function FilesystemItem({
 
   return (
     <li key={node.name}>
-      <span className="flex text-sm text-black dark:text-white md:text-base lg:text-lg items-center gap-1.5 py-1">
-        {node.nodes && node.nodes.length > 0 && (
-          <button onClick={() => setIsOpen(!isOpen)} className="p-1 -m-1">
-            <ChevronIcon />
-          </button>
-        )}
+      {isFolder ? (
+        <>
+          <span className="flex text-sm text-black dark:text-white md:text-base lg:text-lg items-center gap-1.5 py-1">
+            {/* toggle */}
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="p-1 -m-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-800"
+              aria-expanded={isOpen}
+              aria-label={isOpen ? "Collapse folder" : "Expand folder"}
+            >
+              <ChevronIcon />
+            </button>
 
-        {node.nodes ? (
-          <IconFolder
-            className={`size-6 text-orange-300 fill-orange-300 ${
-              node.nodes.length === 0 ? "ml-4 md:ml-12" : ""
-            }`}
-          />
-        ) : (
+            <IconFolder
+              className={`size-6 text-orange-300 fill-orange-300 ${
+                node.nodes && node.nodes.length === 0 ? "ml-4 md:ml-12" : ""
+              }`}
+            />
+            <span className="font-medium">{node.name}</span>
+          </span>
+
+          <ChildrenList />
+        </>
+      ) : (
+        <button
+          onClick={handleOpenCase}
+          className="group flex w-full text-left text-sm text-black dark:text-white md:text-base lg:text-lg items-center gap-1.5 py-1 px-1 -mx-1 rounded-md hover:bg-neutral-100 dark:hover:bg-neutral-800 focus:outline-none focus:ring-2 focus:ring-sky-400"
+          aria-label={`Open ${node.name} demo`}
+        >
+          {/* no chevron for files */}
           <IconFile className="ml-4 size-6 text-sky-500 dark:text-sky-400" />
-        )}
-        {node.name}
-      </span>
-
-      <ChildrenList />
+          <span className="underline-offset-2 group-hover:underline">
+            {node.name}
+          </span>
+        </button>
+      )}
     </li>
   )
 }

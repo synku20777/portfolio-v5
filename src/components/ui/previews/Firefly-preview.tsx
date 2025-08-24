@@ -66,14 +66,14 @@ const cards = [
     content: <SkeletonOne />,
     className: "md:col-span-2",
     thumbnail:
-      "/photos/projects/Firefly/1.jpg",
+      "/photos/projects/Firefly/1.webp",
   },
   {
     id: 2,
     content: <SkeletonTwo />,
     className: "col-span-1",
     thumbnail:
-      "/photos/projects/Firefly/2.jpg",
+      "/photos/projects/Firefly/2.webp",
   },
   {
     id: 3,
@@ -87,6 +87,6 @@ const cards = [
     content: <SkeletonFour />,
     className: "md:col-span-2",
     thumbnail:
-      "/photos/projects/Firefly/4.jpg",
+      "/photos/projects/Firefly/4.webp",
   },
 ];

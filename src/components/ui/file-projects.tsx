@@ -1,4 +1,5 @@
 import { FilesystemItem } from "@/components/ui/filesystem-item"
+import { Cloud } from "lucide-react";
 
 function FilesystemItemAnimatedDemo() {
   return (
@@ -45,6 +46,8 @@ const nodes: Node[] = [
       {
         name: 'Web',
         nodes: [
+          { name: 'CloudFirst.web'
+          },
           {
             name: 'Ecommerce',
             nodes: [
