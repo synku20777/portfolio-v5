@@ -19,14 +19,8 @@ const content = [
     description:
       "A well-defined design system is the backbone of any successful product. I help you create a cohesive design language that enhances collaboration and ensures consistency across all touchpoints. I do everything from branding to tokens, UI components and documentation.",
     content: (
-      <div className="flex h-full w-full items-center justify-center text-white">
-        <img
-          src="/linear.webp"
-          width={300}
-          height={300}
-          className="h-full w-full object-cover"
-          alt="Design Systems"
-        />
+       <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))] text-white">
+        Design Systems
       </div>
     ),
   },

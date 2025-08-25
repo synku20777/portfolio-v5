@@ -37,11 +37,12 @@ export function initGallery(opts: GalleryOptions = {}) {
   };
 
   const observeActive = (el: HTMLElement | null) => {
-    if (typeof ResizeObserver !== "undefined") {
-      if (!ro) ro = new ResizeObserver(updateGalleryHeight);
-      ro.disconnect();
-      if (el) ro.observe(el);
-    }
+    if (typeof ResizeObserver === "undefined") return;
+    
+    if (!ro) ro = new ResizeObserver(updateGalleryHeight);
+    ro.disconnect();
+    if (el) ro.observe(el);
+    
     window.removeEventListener("resize", updateGalleryHeight);
     window.addEventListener("resize", updateGalleryHeight, { passive: true });
     updateGalleryHeight();
@@ -62,6 +63,7 @@ export function initGallery(opts: GalleryOptions = {}) {
       const active = cid === id;
       el.hidden = !active;
       el.dataset.active = active ? "true" : "false";
+      el.setAttribute("aria-hidden", active ? "false" : "true");
       el.style.opacity = active ? "1" : "0";
       el.style.transform = active ? "translateX(0px)" : "translateX(40px)";
       el.style.zIndex = active ? "2" : "1";
@@ -84,15 +86,21 @@ export function initGallery(opts: GalleryOptions = {}) {
     const startH = from ? from.offsetHeight : measure(to);
     to.hidden = false;
     to.dataset.active = "true";
+    to.setAttribute("aria-hidden", "false");
     to.style.opacity = "0";
     to.style.transform = "translateX(-40px)";
     to.style.zIndex = "2";
     const endH = to.offsetHeight;
 
     if (g) {
-      g.animate([{ height: startH + "px" }, { height: endH + "px" }], {
-        duration: DURATION, easing: EASE, fill: "forwards",
-      });
+      try {
+        g.animate([{ height: startH + "px" }, { height: endH + "px" }], {
+          duration: DURATION, easing: EASE, fill: "forwards",
+        });
+      } catch (e) {
+        // Fallback if animation fails
+        g.style.height = endH + "px";
+      }
     }
 
     const clean = (el: HTMLElement) => {
@@ -102,33 +110,47 @@ export function initGallery(opts: GalleryOptions = {}) {
       el.style.willChange = "";
     };
 
-    const enter = to.animate(
-      [{ opacity: 0, transform: "translateX(-40px)" },
-       { opacity: 1, transform: "translateX(0px)" }],
-      { duration: DURATION, easing: EASE, fill: "forwards" }
-    );
-
-    let exit: Animation | null = null;
-    if (from) {
-      from.dataset.active = "false";
-      from.style.zIndex = "1";
-      exit = from.animate(
-        [{ opacity: 1, transform: "translateX(0px)" },
-         { opacity: 0, transform: "translateX(40px)" }],
+    let enterAnim: Animation | null = null;
+    try {
+      enterAnim = to.animate(
+        [{ opacity: 0, transform: "translateX(-40px)" },
+        { opacity: 1, transform: "translateX(0px)" }],
         { duration: DURATION, easing: EASE, fill: "forwards" }
       );
+    } catch (e) {
+      // Fallback if animation fails
+      to.style.opacity = "1";
+      to.style.transform = "translateX(0px)";
+    }
+
+    let exitAnim: Animation | null = null;
+    if (from) {
+      from.dataset.active = "false";
+      from.setAttribute("aria-hidden", "true");
+      from.style.zIndex = "1";
+      try {
+        exitAnim = from.animate(
+          [{ opacity: 1, transform: "translateX(0px)" },
+          { opacity: 0, transform: "translateX(40px)" }],
+          { duration: DURATION, easing: EASE, fill: "forwards" }
+        );
+      } catch (e) {
+        // Fallback if animation fails
+        from.style.opacity = "0";
+        from.style.transform = "translateX(40px)";
+      }
     }
 
     try {
-      await Promise.all([enter.finished, exit ? exit.finished : Promise.resolve()]);
+      if (enterAnim?.finished) await enterAnim.finished;
+      if (exitAnim?.finished) await exitAnim.finished;
+    } catch (e) {
+      console.warn("Animation promise rejected", e);
     } finally {
       if (from) {
         from.hidden = true;
-        from.setAttribute("aria-hidden", "true");
         clean(from);
       }
-      to.hidden = false;
-      to.setAttribute("aria-hidden", "false");
       clean(to);
       currentId = id;
       updateGalleryHeight();
@@ -140,7 +162,7 @@ export function initGallery(opts: GalleryOptions = {}) {
     animate ? setActiveAnimated(id) : setActiveInstant(id);
 
   const fallbackId = (name: string) =>
-    ((name?.split(".")[0] as string) || "case")
+    ((name?.split(".")[0] || "case"))
       .replace(/([a-z])([A-Z])/g, "$1-$2")
       .replace(/\s+/g, "-")
       .toLowerCase() + "-case";
@@ -168,7 +190,7 @@ export function initGallery(opts: GalleryOptions = {}) {
   if (document.readyState === 'loading') {
     document.addEventListener("DOMContentLoaded", boot, { once: true });
   } else {
-    boot();
+    setTimeout(boot, 0);
   }
   window.addEventListener("case:open", onCaseOpen);
 
