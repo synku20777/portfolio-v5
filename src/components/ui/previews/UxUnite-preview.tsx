@@ -69,27 +69,27 @@ const cards = [
     content: <SkeletonOne />,
     className: "md:col-span-2",
     thumbnail:
-      "/photos/projects/UxUnite/1.jpg",
+      "/photos/projects/UxUnite/1.webp",
   },
   {
     id: 2,
     content: <SkeletonTwo />,
     className: "col-span-1",
     thumbnail:
-      "/photos/projects/UxUnite/2.jpg",
+      "/photos/projects/UxUnite/2.webp",
   },
   {
     id: 3,
     content: <SkeletonThree />,
     className: "col-span-1",
     thumbnail:
-      "/photos/projects/UxUnite/3.jpg",
+      "/photos/projects/UxUnite/3.webp",
   },
   {
     id: 4,
     content: <SkeletonFour />,
     className: "md:col-span-2",
     thumbnail:
-      "/photos/projects/UxUnite/4.jpg",
+      "/photos/projects/UxUnite/4.webp",
   },
 ];

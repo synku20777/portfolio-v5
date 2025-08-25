@@ -80,7 +80,7 @@ const cards = [
     content: <SkeletonThree />,
     className: "col-span-1",
     thumbnail:
-      "/photos/projects/Firefly/3.png",
+      "/photos/projects/Firefly/3.webp",
   },
   {
     id: 4,
