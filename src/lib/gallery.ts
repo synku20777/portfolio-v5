@@ -6,11 +6,13 @@ export type GalleryOptions = {
   easing?: string;
   updateHash?: boolean;      // default: true
   scrollIntoView?: boolean;  // default: true
+  hoverDelay?: number;       // default: 0ms - delay before showing hovered case
 };
 
 export function initGallery(opts: GalleryOptions = {}) {
   const EASE = opts.easing ?? 'cubic-bezier(0.22, 1, 0.36, 1)';
   const DURATION = opts.duration ?? 420;
+  const HOVER_DELAY = opts.hoverDelay ?? 0;
 
   const map: Record<string, string> = {
     "UxUnite.ds": "uxunite-case",
@@ -24,6 +26,7 @@ export function initGallery(opts: GalleryOptions = {}) {
 
   let currentId: string | null = null;
   let ro: ResizeObserver | null = null;
+  let hoverTimer: number | null = null;
 
   const getEl = (id: string) => document.getElementById(id) as HTMLElement | null;
 
@@ -171,13 +174,29 @@ export function initGallery(opts: GalleryOptions = {}) {
     const name = e?.detail?.name as string;
     const id = map[name] || fallbackId(name);
     if (!CASE_IDS.includes(id)) CASE_IDS.push(id);
-    setActive(id, { animate: true });
-    if (opts.scrollIntoView !== false) {
-      galleryEl()?.scrollIntoView({ behavior: "smooth", block: "start" });
+    
+    // Clear any pending hover timer
+    if (hoverTimer !== null) {
+      clearTimeout(hoverTimer);
+      hoverTimer = null;
     }
-    if (opts.updateHash !== false) {
-      history.replaceState(null, "", `#${id}`);
+    
+    // Set a delay if configured
+    if (HOVER_DELAY > 0) {
+      hoverTimer = window.setTimeout(() => {
+        setActive(id, { animate: true });
+        if (opts.updateHash !== false) {
+          history.replaceState(null, "", `#${id}`);
+        }
+      }, HOVER_DELAY);
+    } else {
+      setActive(id, { animate: true });
+      if (opts.updateHash !== false) {
+        history.replaceState(null, "", `#${id}`);
+      }
     }
+    
+    // We removed the scrollIntoView behavior to avoid jumping when hovering
   };
 
   if (document.readyState === 'loading') {
@@ -193,6 +212,7 @@ export function initGallery(opts: GalleryOptions = {}) {
       window.removeEventListener("case:open", onCaseOpen);
       window.removeEventListener("resize", updateGalleryHeight);
       if (ro) ro.disconnect();
+      if (hoverTimer !== null) clearTimeout(hoverTimer);
     }
   };
 }

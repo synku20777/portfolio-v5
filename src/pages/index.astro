@@ -27,7 +27,8 @@ import { StickyScrollRevealDemo } from "@/components/ui/services-section";
 				initGallery({
 					galleryId: "gallery",
 					updateHash: true,
-					scrollIntoView: true,
+					scrollIntoView: false, // Disable auto-scrolling on hover
+					hoverDelay: 100, // Small delay to prevent flickering on accidental hover
 				});
 			} catch (e) {
 				console.error("Failed to initialize gallery:", e);

@@ -42,6 +42,29 @@
 #gallery [data-case][data-active="true"] {
   pointer-events: auto;
 }
+
+/* Remove focus rings site-wide, but keep them for keyboard navigation */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Use a custom focus style for accessibility */
+:focus-visible {
+  outline: 2px solid var(--color-focus, #0ea5e9);
+  outline-offset: 2px;
+}
+
+/* Remove focus ring specifically from filesystem items */
+#file-scroller button:focus,
+#file-scroller div:focus,
+#file-scroller [role="button"]:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: transparent !important;
+  ring-width: 0 !important;
+  --ring-color: transparent !important;
+}
+
 /* Reduce motion preference */
 @media (prefers-reduced-motion: reduce) {
   #gallery [data-case] {
@@ -95,6 +118,7 @@
     --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
+    --color-focus: #0ea5e9;
   }
 
   .dark {
@@ -125,5 +149,6 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
+    --color-focus: #0ea5e9;
   }
 }

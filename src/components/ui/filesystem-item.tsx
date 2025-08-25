@@ -20,7 +20,8 @@ export function FilesystemItem({
 
   const isFolder = !!(node.nodes && node.nodes.length > 0)
 
-  const handleOpenCase = () => {
+  // Handle hover to display gallery
+  const handleMouseEnter = () => {
     if (isFolder) return
     if (typeof window !== "undefined") {
       window.dispatchEvent(
@@ -78,7 +79,7 @@ export function FilesystemItem({
             {/* toggle */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-1 -m-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-800"
+              className="p-1 -m-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-800 focus:outline-none"
               aria-expanded={isOpen}
               aria-label={isOpen ? "Collapse folder" : "Expand folder"}
             >
@@ -96,17 +97,17 @@ export function FilesystemItem({
           <ChildrenList />
         </>
       ) : (
-        <button
-          onClick={handleOpenCase}
-          className="group flex w-full text-left text-sm text-black dark:text-white md:text-base lg:text-lg items-center gap-1.5 py-1 px-1 -mx-1 rounded-md hover:bg-neutral-100 dark:hover:bg-neutral-800 focus:outline-none focus:ring-2 focus:ring-sky-400"
-          aria-label={`Open ${node.name} demo`}
+        // File node - simply a div with hover trigger
+        <div 
+          onMouseEnter={handleMouseEnter}
+          className="group flex w-full text-left text-sm text-black dark:text-white md:text-base lg:text-lg items-center gap-1.5 py-1 px-1 -mx-1 rounded-md hover:bg-neutral-100 dark:hover:bg-neutral-800 focus:outline-none cursor-pointer"
+          aria-label={`${node.name} demo`}
         >
-          {/* no chevron for files */}
           <IconFile className="ml-4 size-6 text-sky-500 dark:text-sky-400" />
           <span className="underline-offset-2 group-hover:underline">
             {node.name}
           </span>
-        </button>
+        </div>
       )}
     </li>
   )
