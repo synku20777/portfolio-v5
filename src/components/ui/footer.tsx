@@ -48,32 +48,29 @@ export default function Footer({
   year = new Date().getFullYear(),
   columns = [
     {
-      title: "Menu",
+      title: "Navigation",
       links: [
         { label: "Home", href: "#" },
-        { label: "Services", href: "#" },
-        { label: "Works", href: "#" },
-        { label: "About", href: "#" },
-        { label: "Testimonials", href: "#" },
-        { label: "Contact", href: "#" },
+        { label: "Services", href: "#services" },
+        { label: "Works", href: "#works" },
+        { label: "About", href: "#about" },
       ],
     },
     {
       title: "Socials",
       links: [
-        { label: "LinkedIn", href: "#" },
-        { label: "YouTube", href: "#" },
-        { label: "Instagram", href: "#" },
-        { label: "Bento", href: "#" },
-        { label: "GitHub", href: "#" },
+        { label: "LinkedIn", href: "https://linkedin.com/", external: true },
+        { label: "GitHub", href: "https://github.com/synku20777", external: true },
+        { label: "Twitter", href: "https://twitter.com/", external: true },
+        { label: "Instagram", href: "https://instagram.com/", external: true },
       ],
     },
     {
       title: "Resources",
       links: [
-        { label: "Pillarsstack", href: "#" },
-        { label: "Figma Templates", href: "#" },
-        { label: "Monthly Newsletter", href: "#" },
+        { label: "Portfolio Source", href: "https://github.com/synku20777/portfolio-v5", external: true },
+        { label: "Design System", href: "#works" },
+        { label: "Contact", href: "mailto:contact@example.com", external: true },
       ],
     },
   ],

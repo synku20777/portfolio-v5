@@ -5,17 +5,17 @@ import { LayoutGridDemo as ArtsyLayoutGridDemo } from "@/components/ui/previews/
 import { LayoutGridDemo as CloudFirstLayoutGridDemo } from "@/components/ui/previews/CloudFirst-preview";
 import { LayoutGridDemo as FireflyLayoutGridDemo } from "@/components/ui/previews/Firefly-preview";
 ---
-<section id="works" class="bg-neutral-100 w-full py-4 dark:bg-neutral-900">
-  <div class="mx-auto min-h-screen max-w-7xl px-6 py-8 sm:py-32 flex-col gap-3 items-start justify-start ">
+<section id="works" class="bg-neutral-100 w-full dark:bg-neutral-900 relative overflow-hidden">
+  <div class="mx-auto max-w-7xl px-6 py-8 sm:py-16 flex flex-col">
     <div class="flex items-end">
       <h2 class="text-nowrap text-left text-2xl font-black tracking-tight text-neutral-800  dark: md:text-4xl lg:text-7xl/14 dark:text-neutral-100">Selected Works</h2>
       <hr class="w-full border-t-2 border-black border-neutral-300 dark:border-neutral-700" />
     </div>
-    <div id="projects" class="relative mt-10 flex gap-2 sm:gap-4 md:gap-6 lg:gap-16">
+    <div id="projects" class="relative mt-10 flex gap-2 sm:gap-4 md:gap-6 lg:gap-16 h-screen">
       <div id="file-scroller" class="sticky w-2xs top-10">
         <FilesystemItemAnimatedDemo client:load/>
       </div>
-      <div id="gallery" class="w-full rounded-xl h-[80dvh]">
+      <div id="gallery" class="w-full rounded-xl h-full relative">
         <div id="uxunite-case" data-case class="rounded-xl" aria-hidden="true" hidden data-active="false">
           <UXUniteDemo client:load />
         </div>

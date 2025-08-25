@@ -1,12 +1,12 @@
-import React from "react";
+ import React from "react";
 import { FloatingDock } from "@/components/ui/floating-dock";
 import {
   IconBrandGithub,
-  IconBrandX,
-  IconExchange,
+  IconBrandLinkedin,
   IconHome,
-  IconNewSection,
-  IconTerminal2,
+  IconBriefcase,
+  IconUser,
+  IconTools,
 } from "@tabler/icons-react";
 import { ModeToggle } from "@/components/ui/mode-toggle";
 
@@ -19,54 +19,40 @@ export function FloatingDockDemo() {
       ),
       href: "#",
     },
-
     {
-      title: "Products",
+      title: "Services",
       node: (
-        <IconTerminal2 className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+        <IconTools className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
-      href: "#",
+      href: "#services",
     },
     {
-      title: "Components",
+      title: "Works",
       node: (
-        <IconNewSection className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+        <IconBriefcase className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
-      href: "#",
+      href: "#works",
     },
     {
-      title: "Aceternity UI",
+      title: "About",
       node: (
-        <img
-          src="https://assets.aceternity.com/logo-dark.png"
-          width={20}
-          height={20}
-          alt="Aceternity Logo"
-        />
+        <IconUser className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
-      href: "#",
-    },
-    {
-      title: "Changelog",
-      node: (
-        <IconExchange className="h-full w-full text-neutral-500 dark:text-neutral-300" />
-      ),
-      href: "#",
-    },
-
-    {
-      title: "Twitter",
-      node: (
-        <IconBrandX className="h-full w-full text-neutral-500 dark:text-neutral-300" />
-      ),
-      href: "#",
+      href: "#about",
     },
     {
       title: "GitHub",
       node: (
         <IconBrandGithub className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
-      href: "#",
+      href: "https://github.com/synku20777",
+    },
+    {
+      title: "LinkedIn",
+      node: (
+        <IconBrandLinkedin className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+      ),
+      href: "https://linkedin.com/",
     },
     {
       title: "Mode",

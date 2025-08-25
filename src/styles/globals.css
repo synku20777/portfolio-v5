@@ -25,12 +25,19 @@
 #gallery {
   position: relative;
   min-height: 40vh; /* prevents layout jump between cases */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 #gallery [data-case] {
   position: absolute;
   inset: 0;
   width: 100%;
+  height: 100%;
   pointer-events: none; /* Keep elements from interfering when hidden */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 #gallery [data-case][data-active="true"] {
   pointer-events: auto;
@@ -120,4 +127,3 @@
     --ring: 212.7 26.8% 83.9%;
   }
 }
-

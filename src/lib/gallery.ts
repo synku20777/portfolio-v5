@@ -30,10 +30,15 @@ export function initGallery(opts: GalleryOptions = {}) {
   const galleryEl = () => document.getElementById(opts.galleryId ?? "gallery") as HTMLElement | null;
 
   const updateGalleryHeight = () => {
-    const g = galleryEl();
-    if (!g) return;
+    // The gallery is now full height, so we don't need to adjust its height
+    // Just ensure the active case fills the gallery properly
     const activeEl = currentId ? getEl(currentId) : null;
-    if (activeEl) g.style.height = activeEl.offsetHeight + "px";
+    if (activeEl) {
+      activeEl.style.height = "100%";
+      activeEl.style.display = "flex";
+      activeEl.style.alignItems = "center";
+      activeEl.style.justifyContent = "center";
+    }
   };
 
   const observeActive = (el: HTMLElement | null) => {
@@ -51,9 +56,8 @@ export function initGallery(opts: GalleryOptions = {}) {
   const measure = (el: HTMLElement) => {
     const prevHidden = el.hidden;
     el.hidden = false;
-    const h = el.offsetHeight;
     el.hidden = prevHidden;
-    return h;
+    return el.scrollHeight; // Use scrollHeight instead of offsetHeight
   };
 
   const setActiveInstant = (id: string) => {
@@ -82,26 +86,15 @@ export function initGallery(opts: GalleryOptions = {}) {
 
     if (!CASE_IDS.includes(id)) CASE_IDS.push(id);
 
-    const g = galleryEl();
-    const startH = from ? from.offsetHeight : measure(to);
     to.hidden = false;
     to.dataset.active = "true";
     to.setAttribute("aria-hidden", "false");
     to.style.opacity = "0";
     to.style.transform = "translateX(-40px)";
     to.style.zIndex = "2";
-    const endH = to.offsetHeight;
-
-    if (g) {
-      try {
-        g.animate([{ height: startH + "px" }, { height: endH + "px" }], {
-          duration: DURATION, easing: EASE, fill: "forwards",
-        });
-      } catch (e) {
-        // Fallback if animation fails
-        g.style.height = endH + "px";
-      }
-    }
+    to.style.display = "flex";
+    to.style.alignItems = "center";
+    to.style.justifyContent = "center";
 
     const clean = (el: HTMLElement) => {
       el.style.opacity = "";
