@@ -152,55 +152,100 @@ const meta = {
           <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center text-neutral-800 dark:text-neutral-100">Design Process</h2>
           
           <div class="space-y-12 relative">
-            <div class="md:grid md:grid-cols-2 md:gap-8 items-center relative">
+            <div class="md:grid md:grid-cols-[1fr_auto_1fr] md:gap-8 md:items-center relative">
               <div class="md:text-right pb-8 md:pb-0">
-                <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white font-bold mb-4 md:ml-auto">1-2</div>
-                <h3 class="text-xl font-bold text-neutral-800 dark:text-neutral-200 mb-2">Discovery & Research</h3>
-                <p class="text-neutral-600 dark:text-neutral-400">Problem definition & technical planning followed by user research with driver personas</p>
+              <h3 class="text-xl font-bold text-neutral-800 dark:text-neutral-200 mb-2">Discovery</h3>
+              <p class="text-neutral-600 dark:text-neutral-400">Problem definition & technical planning for navigation requirements</p>
               </div>
-              <div class="hidden md:block absolute left-1/2 top-8 w-5 h-5 rounded-full bg-blue-500 -translate-x-1/2"></div>
-              <div class="bg-neutral-50 dark:bg-neutral-900 p-6 rounded-xl shadow-sm md:transform md:-translate-y-4">
-                <strong class="block text-neutral-800 dark:text-neutral-200 mb-1">Task‑based usability testing</strong>
-                <div class="text-sm text-neutral-600 dark:text-neutral-400">With internal & external driver personas to understand needs and pain points</div>
+              <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white font-bold z-10 mx-auto">1</div>
+              <div class="bg-neutral-50 dark:bg-neutral-900 p-6 rounded-xl shadow-sm">
+              <strong class="block text-neutral-800 dark:text-neutral-200 mb-1">Task‑based usability testing</strong>
+              <div class="text-sm text-neutral-600 dark:text-neutral-400">With internal & external driver personas to understand needs and pain points</div>
+              </div>
+            </div>
+
+            
+            <div class="md:grid md:grid-cols-[1fr_auto_1fr] md:gap-8 md:content-center items-center relative">
+              <div class="bg-neutral-50 dark:bg-neutral-900 p-6 rounded-xl shadow-sm md:transform  order-1 md:order-none">
+                <strong class="block text-neutral-800 dark:text-neutral-200 mb-1">User research</strong>
+                <div class="text-sm text-neutral-600 dark:text-neutral-400">Creating detailed driver personas to guide design decisions</div>
+              </div>
+              <div class="inline-flex items-center justify-center left-1/2 top-8 w-12 h-12 rounded-full bg-blue-500 text-white font-bold z-10">2</div>
+              <div class="md:text-left pb-8 md:pb-0">
+                <h3 class="text-xl font-bold text-neutral-800 dark:text-neutral-200 mb-2">Research</h3>
+                <p class="text-neutral-600 dark:text-neutral-400">Understanding user needs through interviews with truck drivers</p>
               </div>
             </div>
             
-            <div class="md:grid md:grid-cols-2 md:gap-8 items-center relative">
-              <div class="bg-neutral-50 dark:bg-neutral-900 p-6 rounded-xl shadow-sm md:transform md:translate-y-4 order-1 md:order-none">
+            <div class="md:grid md:grid-cols-[1fr_auto_1fr] md:gap-8 md:content-center items-center relative">
+              <div class="md:text-right pb-8 md:pb-0">
+                <h3 class="text-xl font-bold text-neutral-800 dark:text-neutral-200 mb-2">Prototype</h3>
+                <p class="text-neutral-600 dark:text-neutral-400">Creating interactive mockups to validate navigation concepts</p>
+              </div>
+              <div class="inline-flex items-center justify-center left-1/2 top-8 w-12 h-12 rounded-full bg-blue-500 text-white font-bold z-10">3</div>
+              <div class="bg-neutral-50 dark:bg-neutral-900 p-6 rounded-xl shadow-sm md:transform ">
                 <strong class="block text-neutral-800 dark:text-neutral-200 mb-1">Think‑aloud protocol</strong>
                 <div class="text-sm text-neutral-600 dark:text-neutral-400">Interactive prototype reviews to gather qualitative feedback</div>
               </div>
-              <div class="hidden md:block absolute left-1/2 top-8 w-5 h-5 rounded-full bg-blue-500 -translate-x-1/2"></div>
-              <div class="md:text-left pb-8 md:pb-0">
-                <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white font-bold mb-4">3-4</div>
-                <h3 class="text-xl font-bold text-neutral-800 dark:text-neutral-200 mb-2">Prototype & Validation</h3>
-                <p class="text-neutral-600 dark:text-neutral-400">Task‑based usability testing and think‑aloud reviews with interactive prototypes</p>
-              </div>
             </div>
             
-            <div class="md:grid md:grid-cols-2 md:gap-8 items-center relative">
-              <div class="md:text-right pb-8 md:pb-0">
-                <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white font-bold mb-4 md:ml-auto">5-6</div>
-                <h3 class="text-xl font-bold text-neutral-800 dark:text-neutral-200 mb-2">Testing & Iteration</h3>
-                <p class="text-neutral-600 dark:text-neutral-400">Field testing during live driving scenarios and cognitive walkthroughs for low‑distraction use</p>
+            <div class="md:grid md:grid-cols-[1fr_auto_1fr] md:gap-8 md:content-center items-center relative">
+              <div class="bg-neutral-50 dark:bg-neutral-900 p-6 rounded-xl shadow-sm md:transform  order-1 md:order-none">
+                <strong class="block text-neutral-800 dark:text-neutral-200 mb-1">Validation</strong>
+                <div class="text-sm text-neutral-600 dark:text-neutral-400">Evaluating usability with target users before development</div>
               </div>
-              <div class="hidden md:block absolute left-1/2 top-8 w-5 h-5 rounded-full bg-blue-500 -translate-x-1/2"></div>
-              <div class="bg-neutral-50 dark:bg-neutral-900 p-6 rounded-xl shadow-sm md:transform md:-translate-y-4">
+              <div class="inline-flex items-center justify-center left-1/2 top-8 w-12 h-12 rounded-full bg-blue-500 text-white font-bold z-10">4</div>
+              <div class="md:text-left pb-8 md:pb-0">
+                <h3 class="text-xl font-bold text-neutral-800 dark:text-neutral-200 mb-2">Validation</h3>
+                <p class="text-neutral-600 dark:text-neutral-400">Testing interface clarity and intuitiveness with drivers</p>
+              </div>
+            </div>
+
+            <div class="md:grid md:grid-cols-[1fr_auto_1fr] md:gap-8 md:content-center items-center relative">
+              <div class="md:text-right pb-8 md:pb-0">
+                <h3 class="text-xl font-bold text-neutral-800 dark:text-neutral-200 mb-2">Testing</h3>
+                <p class="text-neutral-600 dark:text-neutral-400">Field testing during live driving scenarios</p>
+              </div>
+              <div class="inline-flex items-center justify-center left-1/2 top-8 w-12 h-12 rounded-full bg-blue-500 text-white font-bold z-10">5</div>
+              <div class="bg-neutral-50 dark:bg-neutral-900 p-6 rounded-xl shadow-sm md:transform ">
                 <strong class="block text-neutral-800 dark:text-neutral-200 mb-1">Field testing</strong>
                 <div class="text-sm text-neutral-600 dark:text-neutral-400">On devices in live driving scenarios to ensure real-world usability</div>
               </div>
             </div>
             
-            <div class="md:grid md:grid-cols-2 md:gap-8 items-center relative">
-              <div class="bg-neutral-50 dark:bg-neutral-900 p-6 rounded-xl shadow-sm md:transform md:translate-y-4 order-1 md:order-none">
-                <strong class="block text-neutral-800 dark:text-neutral-200 mb-1">Engineering collaboration</strong>
-                <div class="text-sm text-neutral-600 dark:text-neutral-400">Close work with mobile teams and QA support with prototype-based testing</div>
+            <div class="md:grid md:grid-cols-[1fr_auto_1fr] md:gap-8 md:content-center items-center relative">
+              <div class="bg-neutral-50 dark:bg-neutral-900 p-6 rounded-xl shadow-sm md:transform  order-1 md:order-none">
+                <strong class="block text-neutral-800 dark:text-neutral-200 mb-1">Iteration</strong>
+                <div class="text-sm text-neutral-600 dark:text-neutral-400">Refining design based on user feedback and testing results</div>
               </div>
-              <div class="hidden md:block absolute left-1/2 top-8 w-5 h-5 rounded-full bg-blue-500 -translate-x-1/2"></div>
+              <div class="inline-flex items-center justify-center left-1/2 top-8 w-12 h-12 rounded-full bg-blue-500 text-white font-bold z-10">6</div>
               <div class="md:text-left pb-8 md:pb-0">
-                <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white font-bold mb-4">7-8</div>
-                <h3 class="text-xl font-bold text-neutral-800 dark:text-neutral-200 mb-2">Implementation & QA</h3>
-                <p class="text-neutral-600 dark:text-neutral-400">Close collaboration with mobile engineering and QA support with prototype-based regression tests</p>
+                <h3 class="text-xl font-bold text-neutral-800 dark:text-neutral-200 mb-2">Iteration</h3>
+                <p class="text-neutral-600 dark:text-neutral-400">Cognitive walkthroughs for low‑distraction use</p>
+              </div>
+            </div>
+            
+            <div class="md:grid md:grid-cols-[1fr_auto_1fr] md:gap-8 md:content-center items-center relative">
+              <div class="md:text-right pb-8 md:pb-0">
+                <h3 class="text-xl font-bold text-neutral-800 dark:text-neutral-200 mb-2">Implementation</h3>
+                <p class="text-neutral-600 dark:text-neutral-400">Close collaboration with mobile engineering team</p>
+              </div>
+              <div class="inline-flex items-center justify-center left-1/2 top-8 w-12 h-12 rounded-full bg-blue-500 text-white font-bold z-10">7</div>
+              <div class="bg-neutral-50 dark:bg-neutral-900 p-6 rounded-xl shadow-sm md:transform ">
+                <strong class="block text-neutral-800 dark:text-neutral-200 mb-1">Engineering collaboration</strong>
+                <div class="text-sm text-neutral-600 dark:text-neutral-400">Close work with mobile teams to ensure design feasibility</div>
+              </div>
+            </div>
+
+            <div class="md:grid md:grid-cols-[1fr_auto_1fr] md:gap-8 md:content-center items-center relative">
+              <div class="bg-neutral-50 dark:bg-neutral-900 p-6 rounded-xl shadow-sm md:transform  order-1 md:order-none">
+                <strong class="block text-neutral-800 dark:text-neutral-200 mb-1">QA support</strong>
+                <div class="text-sm text-neutral-600 dark:text-neutral-400">Prototype-based regression testing and validation</div>
+              </div>
+              <div class="inline-flex items-center justify-center left-1/2 top-8 w-12 h-12 rounded-full bg-blue-500 text-white font-bold z-10">8</div>
+              <div class="md:text-left pb-8 md:pb-0">
+                <h3 class="text-xl font-bold text-neutral-800 dark:text-neutral-200 mb-2">QA</h3>
+                <p class="text-neutral-600 dark:text-neutral-400">Support with prototype-based regression tests</p>
               </div>
             </div>
           </div>
