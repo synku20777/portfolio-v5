@@ -127,7 +127,10 @@ export function FilesystemItem({
           onMouseEnter={handleMouseEnter}
           onClick={handleClick}
           className="group flex w-full text-left text-sm text-black dark:text-white md:text-base lg:text-lg items-center gap-1.5 py-1 px-1 -mx-1 rounded-md hover:bg-neutral-100 dark:hover:bg-neutral-800 focus:outline-none cursor-pointer"
-          aria-label={`${node.name} demo`}
+          aria-label={`View ${node.name} project details`}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => e.key === 'Enter' && handleClick(e as any)}
         >
           <IconFile className="ml-4 size-6 text-sky-500 dark:text-sky-400" />
           <span className="underline-offset-2 group-hover:underline">

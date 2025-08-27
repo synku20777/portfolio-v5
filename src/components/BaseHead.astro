@@ -1,22 +1,17 @@
----
-const { title, description, preloadFonts = true } = Astro.props;
----
+<link 
+  rel="preload" 
+  href="/font/font.woff2" 
+  as="font" 
+  type="font/woff2" 
+  crossorigin="anonymous" 
+/>
 
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>{title}</title>
-<meta name="description" content={description} />
-
-<!-- Preload critical fonts -->
-{preloadFonts && (
-  <link
-    rel="preload"
-    href="/font/font.woff2"
-    as="font"
-    type="font/woff2"
-    crossorigin="anonymous"
-  />
-)}
-
-<link rel="stylesheet" href="/src/styles/globals.css" />
-<link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).href} />
+<style is:inline>
+  @font-face {
+    font-family: "Jakarta";
+    src: url('/font/font.woff2') format('woff2');
+    font-weight: 100 900;
+    font-display: swap; /* Improve font loading */
+    font-style: normal;
+  }
+</style>

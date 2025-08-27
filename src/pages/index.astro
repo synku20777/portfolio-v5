@@ -58,10 +58,10 @@ import { StickyScrollRevealDemo } from "@/components/ui/services-section";
 	</head>
 
 	<body class="bg-white dark:bg-black">
-		<FloatingDockDemo client:load />
-		<BackgroundRippleEffectDemo client:load />
+		<FloatingDockDemo client:idle />
+		<BackgroundRippleEffectDemo client:visible />
 		<section id="services" class="bg-neutral-900 w-full py-4 dark:bg-neutral-900">
-			<StickyScrollRevealDemo client:load/>
+			<StickyScrollRevealDemo client:visible/>
 		</section>
 		<Works />
 		<About />
