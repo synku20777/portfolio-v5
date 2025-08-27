@@ -20,6 +20,19 @@ export function FilesystemItem({
 
   const isFolder = !!(node.nodes && node.nodes.length > 0)
 
+  // Map file names to their corresponding URLs
+  const fileUrlMap: Record<string, string> = {
+    "UxUnite.ds": "/UxUnite-case",
+    "Aurora.ds": "/Aurora-case",
+    "CloudFirst.web": "/CloudFirst-case",
+    "Astra.web": "/Astra-case",
+    "ITworkshop.web": "/ITworkshop-case",
+    "Firefly.shop": "/Firefly-case",
+    "Aurora.shop": "/Aurora-shop",
+    "BillPay": "/BillPay-case",
+    "Artsy.app": "/Artsy-case",
+  };
+
   // Handle hover to display gallery
   const handleMouseEnter = () => {
     if (isFolder) return
@@ -27,6 +40,17 @@ export function FilesystemItem({
       window.dispatchEvent(
         new CustomEvent("case:open", { detail: { name: node.name } })
       )
+    }
+  }
+
+  // Handle click to navigate to the case page
+  const handleClick = (e: React.MouseEvent) => {
+    if (isFolder) return;
+    
+    const url = fileUrlMap[node.name];
+    if (url) {
+      e.preventDefault();
+      window.location.href = url;
     }
   }
 
@@ -97,9 +121,11 @@ export function FilesystemItem({
           <ChildrenList />
         </>
       ) : (
-        // File node - simply a div with hover trigger
-        <div 
+        // File node with hover and click functionality
+        <a 
+          href={fileUrlMap[node.name] || "#"} 
           onMouseEnter={handleMouseEnter}
+          onClick={handleClick}
           className="group flex w-full text-left text-sm text-black dark:text-white md:text-base lg:text-lg items-center gap-1.5 py-1 px-1 -mx-1 rounded-md hover:bg-neutral-100 dark:hover:bg-neutral-800 focus:outline-none cursor-pointer"
           aria-label={`${node.name} demo`}
         >
@@ -107,7 +133,7 @@ export function FilesystemItem({
           <span className="underline-offset-2 group-hover:underline">
             {node.name}
           </span>
-        </div>
+        </a>
       )}
     </li>
   )
