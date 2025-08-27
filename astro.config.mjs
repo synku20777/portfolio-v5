@@ -1,12 +1,14 @@
-// @ts-check
 import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@astrojs/react";
 import { fileURLToPath } from 'url';
+import viewTransitions from '@astrojs/view-transitions'; // Add this
 
-// https://astro.build/config
 export default defineConfig({
-  integrations: [react()],
+  integrations: [
+    react(),
+    viewTransitions(), // Add this
+  ],
   vite: { 
     plugins: [tailwindcss()],
     resolve: {
