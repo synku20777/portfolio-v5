@@ -18,6 +18,7 @@ import {
   IconBrandGithub,
   IconBrush
 } from "@tabler/icons-react";
+import OptimizedImage from "@/components/optimizedImage.astro";
 
 const meta = {
   title: "Case Study | IT-Workshoppen Digital Presence",
@@ -115,9 +116,9 @@ const meta = {
             <div class="absolute -right-40 -bottom-20 w-80 h-80 bg-indigo-200 dark:bg-indigo-800 rounded-full opacity-30 blur-3xl"></div>
             <div class="absolute right-20 top-10 w-32 h-32 bg-indigo-200 dark:bg-indigo-900 rounded-full opacity-30 blur-xl"></div>
             <div class="w-full rounded-xl overflow-hidden shadow-2xl transform rotate-2 hover:rotate-0 transition-transform duration-500">
-              <img 
-                src="/photos/projects/It-Workshop/1.webp" 
-                alt="IT-Workshoppen website preview" 
+              <OptimizedImage
+                src={import("../../public/photos/projects/It-Workshop/1.webp")}
+                alt="IT-Workshoppen website preview"
                 class="w-full h-full object-cover"
               />
             </div>
@@ -306,9 +307,9 @@ const meta = {
             </div>
           </div>
           <div class="mt-16 rounded-xl shadow-lg overflow-hidden">
-              <img 
-                src="/photos/projects/It-Workshop/5.webp" 
-                alt="IT-Workshoppen responsive design" 
+              <OptimizedImage
+                src={import("../../public/photos/projects/It-Workshop/5.webp")}
+                alt="IT-Workshoppen responsive design"
                 class="w-full h-auto object-cover"
               />
           </div>
@@ -677,9 +678,9 @@ const meta = {
           
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
             <div class="rounded-xl overflow-hidden shadow-lg">
-              <img 
-                src="/photos/projects/It-Workshop/2.webp" 
-                alt="IT-Workshoppen website design" 
+              <OptimizedImage
+                src={import("../../public/photos/projects/It-Workshop/2.webp")}
+                alt="IT-Workshoppen website design"
                 class="w-full h-auto object-cover"
               />
               <div class="p-4 bg-white dark:bg-neutral-900">
@@ -687,9 +688,9 @@ const meta = {
               </div>
             </div>
             <div class="rounded-xl overflow-hidden shadow-lg">
-              <img 
-                src="/photos/projects/It-Workshop/logo.svg" 
-                alt="IT-Workshoppen logo redesign" 
+              <OptimizedImage
+                src={import("../../public/photos/projects/It-Workshop/logo.svg")}
+                alt="IT-Workshoppen logo redesign"
                 class="w-full h-[450px] object-fill"
               />
               <div class="p-4 bg-white dark:bg-neutral-900">

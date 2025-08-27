@@ -19,6 +19,7 @@ import {
   IconMovie,
   IconWallpaper
 } from "@tabler/icons-react";
+import OptimizedImage from "@/components/optimizedImage.astro";
 
 const meta = {
   title: "Case Study | Astra Design Bureau",
@@ -113,9 +114,9 @@ const meta = {
             <div class="absolute -right-40 -bottom-20 w-80 h-80 bg-neutral-200 dark:bg-neutral-800 rounded-full opacity-30 blur-3xl"></div>
             <div class="absolute right-20 top-10 w-32 h-32 bg-neutral-200 dark:bg-neutral-900 rounded-full opacity-30 blur-xl"></div>
             <div class="w-full rounded-xl overflow-hidden shadow-2xl transform rotate-2 hover:rotate-0 transition-transform duration-500">
-              <img 
-                src="/photos/projects/Astra/1.jpg" 
-                alt="Astra Design Bureau hero image" 
+              <OptimizedImage
+                src={import("../../public/photos/projects/Astra/1.jpg")}
+                alt="Astra Design Bureau hero image"
                 class="w-full h-full object-cover"
               />
             </div>
@@ -352,17 +353,17 @@ const meta = {
             <h3 class="text-xl font-bold mb-6 text-neutral-800 dark:text-neutral-100">Logo</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div class="bg-white dark:bg-neutral-950 p-8 rounded-xl flex items-center justify-center">
-                <img 
-                  src="/photos/projects/Astra/Logotype-1.webp" 
-                  alt="Astra logo" 
-                  class="max-w-full h-auto max-h-48"
+                <OptimizedImage
+                  src={import("../../public/photos/projects/Astra/Logotype-1.webp")}
+                  alt="Astra logo"
+                  class="w-auto h-auto max-h-48"
                 />
               </div>
               <div class="rounded-xl flex items-center justify-center">
-                <img 
-                  src="/photos/projects/Astra/Logotype.webp" 
-                  alt="Astra logo rules" 
-                  class="max-w-full h-auto max-h-48"
+                <OptimizedImage
+                  src={import("../../public/photos/projects/Astra/Logotype.webp")}
+                  alt="Astra logo rules"
+                  class="w-auto h-auto max-h-48"
                 />
               </div>
               <div class="md:col-span-2 mt-4">
@@ -438,7 +439,7 @@ const meta = {
           <div class="mb-16">
             <h3 class="text-xl font-bold mb-6 text-neutral-800 dark:text-neutral-100">Photography Style</h3>
             <div class="">
-              <img 
+              <img
                 src="/photos/projects/Astra/Images&Photography.webp" 
                 alt="Astra photography style example 1" 
                 class="w-full h-auto object-cover rounded-xl"
@@ -556,8 +557,8 @@ const meta = {
           
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
             <div class="bg-white dark:bg-neutral-950 p-4 rounded-xl shadow-md">
-              <img 
-                src="/photos/projects/Astra/PosterBlack 1-1.webp" 
+              <OptimizedImage
+                src={import("../../public/photos/projects/Astra/PosterBlack 1-1.webp")} 
                 alt="Astra black poster design" 
                 class="w-full h-auto rounded-lg"
               />
@@ -565,8 +566,8 @@ const meta = {
             </div>
             
             <div class="bg-neutral-900 dark:bg-neutral-800 p-4 rounded-xl shadow-md">
-              <img 
-                src="/photos/projects/Astra/PosterWhite 1.webp" 
+              <OptimizedImage
+                src={import("../../public/photos/projects/Astra/PosterWhite 1.webp")} 
                 alt="Astra white poster design" 
                 class="w-full h-auto rounded-lg"
               />
@@ -574,10 +575,10 @@ const meta = {
             </div>
             
             <div class="bg-neutral-100 dark:bg-neutral-900 p-4 rounded-xl shadow-md">
-              <img 
-                src="/photos/projects/Astra/wrinkled-poster.webp" 
+              <OptimizedImage
+                src={import("../../public/photos/projects/Astra/wrinkled-poster.webp")} 
                 alt="Astra wrinkled poster mockup" 
-                class="w-full h-auto object-cover rounded-lg"
+                class="w-auto h-auto object-cover rounded-lg"
               />
               <p class="mt-4 text-center text-sm text-neutral-600 dark:text-neutral-400">Wrinkled Poster Application</p>
             </div>
@@ -603,8 +604,8 @@ const meta = {
               {Array.from({ length: 6 }).map((_, i) => (
                 <div class="w-60 flex-shrink-0">
                   <div class="bg-neutral-100 dark:bg-neutral-900 rounded-lg overflow-hidden">
-                    <img 
-                      src={`/photos/projects/Astra/storyboard-${i + 1}.webp`} 
+                    <OptimizedImage
+                      src={import(`/public/photos/projects/Astra/storyboard-${i + 1}.webp`)} 
                       alt={`Storyboard frame ${i + 1}`} 
                       class="w-full h-40 object-cover"
                     />
@@ -725,22 +726,22 @@ const meta = {
               <div class="grid grid-cols-2 md:grid-cols-12 gap-4 md:gap-6">
                 <!-- First large image spanning 6 columns -->
                 <div class="col-span-2 md:col-span-7 rounded-2xl overflow-hidden shadow-lg transform hover:scale-[1.02] transition-transform duration-300">
-                  <img src="/photos/projects/Astra/1.jpg" alt="Information architecture diagram" class="w-full h-full object-cover" />
+                  <OptimizedImage src={import("../../public/photos/projects/Astra/1.jpg")} alt="Information architecture diagram" class="w-full h-full object-cover" />
                 </div>
                 
                 <!-- Second image - positioned with margin-top to create staggering effect -->
                 <div class="col-span-2 md:col-span-5 rounded-2xl overflow-hidden shadow-lg md:mt-12 transform hover:scale-[1.02] transition-transform duration-300">
-                  <img src="/photos/projects/Astra/2.jpg" alt="Portal wireframe" class="w-full h-full object-cover" />
+                  <OptimizedImage src={import("../../public/photos/projects/Astra/2.jpg")} alt="Portal wireframe" class="w-full h-full object-cover" />
                 </div>
                 
                 <!-- Third image - slightly smaller and offset -->
                 <div class="col-span-1 md:col-span-5 rounded-2xl overflow-hidden shadow-lg transform hover:scale-[1.02] transition-transform duration-300">
-                  <img src="/photos/projects/Astra/3.jpg" alt="Final portal design" class="w-full h-full object-cover" />
+                  <OptimizedImage src={import("../../public/photos/projects/Astra/3.jpg")} alt="Final portal design" class="w-full h-full object-cover" />
                 </div>
                 
                 <!-- Fourth image - larger to balance the composition -->
                 <div class="col-span-1 md:col-span-7 rounded-2xl overflow-hidden shadow-lg transform hover:scale-[1.02] transition-transform duration-300">
-                  <img src="/photos/projects/Astra/4.jpg" alt="Final portal design" class="w-full h-full object-cover" />
+                  <OptimizedImage src={import("../../public/photos/projects/Astra/4.jpg")} alt="Final portal design" class="w-full h-full object-cover" />
                 </div>
               </div>
               

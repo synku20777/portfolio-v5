@@ -17,6 +17,7 @@ import {
   IconBrandFigma,
   IconPalette
 } from "@tabler/icons-react";
+import OptimizedImage from "@/components/optimizedImage.astro";
 
 const meta = {
   title: "Case Study | Firefly Ecommerce Website",
@@ -115,9 +116,9 @@ const meta = {
             <div class="absolute -right-40 -bottom-20 w-80 h-80 bg-amber-200 dark:bg-amber-800 rounded-full opacity-30 blur-3xl"></div>
             <div class="absolute right-20 top-10 w-32 h-32 bg-orange-200 dark:bg-orange-900 rounded-full opacity-30 blur-xl"></div>
             <div class="w-full rounded-xl overflow-hidden shadow-2xl transform rotate-2 hover:rotate-0 transition-transform duration-500">
-              <img 
-                src="/photos/projects/Firefly/1.webp" 
-                alt="Firefly Intelligent Stove Alarm hero image" 
+              <OptimizedImage
+                src={import("../../public/photos/projects/Firefly/1.webp")}
+                alt="Firefly Intelligent Stove Alarm hero image"
                 class="w-full h-full object-cover"
               />
             </div>
@@ -734,23 +735,23 @@ const meta = {
           
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
             <div class="rounded-xl overflow-hidden shadow-lg">
-              <img 
-                src="/photos/projects/Firefly/2.webp" 
-                alt="Firefly ecommerce website homepage" 
+              <OptimizedImage
+                src={import("../../public/photos/projects/Firefly/2.webp")}
+                alt="Firefly ecommerce website homepage"
                 class="w-full h-auto object-cover"
               />
             </div>
             <div class="rounded-xl overflow-hidden shadow-lg">
-              <img 
-                src="/photos/projects/Firefly/4.webp" 
-                alt="Firefly branding and visual elements" 
+              <OptimizedImage
+                src={import("../../public/photos/projects/Firefly/4.webp")}
+                alt="Firefly branding and visual elements"
                 class="w-full h-auto object-cover"
               />
             </div>
             <div class="rounded-xl overflow-hidden shadow-lg md:col-span-2">
-              <img 
-                src="/photos/projects/Firefly/3.webp" 
-                alt="Firefly product page design" 
+              <OptimizedImage
+                src={import("../../public/photos/projects/Firefly/3.webp")}
+                alt="Firefly product page design"
                 class="w-full h-auto object-cover"
               />
             </div>

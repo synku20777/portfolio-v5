@@ -8,6 +8,7 @@ import {
   useTransform,
 } from "motion/react";
 import { useRef, useState } from "react";
+import { smoothScrollTo } from "@/lib/smooth-scroll";
 
 export const FloatingDock = ({
   items,
@@ -24,6 +25,25 @@ export const FloatingDock = ({
       <FloatingDockDesktop items={items} className={desktopClassName} />
     </>
   );
+};
+
+// Helper function to handle link clicks
+const handleLinkClick = (e: React.MouseEvent, href: string) => {
+  // Only intercept internal anchor links
+  if (href.startsWith('#') || (href === '/' && window.location.pathname === '/')) {
+    e.preventDefault();
+    
+    // If it's the home link and we're already on the home page, scroll to top
+    if (href === '/' || href === '#') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    
+    // Extract the ID from the href
+    const targetId = href.startsWith('#') ? href.substring(1) : href;
+    smoothScrollTo(targetId);
+  }
+  // External links or other pages will navigate normally
 };
 
 /**
@@ -47,6 +67,7 @@ const FloatingDockSmall = ({
             <motion.a
               key={item.title}
               href={item.href}
+              onClick={(e) => handleLinkClick(e, item.href)}
               whileTap={{ scale: 0.95 }}
               className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-200 outline-none ring-offset-2 transition dark:bg-neutral-800 focus-visible:ring-2 focus-visible:ring-neutral-500"
               aria-label={item.title}
@@ -145,7 +166,12 @@ function IconContainer({
   const [hovered, setHovered] = useState(false);
 
   return (
-    <a href={href} aria-label={title} title={title}>
+    <a 
+      href={href} 
+      onClick={(e) => handleLinkClick(e, href)}
+      aria-label={title} 
+      title={title}
+    >
       <motion.div
         ref={ref}
         style={{ width, height }}

@@ -1,4 +1,4 @@
- import React from "react";
+import React from "react";
 import { FloatingDock } from "@/components/ui/floating-dock";
 import {
   IconBrandGithub,
@@ -52,12 +52,13 @@ export function FloatingDockDemo() {
       node: (
         <IconBrandLinkedin className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
-      href: "https://linkedin.com/",
+      href: "https://linkedin.com/in/nestor-kulik",
     },
     {
       title: "Mode",
       node: <ModeToggle />,
-      href: "#",
+      // Use a non-navigable href for the theme toggle
+      href: "javascript:void(0)",
     },
   ];
   return (

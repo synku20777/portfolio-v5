@@ -1,8 +1,7 @@
 "use client";
-import React from "react";
 import { BackgroundRippleEffect } from "@/components/ui/background-ripple-effect";
 import { TextGenerateEffect } from "@/components/ui/wordgen";
-import { Button } from "@/components/ui/button";
+
 
 
 export function BackgroundRippleEffectDemo() {

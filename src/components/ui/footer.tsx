@@ -1,6 +1,7 @@
 import * as React from "react";
 import { IconArrowBigUp } from "@tabler/icons-react";
 import { Button } from "@/components/ui/button";
+import { smoothScrollTo } from "@/lib/smooth-scroll";
 
 type LinkItem = { label: string; href: string; external?: boolean };
 type Column = { title: string; links: LinkItem[] };
@@ -79,6 +80,21 @@ export default function Footer({
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
+  const handleFooterLinkClick = (e: React.MouseEvent, href: string, external?: boolean) => {
+    if (external || !href.startsWith('#')) return;
+    
+    e.preventDefault();
+    const targetId = href.substring(1);
+    
+    // Handle the empty anchor case (scroll to top)
+    if (!targetId) {
+      scrollToTop();
+      return;
+    }
+    
+    smoothScrollTo(targetId);
+  };
+
   return (
     <footer className="relative w-full border-t bg-neutral-50/60 py-12 text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100">
       <div className="mx-auto max-w-7xl px-6 py-12 sm:py-8">
@@ -93,6 +109,7 @@ export default function Footer({
                   <li key={item.label}>
                     <a
                       href={item.href}
+                      onClick={(e) => handleFooterLinkClick(e, item.href, item.external)}
                       rel={item.external ? "noopener noreferrer" : undefined}
                       target={item.external ? "_blank" : undefined}
                       className="text-neutral-700 underline-offset-4 hover:underline dark:text-neutral-300"

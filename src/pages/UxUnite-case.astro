@@ -4,10 +4,6 @@ import { Button } from "@/components/ui/button";
 import Footer from "@/components/ui/footer";
 import { FloatingDockDemo } from "@/components/ui/nav-dock";
 import {
-  IconBuildingSkyscraper,
-  IconSearch,
-  IconTarget,
-  IconHeartHandshake,
   IconCheck,
   IconVideo,
   IconExternalLink,
@@ -17,6 +13,7 @@ import {
   IconEye,
   IconTypography
 } from "@tabler/icons-react";
+import OptimizedImage from "@/components/optimizedImage.astro";
 
 const meta = {
   title: "Case Study | UxUnite Design System",
@@ -115,9 +112,9 @@ const meta = {
             <div class="absolute -right-40 -bottom-20 w-80 h-80 bg-blue-200 dark:bg-blue-800 rounded-full opacity-30 blur-3xl"></div>
             <div class="absolute right-20 top-10 w-32 h-32 bg-cyan-200 dark:bg-cyan-900 rounded-full opacity-30 blur-xl"></div>
             <div class="w-full rounded-xl overflow-hidden shadow-2xl transform rotate-2 hover:rotate-0 transition-transform duration-500">
-              <img 
-                src="/photos/projects/UxUnite/1.webp" 
-                alt="UxUnite Design System hero image" 
+              <OptimizedImage
+                src={import("../../public/photos/projects/UxUnite/1.webp")}
+                alt="UxUnite Design System hero image"
                 class="w-full h-full object-cover"
               />
             </div>
@@ -504,23 +501,22 @@ const meta = {
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div class="rounded-xl overflow-hidden shadow-2xl">
-                <img 
-                  src="/photos/projects/UxUnite/2.webp" 
-                  alt="Color system example" 
+                <OptimizedImage
+                  src={import("../../public/photos/projects/UxUnite/2.webp")}
+                  alt="Color system example"
                   class="w-full h-auto object-cover"
                 />
               </div>
               <div class="rounded-xl overflow-hidden shadow-2xl">
-                <img 
-                  src="/photos/projects/UxUnite/3.webp" 
-                  alt="Component library example" 
+                <OptimizedImage
+                  src={import("../../public/photos/projects/UxUnite/3.webp")}
+                  alt="Component library example"
                   class="w-full h-auto object-cover"
                 />
               </div>
             </div>
           </div>
         </section>
-
         <!-- CTA section -->
         <section class="mb-24 max-w-4xl mx-auto">
           <div class="bg-gradient-to-br from-blue-50 to-neutral-100 dark:from-neutral-900 dark:to-blue-950 p-10 rounded-3xl shadow-lg text-center">

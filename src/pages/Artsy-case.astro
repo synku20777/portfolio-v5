@@ -17,6 +17,7 @@ import {
   IconPalette,
   IconUser
 } from "@tabler/icons-react";
+import OptimizedImage from "@/components/optimizedImage.astro";
 
 const meta = {
   title: "Case Study | Artsy Museum Experience App",
@@ -115,9 +116,9 @@ const meta = {
             <div class="absolute -right-40 -bottom-20 w-80 h-80 bg-neutral-200 dark:bg-neutral-800 rounded-full opacity-30 blur-3xl"></div>
             <div class="absolute right-20 top-10 w-32 h-32 bg-neutral-200 dark:bg-neutral-900 rounded-full opacity-30 blur-xl"></div>
             <div class="w-full rounded-xl overflow-hidden shadow-2xl transform rotate-2 hover:rotate-0 transition-transform duration-500">
-              <img 
-                src="/photos/projects/Artsy/1.webp" 
-                alt="Artsy Museum App hero image" 
+              <OptimizedImage
+                src={import("../../public/photos/projects/Artsy/1.webp")}
+                alt="Artsy Museum App hero image"
                 class="w-full h-full object-cover"
               />
             </div>
@@ -365,9 +366,9 @@ const meta = {
             <div class="bg-neutral-50 dark:bg-neutral-900 p-8 rounded-xl">
               <h3 class="text-xl font-bold mb-6 text-neutral-800 dark:text-neutral-100">Personalized Tours</h3>
               <div class="bg-white dark:bg-neutral-800 rounded-lg shadow-lg overflow-hidden">
-              <img 
-                src="/photos/projects/Artsy/2.webp" 
-                alt="Personalized tours interface" 
+              <OptimizedImage
+                src={import("../../public/photos/projects/Artsy/2.webp")}
+                alt="Personalized tours interface"
                 class="w-full h-auto"
               />
               </div>
@@ -379,9 +380,9 @@ const meta = {
             <div class="bg-neutral-50 dark:bg-neutral-900 p-8 rounded-xl">
               <h3 class="text-xl font-bold mb-6 text-neutral-800 dark:text-neutral-100">Ticket Aggregator</h3>
               <div class="bg-white dark:bg-neutral-800 rounded-lg shadow-lg overflow-hidden">
-              <img 
-                src="/photos/projects/Artsy/3.webp" 
-                alt="Ticket aggregator interface" 
+              <OptimizedImage
+                src={import("../../public/photos/projects/Artsy/3.webp")}
+                alt="Ticket aggregator interface"
                 class="w-full h-auto"
               />
               </div>
@@ -393,9 +394,9 @@ const meta = {
             <div class="lg:col-span-2 bg-neutral-50 dark:bg-neutral-900 p-8 rounded-xl">
               <h3 class="text-xl font-bold mb-6 text-neutral-800 dark:text-neutral-100">Interactive prototype</h3>
               <div class="bg-white dark:bg-neutral-800 rounded-lg shadow-lg overflow-hidden">
-              <img 
-                src="/photos/projects/Artsy/4.webp" 
-                alt="Interactive map interface" 
+              <img
+                src="/photos/projects/Artsy/4.webp"
+                alt="Interactive map interface"
                 class="w-full h-auto"
               />
               </div>

@@ -16,6 +16,7 @@ import {
   IconFolders,
   IconLayoutDashboard
 } from "@tabler/icons-react";
+import OptimizedImage from "@/components/optimizedImage.astro";
 
 const meta = {
   title: "Case Study | Cloud First Nordics Knowledge Hub",
@@ -110,9 +111,9 @@ const meta = {
             <div class="absolute -right-40 -bottom-20 w-80 h-80 bg-violet-200 dark:bg-violet-800 rounded-full opacity-30 blur-3xl"></div>
             <div class="absolute right-20 top-10 w-32 h-32 bg-violet-200 dark:bg-violet-900 rounded-full opacity-30 blur-xl"></div>
             <div class="w-full rounded-xl overflow-hidden shadow-2xl transform rotate-2 hover:rotate-0 transition-transform duration-500">
-              <img 
-                src="/photos/projects/CloudFirst/1.webp" 
-                alt="Cloud First Nordics Portal hero image" 
+              <OptimizedImage
+                src={import("../../public/photos/projects/CloudFirst/1.webp")}
+                alt="Cloud First Nordics Portal hero image"
                 class="w-full h-full object-cover"
               />
             </div>
@@ -562,23 +563,23 @@ const meta = {
           
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
             <div class="rounded-xl overflow-hidden shadow-lg">
-              <img 
-                src="/photos/projects/CloudFirst/2.webp" 
-                alt="Information architecture diagram" 
+              <OptimizedImage
+                src={import("../../public/photos/projects/CloudFirst/2.webp")}
+                alt="Information architecture diagram"
                 class="w-full h-auto object-cover"
               />
             </div>
             <div class="rounded-xl overflow-hidden shadow-lg">
-              <img 
-                src="/photos/projects/CloudFirst/3.webp" 
-                alt="Portal wireframe" 
+              <OptimizedImage
+                src={import("../../public/photos/projects/CloudFirst/3.webp")}
+                alt="Portal wireframe"
                 class="w-full h-auto object-cover"
               />
             </div>
             <div class="rounded-xl overflow-hidden shadow-lg md:col-span-2">
-              <img 
-                src="/photos/projects/CloudFirst/4.webp" 
-                alt="Final portal design" 
+              <img
+                src="/photos/projects/CloudFirst/4.webp"
+                alt="Final portal design"
                 class="w-full h-auto object-cover"
               />
             </div>

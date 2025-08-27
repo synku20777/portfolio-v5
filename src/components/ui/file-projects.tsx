@@ -1,5 +1,4 @@
 import { FilesystemItem } from "@/components/ui/filesystem-item"
-import { Cloud } from "lucide-react";
 
 function FilesystemItemAnimatedDemo() {
   return (
