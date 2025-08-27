@@ -1,4 +1,5 @@
 ---
+import BaseHead from "@/components/BaseHead.astro";
 import "@/styles/globals.css";
 import { BackgroundRippleEffectDemo } from "@/components/ui/bg-ripple";
 import { FloatingDockDemo } from "@/components/ui/nav-dock";
@@ -6,14 +7,19 @@ import Works from "@/layouts/SelectedWorks.astro";
 import About from "@/layouts/about.astro";
 import Footer from "@/components/ui/footer";
 import { StickyScrollRevealDemo } from "@/components/ui/services-section";
+import { setupViewTransitions } from "@/lib/view-transitions";
+
+const title = "Nest Portfolio | UX Designer & Frontend Developer";
+const description = "Portfolio of a UX designer and frontend developer specializing in accessible, elegant web experiences";
 ---
 
 <html lang="en">
 	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		  <meta name="view-transition" content="same-origin" />
+		<BaseHead title={title} description={description} />
+		<script>
+			import { setupViewTransitions } from '../lib/view-transitions';
+			document.addEventListener('DOMContentLoaded', setupViewTransitions);
+		</script>
 		<script>
 			// Simple path resolver for client-side scripts
 			window.__resolve = (path) => {
@@ -53,10 +59,7 @@ import { StickyScrollRevealDemo } from "@/components/ui/services-section";
 				observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 			}
 		</script>
-		<meta name="Nest" content={Astro.generator} />
-		<title>Nest Portfolio</title>
 	</head>
-
 	<body class="bg-white dark:bg-black">
 		<FloatingDockDemo client:idle />
 		<BackgroundRippleEffectDemo client:visible />

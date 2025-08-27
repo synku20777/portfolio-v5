@@ -2,6 +2,7 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 
+
 type Card = {
   id: number;
   content: React.ReactNode | string;

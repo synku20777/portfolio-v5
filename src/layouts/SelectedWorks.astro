@@ -6,7 +6,9 @@ import { LayoutGridDemo as CloudFirstLayoutGridDemo } from "@/components/ui/prev
 import { LayoutGridDemo as FireflyLayoutGridDemo } from "@/components/ui/previews/Firefly-preview";
 import { LayoutGridDemo as AstraLayoutGridDemo } from "@/components/ui/previews/Astra-preview";
 import { LayoutGridDemo as ITWorkshopLayoutGridDemo } from "@/components/ui/previews/IT-preview";
+import { LazySection } from "@/components/ui/lazy-section";
 ---
+
 <section id="works" class="bg-neutral-100 w-full dark:bg-neutral-900 relative overflow-hidden">
   <div class="mx-auto max-w-7xl px-6 py-8 sm:py-16 flex flex-col">
     <div class="flex items-end">
@@ -15,27 +17,29 @@ import { LayoutGridDemo as ITWorkshopLayoutGridDemo } from "@/components/ui/prev
     </div>
     <div id="projects" class="relative mt-10 flex gap-2 sm:gap-4 md:gap-6 lg:gap-16 h-screen">
       <div id="file-scroller" class="sticky w-2xs top-10">
-        <FilesystemItemAnimatedDemo client:load/>
+        <FilesystemItemAnimatedDemo client:visible/>
       </div>
       <div id="gallery" class="w-full rounded-xl h-full relative">
-        <div id="uxunite-case" data-case class="rounded-xl" aria-hidden="true" hidden data-active="false">
-          <UXUniteDemo client:load />
-        </div>
-        <div id="artsy-case" data-case class="rounded-xl" aria-hidden="true" hidden data-active="false">
-          <ArtsyLayoutGridDemo client:load />
-        </div>
-        <div id="cloudfirst-case" data-case class="rounded-xl" aria-hidden="true" hidden data-active="false">
-          <CloudFirstLayoutGridDemo client:load />
-        </div>
-        <div id="firefly-case" data-case class="rounded-xl" aria-hidden="true" hidden data-active="false">
-          <FireflyLayoutGridDemo client:load />
-        </div>
-        <div id="astra-case" data-case class="rounded-xl" aria-hidden="true" hidden data-active="false">
-          <AstraLayoutGridDemo client:load />
-        </div>
-        <div id="itworkshop-case" data-case class="rounded-xl" aria-hidden="true" hidden data-active="false">
-          <ITWorkshopLayoutGridDemo client:load />
-        </div>
+        <LazySection threshold={0.1} rootMargin="200px" client:load>
+          <div id="uxunite-case" data-case class="rounded-xl" aria-hidden="true" hidden data-active="false">
+            <UXUniteDemo client:visible />
+          </div>
+          <div id="artsy-case" data-case class="rounded-xl" aria-hidden="true" hidden data-active="false">
+            <ArtsyLayoutGridDemo client:visible />
+          </div>
+          <div id="cloudfirst-case" data-case class="rounded-xl" aria-hidden="true" hidden data-active="false">
+            <CloudFirstLayoutGridDemo client:visible />
+          </div>
+          <div id="firefly-case" data-case class="rounded-xl" aria-hidden="true" hidden data-active="false">
+            <FireflyLayoutGridDemo client:visible />
+          </div>
+          <div id="astra-case" data-case class="rounded-xl" aria-hidden="true" hidden data-active="false">
+            <AstraLayoutGridDemo client:visible />
+          </div>
+          <div id="itworkshop-case" data-case class="rounded-xl" aria-hidden="true" hidden data-active="false">
+            <ITWorkshopLayoutGridDemo client:visible />
+          </div>
+        </LazySection>
       </div>
     </div>
   </div>

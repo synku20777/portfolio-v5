@@ -1,12 +1,15 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
 import { LayoutGrid } from "../layout-grid";
+import ErrorBoundary from "@/components/ErrorBoundry";
 
 export function LayoutGridDemo() {
   return (
-    <div className="h-screen w-full">
-      <LayoutGrid cards={cards} />
-    </div>
+    <ErrorBoundary>
+      <div className="h-screen w-full">
+        <LayoutGrid cards={cards} />
+      </div>
+    </ErrorBoundary>
   );
 }
 
