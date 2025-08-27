@@ -1,0 +1,565 @@
+---
+export const prerender = true;
+import { Button } from "@/components/ui/button";
+import Footer from "@/components/ui/footer";
+import { FloatingDockDemo } from "@/components/ui/nav-dock";
+import {
+  IconBuildingSkyscraper,
+  IconSearch,
+  IconTarget,
+  IconHeartHandshake,
+  IconCheck,
+  IconVideo,
+  IconExternalLink,
+  IconChevronRight,
+  IconArrowRight
+} from "@tabler/icons-react";
+
+const meta = {
+  title: "Case Study | Navigation Experience",
+  description:
+    "Designed and shipped a native, turn-by-turn navigation feature for professional truck drivers across Europe.",
+};
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{meta.title}</title>
+    <meta name="description" content={meta.description} />
+    <script is:inline>
+      const getThemePreference = () => {
+        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+          return localStorage.getItem('theme');
+        }
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      };
+      const isDark = getThemePreference() === 'dark';
+      document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
+    
+      if (typeof localStorage !== 'undefined') {
+        const observer = new MutationObserver(() => {
+          const isDark = document.documentElement.classList.contains('dark');
+          localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+        observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+      }
+    </script>
+    <link rel="stylesheet" href="/src/styles/globals.css" />
+  </head>
+
+  <body class="bg-white dark:bg-black">
+    <FloatingDockDemo client:load />
+
+    <!-- Hero section with overlapping elements -->
+    <header class="relative pt-20 pb-0 bg-gradient-to-br from-blue-50 to-neutral-100 dark:from-neutral-950 dark:to-blue-950 overflow-hidden">
+      <div class="mx-auto max-w-7xl px-6">
+        <a href="/" class="inline-flex items-center gap-2 mb-8 text-neutral-700 dark:text-neutral-300 hover:text-black dark:hover:text-white transition-colors">
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block">
+            <path d="m12 19-7-7 7-7"></path>
+            <path d="M19 12H5"></path>
+          </svg>
+          Back
+        </a>
+
+        <!-- Project metadata row -->
+        <div class="flex flex-wrap gap-6 mb-6 text-sm">
+          <div class="inline-block px-3 py-1 font-medium tracking-wider rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+            Mobile Design
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="font-medium text-neutral-500 dark:text-neutral-400">Client:</span>
+            <span class="text-neutral-800 dark:text-neutral-200">Your Client</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="font-medium text-neutral-500 dark:text-neutral-400">Duration:</span>
+            <span class="text-neutral-800 dark:text-neutral-200">2 months</span>
+          </div>
+        </div>
+
+        <!-- Main heading with visual interest -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div class="relative z-10">
+            <div class="absolute -left-10 -top-10 w-32 h-32 bg-blue-100 dark:bg-blue-900 rounded-full opacity-50 blur-2xl"></div>
+            <h1 class="relative text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-neutral-800 dark:text-neutral-100 mb-6">
+              In‑App Navigation Experience for Professional Truck Drivers
+            </h1>
+            <p class="text-lg md:text-xl text-neutral-700 dark:text-neutral-300 max-w-xl mb-10">
+              Designed and shipped a native, turn‑by‑turn navigation feature that removed dependency on third‑party apps and delivered seamless offline routing for professional truck drivers across Europe.
+            </p>
+            
+            <!-- Key outcomes in a horizontal list -->
+            <div class="flex flex-wrap gap-4 mb-10">
+              <div class="py-2 px-4 rounded-full bg-white/80 dark:bg-neutral-800/80 backdrop-blur-sm text-neutral-800 dark:text-neutral-200 text-sm font-medium shadow-sm">
+                Eliminated External App Dependency
+              </div>
+              <div class="py-2 px-4 rounded-full bg-white/80 dark:bg-neutral-800/80 backdrop-blur-sm text-neutral-800 dark:text-neutral-200 text-sm font-medium shadow-sm">
+                Multiple Fleet Clients
+              </div>
+              <div class="py-2 px-4 rounded-full bg-white/80 dark:bg-neutral-800/80 backdrop-blur-sm text-neutral-800 dark:text-neutral-200 text-sm font-medium shadow-sm">
+                Enhanced User Experience
+              </div>
+            </div>
+          </div>
+          
+          <div class="relative">
+            <div class="absolute -right-40 -bottom-20 w-80 h-80 bg-blue-200 dark:bg-blue-800 rounded-full opacity-30 blur-3xl"></div>
+            <div class="absolute right-20 top-10 w-32 h-32 bg-cyan-200 dark:bg-cyan-900 rounded-full opacity-30 blur-xl"></div>
+            <div class="w-full rounded-xl overflow-hidden shadow-2xl transform rotate-2 hover:rotate-0 transition-transform duration-500">
+              <img 
+                src="/photos/projects/CloudFirst/1.webp" 
+                alt="In‑app navigation hero image" 
+                class="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="flex justify-center mt-8 mb-4">
+          <a href="#content" class="animate-bounce p-2 rounded-full bg-white/80 dark:bg-neutral-800/80 backdrop-blur-sm shadow-sm">
+            <IconChevronRight className="w-5 h-5 text-neutral-500 dark:text-neutral-400 rotate-90" />
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main id="content" class="py-24 bg-white dark:bg-black">
+      <div class="mx-auto max-w-7xl px-6">
+        <!-- Challenge and Solution in a card-based layout -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-24">
+          <div class="bg-neutral-50 dark:bg-neutral-900 p-8 rounded-2xl shadow-sm">
+            <h2 class="text-2xl md:text-3xl font-bold mb-6 text-neutral-800 dark:text-neutral-100">The Challenge</h2>
+            <p class="text-neutral-600 dark:text-neutral-400">
+              Professional truck drivers needed integrated navigation with offline maps, truck‑specific constraints, platform‑native patterns for iOS and Android, and safe use in low‑distraction contexts — especially at night.
+            </p>
+          </div>
+
+          <div class="bg-blue-50 dark:bg-blue-950 p-8 rounded-2xl shadow-sm">
+            <h2 class="text-2xl md:text-3xl font-bold mb-6 text-neutral-800 dark:text-neutral-100">The Solution</h2>
+            <p class="text-neutral-600 dark:text-neutral-400">
+              We scoped an MVP on a robust mapping SDK, prioritizing current location, route search & preview, offline map management, and core navigation states. The UI favors glanceability with high contrast, dark mode support, and progressive disclosure.
+            </p>
+          </div>
+        </div>
+
+        <!-- Design Process with visual timeline -->
+<section class="mb-24 relative">
+  <!-- Timeline vertical line - only visible on md+ screens -->
+  <div class="absolute left-1/2 top-28 bottom-0 w-1 bg-neutral-200 dark:bg-neutral-800 -translate-x-1/2 hidden md:block"></div>
+  
+  <!-- Mobile timeline line - left aligned -->
+  <div class="absolute left-6 top-28 bottom-0 w-1 bg-neutral-200 dark:bg-neutral-800 md:hidden"></div>
+  
+  <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center text-neutral-800 dark:text-neutral-100">Design Process</h2>
+  
+  <div class="space-y-12 relative">
+    <!-- Step 1 -->
+    <div class="grid grid-cols-[auto_1fr] md:grid-cols-[1fr_auto_1fr] gap-4 md:gap-8 items-start md:items-center relative">
+      <!-- Mobile & desktop timeline number (always left on mobile) -->
+      <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white font-bold z-10 md:order-2">1</div>
+      
+      <!-- Content container for mobile - stacks vertically -->
+      <div class="grid gap-4 md:contents">
+        <!-- Phase title - right column on mobile, left column on desktop -->
+        <div class="order-1 md:order-1 md:text-right">
+          <h3 class="text-xl font-bold text-neutral-800 dark:text-neutral-200 mb-2">Discovery</h3>
+          <p class="text-neutral-600 dark:text-neutral-400">Problem definition & technical planning for navigation requirements</p>
+        </div>
+        
+        <!-- Task details - right column on mobile, right column on desktop -->
+        <div class="order-2 bg-neutral-50 dark:bg-neutral-900 p-6 rounded-xl shadow-sm md:order-3">
+          <strong class="block text-neutral-800 dark:text-neutral-200 mb-1">Task‑based usability testing</strong>
+          <div class="text-sm text-neutral-600 dark:text-neutral-400">With internal & external driver personas to understand needs and pain points</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="grid grid-cols-[auto_1fr] md:grid-cols-[1fr_auto_1fr] gap-4 md:gap-8 items-start md:items-center relative">
+      <!-- Mobile & desktop timeline number -->
+      <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white font-bold z-10 md:order-2">2</div>
+      
+      <!-- Content container for mobile - stacks vertically -->
+      <div class="grid gap-4 md:contents">
+        <!-- Phase title - right column on mobile, right column on desktop -->
+        <div class="order-1 md:order-3">
+          <h3 class="text-xl font-bold text-neutral-800 dark:text-neutral-200 mb-2">Research</h3>
+          <p class="text-neutral-600 dark:text-neutral-400">Understanding user needs through interviews with truck drivers</p>
+        </div>
+        
+        <!-- Task details - right column on mobile, left column on desktop -->
+        <div class="order-2 bg-neutral-50 dark:bg-neutral-900 p-6 rounded-xl shadow-sm md:order-1">
+          <strong class="block text-neutral-800 dark:text-neutral-200 mb-1">User research</strong>
+          <div class="text-sm text-neutral-600 dark:text-neutral-400">Creating detailed driver personas to guide design decisions</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="grid grid-cols-[auto_1fr] md:grid-cols-[1fr_auto_1fr] gap-4 md:gap-8 items-start md:items-center relative">
+      <!-- Mobile & desktop timeline number -->
+      <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white font-bold z-10 md:order-2">3</div>
+      
+      <!-- Content container for mobile - stacks vertically -->
+      <div class="grid gap-4 md:contents">
+        <!-- Phase title - right column on mobile, left column on desktop -->
+        <div class="order-1 md:order-1 md:text-right">
+          <h3 class="text-xl font-bold text-neutral-800 dark:text-neutral-200 mb-2">Prototype</h3>
+          <p class="text-neutral-600 dark:text-neutral-400">Creating interactive mockups to validate navigation concepts</p>
+        </div>
+        
+        <!-- Task details - right column on mobile, right column on desktop -->
+        <div class="order-2 bg-neutral-50 dark:bg-neutral-900 p-6 rounded-xl shadow-sm md:order-3">
+          <strong class="block text-neutral-800 dark:text-neutral-200 mb-1">Think‑aloud protocol</strong>
+          <div class="text-sm text-neutral-600 dark:text-neutral-400">Interactive prototype reviews to gather qualitative feedback</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="grid grid-cols-[auto_1fr] md:grid-cols-[1fr_auto_1fr] gap-4 md:gap-8 items-start md:items-center relative">
+      <!-- Mobile & desktop timeline number -->
+      <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white font-bold z-10 md:order-2">4</div>
+      
+      <!-- Content container for mobile - stacks vertically -->
+      <div class="grid gap-4 md:contents">
+        <!-- Phase title - right column on mobile, right column on desktop -->
+        <div class="order-1 md:order-3">
+          <h3 class="text-xl font-bold text-neutral-800 dark:text-neutral-200 mb-2">Validation</h3>
+          <p class="text-neutral-600 dark:text-neutral-400">Testing interface clarity and intuitiveness with drivers</p>
+        </div>
+        
+        <!-- Task details - right column on mobile, left column on desktop -->
+        <div class="order-2 bg-neutral-50 dark:bg-neutral-900 p-6 rounded-xl shadow-sm md:order-1">
+          <strong class="block text-neutral-800 dark:text-neutral-200 mb-1">Validation</strong>
+          <div class="text-sm text-neutral-600 dark:text-neutral-400">Evaluating usability with target users before development</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 5 -->
+    <div class="grid grid-cols-[auto_1fr] md:grid-cols-[1fr_auto_1fr] gap-4 md:gap-8 items-start md:items-center relative">
+      <!-- Mobile & desktop timeline number -->
+      <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white font-bold z-10 md:order-2">5</div>
+      
+      <!-- Content container for mobile - stacks vertically -->
+      <div class="grid gap-4 md:contents">
+        <!-- Phase title - right column on mobile, left column on desktop -->
+        <div class="order-1 md:order-1 md:text-right">
+          <h3 class="text-xl font-bold text-neutral-800 dark:text-neutral-200 mb-2">Testing</h3>
+          <p class="text-neutral-600 dark:text-neutral-400">Field testing during live driving scenarios</p>
+        </div>
+        
+        <!-- Task details - right column on mobile, right column on desktop -->
+        <div class="order-2 bg-neutral-50 dark:bg-neutral-900 p-6 rounded-xl shadow-sm md:order-3">
+          <strong class="block text-neutral-800 dark:text-neutral-200 mb-1">Field testing</strong>
+          <div class="text-sm text-neutral-600 dark:text-neutral-400">On devices in live driving scenarios to ensure real-world usability</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 6 -->
+    <div class="grid grid-cols-[auto_1fr] md:grid-cols-[1fr_auto_1fr] gap-4 md:gap-8 items-start md:items-center relative">
+      <!-- Mobile & desktop timeline number -->
+      <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white font-bold z-10 md:order-2">6</div>
+      
+      <!-- Content container for mobile - stacks vertically -->
+      <div class="grid gap-4 md:contents">
+        <!-- Phase title - right column on mobile, right column on desktop -->
+        <div class="order-1 md:order-3">
+          <h3 class="text-xl font-bold text-neutral-800 dark:text-neutral-200 mb-2">Iteration</h3>
+          <p class="text-neutral-600 dark:text-neutral-400">Cognitive walkthroughs for low‑distraction use</p>
+        </div>
+        
+        <!-- Task details - right column on mobile, left column on desktop -->
+        <div class="order-2 bg-neutral-50 dark:bg-neutral-900 p-6 rounded-xl shadow-sm md:order-1">
+          <strong class="block text-neutral-800 dark:text-neutral-200 mb-1">Iteration</strong>
+          <div class="text-sm text-neutral-600 dark:text-neutral-400">Refining design based on user feedback and testing results</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 7 -->
+    <div class="grid grid-cols-[auto_1fr] md:grid-cols-[1fr_auto_1fr] gap-4 md:gap-8 items-start md:items-center relative">
+      <!-- Mobile & desktop timeline number -->
+      <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white font-bold z-10 md:order-2">7</div>
+      
+      <!-- Content container for mobile - stacks vertically -->
+      <div class="grid gap-4 md:contents">
+        <!-- Phase title - right column on mobile, left column on desktop -->
+        <div class="order-1 md:order-1 md:text-right">
+          <h3 class="text-xl font-bold text-neutral-800 dark:text-neutral-200 mb-2">Implementation</h3>
+          <p class="text-neutral-600 dark:text-neutral-400">Close collaboration with mobile engineering team</p>
+        </div>
+        
+        <!-- Task details - right column on mobile, right column on desktop -->
+        <div class="order-2 bg-neutral-50 dark:bg-neutral-900 p-6 rounded-xl shadow-sm md:order-3">
+          <strong class="block text-neutral-800 dark:text-neutral-200 mb-1">Engineering collaboration</strong>
+          <div class="text-sm text-neutral-600 dark:text-neutral-400">Close work with mobile teams to ensure design feasibility</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 8 -->
+    <div class="grid grid-cols-[auto_1fr] md:grid-cols-[1fr_auto_1fr] gap-4 md:gap-8 items-start md:items-center relative">
+      <!-- Mobile & desktop timeline number -->
+      <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white font-bold z-10 md:order-2">8</div>
+      
+      <!-- Content container for mobile - stacks vertically -->
+      <div class="grid gap-4 md:contents">
+        <!-- Phase title - right column on mobile, right column on desktop -->
+        <div class="order-1 md:order-3">
+          <h3 class="text-xl font-bold text-neutral-800 dark:text-neutral-200 mb-2">QA</h3>
+          <p class="text-neutral-600 dark:text-neutral-400">Support with prototype-based regression tests</p>
+        </div>
+        
+        <!-- Task details - right column on mobile, left column on desktop -->
+        <div class="order-2 bg-neutral-50 dark:bg-neutral-900 p-6 rounded-xl shadow-sm md:order-1">
+          <strong class="block text-neutral-800 dark:text-neutral-200 mb-1">QA support</strong>
+          <div class="text-sm text-neutral-600 dark:text-neutral-400">Prototype-based regression testing and validation</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+        <!-- Tech foundation section with visual layout -->
+        <section class="mb-24 bg-gradient-to-br from-neutral-50 to-blue-50 dark:from-neutral-900 dark:to-blue-950 p-8 md:p-12 rounded-3xl relative overflow-hidden">
+          <div class="absolute -right-20 -top-20 w-80 h-80 bg-blue-200 dark:bg-blue-800 rounded-full opacity-20 blur-3xl"></div>
+          
+          <h2 class="text-2xl md:text-3xl font-bold mb-8 flex items-center gap-3 text-neutral-800 dark:text-neutral-100 relative z-10">
+            <IconBuildingSkyscraper className="w-8 h-8 text-blue-500" />
+            <span>Technical Foundation & Constraints</span>
+          </h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
+            <div class="col-span-1 md:col-span-2">
+              <p class="text-neutral-600 dark:text-neutral-400 mb-6">
+                Built on a commercial maps SDK offering routing, search, and offline capabilities. We intentionally adopted platform‑native interaction models and deferred advanced features to post‑MVP phases.
+              </p>
+              
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
+                <div class="flex items-center gap-3 bg-white/80 dark:bg-neutral-800/80 backdrop-blur-sm p-4 rounded-lg">
+                  <span class="text-blue-500 dark:text-blue-400 text-xl font-bold">01</span>
+                  <span class="text-neutral-700 dark:text-neutral-300">Current location handling</span>
+                </div>
+                <div class="flex items-center gap-3 bg-white/80 dark:bg-neutral-800/80 backdrop-blur-sm p-4 rounded-lg">
+                  <span class="text-blue-500 dark:text-blue-400 text-xl font-bold">02</span>
+                  <span class="text-neutral-700 dark:text-neutral-300">Route search & preview</span>
+                </div>
+                <div class="flex items-center gap-3 bg-white/80 dark:bg-neutral-800/80 backdrop-blur-sm p-4 rounded-lg">
+                  <span class="text-blue-500 dark:text-blue-400 text-xl font-bold">03</span>
+                  <span class="text-neutral-700 dark:text-neutral-300">Offline map downloads</span>
+                </div>
+                <div class="flex items-center gap-3 bg-white/80 dark:bg-neutral-800/80 backdrop-blur-sm p-4 rounded-lg">
+                  <span class="text-blue-500 dark:text-blue-400 text-xl font-bold">04</span>
+                  <span class="text-neutral-700 dark:text-neutral-300">Core navigation UI states</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="relative">
+              <div class="sticky top-24 bg-white dark:bg-neutral-900 p-6 rounded-xl shadow-lg">
+                <h3 class="text-xl font-bold mb-4 text-neutral-800 dark:text-neutral-100">Project Team</h3>
+                <div class="space-y-4">
+                  <div>
+                    <div class="text-sm font-medium text-neutral-500 dark:text-neutral-400 mb-1">Team composition</div>
+                    <div class="text-neutral-800 dark:text-neutral-200">Product Team, Mobile Engineering</div>
+                  </div>
+                  <div>
+                    <Button asChild variant="outline" className="w-full justify-between">
+                        <a href="mailto:hello@example.com" class="flex items-center gap-2">
+                          Work with this team
+                          <IconArrowRight className="h-4 w-4" />
+                        </a>
+                      </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Research and UX priorities in an alternating layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-24">
+          <section>
+            <h2 class="text-2xl md:text-3xl font-bold mb-8 flex items-center gap-3 text-neutral-800 dark:text-neutral-100">
+              <IconSearch className="w-8 h-8 text-blue-500" />
+              <span>Research Approach</span>
+            </h2>
+            <div class="space-y-4">
+              <div class="flex gap-4 p-5 rounded-xl bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 hover:shadow-md transition-shadow">
+                <span class="w-3 h-3 mt-1.5 rounded-full bg-blue-500 flex-shrink-0"></span>
+                <div>
+                  <strong class="block text-neutral-800 dark:text-neutral-200">Task‑based usability testing</strong>
+                  <div class="text-sm text-neutral-600 dark:text-neutral-400">With internal & external driver personas</div>
+                </div>
+              </div>
+              <div class="flex gap-4 p-5 rounded-xl bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 hover:shadow-md transition-shadow">
+                <span class="w-3 h-3 mt-1.5 rounded-full bg-blue-500 flex-shrink-0"></span>
+                <div>
+                  <strong class="block text-neutral-800 dark:text-neutral-200">Think‑aloud protocol</strong>
+                  <div class="text-sm text-neutral-600 dark:text-neutral-400">Interactive prototype reviews</div>
+                </div>
+              </div>
+              <div class="flex gap-4 p-5 rounded-xl bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 hover:shadow-md transition-shadow">
+                <span class="w-3 h-3 mt-1.5 rounded-full bg-blue-500 flex-shrink-0"></span>
+                <div>
+                  <strong class="block text-neutral-800 dark:text-neutral-200">Field testing</strong>
+                  <div class="text-sm text-neutral-600 dark:text-neutral-400">On devices in live driving scenarios</div>
+                </div>
+              </div>
+              <div class="flex gap-4 p-5 rounded-xl bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 hover:shadow-md transition-shadow">
+                <span class="w-3 h-3 mt-1.5 rounded-full bg-blue-500 flex-shrink-0"></span>
+                <div>
+                  <strong class="block text-neutral-800 dark:text-neutral-200">Cognitive walkthroughs</strong>
+                  <div class="text-sm text-neutral-600 dark:text-neutral-400">Ensuring intuitive, low‑distraction flows</div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h2 class="text-2xl md:text-3xl font-bold mb-8 flex items-center gap-3 text-neutral-800 dark:text-neutral-100">
+              <IconTarget className="w-8 h-8 text-blue-500" />
+              <span>UX Design Priorities</span>
+            </h2>
+            <div class="space-y-4">
+              <div class="flex gap-4 p-5 rounded-xl bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 hover:shadow-md transition-shadow">
+                <span class="w-3 h-3 mt-1.5 rounded-full bg-blue-500 flex-shrink-0"></span>
+                <div>
+                  <strong class="block text-neutral-800 dark:text-neutral-200">Glanceability</strong>
+                  <div class="text-sm text-neutral-600 dark:text-neutral-400">Large, high‑contrast visuals & generous targets</div>
+                </div>
+              </div>
+              <div class="flex gap-4 p-5 rounded-xl bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 hover:shadow-md transition-shadow">
+                <span class="w-3 h-3 mt-1.5 rounded-full bg-blue-500 flex-shrink-0"></span>
+                <div>
+                  <strong class="block text-neutral-800 dark:text-neutral-200">Dark mode support</strong>
+                  <div class="text-sm text-neutral-600 dark:text-neutral-400">Critical for nighttime safety</div>
+                </div>
+              </div>
+              <div class="flex gap-4 p-5 rounded-xl bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 hover:shadow-md transition-shadow">
+                <span class="w-3 h-3 mt-1.5 rounded-full bg-blue-500 flex-shrink-0"></span>
+                <div>
+                  <strong class="block text-neutral-800 dark:text-neutral-200">Progressive disclosure</strong>
+                  <div class="text-sm text-neutral-600 dark:text-neutral-400">Reduce cognitive load via collapsible UI</div>
+                </div>
+              </div>
+              <div class="flex gap-4 p-5 rounded-xl bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 hover:shadow-md transition-shadow">
+                <span class="w-3 h-3 mt-1.5 rounded-full bg-blue-500 flex-shrink-0"></span>
+                <div>
+                  <strong class="block text-neutral-800 dark:text-neutral-200">Fail‑safe offline behavior</strong>
+                  <div class="text-sm text-neutral-600 dark:text-neutral-400">Fallback states when connectivity is lost</div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Collaboration & handoff with a visual separator -->
+        <section class="mb-24">
+          <div class="flex items-center mb-12">
+            <div class="h-px bg-neutral-200 dark:bg-neutral-800 flex-grow"></div>
+            <h2 class="text-2xl md:text-3xl font-bold px-8 flex items-center gap-3 text-neutral-800 dark:text-neutral-100 whitespace-nowrap">
+              <IconHeartHandshake className="w-8 h-8 text-blue-500" />
+              <span>Collaboration & Handoff</span>
+            </h2>
+            <div class="h-px bg-neutral-200 dark:bg-neutral-800 flex-grow"></div>
+          </div>
+          
+          <div class="max-w-3xl mx-auto text-center">
+            <p class="text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed">
+              Worked closely with mobile engineering on feasibility, transitions, and performance. Supported QA with prototype‑based regression flows and delivered state‑aware design specs with component documentation.
+            </p>
+          </div>
+        </section>
+
+        <!-- Outcomes section with cards -->
+        <section class="mb-24 relative overflow-hidden">
+          <div class="absolute -left-20 -bottom-40 w-80 h-80 bg-blue-100 dark:bg-blue-900 rounded-full opacity-30 blur-3xl"></div>
+          
+          <h2 class="text-2xl md:text-3xl font-bold mb-12 flex items-center gap-3 text-neutral-800 dark:text-neutral-100 relative z-10">
+            <IconCheck className="w-8 h-8 text-blue-500" />
+            <span>Outcomes</span>
+          </h2>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 relative z-10">
+            <div class="bg-white dark:bg-neutral-900 shadow-lg rounded-xl overflow-hidden transform hover:-translate-y-1 transition-transform">
+              <div class="h-1 bg-gradient-to-r from-blue-400 to-blue-600"></div>
+              <div class="p-6">
+                <h3 class="font-bold text-xl mb-3 text-neutral-800 dark:text-neutral-100">Eliminated</h3>
+                <p class="text-neutral-600 dark:text-neutral-400">External App Dependency</p>
+              </div>
+            </div>
+            <div class="bg-white dark:bg-neutral-900 shadow-lg rounded-xl overflow-hidden transform hover:-translate-y-1 transition-transform">
+              <div class="h-1 bg-gradient-to-r from-green-400 to-green-600"></div>
+              <div class="p-6">
+                <h3 class="font-bold text-xl mb-3 text-neutral-800 dark:text-neutral-100">Multiple Clients</h3>
+                <p class="text-neutral-600 dark:text-neutral-400">Fleet Adoption</p>
+              </div>
+            </div>
+            <div class="bg-white dark:bg-neutral-900 shadow-lg rounded-xl overflow-hidden transform hover:-translate-y-1 transition-transform">
+              <div class="h-1 bg-gradient-to-r from-purple-400 to-purple-600"></div>
+              <div class="p-6">
+                <h3 class="font-bold text-xl mb-3 text-neutral-800 dark:text-neutral-100">Enhanced</h3>
+                <p class="text-neutral-600 dark:text-neutral-400">User Experience</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mt-10 p-8 bg-neutral-50 dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-800 relative z-10">
+            <p class="text-neutral-600 dark:text-neutral-400 leading-relaxed">
+              Shipped within scope and adopted by target users, laying the foundation for lane guidance, POI enhancements, and truck‑aware route adjustments.
+            </p>
+          </div>
+        </section>
+
+        <!-- Video section with a full-width treatment -->
+        <section class="mb-24 bg-neutral-900 -mx-6 px-6 py-16 relative">
+          <div class="max-w-7xl mx-auto">
+            <h2 class="text-2xl md:text-3xl font-bold mb-8 flex items-center gap-3 text-neutral-100">
+              <IconVideo className="w-8 h-8 text-blue-500" />
+              <span>MVP Development Process</span>
+            </h2>
+            
+            <p class="text-neutral-400 mb-10 max-w-2xl">
+              A short clip showing iterative design & testing during the MVP phase. This video demonstrates how we approached the development process and addressed key challenges.
+            </p>
+            
+            <div class="relative pt-[56.25%] rounded-xl overflow-hidden shadow-2xl">
+              <iframe 
+                class="absolute inset-0 w-full h-full" 
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                title="MVP Development Process" 
+                allowfullscreen 
+                loading="lazy">
+              </iframe>
+            </div>
+          </div>
+        </section>
+
+        <!-- CTA section -->
+        <section class="mb-24 max-w-4xl mx-auto">
+          <div class="bg-gradient-to-br from-blue-50 to-neutral-100 dark:from-neutral-900 dark:to-blue-950 p-10 rounded-3xl shadow-lg text-center">
+            <h2 class="text-2xl md:text-3xl font-bold mb-6 text-neutral-800 dark:text-neutral-100">Interested in similar work?</h2>
+            <p class="text-neutral-600 dark:text-neutral-400 mb-8 max-w-xl mx-auto">
+              Let's discuss how I can help with your product. I specialize in creating intuitive, user-centered designs that solve real business problems.
+            </p>
+            <Button size="lg" asChild>
+              <a href="mailto:hello@example.com" class="flex items-center gap-2">
+                <IconExternalLink className="h-5 w-5" />
+                Start a Project
+              </a>
+            </Button>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <Footer name="Nest" client:load />
+  </body>
+</html>
