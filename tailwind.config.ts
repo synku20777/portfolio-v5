@@ -1,11 +1,10 @@
-// tailwind.config.ts
 import type { Config } from "tailwindcss"
 
 const config: Config = {
   darkMode: "class",
   content: [
     "./index.html",
-    "./src/**/*.{ts,tsx,js,jsx}",
+    "./src/**/*.{ts,tsx,js,jsx,astro}", // Added .astro files to content path
   ],
   theme: {
     extend: {
@@ -52,6 +51,12 @@ const config: Config = {
     },
   },
   plugins: [require("tailwindcss-animate")],
+  // Add safelist to ensure violet/purple colors are included in the final CSS
+  safelist: [
+    {
+      pattern: /^(bg|text|border|from|to)-(violet|purple)-([1-9]00|950)/,
+    }
+  ]
 }
 
 export default config
