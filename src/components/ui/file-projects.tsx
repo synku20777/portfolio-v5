@@ -40,13 +40,16 @@ const nodes: Node[] = [
             nodes: [
               { name: 'UxUnite.ds' },
               { name: 'Aurora.ds' },
-              { name: 'Simple.ds' },
             ],
         },
       {
         name: 'Web',
         nodes: [
           { name: 'CloudFirst.web'
+          },
+          { name: 'Astra.web'
+          },
+          { name: 'ITworkshop.web'
           },
           {
             name: 'Ecommerce',

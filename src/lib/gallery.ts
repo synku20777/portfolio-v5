@@ -19,10 +19,12 @@ export function initGallery(opts: GalleryOptions = {}) {
     "Artsy.app": "artsy-case",
     "Firefly.shop": "firefly-case",
     "CloudFirst.web": "cloudfirst-case",
+    "Astra.web": "astra-case",
+    "ITworkshop.web": "itworkshop-case",
     ...(opts.nameToId ?? {}),
   };
 
-  const CASE_IDS: string[] = [...(opts.caseIds ?? ["uxunite-case","artsy-case","cloudfirst-case","firefly-case"])];
+  const CASE_IDS: string[] = [...(opts.caseIds ?? ["uxunite-case","artsy-case","cloudfirst-case","firefly-case","astra-case","itworkshop-case"])];
 
   let currentId: string | null = null;
   let ro: ResizeObserver | null = null;
