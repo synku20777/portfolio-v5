@@ -22,7 +22,7 @@ const config: Config = {
   // Updated safelist to include all color families used in case studies
   safelist: [
     {
-      pattern: /^(bg|text|border|from|to)-(violet|purple|amber|neutral|gray|blue|sky|indigo|green|red|orange|yellow)-([1-9]00|950)/,
+      pattern: /^(bg|text|margin|border|from|to)-(violet|purple|amber|neutral|gray|blue|sky|indigo|green|red|orange|yellow)-([1-9]00|950)/,
     }
   ]
 }
