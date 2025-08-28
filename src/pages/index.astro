@@ -9,6 +9,7 @@ import Footer from "@/components/ui/footer";
 import { StickyScrollRevealDemo } from "@/components/ui/services-section";
 import { setupViewTransitions } from "@/lib/view-transitions";
 
+
 const title = "Nest Portfolio | UX Designer & Frontend Developer";
 const description = "Portfolio of a UX designer and frontend developer specializing in accessible, elegant web experiences";
 ---
@@ -16,10 +17,9 @@ const description = "Portfolio of a UX designer and frontend developer specializ
 <html lang="en">
 	<head>
 		<BaseHead title={title} description={description} />
-		<script>
-			import { setupViewTransitions } from '../lib/view-transitions';
-			document.addEventListener('DOMContentLoaded', setupViewTransitions);
-		</script>
+		<script define:vars={{ setupViewTransitions }}>
+					document.addEventListener('DOMContentLoaded', setupViewTransitions);
+				</script>
 		<script>
 			// Simple path resolver for client-side scripts
 			window.__resolve = (path) => {
@@ -28,18 +28,8 @@ const description = "Portfolio of a UX designer and frontend developer specializ
 			};
 		</script>
 		<script type="module">
-			// Inline import with error handling
-			try {
-				const { initGallery } = await import('./src/lib/gallery.ts');
-				initGallery({
-					galleryId: "gallery",
-					updateHash: true,
-					scrollIntoView: false, // Disable auto-scrolling on hover
-					hoverDelay: 100, // Small delay to prevent flickering on accidental hover
-				});
-			} catch (e) {
-				console.error("Failed to initialize gallery:", e);
-			}
+			import initGallery from '@/lib/gallery';
+			initGallery();
 		</script>
 		<script is:inline>
 			const getThemePreference = () => {
