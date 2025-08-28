@@ -20,6 +20,7 @@ import {
   IconWallpaper
 } from "@tabler/icons-react";
 import OptimizedImage from "@/components/optimizedImage.astro";
+import "../styles/globals.css";
 
 // Import all storyboard images statically
 import storyboard1 from "../../public/photos/projects/Astra/storyboard-1.webp";
@@ -71,7 +72,6 @@ const meta = {
         observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
       }
     </script>
-    <link rel="stylesheet" href="/src/styles/globals.css" />
   </head>
 
   <body class="bg-white dark:bg-black">
