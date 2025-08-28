@@ -28,7 +28,7 @@ html {
 
 #gallery {
   position: relative;
-  min-height: 40vh; /* prevents layout jump between cases */
+  min-height: 40vh; 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -38,7 +38,7 @@ html {
   inset: 0;
   width: 100%;
   height: 100%;
-  pointer-events: none; /* Keep elements from interfering when hidden */
+  pointer-events: none;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -69,13 +69,13 @@ html {
   --ring-color: transparent !important;
 }
 
-/* Reduce motion preference */
+/* Reduce motion preference
 @media (prefers-reduced-motion: reduce) {
   #gallery [data-case] {
     transition: none !important;
     animation: none !important;
   }
-}
+} */
 
 @keyframes cell-ripple {
   0% {
