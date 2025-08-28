@@ -20,7 +20,24 @@ const description = "Portfolio of a UX designer and frontend developer specializ
 		<script define:vars={{ setupViewTransitions }}>
 					document.addEventListener('DOMContentLoaded', setupViewTransitions);
 				</script>
-		<script type="module" src={Astro.resolve('@/scripts/init-gallery.ts')}></script>
+		<script is:inline type="module">
+			// Inline the gallery initialization
+			import { initGallery } from '/src/lib/gallery';
+			
+			if (document.readyState === 'loading') {
+				document.addEventListener('DOMContentLoaded', () => initGallery({
+					galleryId: 'gallery',
+					updateHash: true,
+					scrollIntoView: true,
+				}));
+			} else {
+				initGallery({
+					galleryId: 'gallery',
+					updateHash: true,
+					scrollIntoView: true,
+				});
+			}
+		</script>
 		<script is:inline>
 			const getThemePreference = () => {
 				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
