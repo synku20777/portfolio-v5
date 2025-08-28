@@ -1,7 +1,15 @@
-import { initGallery } from '@/lib/gallery-init';
+import { initGallery } from '@/lib/gallery';
 
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => initGallery());
+  document.addEventListener('DOMContentLoaded', () => initGallery({
+    galleryId: 'gallery',
+    updateHash: true,
+    scrollIntoView: true,
+  }));
 } else {
-  initGallery();
+  initGallery({
+    galleryId: 'gallery',
+    updateHash: true,
+    scrollIntoView: true,
+  });
 }

@@ -20,21 +20,7 @@ const description = "Portfolio of a UX designer and frontend developer specializ
 		<script define:vars={{ setupViewTransitions }}>
 					document.addEventListener('DOMContentLoaded', setupViewTransitions);
 				</script>
-		<script>
-			// Declare the custom property type
-			declare global {
-				interface Window {
-					__resolve: (path: string) => string;
-				}
-			}
-			
-			// Simple path resolver for client-side scripts
-			window.__resolve = (path: string) => {
-				const base = '/src/';
-				return path.replace(/^@\//, base);
-			};
-		</script>
-		<script type="module" src="@/scripts/init-gallery.ts"></script>
+		<script type="module" src={Astro.resolve('@/scripts/init-gallery.ts')}></script>
 		<script is:inline>
 			const getThemePreference = () => {
 				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
