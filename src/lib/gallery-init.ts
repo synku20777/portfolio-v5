@@ -7,3 +7,5 @@ document.addEventListener("DOMContentLoaded", () => {
     scrollIntoView: true,
   });
 });
+
+export { initGallery };
