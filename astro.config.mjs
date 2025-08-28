@@ -4,7 +4,8 @@ import react from "@astrojs/react";
 import { fileURLToPath } from 'url';
 
 export default defineConfig({
-  site: 'https://yourwebsite.com',
+  output: 'static',
+  site: 'https://nestux.site',
   integrations: [
     react(),
     // viewTransitions(), // Add this
