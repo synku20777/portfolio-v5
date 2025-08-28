@@ -7,10 +7,32 @@ import {
   IconBriefcase,
   IconUser,
   IconTools,
+  IconSunFilled,
+  IconMoonFilled,
 } from "@tabler/icons-react";
-import { ModeToggle } from "@/components/ui/mode-toggle";
+import { useEffect, useState } from "react";
 
 export function FloatingDockDemo() {
+  // Theme toggle state
+  const [mode, setMode] = useState<"light" | "dark">("light");
+  
+  // Initialize theme on component mount
+  useEffect(() => {
+    const isDark = document.documentElement.classList.contains("dark");
+    setMode(isDark ? "dark" : "light");
+  }, []);
+  
+  // Toggle theme function
+  const toggleTheme = () => {
+    const newMode = mode === "light" ? "dark" : "light";
+    document.documentElement.classList.toggle("dark", newMode === "dark");
+    setMode(newMode);
+    
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem('theme', newMode);
+    }
+  };
+
   const links = [
     {
       title: "Home",
@@ -55,16 +77,21 @@ export function FloatingDockDemo() {
       href: "https://linkedin.com/in/nestor-kulik",
     },
     {
-      title: "Mode",
-      node: <ModeToggle />,
-      // Use a non-navigable href for the theme toggle
-      href: "javascript:void(0)",
+      title: mode === "dark" ? "Light Mode" : "Dark Mode",
+      // Use a direct icon instead of the ModeToggle component
+      node: mode === "dark" ? (
+        <IconSunFilled className="h-full w-full text-yellow-500 dark:text-yellow-400" />
+      ) : (
+        <IconMoonFilled className="h-full w-full text-neutral-700 dark:text-neutral-300" />
+      ),
+      onClick: toggleTheme,
+      href: "#", // We'll intercept the click with onClick
     },
   ];
+  
   return (
     <nav className="fixed z-100 bottom-5 flex items-center justify-center w-full">
-      <FloatingDock
-        mobileClassName="translate-y-20"
+      <FloatingDock 
         items={links}
       />
     </nav>

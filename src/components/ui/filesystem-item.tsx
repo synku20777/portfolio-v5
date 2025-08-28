@@ -83,7 +83,7 @@ export function FilesystemItem({
               animate={{ height: "auto" }}
               exit={{ height: 0 }}
               transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-              className="pl-2 md:pl-6 overflow-hidden flex flex-col justify-end"
+              className="pl-4 overflow-hidden flex flex-col justify-end"
             >
               {children}
             </motion.ul>
@@ -92,23 +92,23 @@ export function FilesystemItem({
       )
     }
 
-    return isOpen && <ul className="pl-2 md:pl-6">{children}</ul>
+    return isOpen && <ul className="pl-2">{children}</ul>
   }
 
   return (
-    <li key={node.name}>
+    <li key={node.name} >
       {isFolder ? (
         <>
-          <span className="flex text-sm text-black dark:text-white md:text-base lg:text-lg items-center gap-1.5 py-1">
+          <span className="text-black dark:text-white lg:text-lg ">
             {/* toggle */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-1 -m-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-800 focus:outline-none"
+              className="flex w-full bg-white dark:bg-neutral-800 rounded-lg items-center gap-1.5 hover:bg-neutral-100 dark:hover:bg-neutral-800 focus:outline-none mt-2 p-3"
               aria-expanded={isOpen}
               aria-label={isOpen ? "Collapse folder" : "Expand folder"}
             >
               <ChevronIcon />
-            </button>
+            
 
             <IconFolder
               className={`size-6 text-orange-300 fill-orange-300 ${
@@ -116,6 +116,7 @@ export function FilesystemItem({
               }`}
             />
             <span className="font-medium">{node.name}</span>
+            </button>
           </span>
 
           <ChildrenList />
@@ -126,13 +127,13 @@ export function FilesystemItem({
           href={fileUrlMap[node.name] || "#"} 
           onMouseEnter={handleMouseEnter}
           onClick={handleClick}
-          className="group flex w-full text-left text-sm text-black dark:text-white md:text-base lg:text-lg items-center gap-1.5 py-1 px-1 -mx-1 rounded-md hover:bg-neutral-100 dark:hover:bg-neutral-800 focus:outline-none cursor-pointer"
+          className="group mt-2 flex w-full text-black dark:text-white text-base items-center gap-1.5 p-2 rounded-md hover:bg-neutral-100 dark:hover:bg-neutral-800 focus:outline-none cursor-pointer"
           aria-label={`View ${node.name} project details`}
           role="button"
           tabIndex={0}
           onKeyDown={(e) => e.key === 'Enter' && handleClick(e as any)}
         >
-          <IconFile className="ml-4 size-6 text-sky-500 dark:text-sky-400" />
+          <IconFile className="size-6 text-sky-500 dark:text-sky-400" />
           <span className="underline-offset-2 group-hover:underline">
             {node.name}
           </span>

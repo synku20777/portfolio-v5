@@ -15,7 +15,12 @@ export const FloatingDock = ({
   desktopClassName,
   mobileClassName,
 }: {
-  items: { title: string; node: React.ReactNode; href: string }[];
+  items: { 
+    title: string; 
+    node: React.ReactNode; 
+    href: string;
+    onClick?: () => void; // Added onClick handler for the theme toggle
+  }[];
   desktopClassName?: string;
   mobileClassName?: string;
 }) => {
@@ -28,7 +33,14 @@ export const FloatingDock = ({
 };
 
 // Helper function to handle link clicks
-const handleLinkClick = (e: React.MouseEvent, href: string) => {
+const handleLinkClick = (e: React.MouseEvent, href: string, onClick?: () => void) => {
+  // If onClick is provided, use that and prevent default navigation
+  if (onClick) {
+    e.preventDefault();
+    onClick();
+    return;
+  }
+  
   // Only intercept internal anchor links
   if (href.startsWith('#') || (href === '/' && window.location.pathname === '/')) {
     e.preventDefault();
@@ -56,18 +68,23 @@ const FloatingDockSmall = ({
   items,
   className,
 }: {
-  items: { title: string; node: React.ReactNode; href: string }[];
+  items: { 
+    title: string; 
+    node: React.ReactNode; 
+    href: string;
+    onClick?: () => void;
+  }[];
   className?: string;
 }) => {
   return (
     <div className={cn("mx-auto block md:hidden", className)}>
-      <div className="mx-auto w-full max-w-md overflow-x-auto">
+      <div className="mx-auto w-full max-w-md overflow-x-auto pb-2">
         <div className="grid grid-rows-2 grid-flow-col auto-cols-max gap-3 rounded-2xl bg-white/10 p-3 shadow-md backdrop-blur-sm dark:bg-neutral-900/10">
           {items.map((item) => (
             <motion.a
               key={item.title}
               href={item.href}
-              onClick={(e) => handleLinkClick(e, item.href)}
+              onClick={(e) => handleLinkClick(e, item.href, item.onClick)}
               whileTap={{ scale: 0.95 }}
               className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-200 outline-none ring-offset-2 transition dark:bg-neutral-800 focus-visible:ring-2 focus-visible:ring-neutral-500"
               aria-label={item.title}
@@ -89,7 +106,12 @@ const FloatingDockDesktop = ({
   items,
   className,
 }: {
-  items: { title: string; node: React.ReactNode; href: string }[];
+  items: { 
+    title: string; 
+    node: React.ReactNode; 
+    href: string;
+    onClick?: () => void; 
+  }[];
   className?: string;
 }) => {
   const mouseX = useMotionValue(Infinity);
@@ -114,11 +136,13 @@ function IconContainer({
   title,
   node,
   href,
+  onClick,
 }: {
   mouseX: MotionValue;
   title: string;
   node: React.ReactNode;
   href: string;
+  onClick?: () => void;
 }) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -168,7 +192,7 @@ function IconContainer({
   return (
     <a 
       href={href} 
-      onClick={(e) => handleLinkClick(e, href)}
+      onClick={(e) => handleLinkClick(e, href, onClick)}
       aria-label={title} 
       title={title}
     >

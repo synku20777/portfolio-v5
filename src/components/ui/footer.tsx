@@ -7,9 +7,9 @@ type LinkItem = { label: string; href: string; external?: boolean };
 type Column = { title: string; links: LinkItem[] };
 
 type FooterProps = {
-  name: string;                    // e.g. "Huy Nguyen"
-  year?: number;                   // default: current year
-  columns?: Column[];              // optional override of the 3 columns
+  name: string;
+  year?: number;
+  columns?: Column[];
 };
 
 function LocalTime() {
@@ -44,6 +44,22 @@ function LocalTime() {
   );
 }
 
+// Helper to find the nearest scrollable ancestor
+function getScrollParent(node: Element | null): Element {
+  let el: Element | null = node;
+  while (el && el !== document.body) {
+    const style = window.getComputedStyle(el);
+    const overflowY = style.overflowY;
+    const canScroll = /(auto|scroll|overlay)/.test(overflowY);
+    if (canScroll) {
+      const h = (el as HTMLElement);
+      if (h.scrollHeight > h.clientHeight) return el;
+    }
+    el = el.parentElement;
+  }
+  return (document.scrollingElement || document.documentElement || document.body) as Element;
+}
+
 export default function Footer({
   name,
   year = new Date().getFullYear(),
@@ -76,8 +92,11 @@ export default function Footer({
     },
   ],
 }: FooterProps) {
+  const footerRef = React.useRef<HTMLElement | null>(null);
+
   const scrollToTop = React.useCallback(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    const container = getScrollParent(footerRef.current);
+    (container as HTMLElement).scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
   const handleFooterLinkClick = (e: React.MouseEvent, href: string, external?: boolean) => {
@@ -96,7 +115,10 @@ export default function Footer({
   };
 
   return (
-    <footer className="relative w-full border-t bg-neutral-50/60 py-12 text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100">
+    <footer
+      ref={footerRef}
+      className="relative w-full border-t bg-neutral-50/60 py-12 text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100"
+    >
       <div className="mx-auto max-w-7xl px-6 py-12 sm:py-8">
         {/* Top grid: 3 columns */}
         <nav aria-label="Footer" className="grid gap-10 grid-cols-2 md:grid-cols-3">
@@ -135,7 +157,7 @@ export default function Footer({
           </div>
 
           {/* Right: back-to-top */}
-          <div className="flex items-end justify-start sm:justify-end md:justify-end">
+          <div className="flex items-end z-100 justify-start">
             <Button
               type="button"
               onClick={scrollToTop}

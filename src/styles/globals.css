@@ -59,6 +59,18 @@ html {
 }
 
 /* Remove focus ring specifically from filesystem items */
+/* Remove focus rings site-wide, but keep them for keyboard navigation */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Use a custom focus style for accessibility */
+:focus-visible {
+  outline: 2px solid var(--color-focus, #0ea5e9);
+  outline-offset: 2px;
+}
+
+/* Remove focus ring specifically from filesystem items */
 #file-scroller button:focus,
 #file-scroller div:focus,
 #file-scroller [role="button"]:focus {
