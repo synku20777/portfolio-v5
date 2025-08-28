@@ -21,6 +21,24 @@ import {
 } from "@tabler/icons-react";
 import OptimizedImage from "@/components/optimizedImage.astro";
 
+// Import all storyboard images statically
+import storyboard1 from "../../public/photos/projects/Astra/storyboard-1.webp";
+import storyboard2 from "../../public/photos/projects/Astra/storyboard-2.webp";
+import storyboard3 from "../../public/photos/projects/Astra/storyboard-3.webp";
+import storyboard4 from "../../public/photos/projects/Astra/storyboard-4.webp";
+import storyboard5 from "../../public/photos/projects/Astra/storyboard-5.webp";
+import storyboard6 from "../../public/photos/projects/Astra/storyboard-6.webp";
+
+// Create an array of storyboard images
+const storyboardImages = [
+  storyboard1,
+  storyboard2,
+  storyboard3,
+  storyboard4,
+  storyboard5,
+  storyboard6
+];
+
 const meta = {
   title: "Case Study | Astra Design Bureau",
   description:
@@ -605,7 +623,7 @@ const meta = {
                 <div class="w-60 flex-shrink-0">
                   <div class="bg-neutral-100 dark:bg-neutral-900 rounded-lg overflow-hidden">
                     <OptimizedImage
-                      src={import(`/public/photos/projects/Astra/storyboard-${i + 1}.webp`)} 
+                      src={storyboardImages[i]} 
                       alt={`Storyboard frame ${i + 1}`} 
                       class="w-full h-40 object-cover"
                     />
