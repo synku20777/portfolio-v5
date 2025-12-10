@@ -80,10 +80,10 @@ export const FilesystemItem = memo(function FilesystemItem({
   }, [isFolder, node.name])
 
   return (
-    <li className="list-none">
+    <li className="list-none w-full min-w-0">
       {isFolder ? (
         <div className="flex flex-col">
-          <span className="text-black dark:text-white lg:text-lg">
+          <span className="text-black dark:text-white lg:text-lg min-w-0 block">
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="flex w-full bg-white dark:bg-neutral-800 rounded-lg items-center gap-1.5 hover:bg-neutral-100 dark:hover:bg-neutral-800 focus:outline-none mt-2 p-3 transition-colors"
@@ -129,7 +129,7 @@ export const FilesystemItem = memo(function FilesystemItem({
           onKeyDown={(e) => e.key === "Enter" && handleClick(e as any)}
         >
           <IconFile className="size-6 text-sky-500 dark:text-sky-400 shrink-0" />
-          <span className="underline-offset-2 group-hover:underline truncate">
+          <span className="underline-offset-2 group-hover:underline truncate min-w-0">
             {node.name}
           </span>
         </a>

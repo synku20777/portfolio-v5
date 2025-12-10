@@ -12,20 +12,20 @@ import { LazySection } from "@/components/ui/lazy-section";
 
 <section id="works" class="bg-neutral-100 w-full dark:bg-neutral-900 relative overflow-hidden">
   <div class="mx-auto max-w-7xl px-6 py-8 sm:py-16 flex flex-col">
-    <div class="flex items-end">
-      <h2 class="text-nowrap text-left text-4xl font-black tracking-tight text-neutral-800 dark: md:text-5xl lg:text-7xl/14 dark:text-neutral-100">Selected Works</h2>
-      <hr class="w-full border-t-2 border-black border-neutral-300 dark:border-neutral-700" />
+    <div class="flex items-end gap-4">
+      <h2 class="whitespace-nowrap text-left text-3xl font-black tracking-tight text-neutral-800 sm:text-4xl md:text-5xl lg:text-7xl dark:text-neutral-100">Selected Works</h2>
+      <hr class="flex-1 w-auto border-t-2 border-neutral-300 dark:border-neutral-700 mb-2 sm:mb-3 md:mb-4" />
     </div>
     
     <!-- Mobile folder view (more filesystem-like) -->
-    <div class="mt-10 block md:hidden">
-      <MobileFolderView client:visible />
+    <div class="mt-10 block lg:hidden w-full">
+      <MobileFolderView client:load />
     </div>
     
     <!-- Desktop filesystem view -->
-    <div id="projects" class="relative mt-10 hidden md:flex gap-2 sm:gap-4 md:gap-6 lg:gap-16 h-screen">
+    <div id="projects" class="relative mt-10 hidden lg:flex gap-2 sm:gap-4 md:gap-6 lg:gap-16 h-screen">
       <div id="file-scroller" class="sticky w-2xs top-10">
-        <FilesystemItemAnimatedDemo client:visible/>
+        <FilesystemItemAnimatedDemo client:load/>
       </div>
       <div id="gallery" class="w-full rounded-xl h-full relative">
         <LazySection threshold={0.1} rootMargin="200px" client:load>

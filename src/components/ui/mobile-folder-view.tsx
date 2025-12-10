@@ -1,5 +1,6 @@
 "use client";
-import React, { useState } from "react";
+import * as React from "react";
+import { useState } from "react";
 import { IconFile, IconFolder, IconFolderOpen, IconChevronRight } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "motion/react";
@@ -44,12 +45,12 @@ const folderData: Node[] = [
             name: 'Ecommerce',
             nodes: [
               { name: 'Firefly.shop', thumbnail: "/photos/projects/Firefly/1.webp" },
-              { name: 'Aurora.shop', thumbnail: "/photos/projects/Astra/2.jpg" },
+              { name: 'Aurora.shop' },
             ],
           },
           {
             name: 'SaaS',
-            nodes: [{ name: 'BillPay', thumbnail: "/photos/projects/CloudFirst/2.webp" }],
+            nodes: [{ name: 'BillPay' }],
           },
           {
             name: 'Mobile',
@@ -122,30 +123,32 @@ function FolderItem({ node }: { node: Node }) {
       ) : (
         <a 
           href={fileUrlMap[node.name] || "#"} 
-          className="flex items-center gap-3 p-3 rounded-lg bg-white dark:bg-neutral-800 shadow-sm hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors"
+          className="flex flex-col gap-3 p-3 rounded-lg bg-white dark:bg-neutral-800 shadow-sm hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors"
         >
-          <div className="w-10 h-10 flex-shrink-0 bg-sky-100 dark:bg-sky-900/30 rounded-md flex items-center justify-center">
-            <IconFile className="w-5 h-5 text-sky-500" />
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 flex-shrink-0 bg-sky-100 dark:bg-sky-900/30 rounded-md flex items-center justify-center">
+              <IconFile className="w-5 h-5 text-sky-500" />
+            </div>
+            
+            <div>
+              <div className="font-medium text-neutral-900 dark:text-neutral-100">
+                {node.name}
+              </div>
+              <div className="text-xs text-neutral-500 dark:text-neutral-400">
+                View project details
+              </div>
+            </div>
           </div>
           
           {node.thumbnail && (
-            <div className="h-10 w-10 rounded-md overflow-hidden flex-shrink-0">
+            <div className="w-full rounded-4xl overflow-hidden mt-1">
               <img 
                 src={node.thumbnail} 
                 alt={`${node.name} thumbnail`} 
-                className="h-full w-full object-cover"
+                className="w-full h-auto object-cover"
               />
             </div>
           )}
-          
-          <div>
-            <div className="font-medium text-neutral-900 dark:text-neutral-100">
-              {node.name}
-            </div>
-            <div className="text-xs text-neutral-500 dark:text-neutral-400">
-              View project details
-            </div>
-          </div>
         </a>
       )}
     </li>
