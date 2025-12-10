@@ -1,14 +1,19 @@
 ---
 import BaseHead from "@/components/BaseHead.astro";
 import "@/styles/globals.css";
-import { BackgroundRippleEffectDemo } from "@/components/ui/bg-ripple";
-import { FloatingDockDemo } from "@/components/ui/nav-dock";
+
+// Layouts & Components
 import Works from "@/layouts/SelectedWorks.astro";
 import About from "@/layouts/about.astro";
 import Footer from "@/components/ui/footer";
-import { StickyScrollRevealDemo } from "@/components/ui/services-section";
-import { setupViewTransitions } from "@/lib/view-transitions";
 
+// Interactive UI Components
+import { BackgroundRippleEffectDemo } from "@/components/ui/bg-ripple";
+import { FloatingDockDemo } from "@/components/ui/nav-dock";
+import { StickyScrollRevealDemo } from "@/components/ui/services-section";
+
+// Libs
+import { setupViewTransitions } from "@/lib/view-transitions";
 
 const title = "Nest Portfolio | UX Designer & Frontend Developer";
 const description = "Portfolio of a UX designer and frontend developer specializing in accessible, elegant web experiences";
@@ -17,11 +22,57 @@ const description = "Portfolio of a UX designer and frontend developer specializ
 <html lang="en">
 	<head>
 		<BaseHead title={title} description={description} />
-		<script define:vars={{ setupViewTransitions }}>
-					document.addEventListener('DOMContentLoaded', setupViewTransitions);
-				</script>
+		
+		{/* Theme Script: Must stay in HEAD to prevent flash of incorrect theme color */}
 		<script is:inline>
-			// Inline the entire gallery initialization to avoid external imports
+			const getThemePreference = () => {
+				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+					return localStorage.getItem('theme');
+				}
+				return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+			};
+			
+			const setDarkClass = () => {
+				const isDark = getThemePreference() === 'dark';
+				document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
+			};
+
+			setDarkClass(); // Run immediately
+
+			// View Transitions hook to re-apply theme after swap
+			document.addEventListener('astro:after-swap', setDarkClass);
+		
+			if (typeof localStorage !== 'undefined') {
+				const observer = new MutationObserver(() => {
+					const isDark = document.documentElement.classList.contains('dark');
+					localStorage.setItem('theme', isDark ? 'dark' : 'light');
+				});
+				observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+			}
+		</script>
+
+		<script define:vars={{ setupViewTransitions }}>
+			document.addEventListener('DOMContentLoaded', setupViewTransitions);
+			document.addEventListener('astro:page-load', setupViewTransitions);
+		</script>
+	</head>
+	
+	<body class="bg-white dark:bg-black antialiased selection:bg-neutral-200 dark:selection:bg-neutral-800">
+		{/* Navigation: client:load ensures nav is ready immediately */}
+		<FloatingDockDemo client:load />
+		
+		<BackgroundRippleEffectDemo client:visible />
+		
+		<section id="services" class="bg-neutral-900 w-full py-4 dark:bg-neutral-900">
+			<StickyScrollRevealDemo client:visible/>
+		</section>
+		
+		<Works />
+		<About />
+		<Footer name="Nest" client:visible />
+
+		{/* Gallery Logic: Moved to end of body to unblock rendering */}
+		<script is:inline>
 			const initGallery = (opts = {}) => {
 				const EASE = opts.easing ?? 'cubic-bezier(0.22, 1, 0.36, 1)';
 				const DURATION = opts.duration ?? 420;
@@ -37,18 +88,15 @@ const description = "Portfolio of a UX designer and frontend developer specializ
 					...(opts.nameToId ?? {}),
 				};
 
-				const CASE_IDS = [...(opts.caseIds ?? ["uxunite-case","artsy-case","cloudfirst-case","firefly-case","astra-case","itworkshop-case"])];
+				const CASE_IDS = opts.caseIds ?? ["uxunite-case","artsy-case","cloudfirst-case","firefly-case","astra-case","itworkshop-case"];
 
 				let currentId = null;
 				let ro = null;
 				let hoverTimer = null;
 
 				const getEl = (id) => document.getElementById(id);
-				const galleryEl = () => document.getElementById(opts.galleryId ?? "gallery");
 
 				const updateGalleryHeight = () => {
-					// The gallery is now full height, so we don't need to adjust its height
-					// Just ensure the active case fills the gallery properly
 					const activeEl = currentId ? getEl(currentId) : null;
 					if (activeEl) {
 						activeEl.style.height = "100%";
@@ -65,6 +113,7 @@ const description = "Portfolio of a UX designer and frontend developer specializ
 					ro.disconnect();
 					if (el) ro.observe(el);
 					
+					// Use a named function reference for cleaner removal if needed
 					window.removeEventListener("resize", updateGalleryHeight);
 					window.addEventListener("resize", updateGalleryHeight, { passive: true });
 					updateGalleryHeight();
@@ -75,12 +124,18 @@ const description = "Portfolio of a UX designer and frontend developer specializ
 						const el = getEl(cid);
 						if (!el) return;
 						const active = cid === id;
+						
+						// Performance: Batch style changes or use classes where possible
 						el.hidden = !active;
-						el.dataset.active = active ? "true" : "false";
-						el.setAttribute("aria-hidden", active ? "false" : "true");
-						el.style.opacity = active ? "1" : "0";
-						el.style.transform = active ? "translateX(0px)" : "translateX(40px)";
-						el.style.zIndex = active ? "2" : "1";
+						el.dataset.active = String(active);
+						el.setAttribute("aria-hidden", String(!active));
+						
+						// Direct style manipulation for instant switch
+						Object.assign(el.style, {
+							opacity: active ? "1" : "0",
+							transform: active ? "translateX(0px)" : "translateX(40px)",
+							zIndex: active ? "2" : "1"
+						});
 					});
 					currentId = id;
 					updateGalleryHeight();
@@ -92,28 +147,33 @@ const description = "Portfolio of a UX designer and frontend developer specializ
 
 					const from = currentId ? getEl(currentId) : null;
 					const to = getEl(id);
-					if (!to) return;
+					if (!to) return; // Guard clause
 
 					if (!CASE_IDS.includes(id)) CASE_IDS.push(id);
 
+					// Prepare 'to' element
 					to.hidden = false;
 					to.dataset.active = "true";
 					to.setAttribute("aria-hidden", "false");
-					to.style.opacity = "0";
-					to.style.transform = "translateX(-40px)";
-					to.style.zIndex = "2";
-					to.style.display = "flex";
-					to.style.alignItems = "center";
-					to.style.justifyContent = "center";
+					Object.assign(to.style, {
+						opacity: "0",
+						transform: "translateX(-40px)",
+						zIndex: "2",
+						display: "flex",
+						alignItems: "center",
+						justifyContent: "center"
+					});
 
 					const clean = (el) => {
+						if(!el) return;
 						el.style.opacity = "";
 						el.style.transform = "";
 						el.style.zIndex = "";
 						el.style.willChange = "";
 					};
 
-					let enterAnim = null;
+					let enterAnim, exitAnim;
+
 					try {
 						enterAnim = to.animate(
 							[{ opacity: 0, transform: "translateX(-40px)" },
@@ -121,12 +181,10 @@ const description = "Portfolio of a UX designer and frontend developer specializ
 							{ duration: DURATION, easing: EASE, fill: "forwards" }
 						);
 					} catch (e) {
-						// Fallback if animation fails
 						to.style.opacity = "1";
 						to.style.transform = "translateX(0px)";
 					}
 
-					let exitAnim = null;
 					if (from) {
 						from.dataset.active = "false";
 						from.setAttribute("aria-hidden", "true");
@@ -138,17 +196,18 @@ const description = "Portfolio of a UX designer and frontend developer specializ
 								{ duration: DURATION, easing: EASE, fill: "forwards" }
 							);
 						} catch (e) {
-							// Fallback if animation fails
 							from.style.opacity = "0";
 							from.style.transform = "translateX(40px)";
 						}
 					}
 
 					try {
-						if (enterAnim?.finished) await enterAnim.finished;
-						if (exitAnim?.finished) await exitAnim.finished;
+						await Promise.all([
+							enterAnim?.finished,
+							exitAnim?.finished
+						]);
 					} catch (e) {
-						console.warn("Animation promise rejected", e);
+						// Animation interrupted or failed
 					} finally {
 						if (from) {
 							from.hidden = true;
@@ -173,97 +232,61 @@ const description = "Portfolio of a UX designer and frontend developer specializ
 				const boot = () => {
 					const fromHash = location.hash?.slice(1);
 					const initial = fromHash && CASE_IDS.includes(fromHash) ? fromHash : CASE_IDS[0];
-					setActive(initial, { animate: false });
-					observeActive(getEl(initial));
+					if (initial) setActive(initial, { animate: false });
 				};
 
 				const onCaseOpen = (e) => {
 					const name = e?.detail?.name;
+					if (!name) return;
+
 					const id = map[name] || fallbackId(name);
 					if (!CASE_IDS.includes(id)) CASE_IDS.push(id);
 					
-					// Clear any pending hover timer
-					if (hoverTimer !== null) {
+					if (hoverTimer) {
 						clearTimeout(hoverTimer);
 						hoverTimer = null;
 					}
 					
-					// Set a delay if configured
 					if (HOVER_DELAY > 0) {
 						hoverTimer = window.setTimeout(() => {
 							setActive(id, { animate: true });
-							if (opts.updateHash !== false) {
-								history.replaceState(null, "", `#${id}`);
-							}
+							if (opts.updateHash !== false) history.replaceState(null, "", `#${id}`);
 						}, HOVER_DELAY);
 					} else {
 						setActive(id, { animate: true });
-						if (opts.updateHash !== false) {
-							history.replaceState(null, "", `#${id}`);
-						}
+						if (opts.updateHash !== false) history.replaceState(null, "", `#${id}`);
 					}
 				};
 
-				if (document.readyState === 'loading') {
-					document.addEventListener("DOMContentLoaded", boot, { once: true });
-				} else {
-					setTimeout(boot, 0);
-				}
+				// Cleanup previous listeners to prevent duplicates during navigation
+				if (window._galleryCleanup) window._galleryCleanup();
+
+				boot();
 				window.addEventListener("case:open", onCaseOpen);
 
-				return {
-					setActive,
-					destroy() {
-						window.removeEventListener("case:open", onCaseOpen);
-						window.removeEventListener("resize", updateGalleryHeight);
-						if (ro) ro.disconnect();
-						if (hoverTimer !== null) clearTimeout(hoverTimer);
-					}
+				// Register cleanup function globally
+				window._galleryCleanup = () => {
+					window.removeEventListener("case:open", onCaseOpen);
+					window.removeEventListener("resize", updateGalleryHeight);
+					if (ro) ro.disconnect();
+					if (hoverTimer) clearTimeout(hoverTimer);
 				};
 			};
 			
-			// Initialize gallery
-			if (document.readyState === 'loading') {
-				document.addEventListener('DOMContentLoaded', () => initGallery({
-					galleryId: 'gallery',
-					updateHash: true,
-					scrollIntoView: true,
-				}));
-			} else {
+			// Initialize with View Transition support (astro:page-load)
+			// This covers both initial load and subsequent client-side navigations
+			const runGallery = () => {
 				initGallery({
 					galleryId: 'gallery',
 					updateHash: true,
 					scrollIntoView: true,
 				});
-			}
-		</script>
-		<script is:inline>
-			const getThemePreference = () => {
-				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-					return localStorage.getItem('theme');
-				}
-				return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 			};
-			const isDark = getThemePreference() === 'dark';
-			document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
-		
-			if (typeof localStorage !== 'undefined') {
-				const observer = new MutationObserver(() => {
-					const isDark = document.documentElement.classList.contains('dark');
-					localStorage.setItem('theme', isDark ? 'dark' : 'light');
-				});
-				observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
-			}
+
+			document.addEventListener('astro:page-load', runGallery);
+			// Fallback for non-ViewTransition setups
+			if (document.readyState === 'complete') runGallery();
+			else document.addEventListener('DOMContentLoaded', runGallery);
 		</script>
-	</head>
-	<body class="bg-white dark:bg-black">
-		<FloatingDockDemo client:idle />
-		<BackgroundRippleEffectDemo client:visible />
-		<section id="services" class="bg-neutral-900 w-full py-4 dark:bg-neutral-900">
-			<StickyScrollRevealDemo client:visible/>
-		</section>
-		<Works />
-		<About />
-		<Footer name="Nest" client:load />
 	</body>
 </html>

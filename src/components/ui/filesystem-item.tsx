@@ -1,5 +1,5 @@
 import { useState, useCallback, memo } from "react"
-import { IconChevronRight, IconFolder, IconFile } from "@tabler/icons-react"
+import { IconFile, IconFolder, IconFolderOpen, IconChevronRight } from "@tabler/icons-react";
 import { AnimatePresence, motion } from "framer-motion"
 
 type Node = {
@@ -92,11 +92,11 @@ export const FilesystemItem = memo(function FilesystemItem({
             >
               <ChevronIcon isOpen={isOpen} animated={animated} />
 
-              <IconFolder
-                className={`size-6 text-orange-300 fill-orange-300 ${
-                  node.nodes && node.nodes.length === 0 ? "ml-4 md:ml-12" : ""
-                }`}
-              />
+              {isOpen ? (
+              <IconFolderOpen className="w-5 h-5 mr-2 text-orange-400 fill-orange-100 dark:fill-orange-900/30" />
+            ) : (
+              <IconFolder className="w-5 h-5 mr-2 text-orange-400 fill-orange-100 dark:fill-orange-900/30" />
+            )}
               <span className="font-medium truncate">{node.name}</span>
             </button>
           </span>
