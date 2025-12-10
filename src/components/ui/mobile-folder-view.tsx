@@ -111,7 +111,7 @@ function FolderItem({ node }: { node: Node }) {
                 animate={{ height: "auto", opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="overflow-hidden pl-4 pt-2"
+                className="overflow-hidden pl-1 pt-2"
               >
                 {node.nodes?.map((childNode) => (
                   <FolderItem key={childNode.name} node={childNode} />
@@ -123,7 +123,7 @@ function FolderItem({ node }: { node: Node }) {
       ) : (
         <a 
           href={fileUrlMap[node.name] || "#"} 
-          className="flex flex-col gap-3 p-3 rounded-lg bg-white dark:bg-neutral-800 shadow-sm hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors"
+          className="flex flex-col gap-3 p-2 rounded-lg bg-white dark:bg-neutral-800 shadow-sm hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors"
         >
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 flex-shrink-0 bg-sky-100 dark:bg-sky-900/30 rounded-md flex items-center justify-center">
@@ -141,7 +141,7 @@ function FolderItem({ node }: { node: Node }) {
           </div>
           
           {node.thumbnail && (
-            <div className="w-full rounded-4xl overflow-hidden mt-1">
+            <div className="w-full rounded-sm overflow-hidden mt-1">
               <img 
                 src={node.thumbnail} 
                 alt={`${node.name} thumbnail`} 
@@ -157,7 +157,7 @@ function FolderItem({ node }: { node: Node }) {
 
 export function MobileFolderView() {
   return (
-    <div className="bg-neutral-100/50 dark:bg-neutral-900/50 rounded-xl p-4">
+    <div className="bg-neutral-100/50 dark:bg-neutral-900/50 rounded-xl py-4">
       <ul>
         {folderData.map((node) => (
           <FolderItem key={node.name} node={node} />
