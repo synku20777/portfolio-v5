@@ -24,45 +24,51 @@ export function initGallery(opts: GalleryOptions = {}) {
     ...(opts.nameToId ?? {}),
   };
 
-  const CASE_IDS: string[] = [...(opts.caseIds ?? ["uxunite-case","artsy-case","cloudfirst-case","firefly-case","astra-case","itworkshop-case"])];
+  const CASE_IDS: string[] = opts.caseIds ?? [
+    "uxunite-case", "artsy-case", "cloudfirst-case", 
+    "firefly-case", "astra-case", "itworkshop-case"
+  ];
 
   let currentId: string | null = null;
   let ro: ResizeObserver | null = null;
   let hoverTimer: number | null = null;
 
-  const getEl = (id: string) => document.getElementById(id) as HTMLElement | null;
+  const getEl = (id: string) => document.getElementById(id);
 
-  const galleryEl = () => document.getElementById(opts.galleryId ?? "gallery") as HTMLElement | null;
+  // Helper for batch style setting to improve readability and perf
+  const setStyles = (el: HTMLElement, styles: Partial<CSSStyleDeclaration>) => {
+    Object.assign(el.style, styles);
+  };
 
   const updateGalleryHeight = () => {
-    // The gallery is now full height, so we don't need to adjust its height
-    // Just ensure the active case fills the gallery properly
     const activeEl = currentId ? getEl(currentId) : null;
     if (activeEl) {
-      activeEl.style.height = "100%";
-      activeEl.style.display = "flex";
-      activeEl.style.alignItems = "center";
-      activeEl.style.justifyContent = "center";
+      setStyles(activeEl, {
+        height: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
+      });
     }
   };
 
   const observeActive = (el: HTMLElement | null) => {
     if (typeof ResizeObserver === "undefined") return;
     
+    // Disconnect previous observer
+    if (ro) ro.disconnect();
+    
+    // Create new observer only if needed (lazy init)
     if (!ro) ro = new ResizeObserver(updateGalleryHeight);
-    ro.disconnect();
+    
     if (el) ro.observe(el);
     
+    // Manage window resize listener to avoid duplicates
     window.removeEventListener("resize", updateGalleryHeight);
     window.addEventListener("resize", updateGalleryHeight, { passive: true });
+    
+    // Initial update
     updateGalleryHeight();
-  };
-
-  const measure = (el: HTMLElement) => {
-    const prevHidden = el.hidden;
-    el.hidden = false;
-    el.hidden = prevHidden;
-    return el.scrollHeight; // Use scrollHeight instead of offsetHeight
   };
 
   const setActiveInstant = (id: string) => {
@@ -70,13 +76,18 @@ export function initGallery(opts: GalleryOptions = {}) {
       const el = getEl(cid);
       if (!el) return;
       const active = cid === id;
+
       el.hidden = !active;
-      el.dataset.active = active ? "true" : "false";
-      el.setAttribute("aria-hidden", active ? "false" : "true");
-      el.style.opacity = active ? "1" : "0";
-      el.style.transform = active ? "translateX(0px)" : "translateX(40px)";
-      el.style.zIndex = active ? "2" : "1";
+      el.dataset.active = String(active);
+      el.setAttribute("aria-hidden", String(!active));
+
+      setStyles(el, {
+        opacity: active ? "1" : "0",
+        transform: active ? "translateX(0px)" : "translateX(40px)",
+        zIndex: active ? "2" : "1"
+      });
     });
+    
     currentId = id;
     updateGalleryHeight();
     observeActive(getEl(id));
@@ -91,65 +102,76 @@ export function initGallery(opts: GalleryOptions = {}) {
 
     if (!CASE_IDS.includes(id)) CASE_IDS.push(id);
 
+    // Setup 'to' element
     to.hidden = false;
     to.dataset.active = "true";
     to.setAttribute("aria-hidden", "false");
-    to.style.opacity = "0";
-    to.style.transform = "translateX(-40px)";
-    to.style.zIndex = "2";
-    to.style.display = "flex";
-    to.style.alignItems = "center";
-    to.style.justifyContent = "center";
+    setStyles(to, {
+      opacity: "0",
+      transform: "translateX(-40px)",
+      zIndex: "2",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center"
+    });
 
     const clean = (el: HTMLElement) => {
-      el.style.opacity = "";
-      el.style.transform = "";
-      el.style.zIndex = "";
-      el.style.willChange = "";
+      if (!el) return;
+      setStyles(el, {
+        opacity: "",
+        transform: "",
+        zIndex: "",
+        willChange: ""
+      });
     };
 
-    let enterAnim: Animation | null = null;
+    // Animation promises
+    let enterAnim: Animation | undefined;
+    let exitAnim: Animation | undefined;
+
     try {
       enterAnim = to.animate(
         [{ opacity: 0, transform: "translateX(-40px)" },
-        { opacity: 1, transform: "translateX(0px)" }],
+         { opacity: 1, transform: "translateX(0px)" }],
         { duration: DURATION, easing: EASE, fill: "forwards" }
       );
     } catch (e) {
-      // Fallback if animation fails
-      to.style.opacity = "1";
-      to.style.transform = "translateX(0px)";
+      // Fallback
+      setStyles(to, { opacity: "1", transform: "translateX(0px)" });
     }
 
-    let exitAnim: Animation | null = null;
     if (from) {
       from.dataset.active = "false";
       from.setAttribute("aria-hidden", "true");
       from.style.zIndex = "1";
+      
       try {
         exitAnim = from.animate(
           [{ opacity: 1, transform: "translateX(0px)" },
-          { opacity: 0, transform: "translateX(40px)" }],
+           { opacity: 0, transform: "translateX(40px)" }],
           { duration: DURATION, easing: EASE, fill: "forwards" }
         );
       } catch (e) {
-        // Fallback if animation fails
-        from.style.opacity = "0";
-        from.style.transform = "translateX(40px)";
+        // Fallback
+        setStyles(from, { opacity: "0", transform: "translateX(40px)" });
       }
     }
 
     try {
-      if (enterAnim?.finished) await enterAnim.finished;
-      if (exitAnim?.finished) await exitAnim.finished;
+        await Promise.all([
+            enterAnim?.finished,
+            exitAnim?.finished
+        ]);
     } catch (e) {
-      console.warn("Animation promise rejected", e);
+        // Ignore animation errors (e.g. element removed from DOM during anim)
     } finally {
       if (from) {
         from.hidden = true;
         clean(from);
       }
       clean(to);
+      
+      // Update state
       currentId = id;
       updateGalleryHeight();
       observeActive(to);
@@ -168,27 +190,26 @@ export function initGallery(opts: GalleryOptions = {}) {
   const boot = () => {
     const fromHash = location.hash?.slice(1);
     const initial = fromHash && CASE_IDS.includes(fromHash) ? fromHash : CASE_IDS[0];
-    setActive(initial, { animate: false });
-    observeActive(getEl(initial));
+    if(initial) setActive(initial, { animate: false });
   };
 
-  const onCaseOpen = (e: any) => {
+  const onCaseOpen = (e: any) => { // Using 'any' for CustomEvent to simplify usage
     const name = e?.detail?.name as string;
+    if (!name) return;
+
     const id = map[name] || fallbackId(name);
     if (!CASE_IDS.includes(id)) CASE_IDS.push(id);
     
-    // Clear any pending hover timer
-    if (hoverTimer !== null) {
+    if (hoverTimer) {
       clearTimeout(hoverTimer);
       hoverTimer = null;
     }
     
-    // Set a delay if configured
     if (HOVER_DELAY > 0) {
       hoverTimer = window.setTimeout(() => {
         setActive(id, { animate: true });
         if (opts.updateHash !== false) {
-          history.replaceState(null, "", `#${id}`);
+            history.replaceState(null, "", `#${id}`);
         }
       }, HOVER_DELAY);
     } else {
@@ -197,15 +218,16 @@ export function initGallery(opts: GalleryOptions = {}) {
         history.replaceState(null, "", `#${id}`);
       }
     }
-    
-    // We removed the scrollIntoView behavior to avoid jumping when hovering
   };
 
+  // Boot sequence
   if (document.readyState === 'loading') {
     document.addEventListener("DOMContentLoaded", boot, { once: true });
   } else {
+    // Defer slightly to ensure DOM is ready in all contexts
     setTimeout(boot, 0);
   }
+  
   window.addEventListener("case:open", onCaseOpen);
 
   return {
@@ -214,7 +236,7 @@ export function initGallery(opts: GalleryOptions = {}) {
       window.removeEventListener("case:open", onCaseOpen);
       window.removeEventListener("resize", updateGalleryHeight);
       if (ro) ro.disconnect();
-      if (hoverTimer !== null) clearTimeout(hoverTimer);
+      if (hoverTimer) clearTimeout(hoverTimer);
     }
   };
 }
