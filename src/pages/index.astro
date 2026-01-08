@@ -8,7 +8,7 @@ import About from "@/layouts/about.astro";
 import Footer from "@/components/ui/footer";
 
 // Interactive UI Components
-import { BackgroundRippleEffectDemo } from "@/components/ui/bg-ripple";
+import { BackgroundRippleEffectDemo } from "@/components/ui/abf";
 import { FloatingDockDemo } from "@/components/ui/nav-dock";
 import { StickyScrollRevealDemo } from "@/components/ui/services-section";
 
@@ -62,12 +62,10 @@ const description = "Portfolio of a UX designer and frontend developer specializ
 		<FloatingDockDemo client:load />
 		
 		<BackgroundRippleEffectDemo client:visible />
-		
+		<Works />
 		<section id="services" class="bg-neutral-900 w-auto py-4 dark:bg-neutral-900">
 			<StickyScrollRevealDemo client:visible/>
 		</section>
-		
-		<Works />
 		<About />
 		<Footer name="Nest" client:visible />
 
