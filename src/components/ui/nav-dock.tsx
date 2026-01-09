@@ -1,11 +1,10 @@
 import { FloatingDock } from "@/components/ui/floating-dock";
 import {
-  IconBrandGithub,
+  IconFileDescription,
   IconBrandLinkedin,
   IconHome,
   IconBriefcase,
   IconUser,
-  IconTools,
   IconSunFilled,
   IconMoonFilled,
 } from "@tabler/icons-react";
@@ -41,13 +40,6 @@ export function FloatingDockDemo() {
       href: "#",
     },
     {
-      title: "Services",
-      node: (
-        <IconTools className="h-full w-full text-neutral-500 dark:text-neutral-300" />
-      ),
-      href: "#services",
-    },
-    {
       title: "Works",
       node: (
         <IconBriefcase className="h-full w-full text-neutral-500 dark:text-neutral-300" />
@@ -62,11 +54,11 @@ export function FloatingDockDemo() {
       href: "#about",
     },
     {
-      title: "GitHub",
+      title: "CV",
       node: (
-        <IconBrandGithub className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+        <IconFileDescription className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
-      href: "https://github.com/synku20777",
+      href: "https://drive.google.com/file/d/1tzd0B9J5t-AOfYvCQYCJhqMAl_u7cEu9/view?usp=sharing",
     },
     {
       title: "LinkedIn",

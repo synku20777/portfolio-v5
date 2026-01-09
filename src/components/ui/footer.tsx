@@ -46,16 +46,15 @@ export default function Footer({
     {
       title: "Socials",
       links: [
-        { label: "LinkedIn", href: "https://linkedin.com/", external: true },
+        { label: "LinkedIn", href: "https://linkedin.com/nestor-kulik", external: true },
         { label: "GitHub", href: "https://github.com/synku20777", external: true },
-        { label: "Twitter", href: "https://twitter.com/", external: true },
-        { label: "Instagram", href: "https://instagram.com/", external: true },
       ],
     },
     {
       title: "Resources",
       links: [
-        { label: "Contact", href: "mailto:contact@example.com", external: true },
+        { label: "Contact", href: "mailto:nestor.kulik@gmail.com", external: true },
+        { label: "CV", href: "https://drive.google.com/file/d/1tzd0B9J5t-AOfYvCQYCJhqMAl_u7cEu9/view?usp=sharing", external: true },
       ],
     },
   ],

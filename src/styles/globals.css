@@ -1,4 +1,6 @@
-@import "tailwindcss";
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -26,84 +28,11 @@ html {
   --animate-cell-ripple: cell-ripple var(--duration, 200ms) ease-out none 1 var(--delay, 0ms);
 }
 
-#gallery {
-  position: relative;
-  min-height: 40vh; 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-#gallery [data-case] {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-#gallery [data-case][data-active="true"] {
-  pointer-events: auto;
-}
-
-/* Remove focus rings site-wide, but keep them for keyboard navigation */
-:focus:not(:focus-visible) {
-  outline: none;
-}
-
-/* Use a custom focus style for accessibility */
-:focus-visible {
-  outline: 2px solid var(--color-focus, #0ea5e9);
-  outline-offset: 2px;
-}
-
-/* Remove focus ring specifically from filesystem items */
-/* Remove focus rings site-wide, but keep them for keyboard navigation */
-:focus:not(:focus-visible) {
-  outline: none;
-}
-
-/* Use a custom focus style for accessibility */
-:focus-visible {
-  outline: 2px solid var(--color-focus, #0ea5e9);
-  outline-offset: 2px;
-}
-
-/* Remove focus ring specifically from filesystem items */
-#file-scroller button:focus,
-#file-scroller div:focus,
-#file-scroller [role="button"]:focus {
-  outline: none !important;
-  box-shadow: none !important;
-  border-color: transparent !important;
-  ring-width: 0 !important;
-  --ring-color: transparent !important;
-}
-
-/* Reduce motion preference
-@media (prefers-reduced-motion: reduce) {
-  #gallery [data-case] {
-    transition: none !important;
-    animation: none !important;
-  }
-} */
-
-@keyframes cell-ripple {
-  0% {
-    opacity: 0.4;
-  }
-
-  50% {
-    opacity: 0.8;
-  }
-
-  100% {
-    opacity: 0.4;
-  }
-}
-
 @layer base {
+  *, ::before, ::after {
+    @apply transition-colors duration-990 ease-in-out;
+  }
+
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
