@@ -1,0 +1,124 @@
+---
+import { IconExternalLink } from "@tabler/icons-react";
+import Tooltip from "@/components/tooltip";
+
+const {
+  heading = "Case Studies",
+  tiles = [
+    {
+      id: "projects",
+      kicker: "UxUnite",
+      title: "Design system for teams that ship fast.",
+      text: "Unified components, accessible colors, scalable UI kit.",
+      href: "/UxUnite-case",
+      image: "/photos/projects/UxUnite/1.webp",
+      tags: ["Design System"],
+      span: "sm:col-span-3 md:col-span-3 lg:col-span-7",
+    },
+    {
+      kicker: "IT-Workshoppen",
+      title: "A modern, mobile-first digital presence.",
+      text: "Brand refresh and responsive website delivery.",
+      href: "/ITworkshop-case",
+      image: "/photos/projects/It-Workshop/1.webp",
+      tags: ["Website"],
+      span: "sm:col-span-2 md:col-span-3 lg:col-span-5",
+    },
+    {
+      kicker: "Firefly",
+      title: "Ecommerce experience for a smart stove alarm.",
+      text: "Minimalist UI with clear value communication.",
+      href: "/Firefly-case",
+      image: "/photos/projects/Firefly/1.webp",
+      tags: ["Ecommerce"],
+      span: "md:col-span-2 lg:col-span-4",
+    },
+    {
+      kicker: "Cloud First Nordics",
+      title: "Knowledge hub for internal teams.",
+      text: "WordPress portal with deep information architecture.",
+      href: "/CloudFirst-case",
+      image: "/photos/projects/CloudFirst/1.webp",
+      tags: ["WordPress"],
+      span: "md:col-span-4 lg:col-span-4",
+    },
+    {
+      kicker: "Astra Design Bureau",
+      title: "Brand strategy with a sustainable posture.",
+      text: "Positioning, identity, and marketing assets.",
+      href: "/Astra-case",
+      image: "/photos/projects/Astra/Logotype-1.webp",
+      tags: ["Brand Design"],
+      span: "sm:col-span-2 md:col-span-6 lg:col-span-4",
+    },
+  ],
+} = Astro.props;
+
+const tileBase = "rounded-lg bg-neutral-50 dark:bg-zinc-900 hover:bg-neutral-100 dark:hover:bg-zinc-800 transition-bg duration-300";
+const pillBase = "text-xs font-medium tracking-tight text-neutral-500 dark:text-zinc-400";
+const tagBase =
+  "inline-flex items-center rounded-full border border-neutral-200/80 bg-white px-2.5 py-1 text-xs font-semibold uppercase tracking-tighter text-stone-500 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300";
+---
+
+<section id="works" class="bg-white dark:bg-zinc-950" id="overview">
+  <div class="mx-auto max-w-7xl px-6 pb-16 pt-10">
+    <div class="mb-10">
+      <h2 class="text-xs font-semibold uppercase tracking-[0.35rem] text-neutral-400 dark:text-zinc-500">
+        {heading}
+      </h2>
+    </div>
+
+    <div class="grid auto-rows-auto grid-cols-1 gap-1 sm:grid-flow-row-dense sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-12">
+      {tiles.map(
+        (tile: {
+          id?: string;
+          kicker: string;
+          title: string;
+          text?: string;
+          href: string;
+          image: string;
+          tags: string[];
+          span: string;
+        }) => (
+          <article class:list={[tileBase, "overflow-hidden cursor-pointer px-2", tile.span]} id={tile.id}>
+            <Tooltip client:load content="Open case" wrapperClassName="w-full items-stretch">
+            <a class="group flex h-full flex-col" href={tile.href}>
+              <div class="flex items-center justify-between gap-2 pl-2 pt-2">
+                <div class="flex items-center flex-wrap gap-2">
+                <span class={pillBase}>{tile.kicker}</span>
+                {tile.tags.map((tag: string) => (
+                        <span class={tagBase}>{tag}</span>
+                    ))}
+                    </div>
+                <span class="inline-flex h-8 w-8 items-center justify-center rounded-full text-xs text-stone-500 transition group-hover:text-stone-800 group-hover:border border-stone-200/80 group-hover:bg-white duration-500 dark:text-zinc-300 dark:group-hover:text-zinc-100 dark:group-hover:border-zinc-700 dark:group-hover:bg-zinc-800">
+                    <IconExternalLink size={16} />
+                </span>
+              </div>
+
+                <div class="flex mt-4 items-center justify-center relative min-h-100 w-full rounded-2xl overflow-hidden">
+                  <img
+                    alt={tile.title}
+                    src={tile.image}
+                    loading="lazy"
+                    decoding="async"
+                    class="absolute h-full w-full object-cover transition-transform  duration-500 group-hover:scale-[1.03]"
+                  />
+                </div>
+
+              </Tooltip>
+
+              <div class="px-3 pl-2 py-2">
+                <h3 class="text-lg font-semibold leading-[1.25] text-stone-900 dark:text-zinc-100">
+                  {tile.title}
+                </h3>
+                {tile.text && <p class="mt-2 text-sm text-stone-600 dark:text-zinc-400">{tile.text}</p>}
+                <div class="mt-3 flex flex-wrap gap-2">
+                </div>
+              </div>
+            </a>
+          </article>
+        )
+      )}
+    </div>
+  </div>
+</section>

@@ -5,7 +5,7 @@ import { TextGenerateEffect } from "@/components/ui/wordgen";
 
 export function BackgroundRippleEffectDemo() {
   return (
-    <section className="flex min-h-[100dvh] w-full flex-col items-start justify-start overflow-hidden">
+    <section className="flex min-h-[60dvh] w-full flex-col items-start justify-start overflow-hidden">
       <div className="relative z-20 mx-auto w-full flex max-w-7xl flex-col items-start justify-start gap-3 px-6 py-24 sm:py-32">
         <h2 className="text-left text-4xl font-black leading-tight tracking-tight text-neutral-800 dark:text-neutral-100 md:text-5xl lg:text-6xl xl:text-6xl">
           <TextGenerateEffect words={"Hey, I'm Nestors 👋"} />

@@ -2,6 +2,8 @@ import * as React from "react";
 import { IconArrowBigUp } from "@tabler/icons-react";
 import { Button } from "@/components/ui/button";
 import { smoothScrollTo } from "@/lib/smooth-scroll";
+import Clock from "@/components/clock";
+import Emoji from "@/components/emoji";
 
 type LinkItem = { label: string; href: string; external?: boolean };
 type Column = { title: string; links: LinkItem[] };
@@ -12,37 +14,6 @@ type FooterProps = {
   columns?: Column[];
 };
 
-function LocalTime() {
-  const [display, setDisplay] = React.useState<string>("");
-
-  React.useEffect(() => {
-    const fmt = new Intl.DateTimeFormat([], {
-      hour: "numeric",
-      minute: "2-digit",
-      second: "2-digit",
-      hour12: true,
-      timeZoneName: "short",
-    });
-
-    const tick = () => {
-      const parts = fmt.formatToParts(new Date());
-      const zone = parts.find(p => p.type === "timeZoneName")?.value ?? "";
-      const time = parts.filter(p => p.type !== "timeZoneName").map(p => p.value).join("").trim();
-      setDisplay(zone ? `${time}, ${zone}` : time);
-    };
-
-    tick();
-    const id = setInterval(tick, 1000);
-    return () => clearInterval(id);
-  }, []);
-
-  return (
-    <div className="mt-6 text-sm">
-      <div className="font-semibold tracking-wide">LOCAL TIME</div>
-      <div className="mt-1 tabular-nums text-neutral-600 dark:text-neutral-300">{display}</div>
-    </div>
-  );
-}
 
 // Helper to find the nearest scrollable ancestor
 function getScrollParent(node: Element | null): Element {
@@ -68,7 +39,6 @@ export default function Footer({
       title: "Navigation",
       links: [
         { label: "Home", href: "#" },
-        { label: "Services", href: "#services" },
         { label: "Works", href: "#works" },
         { label: "About", href: "#about" },
       ],
@@ -85,8 +55,6 @@ export default function Footer({
     {
       title: "Resources",
       links: [
-        { label: "Portfolio Source", href: "https://github.com/synku20777/portfolio-v5", external: true },
-        { label: "Design System", href: "#works" },
         { label: "Contact", href: "mailto:contact@example.com", external: true },
       ],
     },
@@ -149,11 +117,14 @@ export default function Footer({
         <div className="mt-10 grid items-end gap-8 sm:grid-cols-2 md:grid-cols-3">
           {/* Left: copyright block */}
           <div className="col-span-2 md:col-span-2">
+            <div className="flex flex-row mb-2 space-x-2">
+              <Emoji />
+              <Clock />
+            </div>
             <p className="text-2xl font-extrabold leading-tight md:text-3xl">
               © {year} {name}
               <span className="font-medium"> All rights reserved.</span>
             </p>
-            <LocalTime />
           </div>
 
           {/* Right: back-to-top */}
