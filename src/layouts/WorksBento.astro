@@ -13,7 +13,7 @@ const {
       href: "/UxUnite-case",
       image: "/photos/projects/UxUnite/1.webp",
       tags: ["Design System"],
-      span: "sm:col-span-3 md:col-span-3 lg:col-span-7",
+      span: "sm:col-span-4 md:col-span-3 lg:col-span-7",
     },
     {
       kicker: "IT-Workshoppen",
@@ -31,7 +31,7 @@ const {
       href: "/Firefly-case",
       image: "/photos/projects/Firefly/1.webp",
       tags: ["Ecommerce"],
-      span: "md:col-span-2 lg:col-span-4",
+      span: "sm:col-span-2 md:col-span-2 lg:col-span-4",
     },
     {
       kicker: "Cloud First Nordics",
@@ -40,7 +40,7 @@ const {
       href: "/CloudFirst-case",
       image: "/photos/projects/CloudFirst/1.webp",
       tags: ["WordPress"],
-      span: "md:col-span-4 lg:col-span-4",
+      span: "sm:col-span-4 md:col-span-4 lg:col-span-4",
     },
     {
       kicker: "Astra Design Bureau",
@@ -51,10 +51,65 @@ const {
       tags: ["Brand Design"],
       span: "sm:col-span-2 md:col-span-6 lg:col-span-4",
     },
+    {
+      kicker: "Nature",
+      title: "Forest view",
+      text: "Capturing the serene beauty of rich Latvian nature through my lens.",
+      // href: "#",
+      image: "/photos/projects/photos/PXL_20250816_165602397.jpg",
+      tags: ["Photography"],
+      span: "sm:col-span-4 md:col-span-4 lg:col-span-9",
+    },
+    {
+      kicker: "Photography",
+      title: "Paris",
+      text: "A glimpse of the City of Love, captured during a memorable trip.",
+      // href: "#",
+      image: "/photos/projects/photos/PXL_20250424_092240052.MP.jpg",
+      tags: ["Photography"],
+      span: "col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-3 ",
+    },
+    {
+      kicker: "Spot",
+      title: "Coffee?",
+      text: "Right on the shore of Daugava.",
+      // href: "#",
+      image: "/photos/projects/photos/PXL_20250604_201326978.MP.jpg",
+      tags: ["Photography"],
+      span: "col-span-1 sm:col-span-1 md:col-span-2 lg:col-span-3",
+    },
+    {
+      kicker: "Spot",
+      title: "Purvi",
+      text: "Smells like rotten eggs, but beatiful nonetheless.",
+      // href: "#",
+      image: "/photos/projects/photos/PXL_20231119_140936660~2.jpg",
+      tags: ["Photography"],
+      span: "col-span-1 sm:col-span-3 md:col-span-4 lg:col-span-9",
+    },
+    {
+      kicker: "Artsy",
+      title: "Artsy app design",
+      text: "Connecting art enthusiasts to museums with a seamless mobile experience.",
+      // href: "#",
+      image: "/photos/projects/Artsy/1.webp",
+      tags: ["App design"],
+      span: "col-span-1 sm:col-span-3 md:col-span-4 lg:col-span-9",
+    },
+    {
+      kicker: "Astro",
+      title: "Sputniks",
+      text: "That's moon.",
+      // href: "#",
+      image: "/photos/projects/photos/astro/PXL_20250401_211155706.MP.jpg",
+      tags: ["Photography"],
+      span: "sm:col-span-1 md:col-span-2 lg:col-span-3",
+    },
   ],
 } = Astro.props;
 
-const tileBase = "rounded-lg bg-neutral-50 dark:bg-zinc-900 hover:bg-neutral-100 dark:hover:bg-zinc-800 transition-bg duration-300";
+const tileBase =
+  "rounded-lg bg-neutral-50 dark:bg-zinc-900 hover:bg-neutral-100 dark:hover:bg-zinc-800 transition-[grid-column,grid-row,width,height,background-color,transform] duration-[400ms] ease-in-out";
 const pillBase = "text-xs font-medium tracking-tight text-neutral-500 dark:text-zinc-400";
 const tagBase =
   "inline-flex items-center rounded-full border border-neutral-200/80 bg-white px-2.5 py-1 text-xs font-semibold uppercase tracking-tighter text-stone-500 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300";
@@ -68,56 +123,67 @@ const tagBase =
       </h2>
     </div>
 
-    <div class="grid auto-rows-auto grid-cols-1 gap-1 sm:grid-flow-row-dense sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-12">
+    <div class="grid auto-rows-auto grid-cols-1 gap-1 sm:grid-flow-row-dense sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-12">
       {tiles.map(
         (tile: {
           id?: string;
           kicker: string;
           title: string;
           text?: string;
-          href: string;
+          href?: string;
           image: string;
           tags: string[];
           span: string;
-        }) => (
-          <article class:list={[tileBase, "overflow-hidden cursor-pointer px-2", tile.span]} id={tile.id}>
-            <Tooltip client:load content="Open case" wrapperClassName="w-full items-stretch">
+        }) => {
+          const isPhoto = tile.tags?.includes("Photography");
+          const card = (
             <a class="group flex h-full flex-col" href={tile.href}>
               <div class="flex items-center justify-between gap-2 pl-2 pt-2">
                 <div class="flex items-center flex-wrap gap-2">
-                <span class={pillBase}>{tile.kicker}</span>
-                {tile.tags.map((tag: string) => (
-                        <span class={tagBase}>{tag}</span>
-                    ))}
-                    </div>
-                <span class="inline-flex h-8 w-8 items-center justify-center rounded-full text-xs text-stone-500 transition group-hover:text-stone-800 group-hover:border border-stone-200/80 group-hover:bg-white duration-500 dark:text-zinc-300 dark:group-hover:text-zinc-100 dark:group-hover:border-zinc-700 dark:group-hover:bg-zinc-800">
+                  <span class={pillBase}>{tile.kicker}</span>
+                  {tile.tags.map((tag: string) => (
+                    <span class={tagBase}>{tag}</span>
+                  ))}
+                </div>
+                {!isPhoto && (
+                  <span class="inline-flex h-8 w-8 items-center justify-center rounded-full text-xs text-stone-500 transition group-hover:text-stone-800 group-hover:border border-stone-200/80 group-hover:bg-white duration-500 dark:text-zinc-300 dark:group-hover:text-zinc-100 dark:group-hover:border-zinc-700 dark:group-hover:bg-zinc-800">
                     <IconExternalLink size={16} />
-                </span>
+                  </span>
+                )}
               </div>
 
-                <div class="flex mt-4 items-center justify-center relative min-h-100 w-full rounded-2xl overflow-hidden">
-                  <img
-                    alt={tile.title}
-                    src={tile.image}
-                    loading="lazy"
-                    decoding="async"
-                    class="absolute h-full w-full object-cover transition-transform  duration-500 group-hover:scale-[1.03]"
-                  />
-                </div>
-
-              </Tooltip>
+              <div class="flex mt-4 items-center justify-center relative min-h-100 w-full rounded-2xl overflow-hidden">
+                <img
+                  alt={tile.title}
+                  src={tile.image}
+                  loading="lazy"
+                  decoding="async"
+                  class="absolute h-full w-full object-cover transition-transform  duration-500 group-hover:scale-[1.03]"
+                />
+              </div>
 
               <div class="px-3 pl-2 py-2">
                 <h3 class="text-lg font-semibold leading-[1.25] text-stone-900 dark:text-zinc-100">
                   {tile.title}
                 </h3>
                 {tile.text && <p class="mt-2 text-sm text-stone-600 dark:text-zinc-400">{tile.text}</p>}
-                <div class="mt-3 flex flex-wrap gap-2">
-                </div>
+                <div class="mt-3 flex flex-wrap gap-2"></div>
               </div>
             </a>
-          </article>
-        )
+          );
+
+          return (
+            <article class:list={[tileBase, "overflow-hidden cursor-pointer px-2", tile.span]} id={tile.id}>
+              {isPhoto ? (
+                card
+              ) : (
+                <Tooltip client:load content="Open case" wrapperClassName="w-full items-stretch">
+                  {card}
+                </Tooltip>
+              )}
+            </article>
+          );
+        }
       )}
     </div>
   </div>
