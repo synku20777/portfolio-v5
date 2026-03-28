@@ -34,6 +34,7 @@ const caseStudies = defineCollection({
     order: z.number().default(0),
     ogImage: z.string().optional(),
     bentoSpan: z.string().optional(),
+    themeColor: z.enum(['neutral', 'blue', 'violet', 'amber', 'indigo', 'rose', 'emerald', 'teal']).default('neutral'),
   }),
 });
 

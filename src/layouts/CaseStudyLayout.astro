@@ -16,6 +16,7 @@ interface Props {
   heroImage: string;
   outcomes?: string[];
   tags?: string[];
+  themeColor?: string;
 }
 
 const {
@@ -30,9 +31,21 @@ const {
   heroImage,
   outcomes = [],
   tags = [],
+  themeColor = 'neutral',
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+const headerGradients: Record<string, string> = {
+  neutral: 'from-neutral-50 to-neutral-100 dark:from-neutral-950 dark:to-neutral-950',
+  blue: 'from-blue-50 to-neutral-100 dark:from-neutral-950 dark:to-blue-950',
+  violet: 'from-violet-50 to-neutral-100 dark:from-neutral-950 dark:to-violet-950',
+  amber: 'from-amber-50 to-neutral-100 dark:from-neutral-950 dark:to-amber-950',
+  indigo: 'from-indigo-50 to-neutral-100 dark:from-neutral-950 dark:to-indigo-950',
+  rose: 'from-rose-50 to-neutral-100 dark:from-neutral-950 dark:to-rose-950',
+  emerald: 'from-emerald-50 to-neutral-100 dark:from-neutral-950 dark:to-emerald-950',
+  teal: 'from-teal-50 to-neutral-100 dark:from-neutral-950 dark:to-teal-950',
+};
 ---
 
 <html lang="en">
@@ -81,7 +94,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <FloatingDockDemo client:load />
 
     <!-- Hero section -->
-    <header class="relative pt-20 pb-0 bg-gradient-to-br from-neutral-50 to-neutral-100 dark:from-neutral-950 dark:to-neutral-950 overflow-hidden">
+    <header class={`relative pt-20 pb-0 bg-gradient-to-br ${headerGradients[themeColor] || headerGradients.neutral} overflow-hidden`}>
       <div class="mx-auto max-w-7xl px-6">
         <a href="/" class="inline-flex items-center gap-2 mb-8 text-neutral-700 dark:text-neutral-300 hover:text-black dark:hover:text-white transition-colors">
           <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block">
@@ -176,11 +189,20 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       </div>
     </header>
 
-    <main id="content" class="py-24 bg-white dark:bg-black">
+    <main id="content" class="case-study-content py-24 bg-white dark:bg-black">
       <div class="mx-auto max-w-7xl px-6">
         <slot />
       </div>
     </main>
+
+    <style is:global>
+      .case-study-content p {
+        color: var(--color-neutral-600);
+      }
+      :root.dark .case-study-content p {
+        color: var(--color-neutral-400);
+      }
+    </style>
 
     <Footer name="Nest" client:load />
   </body>
