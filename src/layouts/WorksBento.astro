@@ -1,111 +1,79 @@
 ---
 import { IconExternalLink } from "@tabler/icons-react";
 import Tooltip from "@/components/tooltip";
+import { getCollection } from 'astro:content';
+
+const caseStudies = (await getCollection('caseStudies'))
+  .filter(study => !study.data.draft || !import.meta.env.PROD)
+  .sort((a, b) => a.data.order - b.data.order);
+
+const caseStudyTiles = caseStudies.map(study => ({
+  kicker: study.data.client || study.data.title.split('—')[0]?.trim() || study.data.title,
+  title: study.data.title.includes('—') ? study.data.title.split('—')[1]?.trim() : study.data.title,
+  text: study.data.description,
+  href: `/case-studies/${study.id}`,
+  image: study.data.thumbnailImage || study.data.heroImage,
+  tags: study.data.tags,
+  span: study.data.bentoSpan || "sm:col-span-4 md:col-span-4 lg:col-span-4",
+}));
+
+const photoTiles = [
+  {
+    kicker: "Nature",
+    title: "Forest view",
+    text: "Capturing the serene beauty of rich Latvian nature through my lens.",
+    image: "/photos/projects/photos/PXL_20250816_165602397.jpg",
+    tags: ["Photography"],
+    span: "sm:col-span-4 md:col-span-4 lg:col-span-9",
+  },
+  {
+    kicker: "Photography",
+    title: "Paris",
+    text: "A glimpse of the City of Love, captured during a memorable trip.",
+    image: "/photos/projects/photos/PXL_20250424_092240052.MP.jpg",
+    tags: ["Photography"],
+    span: "col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-3 ",
+  },
+  {
+    kicker: "Spot",
+    title: "Coffee?",
+    text: "Right on the shore of Daugava.",
+    image: "/photos/projects/photos/PXL_20250604_201326978.MP.jpg",
+    tags: ["Photography"],
+    span: "col-span-1 sm:col-span-1 md:col-span-2 lg:col-span-3",
+  },
+  {
+    kicker: "Spot",
+    title: "Purvi",
+    text: "Smells like rotten eggs, but beautiful nonetheless.",
+    image: "/photos/projects/photos/PXL_20231119_140936660~2.jpg",
+    tags: ["Photography"],
+    span: "col-span-1 sm:col-span-3 md:col-span-4 lg:col-span-9",
+  },
+  {
+    kicker: "Astro",
+    title: "Sputniks",
+    text: "That's moon.",
+    image: "/photos/projects/photos/astro/PXL_20250401_211155706.MP.jpg",
+    tags: ["Photography"],
+    span: "sm:col-span-1 md:col-span-2 lg:col-span-3",
+  },
+];
+
+// Interleave case studies and photos in a visually appealing order
+const allTiles = [
+  ...caseStudyTiles.slice(0, 2),  // UxUnite, IT-Workshoppen
+  ...caseStudyTiles.slice(2, 5),  // Firefly, CloudFirst, Astra
+  ...photoTiles.slice(0, 1),      // Nature
+  ...photoTiles.slice(1, 3),      // Paris, Coffee
+  ...photoTiles.slice(3, 4),      // Purvi
+  ...caseStudyTiles.slice(5),     // Artsy + any remaining
+  ...photoTiles.slice(4),         // Sputniks + any remaining
+];
 
 const {
   heading = "Case Studies",
-  tiles = [
-    {
-      id: "projects",
-      kicker: "UxUnite",
-      title: "Design system for teams that ship fast.",
-      text: "Unified components, accessible colors, scalable UI kit.",
-      href: "/UxUnite-case",
-      image: "/photos/projects/UxUnite/1.webp",
-      tags: ["Design System"],
-      span: "sm:col-span-4 md:col-span-3 lg:col-span-7",
-    },
-    {
-      kicker: "IT-Workshoppen",
-      title: "A modern, mobile-first digital presence.",
-      text: "Brand refresh and responsive website delivery.",
-      href: "/ITworkshop-case",
-      image: "/photos/projects/It-Workshop/1.webp",
-      tags: ["Website"],
-      span: "sm:col-span-2 md:col-span-3 lg:col-span-5",
-    },
-    {
-      kicker: "Firefly",
-      title: "Ecommerce experience for a smart stove alarm.",
-      text: "Minimalist UI with clear value communication.",
-      href: "/Firefly-case",
-      image: "/photos/projects/Firefly/1.webp",
-      tags: ["Ecommerce"],
-      span: "sm:col-span-2 md:col-span-2 lg:col-span-4",
-    },
-    {
-      kicker: "Cloud First Nordics",
-      title: "Knowledge hub for internal teams.",
-      text: "WordPress portal with deep information architecture.",
-      href: "/CloudFirst-case",
-      image: "/photos/projects/CloudFirst/1.webp",
-      tags: ["WordPress"],
-      span: "sm:col-span-4 md:col-span-4 lg:col-span-4",
-    },
-    {
-      kicker: "Astra Design Bureau",
-      title: "Brand strategy with a sustainable posture.",
-      text: "Positioning, identity, and marketing assets.",
-      href: "/Astra-case",
-      image: "/photos/projects/Astra/Logotype-1.webp",
-      tags: ["Brand Design"],
-      span: "sm:col-span-2 md:col-span-6 lg:col-span-4",
-    },
-    {
-      kicker: "Nature",
-      title: "Forest view",
-      text: "Capturing the serene beauty of rich Latvian nature through my lens.",
-      // href: "#",
-      image: "/photos/projects/photos/PXL_20250816_165602397.jpg",
-      tags: ["Photography"],
-      span: "sm:col-span-4 md:col-span-4 lg:col-span-9",
-    },
-    {
-      kicker: "Photography",
-      title: "Paris",
-      text: "A glimpse of the City of Love, captured during a memorable trip.",
-      // href: "#",
-      image: "/photos/projects/photos/PXL_20250424_092240052.MP.jpg",
-      tags: ["Photography"],
-      span: "col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-3 ",
-    },
-    {
-      kicker: "Spot",
-      title: "Coffee?",
-      text: "Right on the shore of Daugava.",
-      // href: "#",
-      image: "/photos/projects/photos/PXL_20250604_201326978.MP.jpg",
-      tags: ["Photography"],
-      span: "col-span-1 sm:col-span-1 md:col-span-2 lg:col-span-3",
-    },
-    {
-      kicker: "Spot",
-      title: "Purvi",
-      text: "Smells like rotten eggs, but beautiful nonetheless.",
-      // href: "#",
-      image: "/photos/projects/photos/PXL_20231119_140936660~2.jpg",
-      tags: ["Photography"],
-      span: "col-span-1 sm:col-span-3 md:col-span-4 lg:col-span-9",
-    },
-    {
-      kicker: "Artsy",
-      title: "Artsy app design",
-      text: "Connecting art enthusiasts to museums with a seamless mobile experience.",
-      // href: "#",
-      image: "/photos/projects/Artsy/1.webp",
-      tags: ["App design"],
-      span: "col-span-1 sm:col-span-3 md:col-span-4 lg:col-span-9",
-    },
-    {
-      kicker: "Astro",
-      title: "Sputniks",
-      text: "That's moon.",
-      // href: "#",
-      image: "/photos/projects/photos/astro/PXL_20250401_211155706.MP.jpg",
-      tags: ["Photography"],
-      span: "sm:col-span-1 md:col-span-2 lg:col-span-3",
-    },
-  ],
+  tiles = allTiles,
 } = Astro.props;
 
 const tileBase =
