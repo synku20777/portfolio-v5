@@ -9,7 +9,7 @@ import Bento from "@/layouts/WorksBento.astro";
 
 // Interactive UI Components
 import { BackgroundRippleEffectDemo } from "@/components/ui/abf";
-import { FloatingDockDemo } from "@/components/ui/nav-dock";
+import PrimaryDock from "@/components/ui/PrimaryDock.astro";
 
 // Libs
 import { setupViewTransitions } from "@/lib/view-transitions";
@@ -32,6 +32,13 @@ const description = "Portfolio of a UX designer and frontend developer specializ
 <html lang="en">
 	<head>
 		<BaseHead title={title} description={description} />
+		<link
+			rel="preload"
+			as="image"
+			href="/photos/projects/UxUnite/1.webp"
+			type="image/webp"
+			fetchpriority="high"
+		/>
 		
 		{/* Theme Script: Must stay in HEAD to prevent flash of incorrect theme color */}
 		<script is:inline>
@@ -69,8 +76,7 @@ const description = "Portfolio of a UX designer and frontend developer specializ
 	
 	<body class="bg-white dark:bg-black antialiased selection:bg-neutral-200 dark:selection:bg-neutral-800">
 		<a class="skip-link" href="#content" onclick="document.getElementById('content')?.focus()">Skip to content</a>
-		{/* Navigation: client:load ensures nav is ready immediately */}
-		<FloatingDockDemo client:load />
+		<PrimaryDock />
 		
 		<main id="content" tabindex="-1">
 			<BackgroundRippleEffectDemo client:visible />

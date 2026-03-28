@@ -1,0 +1,9 @@
+---
+import { FloatingDockMobile } from "@/components/ui/nav-dock-mobile";
+import { FloatingDockDesktop } from "@/components/ui/nav-dock-desktop";
+---
+
+<nav aria-label="Primary" class="fixed z-100 bottom-5 flex items-center justify-center w-full">
+  <FloatingDockMobile client:media="(max-width: 767px)" />
+  <FloatingDockDesktop client:media="(min-width: 768px)" />
+</nav>

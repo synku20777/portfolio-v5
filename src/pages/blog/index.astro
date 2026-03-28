@@ -2,7 +2,7 @@
 import BaseHead from "@/components/BaseHead.astro";
 import "@/styles/globals.css";
 import Footer from "@/components/ui/footer";
-import { FloatingDockDemo } from "@/components/ui/nav-dock";
+import PrimaryDock from "@/components/ui/PrimaryDock.astro";
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { getReadingTime } from '@/lib/reading-time';
 
@@ -54,7 +54,7 @@ const description = "Thoughts on UX design, frontend development, and creative p
 
   <body class="bg-white dark:bg-black antialiased selection:bg-neutral-200 dark:selection:bg-neutral-800">
     <a class="skip-link" href="#content" onclick="document.getElementById('content')?.focus()">Skip to content</a>
-    <FloatingDockDemo client:load />
+    <PrimaryDock />
 
     <main id="content" class="pt-20 pb-16" tabindex="-1">
       <div class="mx-auto max-w-7xl px-6">

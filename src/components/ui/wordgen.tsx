@@ -1,6 +1,6 @@
 "use client";
-import { useEffect } from "react";
-import { motion, stagger, useAnimate } from "motion/react";
+import { useEffect, useRef } from "react";
+import { animate, stagger } from "motion";
 import { cn } from "@/lib/utils";
 
 export const TextGenerateEffect = ({
@@ -14,28 +14,34 @@ export const TextGenerateEffect = ({
   filter?: boolean;
   duration?: number;
 }) => {
-  const [scope, animate] = useAnimate();
-  let wordsArray = words.split(" ");
+  const scope = useRef<HTMLDivElement>(null);
+  const wordsArray = words.split(" ");
+
   useEffect(() => {
-    animate(
-      "span",
+    const elements = scope.current?.querySelectorAll("span");
+    if (!elements?.length) return;
+
+    const controls = animate(
+      elements,
       {
         opacity: 1,
         filter: filter ? "blur(0px)" : "none",
-          },
+      },
       {
-        duration: duration ? duration : 1,
+        duration: duration || 1,
         delay: stagger(0.2),
       }
     );
-  }, [scope.current]);
+
+    return () => controls.stop();
+  }, [duration, filter, words]);
 
   const renderWords = () => {
-  return (
-      <motion.div ref={scope}>
+    return (
+      <div ref={scope}>
         {wordsArray.map((word, idx) => {
           return (
-            <motion.span
+            <span
               key={word + idx}
               className="dark:text-white opacity-0"
               style={{
@@ -43,10 +49,10 @@ export const TextGenerateEffect = ({
               }}
             >
               {word}{" "}
-            </motion.span>
+            </span>
           );
         })}
-        </motion.div>
+      </div>
     );
   };
 

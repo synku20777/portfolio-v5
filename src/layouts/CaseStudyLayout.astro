@@ -2,7 +2,7 @@
 import BaseHead from "@/components/BaseHead.astro";
 import "@/styles/globals.css";
 import Footer from "@/components/ui/footer";
-import { FloatingDockDemo } from "@/components/ui/nav-dock";
+import PrimaryDock from "@/components/ui/PrimaryDock.astro";
 
 interface Props {
   title: string;
@@ -90,7 +90,7 @@ const headerGradients: Record<string, string> = {
 
   <body class="bg-white dark:bg-black">
     <a class="skip-link" href="#content" onclick="document.getElementById('content')?.focus()">Skip to content</a>
-    <FloatingDockDemo client:load />
+    <PrimaryDock />
 
     <!-- Hero section -->
     <header class={`relative pt-20 pb-0 bg-gradient-to-br ${headerGradients[themeColor] || headerGradients.neutral} overflow-hidden`}>
