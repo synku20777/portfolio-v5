@@ -10,24 +10,27 @@ When I rebuilt my portfolio, I had a choice: Next.js, Remix, plain HTML, or Astr
 
 ## The problem with full-React sites
 
-A portfolio is mostly static content — text, images, case studies. Shipping a full React runtime for that is wasteful. Users pay the cost in bundle size and hydration time for interactivity they'll never use.
+A portfolio is mostly static content — text, images, case studies. Shipping a full React runtime for that is wasteful. Users pay the cost in bundle size and hydration time for interactivity they'll never use. Lokey why your portfolio website takes a MINUTE!!!! to load for this fancy pants gsap animation, do I care? Somewhat yes, BUT A MINUTE is wayyyy too much. 
+
+> "Good design is as little design as possible."
+> — Dieter Rams
 
 ## Islands to the rescue
 
-Astro's island architecture flips the model: **everything is static HTML by default**. You opt *into* JavaScript only where you need it.
+Astro's island architecture flips the model: **everything is static HTML by default**. You opt *into* JavaScript only where you need it. Thank you!
 
 On my site, only three things are interactive:
 - The **navigation dock** (`client:load` — needs to be ready immediately)
 - The **footer** (`client:visible` — only hydrates when scrolled into view)
-- The **theme toggle** (part of the dock)
+- The **theme toggle** (part of the dock) (i know its possible to be done through shadcn without hydration, but I'm special liek that)
 
 Everything else — case studies, the about section, the works grid — is zero-JS static HTML.
 
 ## The result
 
-My portfolio loads fast. Really fast. The initial HTML is tiny, fonts load early via `preload`, and images lazy-load. The Lighthouse scores speak for themselves.
+My portfolio loads fast. less than 50ms! quite fast. The initial HTML is tiny, fonts load early via `preload`, and images lazy-load. The Lighthouse scores speak for themselves.
 
-## When to reach for React
+## When do I reach for React
 
 I use React islands when I need:
 - **State management** — toggles, filters, interactive elements
@@ -38,4 +41,4 @@ For everything else, `.astro` components do the job with zero client-side cost.
 
 ---
 
-If you're building a content-heavy site and reaching for Next.js by default, give Astro a look. You might be surprised how little JavaScript you actually need.
+No, honestly Atro is amazing, if you're building a content-heavy site and reaching for Next.js by default, you should really give Astro a look. You might be surprised how little JavaScript you actually need.
