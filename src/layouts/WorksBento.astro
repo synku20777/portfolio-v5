@@ -1,13 +1,15 @@
 ---
 import { IconExternalLink } from "@tabler/icons-react";
 import Tooltip from "@/components/tooltip";
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 
-const caseStudies = (await getCollection('caseStudies'))
-  .filter(study => !study.data.draft || !import.meta.env.PROD)
-  .sort((a, b) => a.data.order - b.data.order);
+type CaseStudy = CollectionEntry<'caseStudies'>;
 
-const caseStudyTiles = caseStudies.map(study => ({
+const caseStudies: CaseStudy[] = (await getCollection('caseStudies'))
+  .filter((study: CaseStudy) => !study.data.draft || !import.meta.env.PROD)
+  .sort((a: CaseStudy, b: CaseStudy) => a.data.order - b.data.order);
+
+const caseStudyTiles = caseStudies.map((study: CaseStudy) => ({
   kicker: study.data.client || study.data.title.split('—')[0]?.trim() || study.data.title,
   title: study.data.title.includes('—') ? study.data.title.split('—')[1]?.trim() : study.data.title,
   text: study.data.description,

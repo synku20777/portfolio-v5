@@ -1,9 +1,11 @@
 import rss from '@astrojs/rss';
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import type { APIContext } from 'astro';
 
 export async function GET(context: APIContext) {
-  const posts = await getCollection('blog');
+  type BlogPost = CollectionEntry<'blog'>;
+
+  const posts: BlogPost[] = await getCollection('blog');
   return rss({
     title: 'Nest Blog',
     description: 'Thoughts on UX design, frontend development, and creative process.',

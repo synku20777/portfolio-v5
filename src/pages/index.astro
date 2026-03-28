@@ -15,12 +15,14 @@ import { FloatingDockDemo } from "@/components/ui/nav-dock";
 import { setupViewTransitions } from "@/lib/view-transitions";
 
 // Blog
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import { getReadingTime } from '@/lib/reading-time';
 
-const latestPosts = (await getCollection('blog'))
-	.filter(p => !p.data.draft || !import.meta.env.PROD)
-	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+type BlogPost = CollectionEntry<'blog'>;
+
+const latestPosts: BlogPost[] = (await getCollection('blog'))
+	.filter((p: BlogPost) => !p.data.draft || !import.meta.env.PROD)
+	.sort((a: BlogPost, b: BlogPost) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 	.slice(0, 3);
 
 const title = "Nest Portfolio | UX Designer & Frontend Developer";

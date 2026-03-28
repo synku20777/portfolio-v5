@@ -3,11 +3,18 @@ import BaseHead from "@/components/BaseHead.astro";
 import "@/styles/globals.css";
 import Footer from "@/components/ui/footer";
 import { FloatingDockDemo } from "@/components/ui/nav-dock";
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import { getReadingTime } from '@/lib/reading-time';
 
+type BlogPost = CollectionEntry<'blog'>;
+
+interface Props {
+  tag: string;
+  posts: BlogPost[];
+}
+
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
+  const posts: BlogPost[] = await getCollection('blog');
   const tags = [...new Set(posts.flatMap(post => post.data.tags))];
   return tags.map(tag => ({
     params: { tag },
@@ -21,7 +28,7 @@ export async function getStaticPaths() {
   }));
 }
 
-const { tag, posts } = Astro.props;
+const { tag, posts } = Astro.props as Props;
 const title = `Posts tagged "${tag}" | Nest Blog`;
 const description = `All blog posts tagged with "${tag}".`;
 ---
