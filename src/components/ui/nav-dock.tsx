@@ -89,7 +89,7 @@ export function FloatingDockDemo() {
   ];
   
   return (
-    <nav className="fixed z-100 bottom-5 flex items-center justify-center w-full">
+    <nav aria-label="Primary" className="fixed z-100 bottom-5 flex items-center justify-center w-full">
       <FloatingDock 
         items={links}
       />

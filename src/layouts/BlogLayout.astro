@@ -23,8 +23,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 <html lang="en">
   <head>
     <BaseHead />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title} | Nest Blog</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
@@ -93,9 +91,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   </head>
 
   <body class="bg-white dark:bg-black antialiased selection:bg-neutral-200 dark:selection:bg-neutral-800">
+    <a class="skip-link" href="#content" onclick="document.getElementById('content')?.focus()">Skip to content</a>
     <FloatingDockDemo client:load />
 
-    <main class="pt-20 pb-16">
+    <main id="content" class="pt-20 pb-16" tabindex="-1">
       <article class="mx-auto max-w-3xl px-6">
         <!-- Back link -->
         <a href="/blog" class="inline-flex items-center gap-2 mb-8 text-neutral-700 dark:text-neutral-300 hover:text-black dark:hover:text-white transition-colors">

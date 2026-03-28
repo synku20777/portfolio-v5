@@ -51,8 +51,6 @@ const headerGradients: Record<string, string> = {
 <html lang="en">
   <head>
     <BaseHead />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
@@ -91,6 +89,7 @@ const headerGradients: Record<string, string> = {
   </head>
 
   <body class="bg-white dark:bg-black">
+    <a class="skip-link" href="#content" onclick="document.getElementById('content')?.focus()">Skip to content</a>
     <FloatingDockDemo client:load />
 
     <!-- Hero section -->
@@ -189,7 +188,7 @@ const headerGradients: Record<string, string> = {
       </div>
     </header>
 
-    <main id="content" class="case-study-content py-24 bg-white dark:bg-black">
+    <main id="content" class="case-study-content py-24 bg-white dark:bg-black" tabindex="-1">
       <div class="mx-auto max-w-7xl px-6">
         <slot />
       </div>

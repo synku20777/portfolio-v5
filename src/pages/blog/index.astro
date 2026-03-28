@@ -22,8 +22,6 @@ const description = "Thoughts on UX design, frontend development, and creative p
 <html lang="en">
   <head>
     <BaseHead />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="alternate" type="application/rss+xml" title="Nest Blog" href="/rss.xml" />
@@ -55,12 +53,13 @@ const description = "Thoughts on UX design, frontend development, and creative p
   </head>
 
   <body class="bg-white dark:bg-black antialiased selection:bg-neutral-200 dark:selection:bg-neutral-800">
+    <a class="skip-link" href="#content" onclick="document.getElementById('content')?.focus()">Skip to content</a>
     <FloatingDockDemo client:load />
 
-    <main class="pt-20 pb-16">
+    <main id="content" class="pt-20 pb-16" tabindex="-1">
       <div class="mx-auto max-w-7xl px-6">
         <!-- Page header -->
-        <div class="mb-10">
+        <header class="mb-10">
           <a
             id="blog-index-back-link"
             href="/"
@@ -78,7 +77,7 @@ const description = "Thoughts on UX design, frontend development, and creative p
           <p class="mt-3 text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl">
             {description}
           </p>
-        </div>
+        </header>
 
         <!-- Tag filters -->
         {allTags.length > 0 && (

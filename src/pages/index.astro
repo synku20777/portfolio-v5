@@ -68,11 +68,13 @@ const description = "Portfolio of a UX designer and frontend developer specializ
 	</head>
 	
 	<body class="bg-white dark:bg-black antialiased selection:bg-neutral-200 dark:selection:bg-neutral-800">
+		<a class="skip-link" href="#content" onclick="document.getElementById('content')?.focus()">Skip to content</a>
 		{/* Navigation: client:load ensures nav is ready immediately */}
 		<FloatingDockDemo client:load />
 		
-		<BackgroundRippleEffectDemo client:visible />
-		<Bento />
+		<main id="content" tabindex="-1">
+			<BackgroundRippleEffectDemo client:visible />
+			<Bento />
 		<!-- <Works /> -->
 		<!-- <section id="services" class="bg-neutral-900 w-auto py-4 dark:bg-neutral-900">
 			<StickyScrollRevealDemo client:visible/>
@@ -81,14 +83,14 @@ const description = "Portfolio of a UX designer and frontend developer specializ
 		{latestPosts.length > 0 && (
 			<section class="bg-white dark:bg-zinc-950 py-16">
 				<div class="mx-auto max-w-7xl px-6">
-					<div class="mb-10 flex items-end justify-between">
+					<header class="mb-10 flex items-end justify-between">
 						<h2 class="text-xs font-semibold uppercase tracking-[0.35rem] text-neutral-400 dark:text-zinc-500">
 							Latest Posts
 						</h2>
 						<a href="/blog" class="text-sm text-neutral-500 hover:text-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-200 transition-colors">
 							View all &rarr;
 						</a>
-					</div>
+					</header>
 					<div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
 						{latestPosts.map(post => {
 							const readingTime = getReadingTime(post.body ?? '');
@@ -130,7 +132,8 @@ const description = "Portfolio of a UX designer and frontend developer specializ
 			</section>
 		)}
 
-		<About />
+			<About />
+		</main>
 		<Footer name="Nest" client:visible />
 	</body>
 </html>
