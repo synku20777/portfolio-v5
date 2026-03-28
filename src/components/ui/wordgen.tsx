@@ -22,7 +22,7 @@ export const TextGenerateEffect = ({
       {
         opacity: 1,
         filter: filter ? "blur(0px)" : "none",
-      },
+          },
       {
         duration: duration ? duration : 1,
         delay: stagger(0.2),
@@ -31,7 +31,7 @@ export const TextGenerateEffect = ({
   }, [scope.current]);
 
   const renderWords = () => {
-    return (
+  return (
       <motion.div ref={scope}>
         {wordsArray.map((word, idx) => {
           return (
@@ -46,7 +46,7 @@ export const TextGenerateEffect = ({
             </motion.span>
           );
         })}
-      </motion.div>
+        </motion.div>
     );
   };
 

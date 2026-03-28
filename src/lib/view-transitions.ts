@@ -18,7 +18,7 @@ export function setupViewTransitions() {
         link.getAttribute('rel') === 'external') {
       return;
     }
-    
+
     if (document.startViewTransition) {
       event.preventDefault();
       const url = link.href;
