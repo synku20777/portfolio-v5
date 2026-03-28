@@ -7,6 +7,7 @@ import {
   IconUser,
   IconSunFilled,
   IconMoonFilled,
+  IconArticle,
 } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 
@@ -37,21 +38,28 @@ export function FloatingDockDemo() {
       node: (
         <IconHome className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
-      href: "#",
+      href: "/",
     },
     {
       title: "Works",
       node: (
         <IconBriefcase className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
-      href: "#works",
+      href: "/#works",
     },
     {
       title: "About",
       node: (
         <IconUser className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
-      href: "#about",
+      href: "/#about",
+    },
+    {
+      title: "Blog",
+      node: (
+        <IconArticle className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+      ),
+      href: "/blog",
     },
     {
       title: "CV",
