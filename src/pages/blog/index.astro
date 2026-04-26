@@ -1,204 +1,137 @@
 ---
-import BaseHead from "@/components/BaseHead.astro";
-import "@/styles/globals.css";
-import Footer from "@/components/ui/footer";
-import PrimaryDock from "@/components/ui/PrimaryDock.astro";
-import { getCollection, type CollectionEntry } from 'astro:content';
-import { getReadingTime } from '@/lib/reading-time';
+import SiteShell from "@/components/SiteShell.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+import { getReadingTime } from "@/lib/reading-time";
+import { siteConfig } from "@/lib/site";
 
-type BlogPost = CollectionEntry<'blog'>;
+type BlogPost = CollectionEntry<"blog">;
 
-const allPosts: BlogPost[] = await getCollection('blog');
+const allPosts: BlogPost[] = await getCollection("blog");
 const posts = allPosts
-  .filter(post => !post.data.draft || !import.meta.env.PROD)
+  .filter((post) => !post.data.draft || !import.meta.env.PROD)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-const allTags = [...new Set(posts.flatMap(post => post.data.tags))].sort();
+const allTags = [...new Set(posts.flatMap((post) => post.data.tags))].sort();
 
-const title = "Blog | Nest";
-const description = "Thoughts on UX design, frontend development, and creative process.";
+const title = "Notes | Nest";
+const description =
+  "Short essays and working notes on design systems, frontend craft, product decisions, and the occasional visual tangent.";
+
+const notesSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: title,
+  description,
+  url: `${siteConfig.siteUrl}/blog`,
+};
 ---
 
-<html lang="en">
-  <head>
-    <BaseHead />
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    <link rel="alternate" type="application/rss+xml" title="Nest Blog" href="/rss.xml" />
+<SiteShell title={title} description={description} schema={notesSchema} mainClass="pt-20 pb-16">
+  <Fragment slot="head">
+    <link rel="alternate" type="application/rss+xml" title="Nest Notes" href="/rss.xml" />
+  </Fragment>
 
-    <script is:inline>
-      const getThemePreference = () => {
-        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-          return localStorage.getItem('theme');
-        }
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      };
+  <div class="mx-auto max-w-7xl px-6">
+    <header class="mb-10">
+      <a
+        id="blog-index-back-link"
+        href="/"
+        class="mb-8 inline-flex items-center gap-2 text-neutral-700 transition-colors hover:text-black dark:text-neutral-300 dark:hover:text-white"
+      >
+        <svg
+          aria-hidden="true"
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="inline-block"
+        >
+          <path d="m12 19-7-7 7-7"></path>
+          <path d="M19 12H5"></path>
+        </svg>
+        Home
+      </a>
+      <h1 class="text-xs font-semibold uppercase tracking-[0.35rem] text-neutral-400 dark:text-zinc-500">
+        Notes
+      </h1>
+      <p class="mt-3 max-w-2xl text-lg text-neutral-600 dark:text-neutral-400">{description}</p>
+    </header>
 
-      const setDarkClass = () => {
-        const isDark = getThemePreference() === 'dark';
-        document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
-      };
-
-      setDarkClass();
-      document.addEventListener('astro:after-swap', setDarkClass);
-
-      if (typeof localStorage !== 'undefined') {
-        const observer = new MutationObserver(() => {
-          const isDark = document.documentElement.classList.contains('dark');
-          localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        });
-        observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
-      }
-    </script>
-  </head>
-
-  <body class="bg-white dark:bg-black antialiased selection:bg-neutral-200 dark:selection:bg-neutral-800">
-    <a class="skip-link" href="#content" onclick="document.getElementById('content')?.focus()">Skip to content</a>
-    <PrimaryDock />
-
-    <main id="content" class="pt-20 pb-16" tabindex="-1">
-      <div class="mx-auto max-w-7xl px-6">
-        <!-- Page header -->
-        <header class="mb-10">
-          <a
-            id="blog-index-back-link"
-            href="/"
-            class="inline-flex items-center gap-2 mb-8 text-neutral-700 dark:text-neutral-300 hover:text-black dark:hover:text-white transition-colors"
-          >
-          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block">
-            <path d="m12 19-7-7 7-7"></path>
-            <path d="M19 12H5"></path>
-          </svg>
-          Back
+    {allTags.length > 0 && (
+      <div class="mb-8 flex flex-wrap gap-2">
+        <a
+          href="/blog"
+          class="inline-flex items-center rounded-full border border-neutral-400 bg-neutral-200 px-3 py-1.5 text-xs font-semibold uppercase tracking-tighter text-stone-700 dark:border-zinc-500 dark:bg-zinc-700 dark:text-zinc-200"
+        >
+          All
         </a>
-          <h1 class="text-xs font-semibold uppercase tracking-[0.35rem] text-neutral-400 dark:text-zinc-500">
-            Blog
-          </h1>
-          <p class="mt-3 text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl">
-            {description}
-          </p>
-        </header>
-
-        <!-- Tag filters -->
-        {allTags.length > 0 && (
-          <div id="tag-filters" class="mb-8 flex flex-wrap gap-2">
-            <button
-              data-tag="all"
-              class="tag-btn active inline-flex items-center rounded-full border px-3 py-1.5 text-xs font-semibold uppercase tracking-tighter transition-colors cursor-pointer border-neutral-400 bg-neutral-200 text-stone-700 dark:border-zinc-500 dark:bg-zinc-700 dark:text-zinc-200"
-            >
-              All
-            </button>
-            {allTags.map(tag => (
-              <button
-                data-tag={tag}
-                class="tag-btn inline-flex items-center rounded-full border px-3 py-1.5 text-xs font-semibold uppercase tracking-tighter transition-colors cursor-pointer border-neutral-200/80 bg-white text-stone-500 hover:bg-neutral-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700"
-              >
-                {tag}
-              </button>
-            ))}
-          </div>
-        )}
-
-        <!-- Post grid -->
-        {posts.length === 0 ? (
-          <p class="text-neutral-500 dark:text-neutral-400">No posts yet. Check back soon!</p>
-        ) : (
-          <div id="post-grid" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {posts.map(post => {
-              const readingTime = getReadingTime(post.body ?? '');
-              const formattedDate = post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
-              return (
-                <a
-                  href={`/blog/${post.id}`}
-                  data-tags={post.data.tags.join(',')}
-                  class="post-card group rounded-lg bg-neutral-50 dark:bg-zinc-900 hover:bg-neutral-100 dark:hover:bg-zinc-800 overflow-hidden transition-[opacity,transform] duration-300 ease-in-out"
-                >
-                  {post.data.heroImage && (
-                    <div class="relative h-48 w-full overflow-hidden">
-                      <img
-                        src={post.data.heroImage}
-                        alt={post.data.title}
-                        loading="lazy"
-                        decoding="async"
-                        class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                      />
-                    </div>
-                  )}
-                  <div class="p-5">
-                    <div class="flex items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400 mb-3">
-                      <time datetime={post.data.pubDate.toISOString()}>{formattedDate}</time>
-                      <span aria-hidden="true">·</span>
-                      <span>{readingTime}</span>
-                    </div>
-                    <h2 class="text-lg font-semibold leading-tight text-stone-900 dark:text-zinc-100 group-hover:text-stone-700 dark:group-hover:text-zinc-200 transition-colors">
-                      {post.data.title}
-                    </h2>
-                    <p class="mt-2 text-sm text-stone-600 dark:text-zinc-400 line-clamp-2">
-                      {post.data.description}
-                    </p>
-                    {post.data.tags.length > 0 && (
-                      <div class="mt-3 flex flex-wrap gap-1.5">
-                        {post.data.tags.map((tag: string) => (
-                          <span class="inline-flex items-center rounded-full border border-neutral-200/80 bg-white px-2 py-0.5 text-[10px] font-semibold uppercase tracking-tighter text-stone-500 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </a>
-              );
-            })}
-          </div>
-        )}
-
-        <script is:inline>
-          (() => {
-            const ACTIVE = 'border-neutral-400 bg-neutral-200 text-stone-700 dark:border-zinc-500 dark:bg-zinc-700 dark:text-zinc-200';
-            const INACTIVE = 'border-neutral-200/80 bg-white text-stone-500 hover:bg-neutral-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700';
-
-            const filters = document.getElementById('tag-filters');
-            const cards = document.querySelectorAll('.post-card');
-            if (!filters || !cards.length) return;
-
-            const setActive = (btn) => {
-              filters.querySelectorAll('.tag-btn').forEach(b => {
-                b.className = b.className.replace(ACTIVE, '').replace(INACTIVE, '').trim();
-                b.classList.add(...(b === btn ? ACTIVE : INACTIVE).split(' '));
-                b === btn ? b.classList.add('active') : b.classList.remove('active');
-              });
-            };
-
-            const filterPosts = (tag) => {
-              cards.forEach(card => {
-                const tags = card.dataset.tags?.split(',') ?? [];
-                const show = tag === 'all' || tags.includes(tag);
-                if (show) {
-                  card.style.display = '';
-                  requestAnimationFrame(() => {
-                    card.style.opacity = '1';
-                    card.style.transform = 'scale(1)';
-                  });
-                } else {
-                  card.style.opacity = '0';
-                  card.style.transform = 'scale(0.95)';
-                  setTimeout(() => { card.style.display = 'none'; }, 300);
-                }
-              });
-            };
-
-            filters.addEventListener('click', (e) => {
-              const btn = e.target.closest('.tag-btn');
-              if (!btn) return;
-              const tag = btn.dataset.tag;
-              setActive(btn);
-              filterPosts(tag);
-            });
-          })();
-        </script>
+        {allTags.map((tag) => (
+          <a
+            href={`/blog/tag/${encodeURIComponent(tag)}`}
+            class="inline-flex items-center rounded-full border border-neutral-200/80 bg-white px-3 py-1.5 text-xs font-semibold uppercase tracking-tighter text-stone-500 transition-colors hover:bg-neutral-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700"
+          >
+            {tag}
+          </a>
+        ))}
       </div>
-    </main>
+    )}
 
-    <Footer name="Nest" client:visible />
-  </body>
-</html>
+    {posts.length === 0 ? (
+      <p class="text-neutral-500 dark:text-neutral-400">No notes yet. Check back soon.</p>
+    ) : (
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {posts.map((post) => {
+          const readingTime = getReadingTime(post.body ?? "");
+          const formattedDate = post.data.pubDate.toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+          });
+
+          return (
+            <a
+              href={`/blog/${post.id}/`}
+              class="group overflow-hidden rounded-lg bg-neutral-50 transition-colors hover:bg-neutral-100 dark:bg-zinc-900 dark:hover:bg-zinc-800"
+            >
+              {post.data.heroImage && (
+                <div class="relative h-48 w-full overflow-hidden">
+                  <img
+                    src={post.data.heroImage}
+                    alt={post.data.title}
+                    loading="lazy"
+                    decoding="async"
+                    class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  />
+                </div>
+              )}
+              <div class="p-5">
+                <div class="mb-3 flex items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400">
+                  <time datetime={post.data.pubDate.toISOString()}>{formattedDate}</time>
+                  <span aria-hidden="true">&middot;</span>
+                  <span>{readingTime}</span>
+                </div>
+                <h2 class="text-lg font-semibold leading-tight text-stone-900 transition-colors group-hover:text-stone-700 dark:text-zinc-100 dark:group-hover:text-zinc-200">
+                  {post.data.title}
+                </h2>
+                <p class="mt-2 text-sm text-stone-600 dark:text-zinc-400">{post.data.description}</p>
+                {post.data.tags.length > 0 && (
+                  <div class="mt-3 flex flex-wrap gap-1.5">
+                    {post.data.tags.map((tag) => (
+                      <span class="inline-flex items-center rounded-full border border-neutral-200/80 bg-white px-2 py-0.5 text-[10px] font-semibold uppercase tracking-tighter text-stone-500 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    )}
+  </div>
+</SiteShell>

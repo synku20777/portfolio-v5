@@ -1,44 +1,44 @@
 ---
 title: "Why I Use Astro with React Islands"
-description: "How Astro's island architecture lets me ship fast static pages with targeted React interactivity - and why it's my default stack."
+description: "How Astro's island architecture lets me keep the site mostly static while using React only where interactivity earns its place."
 pubDate: 2026-03-20
 tags: ["frontend", "astro"]
 draft: false
+homepageSummary: "Why Astro with React islands is the default stack behind this portfolio."
 ---
 
-When I rebuilt my portfolio, I had a choice: Next.js, Remix, plain HTML, or Astro. I went with Astro, and React islands are a big reason why.
+When I rebuilt this portfolio, I had a straightforward stack choice: Next.js, Remix, plain HTML, or Astro. I went with Astro, and React islands were the deciding factor.
 
 ## The problem with full-React sites
 
-A portfolio is mostly static content — text, images, case studies. Shipping a full React runtime for that is wasteful. Users pay the cost in bundle size and hydration time for interactivity they'll never use. Lokey why your portfolio website takes a MINUTE!!!! to load for this fancy pants gsap animation, do I care? Somewhat yes, BUT A MINUTE is wayyyy too much. 
+A portfolio is mostly static content: text, images, case studies, and notes. Shipping a full React runtime for that can be expensive if only a few parts of the page actually need JavaScript. Users pay for it in bundle size, hydration time, and often a lot of unnecessary motion.
 
-> "Good design is as little design as possible."
-> — Dieter Rams
+## Islands are the useful middle ground
 
-## Islands to the rescue
+Astro flips the default. Everything ships as static HTML unless I opt into client-side JavaScript for a specific component.
 
-Astro's island architecture flips the model: **everything is static HTML by default**. You opt *into* JavaScript only where you need it. Thank you!
+On this site, the interactive pieces are small and deliberate:
 
-On my site, only three things are interactive:
-- The **navigation dock** (`client:load` — needs to be ready immediately)
-- The **footer** (`client:visible` — only hydrates when scrolled into view)
-- The **theme toggle** (part of the dock) (i know its possible to be done through shadcn without hydration, but I'm special liek that)
+- The navigation dock, because theme switching and interaction need to feel immediate
+- The footer, because it only needs hydration when it becomes visible
+- A few motion-heavy React components where the payoff is clear
 
-Everything else — case studies, the about section, the works grid — is zero-JS static HTML.
+Everything else stays static. That keeps the baseline fast and the architecture easier to reason about.
 
-## The result
+## What that buys me
 
-My portfolio loads fast. less than 50ms! quite fast. The initial HTML is tiny, fonts load early via `preload`, and images lazy-load. The Lighthouse scores speak for themselves.
+The site loads quickly, the HTML stays lightweight, and I still get to use React where it actually helps. It is a good fit for portfolios, editorial sites, and product marketing pages where most of the experience should be readable before JavaScript even wakes up.
 
-## When do I reach for React
+## When I still reach for React
 
-I use React islands when I need:
-- **State management** — toggles, filters, interactive elements
-- **Animation** — Framer Motion components that need JS
-- **Third-party libraries** — anything that expects a React runtime
+React islands are still useful when I need:
 
-For everything else, `.astro` components do the job with zero client-side cost.
+- Stateful UI such as toggles, filters, or interactive controls
+- Motion components that need runtime orchestration
+- Third-party libraries that expect a React environment
 
----
+For everything else, `.astro` components are enough.
 
-No, honestly Atro is amazing, if you're building a content-heavy site and reaching for Next.js by default, you should really give Astro a look. You might be surprised how little JavaScript you actually need.
+## The main reason I keep coming back to Astro
+
+It lets me be strict about where interactivity belongs. That alone improves performance, but it also improves taste. If a component needs hydration, it has to justify itself.

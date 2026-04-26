@@ -1,16 +1,76 @@
 ---
+import { siteConfig } from "@/lib/site";
+
 interface Props {
   title?: string;
   description?: string;
+  canonical?: string | URL;
+  image?: string;
+  type?: "website" | "article";
+  publishedTime?: string;
+  updatedTime?: string;
+  tags?: string[];
+  schema?: Record<string, unknown> | Record<string, unknown>[];
 }
 
-const { title, description } = Astro.props;
+const {
+  title = siteConfig.defaultTitle,
+  description = siteConfig.defaultDescription,
+  canonical,
+  image = siteConfig.defaultImage,
+  type = "website",
+  publishedTime,
+  updatedTime,
+  tags = [],
+  schema,
+} = Astro.props;
+
+const resolvedCanonical = (() => {
+  if (canonical) {
+    return new URL(canonical, Astro.site).toString();
+  }
+  return Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : undefined;
+})();
+
+const resolvedImage = image && Astro.site ? new URL(image, Astro.site).toString() : undefined;
+const schemaPayload = schema
+  ? JSON.stringify(Array.isArray(schema) ? schema : [schema])
+  : undefined;
 ---
 
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-{title && <title>{title}</title>}
-{description && <meta name="description" content={description} />}
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="generator" content={Astro.generator} />
+<meta name="color-scheme" content="light dark" />
+<meta property="og:site_name" content={siteConfig.name} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content={type} />
+<meta name="twitter:card" content={resolvedImage ? "summary_large_image" : "summary"} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+{resolvedCanonical && (
+  <>
+    <link rel="canonical" href={resolvedCanonical} />
+    <meta property="og:url" content={resolvedCanonical} />
+  </>
+)}
+{resolvedImage && (
+  <>
+    <meta property="og:image" content={resolvedImage} />
+    <meta name="twitter:image" content={resolvedImage} />
+  </>
+)}
+{type === "article" && publishedTime && (
+  <meta property="article:published_time" content={publishedTime} />
+)}
+{type === "article" && updatedTime && (
+  <meta property="article:modified_time" content={updatedTime} />
+)}
+{type === "article" &&
+  tags.map((tag) => <meta property="article:tag" content={tag} />)}
 <link
   rel="preload"
   href="/font/font.woff2"
@@ -18,6 +78,7 @@ const { title, description } = Astro.props;
   type="font/woff2"
   crossorigin="anonymous"
 />
+{schemaPayload && <script type="application/ld+json" set:html={schemaPayload} />}
 
 <style is:inline>
   @font-face {

@@ -14,7 +14,7 @@ export const TextGenerateEffect = ({
   filter?: boolean;
   duration?: number;
 }) => {
-  const scope = useRef<HTMLDivElement>(null);
+  const scope = useRef<HTMLSpanElement>(null);
   const wordsArray = words.split(" ");
 
   useEffect(() => {
@@ -38,31 +38,27 @@ export const TextGenerateEffect = ({
 
   const renderWords = () => {
     return (
-      <div ref={scope}>
+      <span ref={scope} className="inline">
         {wordsArray.map((word, idx) => {
           return (
             <span
               key={word + idx}
-              className="dark:text-white opacity-0"
+              className="mr-[0.25em] inline-block opacity-0 last:mr-0 dark:text-white"
               style={{
                 filter: filter ? "blur(10px)" : "none",
               }}
             >
-              {word}{" "}
+              {word}
             </span>
           );
         })}
-      </div>
+      </span>
     );
   };
 
   return (
-    <div className={cn(className)}>
-      <div className="mt-4">
-        <div className=" dark:text-white tracking-tight">
-          {renderWords()}
-        </div>
-      </div>
-    </div>
+    <span className={cn("inline-block", className)}>
+      <span className="tracking-tight dark:text-white">{renderWords()}</span>
+    </span>
   );
 };

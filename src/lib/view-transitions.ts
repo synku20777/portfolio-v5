@@ -1,5 +1,11 @@
 export function setupViewTransitions() {
+  if ((window as typeof window & { __nestViewTransitionsInitialized?: boolean }).__nestViewTransitionsInitialized) {
+    return;
+  }
+
   if (!document.startViewTransition) return;
+
+  (window as typeof window & { __nestViewTransitionsInitialized?: boolean }).__nestViewTransitionsInitialized = true;
   
   document.addEventListener('astro:page-load', () => {
     // Initialize components that need to be set up after navigation
@@ -19,12 +25,23 @@ export function setupViewTransitions() {
       return;
     }
 
+    const url = new URL(link.href, window.location.href);
+    const currentUrl = new URL(window.location.href);
+
+    if (url.origin !== currentUrl.origin || !/^https?:$/.test(url.protocol)) {
+      return;
+    }
+
+    if (url.pathname === currentUrl.pathname && url.hash) {
+      return;
+    }
+
     if (document.startViewTransition) {
       event.preventDefault();
-      const url = link.href;
+      const nextUrl = link.href;
       
       document.startViewTransition(async () => {
-        await navigateTo(url);
+        await navigateTo(nextUrl);
       });
     }
   });

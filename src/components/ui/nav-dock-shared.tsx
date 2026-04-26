@@ -11,6 +11,7 @@ import {
 import type { TablerIcon } from "@tabler/icons-react";
 import type { MouseEvent } from "react";
 import { smoothScrollTo } from "@/lib/smooth-scroll";
+import { siteConfig } from "@/lib/site";
 
 export type DockMode = "light" | "dark";
 
@@ -48,20 +49,20 @@ export function getDockItems({ mode, toggleTheme }: DockItemConfig): DockItem[] 
       iconClassName: "h-full w-full text-neutral-500 dark:text-neutral-300",
     },
     {
-      title: "Blog",
-      href: "/blog",
+      title: "Notes",
+      href: siteConfig.links.notes,
       icon: IconArticle,
       iconClassName: "h-full w-full text-neutral-500 dark:text-neutral-300",
     },
     {
       title: "CV",
-      href: "https://drive.google.com/file/d/1tzd0B9J5t-AOfYvCQYCJhqMAl_u7cEu9/view?usp=sharing",
+      href: siteConfig.links.cv,
       icon: IconFileDescription,
       iconClassName: "h-full w-full text-neutral-500 dark:text-neutral-300",
     },
     {
       title: "LinkedIn",
-      href: "https://linkedin.com/in/nestor-kulik",
+      href: siteConfig.links.linkedin,
       icon: IconBrandLinkedin,
       iconClassName: "h-full w-full text-neutral-500 dark:text-neutral-300",
     },
@@ -78,6 +79,25 @@ export function getDockItems({ mode, toggleTheme }: DockItemConfig): DockItem[] 
   ];
 }
 
+function getSamePageHash(href: string): string | null {
+  if (typeof window === "undefined") {
+    return null;
+  }
+
+  if (href.startsWith("#")) {
+    return href.slice(1);
+  }
+
+  try {
+    const url = new URL(href, window.location.origin);
+    if (url.pathname === "/" && window.location.pathname === "/" && url.hash) {
+      return url.hash.slice(1);
+    }
+  } catch {}
+
+  return null;
+}
+
 export function handleDockLinkClick(
   event: MouseEvent<HTMLElement>,
   href: string,
@@ -89,7 +109,9 @@ export function handleDockLinkClick(
     return;
   }
 
-  if (href.startsWith("#") || (href === "/" && window.location.pathname === "/")) {
+  const samePageHash = getSamePageHash(href);
+
+  if (samePageHash !== null || (href === "/" && window.location.pathname === "/")) {
     event.preventDefault();
 
     if (href === "/" || href === "#") {
@@ -97,7 +119,6 @@ export function handleDockLinkClick(
       return;
     }
 
-    const targetId = href.startsWith("#") ? href.substring(1) : href;
-    smoothScrollTo(targetId);
+    smoothScrollTo(samePageHash);
   }
 }

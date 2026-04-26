@@ -1,35 +1,29 @@
 # Portfolio Website
 
-A fast, accessible, and elegant personal portfolio site using Astro with React islands, TypeScript, Tailwind CSS, and shadcn/ui.
+Personal portfolio and notes site built with Astro, React islands, TypeScript, and Tailwind CSS.
 
 ## Features
 
-- 🚀 Fully static export - deployable anywhere
-- ⚡️ Lightning-fast performance (Lighthouse score ≥ 95)
-- ♿ WCAG AA accessibility compliance
-- 🌙 Dark mode support
-- 📱 Responsive design
-- 🧩 Content collections for projects/blog
-- 🔍 SEO optimized
+- Static Astro site with content collections for case studies and notes
+- Shared SEO shell with canonical, Open Graph, and structured data support
+- Dark mode with persistent theme preference
+- Mixed portfolio grid for case studies and visual notes
+- RSS feed for notes
+- Responsive layouts across homepage, notes, and case-study pages
 
-## Tech Stack
+## Stack
 
-- **Framework**: [Astro](https://astro.build) with React islands
-- **Language**: TypeScript (strict mode)
-- **Styling**: Tailwind CSS + shadcn/ui components
-- **Animations**: Framer Motion
+- Astro
+- React
+- TypeScript
+- Tailwind CSS
+- Motion
 
 ## Development
 
 ```bash
-# Install dependencies
 npm install
-
-# Start development server
 npm run dev
-
-# Build for production
 npm run build
-
-# Preview production build
 npm run preview
+```

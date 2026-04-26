@@ -12,6 +12,8 @@ const blog = defineCollection({
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
     ogImage: z.string().optional(),
+    featured: z.boolean().default(false),
+    homepageSummary: z.string().optional(),
   }),
 });
 
@@ -35,6 +37,11 @@ const caseStudies = defineCollection({
     ogImage: z.string().optional(),
     bentoSpan: z.string().optional(),
     themeColor: z.enum(['neutral', 'blue', 'violet', 'amber', 'indigo', 'rose', 'emerald', 'teal']).default('neutral'),
+    featured: z.boolean().default(false),
+    homepageSummary: z.string().optional(),
+    constraint: z.string().optional(),
+    keyDecision: z.string().optional(),
+    result: z.string().optional(),
   }),
 });
 

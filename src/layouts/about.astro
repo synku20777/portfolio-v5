@@ -1,32 +1,42 @@
 ---
-import OptimizedImage from "@/components/optimizedImage.astro"
+import OptimizedImage from "@/components/optimizedImage.astro";
 ---
+
 <section id="about" class="relative overflow-hidden bg-neutral-50 text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100">
   <div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(60%_40%_at_50%_0%,rgba(255,255,255,.06),transparent)]"></div>
   <div class="mx-auto max-w-7xl px-6 py-24 sm:py-32">
     <div class="relative">
-      <div aria-hidden="true" class="pointer-events-none absolute -top-10 right-0 select-none text-right font-black leading-[0.78] tracking-tighter text-neutral-900/5 dark:text-neutral-100/5">
+      <div
+        aria-hidden="true"
+        class="pointer-events-none absolute right-0 -top-10 select-none text-right font-black leading-[0.78] tracking-tighter text-neutral-900/5 dark:text-neutral-100/5"
+      >
         <span class="block text-[18vw]">Developer</span>
         <span class="block -mt-3 text-[18vw]">Designer</span>
       </div>
       <div class="grid grid-cols-1 items-start gap-8 sm:gap-12 lg:grid-cols-12">
         <div class="lg:col-span-5">
           <figure class="overflow-hidden rounded-2xl shadow-2xl">
-            <OptimizedImage src={import("../../public/photos/IMGA0704_3.webp")} alt="Portrait of me" class="h-auto w-full object-contain grayscale" />
+            <OptimizedImage
+              src={import("../../public/photos/IMGA0704_3.webp")}
+              alt="Portrait of Nestor Kulik"
+              class="h-auto w-full object-contain grayscale"
+            />
           </figure>
         </div>
         <div class="lg:col-span-7">
           <p class="max-w-2xl text-2xl font-medium leading-tight tracking-tight text-neutral-800 dark:text-neutral-200 sm:text-3xl lg:text-4xl">
-            Achieving impactful results in UX/UI design, I excel in balancing user needs with business objectives. Eager to innovate further, I aspire for industry recognition in creating accessible, engaging experiences.
+            I like products that feel composed from the first click: clear structure, quiet confidence, and details that
+            hold up under real use.
           </p>
-          <div class="max-w-2xl mt-12 grid grid-cols-1 gap-6 md:grid-cols-5">
-            <div class="col-span-1 md:col-span-2 text-sm tracking-widest text-neutral-600 dark:text-neutral-300">
+          <div class="mt-12 grid max-w-2xl grid-cols-1 gap-6 md:grid-cols-5">
+            <div class="col-span-1 text-sm tracking-widest text-neutral-600 dark:text-neutral-300 md:col-span-2">
               <span class="font-mono">( ABOUT ME )</span>
             </div>
-            <div class="col-span-2 md:col-span-3 leading-normal text-neutral-700 dark:text-neutral-300">
-              Creating great web experiences is my primary focus. I ensure each project leaves users
-              with a feel-good sensation through meticulous attention to detail and user-centric design
-              principles. When I’m not immersed in web development and design, you can find me reconnecting with nature, watching movies, or working on some furniture or a side-project.
+            <div class="col-span-2 leading-normal text-neutral-700 dark:text-neutral-300 md:col-span-3">
+              My work sits where UX structure, frontend craft, and visual judgment overlap. I care about information
+              architecture, accessible interfaces, restrained motion, and systems that make teams faster instead of
+              noisier. Outside of product work I photograph cities, skies, and quiet details, build side projects, and
+              spend a lot of time looking for better ways to make digital things feel intentional.
             </div>
           </div>
         </div>

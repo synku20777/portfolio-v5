@@ -10,6 +10,7 @@ import {
   IconArticle,
 } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
+import { siteConfig } from "@/lib/site";
 
 export function FloatingDockDemo() {
   // Theme toggle state
@@ -55,25 +56,25 @@ export function FloatingDockDemo() {
       href: "/#about",
     },
     {
-      title: "Blog",
+      title: "Notes",
       node: (
         <IconArticle className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
-      href: "/blog",
+      href: siteConfig.links.notes,
     },
     {
       title: "CV",
       node: (
         <IconFileDescription className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
-      href: "https://drive.google.com/file/d/1tzd0B9J5t-AOfYvCQYCJhqMAl_u7cEu9/view?usp=sharing",
+      href: siteConfig.links.cv,
     },
     {
       title: "LinkedIn",
       node: (
         <IconBrandLinkedin className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
-      href: "https://linkedin.com/in/nestor-kulik",
+      href: siteConfig.links.linkedin,
     },
     {
       title: mode === "dark" ? "Light Mode" : "Dark Mode",

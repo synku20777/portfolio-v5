@@ -7,8 +7,8 @@ export async function GET(context: APIContext) {
 
   const posts: BlogPost[] = await getCollection('blog');
   return rss({
-    title: 'Nest Blog',
-    description: 'Thoughts on UX design, frontend development, and creative process.',
+    title: 'Nest Notes',
+    description: 'Notes on design systems, frontend craft, product decisions, and the occasional visual tangent.',
     site: context.site!,
     items: posts
       .filter(p => !p.data.draft)

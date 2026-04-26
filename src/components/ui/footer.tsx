@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { smoothScrollTo } from "@/lib/smooth-scroll";
 import Clock from "@/components/clock";
 import Emoji from "@/components/emoji";
+import { siteConfig } from "@/lib/site";
 
 type LinkItem = { label: string; href: string; external?: boolean };
 type Column = { title: string; links: LinkItem[] };
@@ -14,8 +15,6 @@ type FooterProps = {
   columns?: Column[];
 };
 
-
-// Helper to find the nearest scrollable ancestor
 function getScrollParent(node: Element | null): Element {
   let el: Element | null = node;
   while (el && el !== document.body) {
@@ -23,12 +22,31 @@ function getScrollParent(node: Element | null): Element {
     const overflowY = style.overflowY;
     const canScroll = /(auto|scroll|overlay)/.test(overflowY);
     if (canScroll) {
-      const h = (el as HTMLElement);
-      if (h.scrollHeight > h.clientHeight) return el;
+      const container = el as HTMLElement;
+      if (container.scrollHeight > container.clientHeight) return el;
     }
     el = el.parentElement;
   }
   return (document.scrollingElement || document.documentElement || document.body) as Element;
+}
+
+function getSamePageHash(href: string): string | null {
+  if (typeof window === "undefined") {
+    return null;
+  }
+
+  if (href.startsWith("#")) {
+    return href.slice(1);
+  }
+
+  try {
+    const url = new URL(href, window.location.origin);
+    if (url.pathname === "/" && window.location.pathname === "/" && url.hash) {
+      return url.hash.slice(1);
+    }
+  } catch {}
+
+  return null;
 }
 
 export default function Footer({
@@ -41,21 +59,21 @@ export default function Footer({
         { label: "Home", href: "/" },
         { label: "Works", href: "/#works" },
         { label: "About", href: "/#about" },
-        { label: "Blog", href: "/blog" },
+        { label: "Notes", href: siteConfig.links.notes },
       ],
     },
     {
       title: "Socials",
       links: [
-        { label: "LinkedIn", href: "https://linkedin.com/nestor-kulik", external: true },
-        { label: "GitHub", href: "https://github.com/synku20777", external: true },
+        { label: "LinkedIn", href: siteConfig.links.linkedin, external: true },
+        { label: "GitHub", href: siteConfig.links.github, external: true },
       ],
     },
     {
       title: "Resources",
       links: [
-        { label: "Contact", href: "mailto:nestor.kulik@gmail.com", external: true },
-        { label: "CV", href: "https://drive.google.com/file/d/1tzd0B9J5t-AOfYvCQYCJhqMAl_u7cEu9/view?usp=sharing", external: true },
+        { label: "Contact", href: siteConfig.links.email, external: true },
+        { label: "CV", href: siteConfig.links.cv, external: true },
       ],
     },
   ],
@@ -67,39 +85,41 @@ export default function Footer({
     (container as HTMLElement).scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
-  const handleFooterLinkClick = (e: React.MouseEvent, href: string, external?: boolean) => {
-    if (external || !href.startsWith('#')) return;
-    
-    e.preventDefault();
-    const targetId = href.substring(1);
-    
-    // Handle the empty anchor case (scroll to top)
-    if (!targetId) {
+  const handleFooterLinkClick = (event: React.MouseEvent, href: string, external?: boolean) => {
+    if (external) return;
+
+    const samePageHash = getSamePageHash(href);
+    const isHome = href === "/" && window.location.pathname === "/";
+
+    if (!samePageHash && !isHome) return;
+
+    event.preventDefault();
+
+    if (!samePageHash) {
       scrollToTop();
       return;
     }
-    
-    smoothScrollTo(targetId);
+
+    smoothScrollTo(samePageHash);
   };
 
   return (
-   <footer
+    <footer
       ref={footerRef}
       className="relative w-full border-t bg-neutral-50/60 py-12 text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100"
     >
       <div className="mx-auto max-w-7xl px-6 py-12 sm:py-8">
-        {/* Top grid: 3 columns */}
-        <nav aria-label="Footer" className="grid gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-          {columns.map((col) => (
-            <div key={col.title}>
-              <h3 className="text-sm font-semibold">{col.title}</h3>
+        <nav aria-label="Footer" className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
+          {columns.map((column) => (
+            <div key={column.title}>
+              <h3 className="text-sm font-semibold">{column.title}</h3>
               <div className="mt-2 h-px w-full bg-neutral-300/80 dark:bg-neutral-700/60" />
               <ul className="mt-4 space-y-3">
-                {col.links.map((item) => (
+                {column.links.map((item) => (
                   <li key={item.label}>
                     <a
                       href={item.href}
-                      onClick={(e) => handleFooterLinkClick(e, item.href, item.external)}
+                      onClick={(event) => handleFooterLinkClick(event, item.href, item.external)}
                       rel={item.external ? "noopener noreferrer" : undefined}
                       target={item.external ? "_blank" : undefined}
                       className="text-neutral-700 underline-offset-4 hover:underline dark:text-neutral-300"
@@ -113,22 +133,19 @@ export default function Footer({
           ))}
         </nav>
 
-        {/* Bottom row */}
         <div className="mt-10 grid items-end gap-8 sm:grid-cols-2 md:grid-cols-3">
-          {/* Left: copyright block */}
           <div className="col-span-2 md:col-span-2">
-            <div className="flex flex-row mb-2 space-x-2">
+            <div className="mb-2 flex flex-row space-x-2">
               <Emoji />
               <Clock />
             </div>
             <p className="text-2xl font-extrabold leading-tight md:text-3xl">
-              © {year} {name}
+              Copyright {year} {name}
               <span className="font-medium"> All rights reserved.</span>
             </p>
           </div>
 
-          {/* Right: back-to-top */}
-          <div className="flex items-end z-100 justify-start">
+          <div className="z-100 flex items-end justify-start">
             <Button
               type="button"
               onClick={scrollToTop}

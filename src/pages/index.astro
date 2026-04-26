@@ -1,145 +1,117 @@
 ---
-import BaseHead from "@/components/BaseHead.astro";
-import "@/styles/globals.css";
-
-// Layouts & Components
+import SiteShell from "@/components/SiteShell.astro";
 import About from "@/layouts/about.astro";
-import Footer from "@/components/ui/footer";
 import Bento from "@/layouts/WorksBento.astro";
-
-// Interactive UI Components
 import { BackgroundRippleEffectDemo } from "@/components/ui/abf";
-import PrimaryDock from "@/components/ui/PrimaryDock.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+import { getReadingTime } from "@/lib/reading-time";
+import { siteConfig } from "@/lib/site";
 
-// Libs
-import { setupViewTransitions } from "@/lib/view-transitions";
+type BlogPost = CollectionEntry<"blog">;
 
-// Blog
-import { getCollection, type CollectionEntry } from 'astro:content';
-import { getReadingTime } from '@/lib/reading-time';
+const latestPosts: BlogPost[] = (await getCollection("blog"))
+  .filter((post) => !post.data.draft || !import.meta.env.PROD)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
 
-type BlogPost = CollectionEntry<'blog'>;
-
-const latestPosts: BlogPost[] = (await getCollection('blog'))
-	.filter((p: BlogPost) => !p.data.draft || !import.meta.env.PROD)
-	.sort((a: BlogPost, b: BlogPost) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-	.slice(0, 3);
-
-const title = "Nest Portfolio | UX Designer & Frontend Developer";
-const description = "Portfolio of a UX designer and frontend developer specializing in accessible, elegant web experiences";
+const title = siteConfig.defaultTitle;
+const description = siteConfig.defaultDescription;
+const homeSchema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: siteConfig.personName,
+    url: siteConfig.siteUrl,
+    jobTitle: "UX Designer and Frontend Developer",
+    homeLocation: siteConfig.location,
+    sameAs: [siteConfig.links.linkedin, siteConfig.links.github],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: siteConfig.name,
+    url: siteConfig.siteUrl,
+    description,
+  },
+];
 ---
 
-<html lang="en">
-	<head>
-		<BaseHead title={title} description={description} />
-		<link
-			rel="preload"
-			as="image"
-			href="/photos/projects/UxUnite/1.webp"
-			type="image/webp"
-			fetchpriority="high"
-		/>
-		
-		{/* Theme Script: Must stay in HEAD to prevent flash of incorrect theme color */}
-		<script is:inline>
-			const getThemePreference = () => {
-				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-					return localStorage.getItem('theme');
-				}
-				return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-			};
-			
-			const setDarkClass = () => {
-				const isDark = getThemePreference() === 'dark';
-				document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
-			};
+<SiteShell title={title} description={description} schema={homeSchema}>
+  <Fragment slot="head">
+    <link
+      rel="preload"
+      as="image"
+      href="/photos/projects/UxUnite/1.webp"
+      type="image/webp"
+      fetchpriority="high"
+    />
+  </Fragment>
 
-			setDarkClass(); // Run immediately
+  <BackgroundRippleEffectDemo client:visible />
+  <Bento />
 
-			// View Transitions hook to re-apply theme after swap
-			document.addEventListener('astro:after-swap', setDarkClass);
-		
-			if (typeof localStorage !== 'undefined') {
-				const observer = new MutationObserver(() => {
-					const isDark = document.documentElement.classList.contains('dark');
-					localStorage.setItem('theme', isDark ? 'dark' : 'light');
-				});
-				observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
-			}
-		</script>
+  {latestPosts.length > 0 && (
+    <section class="bg-white py-16 dark:bg-zinc-950">
+      <div class="mx-auto max-w-7xl px-6">
+        <header class="mb-10 flex items-end justify-between">
+          <div>
+            <h2 class="text-xs font-semibold uppercase tracking-[0.35rem] text-neutral-400 dark:text-zinc-500">
+              Latest Notes
+            </h2>
+            <p class="mt-3 max-w-2xl text-sm text-neutral-500 dark:text-zinc-400">
+              Working notes on design systems, product UX, frontend craft, and the occasional visual tangent.
+            </p>
+          </div>
+          <a
+            href="/blog"
+            class="text-sm text-neutral-500 transition-colors hover:text-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-200"
+          >
+            Read all notes &rarr;
+          </a>
+        </header>
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {latestPosts.map((post) => {
+            const readingTime = getReadingTime(post.body ?? "");
+            const formattedDate = post.data.pubDate.toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+            });
 
-		<script define:vars={{ setupViewTransitions }}>
-			document.addEventListener('DOMContentLoaded', setupViewTransitions);
-			document.addEventListener('astro:page-load', setupViewTransitions);
-		</script>
-	</head>
-	
-	<body class="bg-white dark:bg-black antialiased selection:bg-neutral-200 dark:selection:bg-neutral-800">
-		<a class="skip-link" href="#content" onclick="document.getElementById('content')?.focus()">Skip to content</a>
-		<PrimaryDock />
-		
-		<main id="content" tabindex="-1">
-			<BackgroundRippleEffectDemo client:visible />
-			<Bento />
-		<!-- <Works /> -->
-		<!-- <section id="services" class="bg-neutral-900 w-auto py-4 dark:bg-neutral-900">
-			<StickyScrollRevealDemo client:visible/>
-		</section> -->
-		<!-- Latest Blog Posts -->
-		{latestPosts.length > 0 && (
-			<section class="bg-white dark:bg-zinc-950 py-16">
-				<div class="mx-auto max-w-7xl px-6">
-					<header class="mb-10 flex items-end justify-between">
-						<h2 class="text-xs font-semibold uppercase tracking-[0.35rem] text-neutral-400 dark:text-zinc-500">
-							Latest Posts
-						</h2>
-						<a href="/blog" class="text-sm text-neutral-500 hover:text-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-200 transition-colors">
-							View all &rarr;
-						</a>
-					</header>
-					<div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-						{latestPosts.map(post => {
-							const readingTime = getReadingTime(post.body ?? '');
-							const formattedDate = post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
-							return (
-								<a
-									href={`/blog/${post.id}`}
-									class="group rounded-lg bg-neutral-50 dark:bg-zinc-900 hover:bg-neutral-100 dark:hover:bg-zinc-800 transition-colors overflow-hidden"
-								>
-									{post.data.heroImage && (
-										<div class="relative h-48 w-full overflow-hidden">
-											<img
-												src={post.data.heroImage}
-												alt={post.data.title}
-												loading="lazy"
-												decoding="async"
-												class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-											/>
-										</div>
-									)}
-									<div class="p-5">
-										<div class="flex items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400 mb-3">
-											<time datetime={post.data.pubDate.toISOString()}>{formattedDate}</time>
-											<span aria-hidden="true">·</span>
-											<span>{readingTime}</span>
-										</div>
-										<h3 class="text-lg font-semibold leading-tight text-stone-900 dark:text-zinc-100 group-hover:text-stone-700 dark:group-hover:text-zinc-200 transition-colors">
-											{post.data.title}
-										</h3>
-										<p class="mt-2 text-sm text-stone-600 dark:text-zinc-400 line-clamp-2">
-											{post.data.description}
-										</p>
-									</div>
-								</a>
-							);
-						})}
-					</div>
-				</div>
-			</section>
-		)}
+            return (
+              <a
+                href={`/blog/${post.id}/`}
+                class="group overflow-hidden rounded-lg bg-neutral-50 transition-colors hover:bg-neutral-100 dark:bg-zinc-900 dark:hover:bg-zinc-800"
+              >
+                {post.data.heroImage && (
+                  <div class="relative h-48 w-full overflow-hidden">
+                    <img
+                      src={post.data.heroImage}
+                      alt={post.data.title}
+                      loading="lazy"
+                      decoding="async"
+                      class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    />
+                  </div>
+                )}
+                <div class="p-5">
+                  <div class="mb-3 flex items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400">
+                    <time datetime={post.data.pubDate.toISOString()}>{formattedDate}</time>
+                    <span aria-hidden="true">&middot;</span>
+                    <span>{readingTime}</span>
+                  </div>
+                  <h3 class="text-lg font-semibold leading-tight text-stone-900 transition-colors group-hover:text-stone-700 dark:text-zinc-100 dark:group-hover:text-zinc-200">
+                    {post.data.title}
+                  </h3>
+                  <p class="mt-2 text-sm text-stone-600 dark:text-zinc-400">{post.data.description}</p>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  )}
 
-			<About />
-		</main>
-		<Footer name="Nest" client:visible />
-	</body>
-</html>
+  <About />
+</SiteShell>
