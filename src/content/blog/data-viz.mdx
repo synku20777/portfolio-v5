@@ -1,0 +1,78 @@
+---
+title: "What I Learned About Data Visualization"
+description: "A UX-focused summary of how to choose clearer charts by starting with the user question, data type, visual channel, and comparison task."
+pubDate: 2026-04-26
+tags: ["UX", "Data Visualization"]
+draft: true
+homepageSummary: "Data visualization is not about making charts look interesting. It is about making the right comparison visible with the least effort."
+---
+
+## Making Charts That Actually Make Sense: My Deep Dive into Data Viz
+
+I’ll be honest: when I first started working with user interfaces, I usually jumped straight to the "fun" part. There wasnt a lot of thinking involved, I navigated it on hunches and previous experinces, which is completely wrong, however those were the unfortunate business circumstances I was in.
+
+Lately, however, I’ve been doing a lot of reading and practicing, and I’ve realized I was looking at it all wrong. Specifically reading up on data visualization. A chart first of al, isn't a decoration or a way to make a page look "designed." It’s a tool to help someone quickly understand a relationship between numbers without having to do a bunch of mental math. It's very much what design is meant to be.
+
+Here is a summary of what I’ve learned so far on my journey to making charts that actually are designed well:
+
+---
+
+### The Question is More Important Than the Chart
+The biggest lesson I’ve learned is to stop asking "Which chart would look good?" and start asking **"What does the person looking at this need to know?"**. Making it a very user centric approach, and this particular case, its actually very important. 
+
+If I can’t explain the specific question the chart is answering, Its not ready to be built it yet. I figured a little checklist to follow before starting:
+* What is the main question here?
+* What kind of info do I actually have?
+* What should be charted against what?
+* How can I make that comparison as easy as possible to see?
+* What can I delete to make it even simpler?
+
+### Figuring Out Your "Data Personality"
+Before I even pick a color, I have to figure out what kind of data I'm holding. I’ve started thinking of it in plain words:
+* Smooth Rulers (Continuous): Things like revenue or temperature that slide smoothly between points.
+* Labeled Shelves (Discrete): Separate buckets, like "Mobile vs. Desktop" or different countries.
+* Ordered Groups: Things that have a natural rank, like "High, Medium, Low".
+
+Knowing this helps me decide how to treat the data visually—like using a fade for ranks or distinct colors for separate groups.
+
+### Playing to Our Eyes' Strengths
+One of the coolest things I learned is that our eyes are "wired" to see certain things better than others.
+* We are amazing at comparing where a dot sits on a scale or how long a bar is. This is why bars and lines are so popular—they aren't lazy choices; they're just the easiest for humans to read.
+* We are much worse at judging the size of circles or the angles in a pie chart.
+
+Because of this, I’m trying to put the most important info in the "strongest" spots—like the length of a bar—rather than relying on things like color or shape to do the heavy lifting.
+
+### Color Has a Job, Too
+I used to think color was just for branding, but in data viz, color is the language that chart speaks.
+* Use different colors to show different categories.
+* Use a "light-to-dark" fade to show low-to-high numbers.
+* Use two different colors meeting in the middle when you want to show things like "Above or Below Average".
+* Use one bright "pop" of color to highlight the most important thing on the page.
+
+The biggest mistake? Overuse. If every bar is a different bright color, nothing is actually important.
+
+### Picking the Right Tool for the Data
+I used to get overwhelmed by all the options, but it turns out most data fits into a few "jobs". Instead of picking a chart because it’s "pretty," I’m learning to pick it based on what it needs to do:
+* **Comparing amounts?** Use bars or simple dots.
+* **Showing change over time?** Use a line.
+* **Seeing how two numbers relate?** Use a scatterplot.
+* **Showing where something happened?** Only use a map if the *location* is the most important part.
+* **Showing a "part-of-a-whole"?** Use stacked bars or—if you must—a very simple pie chart with only a few slices.
+
+Probably you could create some sort of decision tree for picking which one.
+
+I’ve also realized that "boring" is often better. If a simple bar chart explains the point in two seconds, there’s no reason to use a complicated "exotic" chart just to look fancy.
+
+### Red Flags I'm Learning to Avoid
+As I audit my own work, I’ve started looking for these "warning signs" that a chart might be confusing:
+* **Alphabetical order:** Unless you're looking for a specific name, sorting bars from highest to lowest is almost always more helpful.
+* **Tilted labels:** If you have to tilt your head to read the words on the bottom, flip the chart and use horizontal bars instead.
+* **Using maps for no reason:** If you’re comparing sales in five states, a bar chart is usually faster to read than a map.
+* **Starting bars at random numbers:** Bars should always start at zero, or you're accidentally tricking the viewer.
+
+---
+
+### The Bottom Line
+At the end of the day, a chart should be a **shortcut.** It should make understanding the data easier than reading a plain old table of numbers. If my chart is so "clever" that it needs a long paragraph to explain how to read it, I’ve probably failed. 
+
+The goal isn't to make the data look interesting; it's to make the truth of the data impossible to miss.
