@@ -177,7 +177,7 @@ const tagBase =
         );
 
         return (
-          <article class:list={[isPhoto ? photoTileBase : caseTileBase, "cursor-pointer", tile.span]} id={tile.id}>
+          <article class:list={[isPhoto ? photoTileBase : caseTileBase, isPhoto ? "cursor-default" : "cursor-pointer", tile.span]} id={tile.id}>
             {isPhoto ? (
               card
             ) : (
