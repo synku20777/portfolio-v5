@@ -127,17 +127,7 @@ const tagBase =
             <div class="flex items-center justify-between gap-2 pl-2 pt-2">
               <div class="flex flex-wrap items-center gap-2">
                 <span class={pillBase}>{tile.kicker}</span>
-                <span
-                  class:list={[
-                    tagBase,
-                    isPhoto
-                      ? "border-stone-300/80 bg-stone-100 text-stone-600 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300"
-                      : undefined,
-                  ]}
-                >
-                  {isPhoto ? "Visual note" : "Case study"}
-                </span>
-                {tile.tags.map((tag) => (
+                {tile.tags.filter((tag) => tag !== "Photography").map((tag) => (
                   <span class={tagBase}>{tag}</span>
                 ))}
               </div>
