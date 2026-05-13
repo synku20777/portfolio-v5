@@ -9,7 +9,7 @@ interface Props {
 export async function getStaticPaths() {
   const caseStudies = await getCollection('caseStudies');
   return caseStudies
-    .filter(study => !study.data.draft || !import.meta.env.PROD)
+    .filter(study => !study.data.comingSoon && (!study.data.draft || !import.meta.env.PROD))
     .map(study => ({
       params: { slug: study.id },
       props: { study },
