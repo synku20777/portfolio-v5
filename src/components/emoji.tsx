@@ -11,7 +11,7 @@ interface EmojiState {
 const rigaCalendar = new Intl.DateTimeFormat("en-US", {
   timeZone: "Europe/Riga",
   hour: "numeric",
-  hour12: false,
+  hourCycle: "h23",
   weekday: "short",
 });
 
@@ -67,48 +67,21 @@ const getCurrentEmojiState = (): EmojiState => {
 };
 
 export default function CurrentlyEmoji() {
-  const [emojiState, setEmojiState] = useState<EmojiState>(() => {
-    if (typeof window !== "undefined") {
-      try {
-        const cached = localStorage.getItem("currentEmojiState");
-        const currentState = getCurrentEmojiState();
-
-        if (cached) {
-          const parsedCache = JSON.parse(cached);
-          return parsedCache.tooltipContent === currentState.tooltipContent
-            ? parsedCache
-            : currentState;
-        }
-
-        return currentState;
-      } catch {
-        return getCurrentEmojiState();
-      }
-    }
-
-    return getCurrentEmojiState();
+  const [emojiState, setEmojiState] = useState<EmojiState>({
+    emoji: "\uD83D\uDD52",
+    tooltipContent: "Daily schedule in Riga",
   });
 
-  const shouldAnimate =
-    typeof window !== "undefined" && !localStorage.getItem("initialPageLoad");
-
   useEffect(() => {
-    const interval = setInterval(() => {
-      const newState = getCurrentEmojiState();
-      setEmojiState(newState);
-      localStorage.setItem("currentEmojiState", JSON.stringify(newState));
-    }, 60000);
-
-    if (shouldAnimate) {
-      localStorage.setItem("initialPageLoad", "true");
-    }
-
+    const update = () => setEmojiState(getCurrentEmojiState());
+    update();
+    const interval = setInterval(update, 60000);
     return () => clearInterval(interval);
-  }, [shouldAnimate]);
+  }, []);
 
   return (
     <Tooltip content={emojiState.tooltipContent}>
-      <span className={`cursor-default ${shouldAnimate ? "initial-fade-in emoji-fade-in" : ""}`}>
+      <span role="img" aria-label={emojiState.tooltipContent} title={emojiState.tooltipContent} className="cursor-default">
         {emojiState.emoji}
       </span>
     </Tooltip>

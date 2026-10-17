@@ -2,6 +2,8 @@ import * as React from "react";
 import { IconArrowUp, IconArrowUpRight } from "@tabler/icons-react";
 import { smoothScrollTo } from "@/lib/smooth-scroll";
 import { siteConfig } from "@/lib/site";
+import Clock from "@/components/clock";
+import CurrentlyEmoji from "@/components/emoji";
 
 type LinkItem = { label: string; href: string; external?: boolean };
 type Column = { title: string; links: LinkItem[] };
@@ -166,12 +168,10 @@ export default function Footer({
           </nav>
 
           <div className="flex flex-col items-start justify-between gap-8">
-            <dl className="text-sm leading-relaxed">
-              <div>
-                <dt className="text-neutral-600 dark:text-neutral-400">Based in</dt>
-                <dd className="mt-1 text-base">{siteConfig.location}</dd>
-              </div>
-            </dl>
+            <div className="flex items-center gap-3 text-base text-neutral-600 dark:text-neutral-300">
+              <CurrentlyEmoji />
+              <Clock />
+            </div>
             <a
               href="#"
               onClick={(event) => {

@@ -12,39 +12,18 @@ function getCurrentRigaTime() {
 }
 
 export default function RigaTimeClock() {
-    const [time, setTime] = useState(() => {
-        if (typeof window !== "undefined") {
-            const cached = localStorage.getItem("rigaTime");
-            return cached || getCurrentRigaTime();
-        }
-        return getCurrentRigaTime();
-    });
-
-    const shouldAnimate =
-        typeof window !== "undefined" &&
-        !localStorage.getItem("initialPageLoad");
+    const [time, setTime] = useState<string | null>(null);
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            const newTime = getCurrentRigaTime();
-            setTime(newTime);
-            localStorage.setItem("rigaTime", newTime);
-        }, 1000);
-
-        if (shouldAnimate) {
-            localStorage.setItem("initialPageLoad", "true");
-        }
-
+        const update = () => setTime(getCurrentRigaTime());
+        update();
+        const interval = setInterval(update, 1000);
         return () => clearInterval(interval);
-    }, [shouldAnimate]);
+    }, []);
 
     return (
-        <div
-            className={`${
-                shouldAnimate ? "initial-fade-in clock-fade-in" : ""
-            }`}
-        >
-            {time} Riga, Latvia
+        <div>
+            <span className="tabular-nums">{time ?? "--:--"}</span> Riga, Latvia
         </div>
     );
 }
