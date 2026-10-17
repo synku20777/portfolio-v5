@@ -1,9 +1,6 @@
 import * as React from "react";
-import { IconArrowBigUp } from "@tabler/icons-react";
-import { Button } from "@/components/ui/button";
+import { IconArrowUp, IconArrowUpRight } from "@tabler/icons-react";
 import { smoothScrollTo } from "@/lib/smooth-scroll";
-import Clock from "@/components/clock";
-import Emoji from "@/components/emoji";
 import { siteConfig } from "@/lib/site";
 
 type LinkItem = { label: string; href: string; external?: boolean };
@@ -82,11 +79,15 @@ export default function Footer({
 
   const scrollToTop = React.useCallback(() => {
     const container = getScrollParent(footerRef.current);
-    (container as HTMLElement).scrollTo({ top: 0, behavior: "smooth" });
+    (container as HTMLElement).scrollTo({
+      top: 0,
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+    });
+    document.querySelector<HTMLElement>("main")?.focus({ preventScroll: true });
   }, []);
 
   const handleFooterLinkClick = (event: React.MouseEvent, href: string, external?: boolean) => {
-    if (external) return;
+    if (external || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
 
     const samePageHash = getSamePageHash(href);
     const isHome = href === "/" && window.location.pathname === "/";
@@ -100,64 +101,95 @@ export default function Footer({
       return;
     }
 
-    smoothScrollTo(samePageHash);
+    smoothScrollTo(samePageHash, {
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+    });
   };
 
   return (
     <footer
       ref={footerRef}
-      className="relative w-full border-t bg-neutral-50/60 py-12 text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100"
+      className="relative w-full border-t border-neutral-200 bg-neutral-100 text-neutral-900 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-100"
     >
-      <div className="mx-auto max-w-7xl px-6 py-12 sm:py-8">
-        <nav aria-label="Footer" className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
-          {columns.map((column) => (
-            <div key={column.title}>
-              <h3 className="text-sm font-semibold">{column.title}</h3>
-              <div className="mt-2 h-px w-full bg-neutral-300/80 dark:bg-neutral-700/60" />
-              <ul className="mt-4 space-y-3">
-                {column.links.map((item) => (
-                  <li key={item.label}>
-                    <a
-                      href={item.href}
-                      onClick={(event) => handleFooterLinkClick(event, item.href, item.external)}
-                      rel={item.external ? "noopener noreferrer" : undefined}
-                      target={item.external ? "_blank" : undefined}
-                      className="text-neutral-700 underline-offset-4 hover:underline dark:text-neutral-300"
-                    >
-                      {item.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </nav>
+      <div className="mx-auto max-w-7xl px-6 pb-40 pt-16 sm:pt-20">
+        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-start">
+          <h2 className="max-w-[20ch] text-balance text-2xl font-semibold tracking-tight sm:text-3xl">
+            Have a role in mind?
+          </h2>
+          <p className="max-w-[42ch] text-base leading-relaxed text-neutral-600 dark:text-neutral-300">
+            {siteConfig.availability}
+          </p>
+        </div>
 
-        <div className="mt-10 grid items-end gap-8 sm:grid-cols-2 md:grid-cols-3">
-          <div className="col-span-2 md:col-span-2">
-            <div className="mb-2 flex flex-row space-x-2">
-              <Emoji />
-              <Clock />
-            </div>
-            <p className="text-2xl font-extrabold leading-tight md:text-3xl">
-              Copyright {year} {name}
-              <span className="font-medium"> All rights reserved.</span>
-            </p>
-          </div>
+        <a
+          href={siteConfig.links.email}
+          className="footer-contact group mt-10 flex min-h-11 items-center justify-between gap-4 rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-600 dark:focus-visible:outline-sky-400 sm:mt-14"
+        >
+          <span className="relative block overflow-hidden whitespace-nowrap pb-[0.1em] text-[clamp(2.75rem,13.2vw,11rem)] font-semibold leading-[1.1] tracking-[-0.065em]">
+            <span className="block motion-safe:transition-transform motion-safe:duration-500 motion-safe:ease-[cubic-bezier(.22,1,.36,1)] motion-safe:group-hover:-translate-y-[115%] motion-safe:group-focus-visible:-translate-y-[115%]">
+              Say hello.
+            </span>
+            <span aria-hidden="true" className="footer-contact-outline absolute inset-x-0 top-0 translate-y-[115%] motion-safe:transition-transform motion-safe:duration-500 motion-safe:ease-[cubic-bezier(.22,1,.36,1)] motion-safe:group-hover:translate-y-0 motion-safe:group-focus-visible:translate-y-0">
+              Say hello.
+            </span>
+          </span>
+          <span className="flex size-14 shrink-0 items-center justify-center rounded-full bg-neutral-900 text-neutral-100 dark:bg-neutral-100 dark:text-neutral-900 sm:size-24 lg:size-32">
+            <IconArrowUpRight aria-hidden="true" stroke={1.25} className="size-8 motion-safe:transition-transform motion-safe:duration-500 motion-safe:group-hover:rotate-45 motion-safe:group-focus-visible:rotate-45 sm:size-14 lg:size-20" />
+          </span>
+        </a>
+        <p className="mt-1 break-words text-base text-neutral-600 dark:text-neutral-300 sm:text-lg">
+          {siteConfig.links.email.replace("mailto:", "")}
+        </p>
 
-          <div className="z-100 flex items-end justify-start">
-            <Button
-              type="button"
-              onClick={scrollToTop}
-              aria-label="Back to top"
-              variant="outline"
-              size="icon"
-              title="Back to top"
+        <div className="mt-12 grid gap-10 border-t border-neutral-300 pt-10 dark:border-neutral-700 lg:mt-16 lg:grid-cols-[2fr_1fr] lg:gap-16">
+          <nav aria-label="Footer" className="grid grid-cols-2 gap-x-8 gap-y-8 sm:grid-cols-3">
+            {columns.map((column) => (
+              <div key={column.title}>
+                <h3 className="mb-3 text-sm font-medium text-neutral-600 dark:text-neutral-400">{column.title}</h3>
+                <ul>
+                  {column.links.map((item) => (
+                    <li key={item.label}>
+                      <a
+                        href={item.href}
+                        onClick={(event) => handleFooterLinkClick(event, item.href, item.external)}
+                        rel={item.external ? "noopener noreferrer" : undefined}
+                        target={item.external ? "_blank" : undefined}
+                        className="inline-flex min-h-11 items-center text-base underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-600 dark:focus-visible:outline-sky-400"
+                      >
+                        {item.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </nav>
+
+          <div className="flex flex-col items-start justify-between gap-8">
+            <dl className="text-sm leading-relaxed">
+              <div>
+                <dt className="text-neutral-600 dark:text-neutral-400">Based in</dt>
+                <dd className="mt-1 text-base">{siteConfig.location}</dd>
+              </div>
+            </dl>
+            <a
+              href="#"
+              onClick={(event) => {
+                if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+                event.preventDefault();
+                scrollToTop();
+              }}
+              className="group inline-flex min-h-11 items-center gap-3 rounded-full border border-neutral-400 px-5 text-sm font-medium focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-600 dark:focus-visible:outline-sky-400"
             >
-              <IconArrowBigUp className="h-6 w-6" />
-            </Button>
+              Back to top
+              <IconArrowUp aria-hidden="true" size={18} className="motion-safe:transition-transform motion-safe:group-hover:-translate-y-1" />
+            </a>
           </div>
         </div>
+
+        <p className="mt-12 text-xs leading-relaxed text-neutral-600 dark:text-neutral-400">
+          © {year} {name}. All rights reserved.
+        </p>
       </div>
     </footer>
   );

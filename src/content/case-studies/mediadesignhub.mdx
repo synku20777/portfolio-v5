@@ -1,0 +1,71 @@
+---
+title: "MediaDesigner Hub: A Map for Learning"
+description: "Five exploratory interviews and two observation rounds shaped an accessible learning-hub prototype for multimedia-design students."
+category: "Information Architecture"
+client: "University project"
+role: "Information architecture & frontend development"
+year: "2023"
+tools: "HTML, CSS"
+heroImage: "/photos/projects/MediaDesignerHub/library.webp"
+thumbnailImage: "/photos/projects/MediaDesignerHub/home.webp"
+outcomes: ["5 exploratory interviews", "2 observation rounds", "Shared content structure"]
+tags: ["University project", "Information architecture", "Frontend"]
+order: 8
+bentoSpan: "sm:col-span-4 md:col-span-3 lg:col-span-4"
+themeColor: "amber"
+constraint: "Organize a limited set of learning resources without building a search engine or content-management platform."
+keyDecision: "Pair a shared topic hierarchy with clearer tile boundaries and explicit section identification after observing navigation."
+result: "Two observation rounds supported the subject split and exposed tile, menu, and section-identification issues for refinement."
+---
+
+<div class="mx-auto max-w-7xl px-6">
+  <div class="grid grid-cols-1 gap-8 mb-16 md:grid-cols-2">
+    <section class="rounded-2xl bg-neutral-50 p-8 dark:bg-neutral-900">
+      <h2 class="mb-4 text-2xl font-bold text-neutral-800 dark:text-neutral-100">The challenge</h2>
+      <p>The assignment asked how a website could teach web-accessibility principles to multimedia-design students while demonstrating inclusion and usability itself. The response needed to make unfamiliar theory understandable and keep a small reference library easy to navigate.</p>
+    </section>
+    <section class="rounded-2xl bg-amber-50 p-8 dark:bg-amber-950">
+      <h2 class="mb-4 text-2xl font-bold text-neutral-800 dark:text-neutral-100">The response</h2>
+      <p>The homepage offers two entry points: Design and Development. Each uses the same category structure—Principles, Theory, and Methodologies—so moving between subjects does not mean learning a new navigation system.</p>
+    </section>
+  </div>
+
+  <section class="mb-16 prose prose-neutral max-w-3xl dark:prose-invert">
+    <h2>Five interviews changed the content brief</h2>
+    <p>I used five unstructured, unrecorded interviews and discussions to explore content, color associations, and information architecture. Participants were often new to the field, so asking them for a complete content specification was less useful than identifying the structure they needed.</p>
+    <p>A repeatable reference entry emerged: key points, a concise summary, a real-world example, and a source. The proposed Design/Development split made sense to participants. Color associations did not reach consensus, so color could not carry the meaning of a section on its own.</p>
+  </section>
+
+  <section class="mb-16 prose prose-neutral max-w-3xl dark:prose-invert">
+    <h2>Start with the subject, then the kind of help</h2>
+    <p>The main design decision is the hierarchy itself. A student first chooses a discipline, then the type of reference they need. Topic pages, such as usability heuristics and psychology, sit underneath that structure.</p>
+    <p>Breadcrumbs make the path visible and offer a way back to the wider collection. Large linked tiles carry the category names, making the navigation the main content rather than surrounding the page with competing actions.</p>
+  </section>
+
+  <figure class="mb-16">
+    <img src="/photos/projects/MediaDesignerHub/home.webp" alt="MediaDesigner Hub homepage with two large navigation links for Design and Development" class="w-full rounded-xl" loading="lazy" decoding="async" />
+    <figcaption class="mt-3 text-sm text-neutral-500 dark:text-neutral-400">The original homepage reduces the first decision to two subject areas.</figcaption>
+  </figure>
+
+  <section class="mb-16 grid gap-8 md:grid-cols-2">
+    <div class="prose prose-neutral max-w-none dark:prose-invert">
+      <h2>A repeatable page structure</h2>
+      <p>Shared CSS defines navigation, typography, tiles, and breadcrumbs across the static HTML pages. That gives the project a small visual system without introducing a framework or a publishing backend.</p>
+      <p>The implementation makes the proposed taxonomy tangible: the reader can follow links through subject, category, and reference content instead of evaluating a sitemap in isolation.</p>
+    </div>
+    <div class="prose prose-neutral max-w-none dark:prose-invert">
+      <h2>The scope boundary</h2>
+      <p>The documentation explicitly limits working reference content to Design/Principles and Design/Theory. Development pages and other destinations demonstrate the proposed hierarchy; the search field is an interface placeholder.</p>
+      <p>I documented contrast and accessibility checks using tools including WhoCanUse, Total Validator, and an accessibility checklist, alongside semantic HTML and descriptive labels. These are documented checks within the assignment, rather than a comprehensive accessibility certification.</p>
+    </div>
+  </section>
+
+  <section class="mb-16 rounded-2xl bg-neutral-50 p-8 dark:bg-neutral-900">
+    <h2 class="mb-4 text-2xl font-bold text-neutral-800 dark:text-neutral-100">Two observation rounds, specific changes</h2>
+    <p>In the first round, navigating between pages and returning home worked, but participants questioned the tile boundaries, color meaning, and nonfunctional mobile-menu links. The response was to make tile boundaries clearer and prioritize a functional menu.</p>
+    <p class="mt-4">The second round again supported the broad navigation structure, but unfinished destinations raised content questions and breadcrumbs alone did not reliably distinguish Design from Development. The documented next change was to identify the section in page titles and finish the reference content. A third round was planned but not completed because of time.</p>
+    <p class="mt-4">The outcome is a tested direction for the hierarchy with concrete iteration priorities. The documentation does not state participant counts for each observation round, so the five exploratory interviews are not presented as five usability tests per round.</p>
+  </section>
+
+  <a href="https://github.com/synku20777/mediadesignhub" class="inline-flex rounded-lg border border-neutral-300 px-5 py-3 font-medium text-neutral-800 underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 dark:border-neutral-700 dark:text-neutral-100">Explore MediaDesigner Hub on GitHub</a>
+</div>

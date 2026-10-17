@@ -1,0 +1,62 @@
+---
+title: "Task Manager: Learning to Structure a React App"
+description: "A university team prototype for organizing student and teaching tasks, built around typed records, shared state, and reusable React components."
+category: "Web Application"
+client: "University team project"
+role: "Collaborative React development & interface implementation"
+year: "2024"
+tools: "React, TypeScript, CSS"
+heroImage: "/photos/projects/TaskManager/tasks.webp"
+outcomes: ["Task creation & editing", "Category filtering", "Priority & deadline controls"]
+tags: ["University project", "React", "TypeScript"]
+order: 12
+bentoSpan: "sm:col-span-4 md:col-span-3 lg:col-span-5"
+themeColor: "blue"
+constraint: "Learn React and TypeScript within a small team assignment, prioritizing the core task workflow."
+keyDecision: "Keep task state in the parent component and pass typed data and actions to the form and cards."
+result: "A task-management prototype with creation, editing, deletion, category filtering, and sorting controls."
+---
+
+<div class="mx-auto max-w-7xl px-6">
+  <div class="mb-16 grid gap-8 md:grid-cols-2">
+    <section class="rounded-2xl bg-neutral-50 p-8 dark:bg-neutral-900">
+      <h2 class="mb-4 text-2xl font-bold text-neutral-800 dark:text-neutral-100">The challenge</h2>
+      <p>The assignment targeted students and teachers who need to keep track of tasks, priorities, and deadlines. It also served as a practical introduction to React and TypeScript, so the team prioritized the application’s structure and core interactions over a finished visual identity.</p>
+    </section>
+    <section class="rounded-2xl bg-blue-50 p-8 dark:bg-blue-950">
+      <h2 class="mb-4 text-2xl font-bold text-neutral-800 dark:text-neutral-100">The response</h2>
+      <p>A small task workspace combines an add/edit form, individual task cards, category filtering, and priority and deadline controls. Each record carries the information needed to display and update it consistently.</p>
+    </section>
+  </div>
+
+  <section class="mb-16 prose prose-neutral max-w-3xl dark:prose-invert">
+    <h2>Make the data flow understandable first</h2>
+    <p>The parent component owns the task list. A typed Task describes the title, categories, description, deadline, and priority; the form and cards receive data and callbacks through props. Saving an edit updates the corresponding record in the same list rather than creating an independent copy of the task.</p>
+    <p>The implementation includes title and deadline requirements, an edit mode that reuses the form, and confirmation before deletion. These are small but concrete examples of connecting interface states to record changes.</p>
+  </section>
+
+  <figure class="mb-16">
+    <img src="/photos/projects/TaskManager/form.webp" alt="Original Task Manager form for editing a task’s title, category, description, deadline, and priority" class="w-full rounded-xl" loading="lazy" decoding="async" />
+    <figcaption class="mt-3 text-sm text-neutral-500 dark:text-neutral-400">Original interface with illustrative task records prepared for the portfolio. These are not participant data.</figcaption>
+  </figure>
+
+  <section class="mb-16 grid gap-8 md:grid-cols-2">
+    <div class="prose prose-neutral max-w-none dark:prose-invert">
+      <h2>A shared learning project</h2>
+      <p>The report credits the group collectively with coding, research, React experiments, and design implementation. After earlier difficulties with branches, one person maintained the working codebase while the team contributed locally. I present this as collaborative development rather than sole ownership of the application.</p>
+      <p>The useful learning outcome was understanding how parent state, typed props, and callbacks connect a form to a list of records.</p>
+    </div>
+    <div class="prose prose-neutral max-w-none dark:prose-invert">
+      <h2>What this version demonstrates</h2>
+      <p>The inspected implementation supports creating, editing, and deleting tasks, category filtering, and priority/deadline controls. Tasks live in component state in this version; persistence, completion-status controls, reminders, and a more polished interface remain extensions.</p>
+      <p>The report recommends React Testing Library checks for creation, filtering, and updates. It does not document a completed automated suite or measured usability results, so those are not included as outcomes.</p>
+    </div>
+  </section>
+
+  <section class="mb-16 rounded-2xl bg-neutral-50 p-8 dark:bg-neutral-900">
+    <h2 class="mb-4 text-2xl font-bold text-neutral-800 dark:text-neutral-100">Outcome & next checks</h2>
+    <p>The deliverable is a bounded React-and-TypeScript workflow with reusable form and card components. The next checks would cover editing without duplication, filtering after an update, sorting when deadlines tie, and preserving records between sessions. The report’s accessibility aims also need verification against the interactive controls before making broader claims.</p>
+  </section>
+
+  <a href="https://github.com/synku20777/task-manager" class="inline-flex rounded-lg border border-neutral-300 px-5 py-3 font-medium text-neutral-800 underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 dark:border-neutral-700 dark:text-neutral-100">Explore Task Manager on GitHub</a>
+</div>

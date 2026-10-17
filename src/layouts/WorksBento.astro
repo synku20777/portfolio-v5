@@ -1,17 +1,16 @@
 ---
-import { IconExternalLink, IconSparkles } from "@tabler/icons-react";
+import { IconExternalLink } from "@tabler/icons-react";
 import Tooltip from "@/components/tooltip";
 import { getCollection, type CollectionEntry } from "astro:content";
 
 type CaseStudy = CollectionEntry<"caseStudies">;
-type TileKind = "case-study" | "visual-note";
 
 interface BentoTile {
   id?: string;
-  kind: TileKind;
   kicker: string;
   title: string;
   text?: string;
+  role?: string;
   href?: string;
   image?: string;
   emoji?: string;
@@ -22,13 +21,15 @@ interface BentoTile {
 
 const caseStudies: CaseStudy[] = (await getCollection("caseStudies"))
   .filter((study) => !study.data.comingSoon && (!study.data.draft || !import.meta.env.PROD))
+  // The landing-page route now redirects to the combined Aurora study.
+  .filter((study) => study.id !== "aurora")
   .sort((a, b) => a.data.order - b.data.order);
 
 const caseStudyTiles: BentoTile[] = caseStudies.map((study) => ({
-  kind: "case-study",
   kicker: study.data.client || study.data.category,
   title: study.data.title,
   text: study.data.description,
+  role: study.data.role,
   href: study.data.comingSoon ? undefined : `/case-studies/${study.id}`,
   image: study.data.thumbnailImage || study.data.heroImage,
   emoji: study.data.bentoEmoji,
@@ -36,79 +37,15 @@ const caseStudyTiles: BentoTile[] = caseStudies.map((study) => ({
   span: study.data.bentoSpan || "sm:col-span-4 md:col-span-4 lg:col-span-4",
   comingSoon: study.data.comingSoon,
 }));
-const publishedCaseStudyTiles = caseStudyTiles.filter((tile) => !tile.comingSoon);
-const comingSoonCaseStudyTiles = caseStudyTiles.filter((tile) => tile.comingSoon);
-
-const photoTiles: BentoTile[] = [
-  {
-    kind: "visual-note",
-    kicker: "Nature",
-    title: "Forest view",
-    text: "Quiet textures from Latvian woods.",
-    image: "/photos/projects/photos/PXL_20250816_165602397.webp",
-    tags: ["Photography"],
-    span: "sm:col-span-4 md:col-span-4 lg:col-span-9",
-  },
-  {
-    kind: "visual-note",
-    kicker: "Paris",
-    title: "Street light, soft rain",
-    text: "A small moment from a city that already knows how to frame itself.",
-    image: "/photos/projects/photos/PXL_20250424_092240052.MP.webp",
-    tags: ["Photography"],
-    span: "col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-3",
-  },
-  {
-    kind: "visual-note",
-    kicker: "Daugava",
-    title: "Coffee stop",
-    text: "A place worth staying in a little longer.",
-    image: "/photos/projects/photos/PXL_20250604_201326978.MP.webp",
-    tags: ["Photography"],
-    span: "col-span-1 sm:col-span-1 md:col-span-2 lg:col-span-3",
-  },
-  {
-    kind: "visual-note",
-    kicker: "Purvi",
-    title: "Stillness, sulfur, and a lot of sky",
-    text: "Unfriendly smell. Strong atmosphere.",
-    image: "/photos/projects/photos/PXL_20231119_140936660~2.webp",
-    tags: ["Photography"],
-    span: "col-span-1 sm:col-span-3 md:col-span-4 lg:col-span-9",
-  },
-  {
-    kind: "visual-note",
-    kicker: "Night sky",
-    title: "Sputniks",
-    text: "A telescope, a patient camera, and enough darkness.",
-    image: "/photos/projects/photos/astro/PXL_20250401_211155706.MP.webp",
-    tags: ["Photography"],
-    span: "sm:col-span-1 md:col-span-2 lg:col-span-3",
-  },
-];
-
-const allTiles: BentoTile[] = [
-  ...publishedCaseStudyTiles.slice(0, 2),
-  ...publishedCaseStudyTiles.slice(2, 5),
-  ...photoTiles.slice(0, 1),
-  ...photoTiles.slice(1, 3),
-  ...photoTiles.slice(3, 4),
-  ...publishedCaseStudyTiles.slice(5),
-  ...photoTiles.slice(4),
-  ...comingSoonCaseStudyTiles,
-];
-
 const {
-  heading = "Selected Work + Visual Notes",
-  tiles = allTiles,
+  heading = "Selected work",
+  tiles = caseStudyTiles,
 } = Astro.props;
 
 const caseTileBase =
   "overflow-hidden rounded-lg bg-neutral-50 px-2 transition-[grid-column,grid-row,width,height,background-color,transform] duration-[400ms] ease-in-out hover:bg-neutral-100 dark:bg-zinc-900 dark:hover:bg-zinc-800";
 const comingSoonTileBase =
   "overflow-hidden rounded-lg border border-dashed border-neutral-200 bg-neutral-50 px-2 transition-[grid-column,grid-row,width,height,background-color] duration-[400ms] ease-in-out dark:border-zinc-800 dark:bg-zinc-900/70";
-const photoTileBase =
-  "overflow-hidden rounded-lg border border-dashed border-neutral-200 bg-stone-50/80 px-2 transition-[grid-column,grid-row,width,height,background-color,transform] duration-[400ms] ease-in-out hover:bg-stone-100 dark:border-zinc-800 dark:bg-zinc-950 dark:hover:bg-zinc-900";
 const pillBase = "text-xs font-medium tracking-tight text-neutral-500 dark:text-zinc-400";
 const tagBase =
   "inline-flex items-center rounded-full border border-neutral-200/80 bg-white px-2.5 py-1 text-xs font-semibold uppercase tracking-tighter text-stone-500 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300";
@@ -117,19 +54,17 @@ const tagBase =
 <section id="works" class="bg-white dark:bg-zinc-950">
   <div class="mx-auto max-w-7xl px-6 pb-16 pt-10">
     <div class="mb-10">
-      <h2 class="text-xs font-semibold uppercase tracking-[0.35rem] text-neutral-400 dark:text-zinc-500">
+      <h2 class="text-xs font-semibold uppercase tracking-[0.35rem] text-neutral-500 dark:text-zinc-400">
         {heading}
       </h2>
       <p class="mt-3 max-w-2xl text-sm text-neutral-500 dark:text-zinc-400">
-        Case studies stay at the center. Photography stays in the mix as visual field notes.
+        UX/UI, design systems, and frontend projects.
       </p>
     </div>
 
     <div class="grid auto-rows-auto grid-cols-1 gap-1 sm:grid-flow-row-dense sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-12">
       {tiles.map((tile: BentoTile) => {
-        const isPhoto = tile.kind === "visual-note";
         const isComingSoon = Boolean(tile.comingSoon);
-        const isLcpImage = tile.image === "/photos/projects/UxUnite/1.webp";
         const Wrapper = tile.href ? "a" : "div";
 
         const card = (
@@ -137,15 +72,11 @@ const tagBase =
             <div class="flex items-center justify-between gap-2 pl-2 pt-2">
               <div class="flex flex-wrap items-center gap-2">
                 <span class={pillBase}>{tile.kicker}</span>
-                {tile.tags.filter((tag) => tag !== "Photography").map((tag) => (
+                {tile.tags.map((tag) => (
                   <span class={tagBase}>{tag}</span>
                 ))}
               </div>
-              {isPhoto ? (
-                <span class="inline-flex h-8 w-8 items-center justify-center rounded-full text-stone-500 dark:text-zinc-300">
-                  <IconSparkles size={16} />
-                </span>
-              ) : isComingSoon ? (
+              {isComingSoon ? (
                 <span class="inline-flex h-8 w-8 items-center justify-center rounded-full text-xs font-semibold uppercase tracking-tighter text-stone-400 dark:text-zinc-500">
                   Soon
                 </span>
@@ -165,31 +96,27 @@ const tagBase =
                 <img
                   alt={tile.title}
                   src={tile.image}
-                  loading={isLcpImage ? "eager" : "lazy"}
-                  fetchpriority={isLcpImage ? "high" : undefined}
+                  loading="lazy"
                   decoding="async"
                   class:list={[
                     "absolute h-full w-full object-cover transition-transform duration-500",
                     isComingSoon ? "grayscale opacity-75" : "group-hover:scale-[1.03]",
-                    isPhoto ? "saturate-[0.92]" : undefined,
                   ]}
                 />
               ) : null}
-              {isPhoto && (
-                <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-stone-950/20 via-transparent to-transparent dark:from-black/30"></div>
-              )}
             </div>
 
             <div class="px-3 pb-3 pl-2 pt-2">
               <h3 class:list={["text-lg font-semibold leading-[1.25]", isComingSoon ? "text-stone-600 dark:text-zinc-300" : "text-stone-900 dark:text-zinc-100"]}>{tile.title}</h3>
               {tile.text && <p class="mt-2 text-sm text-stone-600 dark:text-zinc-400">{tile.text}</p>}
+              {tile.role && <p class="mt-2 text-xs font-semibold text-stone-700 dark:text-zinc-300">My role: {tile.role}</p>}
             </div>
           </Wrapper>
         );
 
         return (
-          <article class:list={[isComingSoon ? comingSoonTileBase : isPhoto ? photoTileBase : caseTileBase, isPhoto || isComingSoon ? "cursor-default" : "cursor-pointer", tile.span]} id={tile.id}>
-            {isPhoto || isComingSoon ? (
+          <article class:list={[isComingSoon ? comingSoonTileBase : caseTileBase, isComingSoon ? "cursor-default" : "cursor-pointer", tile.span]} id={tile.id}>
+            {isComingSoon ? (
               card
             ) : (
               <Tooltip

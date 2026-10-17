@@ -1,65 +1,56 @@
 "use client";
 
-import { TextGenerateEffect } from "@/components/ui/wordgen";
 import { siteConfig } from "@/lib/site";
-
-const proofItems = [
-  {
-    label: "Based in",
-    value: siteConfig.location,
-  },
-  {
-    label: "Current focus",
-    value: "Design systems, product UX, and frontends with strong visual discipline.",
-  },
-  {
-    label: "Strength",
-    value: "Clear structure, restrained motion, and interfaces that feel considered.",
-  },
-  {
-    label: "Availability",
-    value: siteConfig.availability,
-  },
-];
+import { TextGenerateEffect } from "@/components/ui/wordgen";
 
 export function BackgroundRippleEffectDemo() {
   return (
     <header className="w-full overflow-hidden">
-      <div className="relative z-20 mx-auto flex min-h-[100svh] w-full max-w-7xl flex-col justify-between gap-[clamp(2rem,7svh,6rem)] px-6 pb-[clamp(1.5rem,5svh,4rem)] pt-[clamp(6rem,13svh,9rem)]">
-        <div className="flex flex-col items-start gap-3">
-          <h1 className="text-left text-4xl font-black leading-tight tracking-tight text-neutral-800 dark:text-neutral-100 md:text-5xl lg:text-6xl xl:text-6xl">
-          <TextGenerateEffect words={"Hey, I'm Nestors 👋"} />
+      <div className="mx-auto w-full max-w-7xl px-6 pb-12 pt-16 sm:pb-16 sm:pt-24">
+        <div className="flex flex-col items-start">
+          <p className="text-base font-medium text-neutral-600 dark:text-neutral-400">{siteConfig.personName}</p>
+          <h1 className="mt-5 max-w-[21ch] text-balance text-left text-4xl font-semibold leading-[1.12] tracking-[-0.04em] text-neutral-900 dark:text-neutral-100 sm:text-5xl lg:text-7xl">
+            <TextGenerateEffect words="UX/UI designer and frontend developer" duration={0.6} />
           </h1>
-          <p className="mt-2 max-w-xl text-left text-lg text-neutral-900 hyphens-auto dark:text-neutral-500 lg:text-xl xl:text-2xl">
-            Welcome to my portfolio website. I like building web solutions.
-          </p>
-          <p className="mt-2 max-w-xl text-left text-lg text-neutral-900 hyphens-auto dark:text-neutral-500 lg:text-xl xl:text-2xl">
-            In my free time, I enjoy cooking, looking at the night sky, taking pictures and going somewhere unknown in my car.
+          <p className="mt-6 max-w-[52ch] text-lg leading-relaxed text-neutral-600 dark:text-neutral-300 sm:text-xl">
+            I design product interfaces and design systems, and build them in code.
+            Clear structure, accessible interactions, and careful visual details guide my work.
           </p>
 
-          <div className="flex flex-wrap gap-3 pt-2">
+          <div className="mt-7 flex flex-wrap gap-3">
+            <a
+              href="#works"
+              className="inline-flex min-h-11 items-center rounded-full bg-neutral-900 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-neutral-700 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-600 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-neutral-300 dark:focus-visible:outline-sky-400"
+            >
+              View work
+            </a>
+            <a
+              href={siteConfig.links.cv}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-11 items-center rounded-full border border-neutral-400 px-4 py-2.5 text-sm font-semibold text-neutral-900 transition-colors hover:bg-neutral-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-600 dark:border-zinc-600 dark:text-neutral-100 dark:hover:bg-zinc-800 dark:focus-visible:outline-sky-400"
+            >
+              View CV
+            </a>
             <a
               href={siteConfig.links.email}
-              className="inline-flex items-center text-sm text-neutral-600 underline-offset-4 transition-colors hover:text-neutral-900 hover:underline dark:text-neutral-400 dark:hover:text-neutral-100"
+              className="inline-flex min-h-11 items-center rounded-full border border-neutral-400 px-4 py-2.5 text-sm font-semibold text-neutral-900 transition-colors hover:bg-neutral-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-600 dark:border-zinc-600 dark:text-neutral-100 dark:hover:bg-zinc-800 dark:focus-visible:outline-sky-400"
             >
-              Contact: {siteConfig.links.email.replace("mailto:", "")}
+              Contact
             </a>
           </div>
         </div>
 
-        <div className="grid w-full gap-3 pb-12 md:grid-cols-2 xl:grid-cols-4">
-          {proofItems.map((item) => (
-            <div
-              key={item.label}
-              className="rounded-2xl border border-neutral-200 bg-white/80 p-4 backdrop-blur-sm dark:border-zinc-800 dark:bg-zinc-950/70"
-            >
-              <p className="text-xs font-semibold text-neutral-400 dark:text-zinc-500">
-                {item.label}
-              </p>
-              <p className="mt-2 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">{item.value}</p>
-            </div>
-          ))}
-        </div>
+        <dl className="mt-10 grid max-w-3xl gap-5 text-sm leading-relaxed sm:grid-cols-[auto_1fr] sm:gap-x-12">
+          <div>
+            <dt className="text-neutral-500 dark:text-neutral-400">Based in</dt>
+            <dd className="mt-1 text-neutral-800 dark:text-neutral-200">{siteConfig.location}</dd>
+          </div>
+          <div>
+            <dt className="text-neutral-500 dark:text-neutral-400">Availability</dt>
+            <dd className="mt-1 text-neutral-800 dark:text-neutral-200">{siteConfig.availability}</dd>
+          </div>
+        </dl>
       </div>
     </header>
   );

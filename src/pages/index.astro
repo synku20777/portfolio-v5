@@ -37,39 +37,29 @@ const homeSchema = [
 ---
 
 <SiteShell title={title} description={description} schema={homeSchema}>
-  <Fragment slot="head">
-    <link
-      rel="preload"
-      as="image"
-      href="/photos/projects/UxUnite/1.webp"
-      type="image/webp"
-      fetchpriority="high"
-    />
-  </Fragment>
-
   <BackgroundRippleEffectDemo client:visible />
   <Bento />
 
   {latestPosts.length > 0 && (
-    <section class="bg-white py-16 dark:bg-zinc-950">
+    <section aria-labelledby="notes-heading" class="bg-white py-16 dark:bg-black sm:py-24">
       <div class="mx-auto max-w-7xl px-6">
-        <header class="mb-10 flex items-end justify-between">
+        <header class="mb-10 flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
           <div>
-            <h2 class="text-xs font-semibold uppercase tracking-[0.35rem] text-neutral-400 dark:text-zinc-500">
-              Latest Notes
+            <h2 id="notes-heading" class="text-4xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100 sm:text-5xl">
+              Latest notes
             </h2>
-            <p class="mt-3 max-w-2xl text-sm text-neutral-500 dark:text-zinc-400">
+            <p class="mt-4 max-w-[52ch] text-base leading-relaxed text-neutral-600 dark:text-neutral-300">
               Working notes on design systems, product UX, frontend craft, and the occasional visual tangent.
             </p>
           </div>
           <a
             href="/blog"
-            class="text-sm text-neutral-500 transition-colors hover:text-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-200"
+            class="inline-flex min-h-11 shrink-0 items-center rounded-full border border-neutral-400 px-5 text-sm font-medium text-neutral-900 hover:bg-neutral-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-600 dark:text-neutral-100 dark:hover:bg-neutral-900 dark:focus-visible:outline-sky-400"
           >
-            Read all notes &rarr;
+            Read all notes
           </a>
         </header>
-        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="divide-y divide-neutral-200 border-t border-neutral-200 dark:divide-neutral-800 dark:border-neutral-800">
           {latestPosts.map((post) => {
             const readingTime = getReadingTime(post.body ?? "");
             const formattedDate = post.data.pubDate.toLocaleDateString("en-US", {
@@ -79,33 +69,35 @@ const homeSchema = [
             });
 
             return (
-              <a
-                href={`/blog/${post.id}/`}
-                class="group overflow-hidden rounded-lg bg-neutral-50 transition-colors hover:bg-neutral-100 dark:bg-zinc-900 dark:hover:bg-zinc-800"
-              >
-                {post.data.heroImage && (
-                  <div class="relative h-48 w-full overflow-hidden">
-                    <img
-                      src={post.data.heroImage}
-                      alt={post.data.title}
-                      loading="lazy"
-                      decoding="async"
-                      class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                    />
-                  </div>
-                )}
-                <div class="p-5">
-                  <div class="mb-3 flex items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400">
+              <article>
+                <a
+                  href={`/blog/${post.id}/`}
+                  class="group grid grid-cols-[minmax(0,1fr)_auto] gap-x-6 gap-y-4 py-7 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-600 dark:focus-visible:outline-sky-400 md:grid-cols-[9rem_minmax(0,1fr)_auto] md:gap-x-10 md:py-9"
+                >
+                  <div class="col-span-2 flex flex-wrap gap-x-4 gap-y-2 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400 md:col-span-1 md:flex-col">
                     <time datetime={post.data.pubDate.toISOString()}>{formattedDate}</time>
-                    <span aria-hidden="true">&middot;</span>
                     <span>{readingTime}</span>
                   </div>
-                  <h3 class="text-lg font-semibold leading-tight text-stone-900 transition-colors group-hover:text-stone-700 dark:text-zinc-100 dark:group-hover:text-zinc-200">
-                    {post.data.title}
-                  </h3>
-                  <p class="mt-2 text-sm text-stone-600 dark:text-zinc-400">{post.data.description}</p>
-                </div>
-              </a>
+                  <div class="min-w-0">
+                    {post.data.heroImage && (
+                      <img
+                        src={post.data.heroImage}
+                        alt={post.data.title}
+                        loading="lazy"
+                        decoding="async"
+                        class="mb-5 h-40 w-full max-w-sm rounded-xl object-cover"
+                      />
+                    )}
+                    <h3 class="max-w-[36ch] text-balance text-xl font-semibold leading-tight tracking-tight text-neutral-900 underline-offset-4 group-hover:underline dark:text-neutral-100 sm:text-2xl">
+                      {post.data.title}
+                    </h3>
+                    <p class="mt-3 max-w-[60ch] text-sm leading-relaxed text-neutral-600 dark:text-neutral-300 sm:text-base">{post.data.description}</p>
+                  </div>
+                  <svg aria-hidden="true" class="size-6 self-center text-neutral-600 motion-safe:transition-transform motion-safe:group-hover:-translate-y-1 motion-safe:group-hover:translate-x-1 dark:text-neutral-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M7 17 17 7M7 7h10v10"></path>
+                  </svg>
+                </a>
+              </article>
             );
           })}
         </div>

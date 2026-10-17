@@ -38,16 +38,17 @@ const {
   result,
 } = Astro.props;
 
-const headerGradients: Record<string, string> = {
-  neutral: "from-neutral-50 to-neutral-100 dark:from-neutral-950 dark:to-neutral-950",
-  blue: "from-blue-50 to-neutral-100 dark:from-neutral-950 dark:to-blue-950",
-  violet: "from-violet-50 to-neutral-100 dark:from-neutral-950 dark:to-violet-950",
-  amber: "from-amber-50 to-neutral-100 dark:from-neutral-950 dark:to-amber-950",
-  indigo: "from-indigo-50 to-neutral-100 dark:from-neutral-950 dark:to-indigo-950",
-  rose: "from-rose-50 to-neutral-100 dark:from-neutral-950 dark:to-rose-950",
-  emerald: "from-emerald-50 to-neutral-100 dark:from-neutral-950 dark:to-emerald-950",
-  teal: "from-teal-50 to-neutral-100 dark:from-neutral-950 dark:to-teal-950",
+const projectAccents: Record<string, string> = {
+  neutral: "#525252",
+  blue: "#2563eb",
+  violet: "#7c3aed",
+  amber: "#b45309",
+  indigo: "#4f46e5",
+  rose: "#e11d48",
+  emerald: "#047857",
+  teal: "#0f766e",
 };
+const caseAccent = projectAccents[themeColor] || projectAccents.neutral;
 
 const signalCards = [
   {
@@ -92,13 +93,11 @@ const caseStudySchema = {
   tags={tags}
   schema={caseStudySchema}
 >
-  <header
-    class={`relative overflow-hidden bg-gradient-to-br pb-0 pt-20 ${headerGradients[themeColor] || headerGradients.neutral}`}
-  >
+  <header class="case-study-header bg-white pb-12 pt-8 dark:bg-black sm:pb-16 sm:pt-12" style={`--case-accent: ${caseAccent}`}>
     <div class="mx-auto max-w-7xl px-6">
       <a
-        href="/"
-        class="mb-8 inline-flex items-center gap-2 text-neutral-700 transition-colors hover:text-black dark:text-neutral-300 dark:hover:text-white"
+        href="/#works"
+        class="group mb-10 inline-flex min-h-11 items-center gap-2 rounded-full border border-neutral-400 px-4 text-sm font-medium text-neutral-700 transition-colors hover:bg-neutral-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-600 dark:border-neutral-600 dark:text-neutral-200 dark:hover:bg-neutral-900 dark:focus-visible:outline-sky-400 sm:mb-14"
       >
         <svg
           aria-hidden="true"
@@ -110,117 +109,75 @@ const caseStudySchema = {
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
-          class="inline-block"
+          class="motion-safe:transition-transform motion-safe:group-hover:-translate-x-1"
         >
           <path d="m12 19-7-7 7-7"></path>
           <path d="M19 12H5"></path>
         </svg>
-        Back
+        All work
       </a>
 
-      <div class="mb-6 flex flex-wrap gap-6 text-sm">
-        <div class="inline-block rounded-full bg-neutral-200 px-3 py-1 font-medium tracking-wider text-neutral-800 dark:bg-neutral-800 dark:text-neutral-200">
-          {category}
-        </div>
-        {client && (
-          <div class="flex items-center gap-2">
-            <span class="font-medium text-neutral-500 dark:text-neutral-400">Client:</span>
-            <span class="text-neutral-800 dark:text-neutral-200">{client}</span>
-          </div>
-        )}
-        {duration && (
-          <div class="flex items-center gap-2">
-            <span class="font-medium text-neutral-500 dark:text-neutral-400">Duration:</span>
-            <span class="text-neutral-800 dark:text-neutral-200">{duration}</span>
-          </div>
-        )}
-        {year && (
-          <div class="flex items-center gap-2">
-            <span class="font-medium text-neutral-500 dark:text-neutral-400">Year:</span>
-            <span class="text-neutral-800 dark:text-neutral-200">{year}</span>
-          </div>
-        )}
-      </div>
-
-      <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
-        <div class="relative z-10">
-          <div class="absolute -left-10 -top-10 h-32 w-32 rounded-full bg-neutral-100 opacity-50 blur-2xl dark:bg-neutral-900"></div>
-          <h1 class="relative mb-6 text-4xl font-black tracking-tight text-neutral-800 dark:text-neutral-100 md:text-5xl lg:text-6xl">
+      <div class="grid min-w-0 items-center gap-10 lg:grid-cols-12 lg:gap-14">
+        <div class="min-w-0 motion-safe:animate-[case-intro_650ms_both] lg:col-span-7">
+          <p class="mb-4 text-sm font-medium text-neutral-600 dark:text-neutral-400">{category}</p>
+          <h1 class="max-w-[23ch] text-balance text-4xl font-semibold leading-[1.1] tracking-[-0.04em] text-neutral-900 dark:text-neutral-100 sm:text-5xl xl:text-6xl">
             {title}
           </h1>
-          <p class="mb-8 max-w-xl text-lg text-neutral-700 dark:text-neutral-300 md:text-xl">{description}</p>
+          <p class="mt-6 max-w-[52ch] text-pretty text-lg leading-relaxed text-neutral-600 dark:text-neutral-300 sm:text-xl">{description}</p>
 
-          {outcomes.length > 0 && (
-            <div class="mb-6 flex flex-wrap gap-4">
-              {outcomes.map((outcome) => (
-                <div class="rounded-full bg-white/80 px-4 py-2 text-sm font-medium text-neutral-800 shadow-sm backdrop-blur-sm dark:bg-neutral-800/80 dark:text-neutral-200">
-                  {outcome}
-                </div>
-              ))}
+          {role && (
+            <div class="mt-6 max-w-[52ch] text-sm leading-relaxed">
+              <span class="text-neutral-500 dark:text-neutral-400">My role</span>
+              <p class="mt-1 font-medium text-neutral-900 dark:text-neutral-100">{role}</p>
             </div>
           )}
 
-          {tags.length > 0 && (
-            <div class="flex flex-wrap gap-2">
-              {tags.map((tag) => (
-                <span class="rounded-full border border-neutral-200/80 bg-white px-2.5 py-1 text-xs font-semibold uppercase tracking-tighter text-stone-500 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
-                  {tag}
-                </span>
-              ))}
-            </div>
-          )}
+          <a href="#case-study" class="group mt-7 inline-flex min-h-11 items-center gap-3 rounded-full bg-neutral-900 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-neutral-700 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-600 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-neutral-300 dark:focus-visible:outline-sky-400">
+            Read case study
+            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="motion-safe:transition-transform motion-safe:group-hover:translate-y-0.5">
+              <path d="M12 5v14m-6-6 6 6 6-6"></path>
+            </svg>
+          </a>
         </div>
 
-        <div class="relative">
-          <div class="absolute -bottom-20 -right-40 h-80 w-80 rounded-full bg-neutral-200 opacity-30 blur-3xl dark:bg-neutral-800"></div>
-          <div class="absolute right-20 top-10 h-32 w-32 rounded-full bg-neutral-200 opacity-30 blur-xl dark:bg-neutral-900"></div>
-          <div class="w-full overflow-hidden rounded-xl shadow-2xl transition-transform duration-500 hover:rotate-0 lg:rotate-2">
+        <figure class="case-hero group relative isolate min-w-0 motion-safe:animate-[case-image_850ms_100ms_both] lg:col-span-5">
+          <div class="aspect-square overflow-hidden rounded-3xl bg-neutral-100 dark:bg-neutral-900">
             <img
               src={heroImage}
               alt={`${title} hero image`}
-              class="h-full w-full object-cover"
+              class="h-full w-full object-cover motion-safe:transition-transform motion-safe:duration-500 motion-safe:group-hover:scale-[1.02]"
               loading="eager"
+              fetchpriority="high"
               decoding="async"
             />
           </div>
-        </div>
+        </figure>
       </div>
 
-      <div class="mb-4 mt-8 flex justify-center">
-        <a href="#case-study" class="rounded-full bg-white/80 p-2 shadow-sm backdrop-blur-sm dark:bg-neutral-800/80">
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="rotate-90 text-neutral-500 dark:text-neutral-400"
-          >
-            <path d="m9 18 6-6-6-6"></path>
-          </svg>
-        </a>
-      </div>
+      <dl class="mt-10 grid gap-x-10 gap-y-5 border-t border-neutral-200 pt-6 text-sm leading-relaxed dark:border-neutral-800 sm:grid-cols-2 lg:grid-cols-4">
+        {client && <div><dt class="text-neutral-500 dark:text-neutral-400">Project</dt><dd class="mt-1 text-neutral-900 dark:text-neutral-200">{client}</dd></div>}
+        {year && <div><dt class="text-neutral-500 dark:text-neutral-400">Year</dt><dd class="mt-1 text-neutral-900 dark:text-neutral-200">{year}</dd></div>}
+        {duration && <div><dt class="text-neutral-500 dark:text-neutral-400">Duration</dt><dd class="mt-1 text-neutral-900 dark:text-neutral-200">{duration}</dd></div>}
+        {tags.length > 0 && <div><dt class="text-neutral-500 dark:text-neutral-400">Focus</dt><dd class="mt-1 text-neutral-900 dark:text-neutral-200">{tags.join(", ")}</dd></div>}
+      </dl>
     </div>
   </header>
 
-  <section id="case-study" class="bg-white py-20 dark:bg-black">
+  <section id="case-study" class="case-study-body scroll-mt-8 bg-white pb-24 dark:bg-black" style={`--case-accent: ${caseAccent}`}>
     <div class="mx-auto max-w-7xl px-6">
       {signalCards.length > 0 && (
-        <div class="mb-16 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        <dl class="mb-16 grid gap-x-12 gap-y-8 border-y border-neutral-200 py-8 leading-relaxed dark:border-neutral-800 md:grid-cols-2 sm:py-10">
           {signalCards.map((card) => (
-            <div class="rounded-2xl border border-neutral-200 bg-neutral-50 p-6 dark:border-neutral-800 dark:bg-neutral-950">
-              <p class="text-xs font-semibold uppercase tracking-[0.3rem] text-neutral-400 dark:text-neutral-500">
+            <div>
+              <dt class="text-sm font-medium text-neutral-500 dark:text-neutral-400">
                 {card.label}
-              </p>
-              <p class="mt-3 text-base leading-relaxed text-neutral-700 dark:text-neutral-300">
+              </dt>
+              <dd class="mt-2 max-w-[60ch] text-base text-neutral-800 dark:text-neutral-200">
                 {card.value}
-              </p>
+              </dd>
             </div>
           ))}
-        </div>
+        </dl>
       )}
 
       <div class="case-study-content">
@@ -230,12 +187,512 @@ const caseStudySchema = {
   </section>
 
   <style is:global>
+    @keyframes case-intro {
+      from { opacity: 0.65; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes case-image {
+      from { transform: translateY(16px) scale(0.98); }
+      to { transform: translateY(0) scale(1); }
+    }
+
+    .case-hero::before {
+      content: "";
+      position: absolute;
+      inset: 12%;
+      z-index: -1;
+      border-radius: 2rem;
+      background: var(--case-accent);
+      opacity: 0.28;
+      filter: blur(32px);
+      transform: translateY(32px) scale(1.12);
+    }
+
+    .case-study-content {
+      --case-surface: #fafafa;
+      --case-line: #e5e5e5;
+      --case-page: #fff;
+      line-height: 1.75;
+      overflow-wrap: break-word;
+    }
+
+    :root.dark .case-study-content {
+      --case-surface: #171717;
+      --case-line: #404040;
+      --case-page: #000;
+    }
+
+    .case-study-content .case-process > h2 {
+      text-align: left;
+    }
+
+    .case-process > .case-process-track {
+      display: none;
+    }
+
+    .case-process-steps {
+      position: relative;
+      display: grid;
+      gap: 0;
+    }
+
+    .case-process-steps::before,
+    .case-process-steps::after {
+      content: "";
+      position: absolute;
+      top: 3rem;
+      bottom: 3rem;
+      left: 23px;
+      width: 2px;
+      background: var(--case-line);
+    }
+
+    .case-process-steps::after {
+      display: none;
+      background: var(--case-accent);
+      transform-origin: top;
+    }
+
+    .case-process-steps > .case-process-step {
+      display: grid;
+      grid-template-columns: 3rem minmax(0, 1fr);
+      align-items: start;
+      gap: clamp(1rem, 3vw, 2rem);
+      margin: 0;
+      padding-block: 1.5rem;
+    }
+
+    .case-process-step > .case-process-number {
+      order: 0;
+      grid-column: 1;
+      background: var(--case-page);
+      border: 1px solid var(--case-accent);
+      color: var(--case-accent);
+      box-shadow: 0 0 0 8px var(--case-page);
+      font-weight: 600;
+    }
+
+    :root.dark .case-process-step > .case-process-number {
+      color: var(--color-neutral-200);
+    }
+
+    .case-process-step > .grid {
+      display: grid;
+      grid-column: 2;
+      gap: 1rem;
+    }
+
+    .case-process-step > .grid > div {
+      order: initial;
+      text-align: left;
+    }
+
+    .case-process-step .case-process-note {
+      padding: 1.25rem;
+      border: 1px solid var(--case-line);
+      border-radius: 1rem;
+      background: var(--case-surface);
+      box-shadow: none;
+    }
+
+    .case-process-media,
+    .case-research-media {
+      border: 1px solid var(--case-line);
+      box-shadow: none;
+    }
+
+    .case-study-content .case-research {
+      padding: 2rem 0 0;
+      border-top: 1px solid var(--case-line);
+      border-radius: 0;
+      background: transparent;
+    }
+
+    .case-research > .absolute {
+      display: none;
+    }
+
+    .case-research > .grid {
+      grid-template-columns: minmax(0, 1fr);
+      align-items: start;
+      gap: 2.5rem;
+    }
+
+    .case-research > .grid > div {
+      grid-column: auto;
+      min-width: 0;
+    }
+
+    .case-research .space-y-6 > .p-6 {
+      padding: 1.5rem 0;
+      border-top: 1px solid var(--case-line);
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .case-research .space-y-6 > .case-research-analysis {
+      border-top: 0;
+    }
+
+    .case-research .case-research-aside {
+      position: static;
+      padding: 1.5rem 0 0;
+      border-top: 1px solid var(--case-line);
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .case-research :is(ul, .case-research-aside .text-neutral-600) {
+      color: var(--color-neutral-600);
+    }
+
+    :root.dark .case-research :is(ul, .case-research-aside .text-neutral-600) {
+      color: var(--color-neutral-300);
+    }
+
+    .case-research-analysis h4 {
+      color: var(--color-neutral-900);
+    }
+
+    :root.dark .case-research-analysis h4 {
+      color: var(--color-neutral-100);
+    }
+
+    .case-research-analysis > .grid > div {
+      padding-top: 1rem;
+      border-top: 1px solid var(--case-line);
+    }
+
+    @media (min-width: 1024px) {
+      .case-research > .grid {
+        grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+        gap: 3rem;
+      }
+
+      .case-research .case-research-aside {
+        padding: 0 0 0 2rem;
+        border-top: 0;
+        border-left: 1px solid var(--case-line);
+      }
+    }
+
+    .case-study-content .case-challenges {
+      padding: clamp(1.25rem, 4vw, 3rem);
+      border: 1px solid var(--case-line);
+      border-radius: 1.5rem;
+      background: var(--case-surface);
+    }
+
+    .case-challenges > .absolute,
+    .case-outcomes > .absolute {
+      display: none;
+    }
+
+    .case-challenges > .grid > div,
+    .case-challenges > .grid > div > .space-y-4 {
+      display: contents;
+    }
+
+    .case-challenges > .grid > div > p {
+      grid-column: 1 / -1;
+      margin-bottom: 0;
+    }
+
+    .case-challenges .space-y-4 > div {
+      margin: 0;
+      padding: 1.5rem;
+      gap: 1rem;
+      border: 1px solid var(--case-line);
+      border-radius: 1rem;
+      background: var(--case-page);
+    }
+
+    .case-challenges .space-y-4 > div > span {
+      width: 2px;
+      height: 1.5rem;
+      border-radius: 0;
+      background: var(--case-accent);
+    }
+
+    .case-outcomes > .case-outcome-grid {
+      grid-template-columns: 1fr;
+      gap: 0;
+      border-block: 1px solid var(--case-line);
+    }
+
+    .case-outcome-grid > .case-outcome {
+      padding: 2rem 1.5rem;
+      border-radius: 0;
+      border-bottom: 1px solid var(--case-line);
+      background: transparent;
+      box-shadow: none;
+      transform: none;
+    }
+
+    .case-outcome-grid > .case-outcome:last-child {
+      border-bottom: 0;
+    }
+
+    .case-outcome > .h-1 {
+      display: none;
+    }
+
+    .case-outcome > .p-6 {
+      padding: 0;
+    }
+
+    .case-study-content .case-outcome h3 {
+      font-size: clamp(1.375rem, 2vw, 1.75rem);
+    }
+
+    .case-study-content .case-outcome-summary {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      border: 0;
+      border-left: 3px solid var(--case-accent);
+      border-radius: 0 1rem 1rem 0;
+      background: var(--case-surface);
+    }
+
+    .case-study-content .case-showcase {
+      margin-inline: 0;
+      padding: 2rem 0 0;
+      border-top: 1px solid var(--case-line);
+      border-radius: 0;
+      background: var(--case-page);
+    }
+
+    .case-showcase .grid {
+      align-items: start;
+      gap: clamp(1rem, 3vw, 2rem);
+    }
+
+    .case-showcase .grid > div {
+      padding: clamp(0.75rem, 2vw, 1.5rem);
+      border: 1px solid var(--case-line);
+      border-radius: 1.5rem;
+      background: var(--case-surface);
+      box-shadow: none;
+    }
+
+    .case-showcase .grid img {
+      object-fit: contain;
+      border-radius: 0.75rem;
+    }
+
+    .case-showcase .grid > div > .p-4 {
+      padding: 1rem 0 0;
+      background: transparent;
+    }
+
+    .case-study-content .case-detail-columns {
+      gap: 2rem;
+    }
+
+    .case-detail-columns > section {
+      position: relative;
+      padding-top: 1.5rem;
+    }
+
+    .case-detail-columns > section > h2 {
+      margin-bottom: 1.5rem;
+      font-size: clamp(1.375rem, 2.5vw, 1.75rem);
+    }
+
+    .case-detail-columns .space-y-4 > div {
+      margin: 0;
+      padding: 1.25rem 0;
+      border: 0;
+      border-top: 1px solid var(--case-line);
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .case-detail-columns .space-y-4 > div:last-child {
+      padding-bottom: 0;
+    }
+
+    .case-detail-columns .space-y-4 > div > span {
+      width: 0.375rem;
+      height: 0.375rem;
+      background: var(--case-accent);
+    }
+
+    .case-study-content .case-showcase :is(h2, h3) {
+      color: var(--color-neutral-900);
+    }
+
+    :root.dark .case-study-content .case-showcase :is(h2, h3) {
+      color: var(--color-neutral-100);
+    }
+
+    @media (min-width: 768px) {
+      .case-outcomes > .case-outcome-grid {
+        grid-template-columns: none;
+        grid-auto-flow: column;
+        grid-auto-columns: minmax(0, 1fr);
+      }
+
+      .case-outcome-grid > .case-outcome {
+        border-bottom: 0;
+        border-right: 1px solid var(--case-line);
+      }
+      .case-outcome-grid > .case-outcome:last-child {
+        border-right: 0;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .case-study-content .case-process > h2 {
+        text-align: center;
+      }
+
+      .case-process-steps::before,
+      .case-process-steps::after {
+        left: calc(50% - 1px);
+      }
+
+      .case-process-steps > .case-process-step {
+        grid-template-columns: minmax(0, 1fr) 3rem minmax(0, 1fr);
+        align-items: center;
+        gap: 2rem;
+      }
+
+      .case-process-step > .case-process-number {
+        grid-column: 2;
+        grid-row: 1;
+      }
+
+      .case-process-step > .grid {
+        display: contents;
+      }
+
+      .case-process-step > .grid > div {
+        grid-row: 1;
+      }
+
+      .case-process-step:nth-child(odd) > .grid > div:first-child,
+      .case-process-step:nth-child(even) > .grid > .case-process-note {
+        grid-column: 1;
+      }
+
+      .case-process-step:nth-child(odd) > .grid > .case-process-note,
+      .case-process-step:nth-child(even) > .grid > div:first-child {
+        grid-column: 3;
+      }
+
+      .case-process-step:nth-child(odd) > .grid > div:first-child {
+        text-align: right;
+      }
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      @supports (animation-timeline: view()) {
+        .case-process {
+          view-timeline-name: --case-process;
+          view-timeline-axis: block;
+        }
+        .case-process-steps::after {
+          display: block;
+          animation: case-process-draw linear both;
+          animation-timeline: --case-process;
+          animation-range: entry 20% exit 70%;
+        }
+
+        .case-detail-columns > section::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 2px;
+          background: var(--case-accent);
+          transform-origin: left;
+          animation: case-detail-rule linear both;
+          animation-timeline: view();
+          animation-range: entry 10% cover 30%;
+        }
+      }
+    }
+
+    @keyframes case-process-draw {
+      from { transform: scaleY(0); }
+      to { transform: scaleY(1); }
+    }
+
+    @keyframes case-detail-rule {
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
+    }
+
+    .case-study-content > .mx-auto {
+      padding-inline: 0;
+    }
+
     .case-study-content p {
+      max-width: 70ch;
       color: var(--color-neutral-600);
     }
 
     :root.dark .case-study-content p {
-      color: var(--color-neutral-400);
+      color: var(--color-neutral-300);
+    }
+
+    .case-study-content :is(h2, h3, h4) {
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: -0.025em;
+      text-wrap: balance;
+      white-space: normal;
+      scroll-margin-top: 2rem;
+    }
+
+    .case-study-content :is(h2, h3, h4) > span {
+      min-width: 0;
+    }
+
+    .case-study-content figcaption {
+      max-width: 70ch;
+      margin-top: 1rem;
+      font-size: 0.875rem;
+      line-height: 1.6;
+      color: var(--color-neutral-600);
+    }
+
+    :root.dark .case-study-content figcaption {
+      color: var(--color-neutral-300);
+    }
+
+    .case-study-content a {
+      scroll-margin-bottom: 10rem;
+    }
+
+    .case-study-content a:focus-visible {
+      outline: 2px solid #0284c7;
+      outline-offset: 4px;
+    }
+
+    :root.dark .case-study-content a:focus-visible {
+      outline-color: #38bdf8;
+    }
+
+    @media (max-width: 639px) {
+      .case-study-content :is(section, div).p-8 {
+        padding: 1.25rem;
+      }
+      .case-study-content h2.px-8 {
+        padding-inline: 0.75rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html:has(.case-study-header) {
+        scroll-behavior: auto;
+      }
     }
   </style>
 </SiteShell>

@@ -6,7 +6,7 @@ export const siteConfig = {
   defaultDescription:
     "Portfolio and notes from Nestor Kulik: UX design, frontend systems, product thinking, and photography-influenced visual work.",
   location: "Riga, Latvia",
-  availability: "Open to selected in-house roles and thoughtful collaborations.",
+  availability: "Open to in-house UX/UI and design-systems roles in Riga, Denmark, or remote.",
   focus:
     "Design systems, product UX, and frontend builds that need structure, clarity, and restraint.",
   strengths: [

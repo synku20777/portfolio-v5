@@ -17,6 +17,9 @@ export async function getStaticPaths() {
 }
 
 const { study } = Astro.props as Props;
+if (study.id === 'aurora') {
+  return Astro.redirect('/case-studies/aurora-design-system/#launch', 301);
+}
 const { Content } = await render(study);
 ---
 
@@ -33,6 +36,9 @@ const { Content } = await render(study);
   outcomes={study.data.outcomes}
   tags={study.data.tags}
   themeColor={study.data.themeColor}
+  constraint={study.data.constraint}
+  keyDecision={study.data.keyDecision}
+  result={study.data.result}
 >
   <Content />
 </CaseStudyLayout>

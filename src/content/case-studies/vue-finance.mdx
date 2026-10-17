@@ -1,0 +1,70 @@
+---
+title: "Vue Finance: From Transactions to an Overview"
+description: "A university MVP connecting manual transaction entry, category totals, and a financial dashboard with Vue and GraphQL."
+category: "Web Application"
+client: "University project"
+role: "Interface design & full-stack development"
+year: "2024"
+tools: "Vue 3, TypeScript, Tailwind CSS, Apollo GraphQL, Node.js, MongoDB"
+heroImage: "/photos/projects/VueFinance/dashboard.webp"
+outcomes: ["Transaction entry", "Category summaries", "GraphQL integration"]
+tags: ["University project", "Vue", "Dashboard"]
+order: 2
+bentoSpan: "sm:col-span-4 md:col-span-3 lg:col-span-5"
+themeColor: "emerald"
+constraint: "A Vue learning exercise expanded into a full-stack MVP, with a JavaScript backend and a TypeScript frontend."
+keyDecision: "Connect transaction entry, a readable table, and category summaries around the same underlying records."
+result: "A dashboard implementation with manual entry, transaction deletion, category totals, and account screens."
+---
+
+<div class="mx-auto max-w-7xl px-6">
+  <div class="grid grid-cols-1 gap-8 mb-16 md:grid-cols-2">
+    <section class="rounded-2xl bg-neutral-50 p-8 dark:bg-neutral-900">
+      <h2 class="mb-4 text-2xl font-bold text-neutral-800 dark:text-neutral-100">The challenge</h2>
+      <p>A transaction list records activity, but it does not immediately explain the bigger picture. This university MVP explores how someone entering their finances manually could move between individual records and an overview of income, expenses, and investments.</p>
+    </section>
+    <section class="rounded-2xl bg-emerald-50 p-8 dark:bg-emerald-950">
+      <h2 class="mb-4 text-2xl font-bold text-neutral-800 dark:text-neutral-100">The response</h2>
+      <p>A compact dashboard combines a category chart, summary cards, and a transaction table. An “Add transaction” panel keeps entry close to the overview, so the central workflow stays within one workspace.</p>
+    </section>
+  </div>
+
+  <section class="mb-16 prose prose-neutral max-w-3xl dark:prose-invert">
+    <h2>One record, three ways to read it</h2>
+    <p>The table answers “What happened?” with dates, descriptions, categories, and amounts. Summary cards answer “How much?” and a donut chart shows the category distribution. These views share transaction queries rather than being independent decorative widgets.</p>
+    <p>Creating or deleting a transaction requests fresh table and statistics data. That connection is the main implementation decision: a change to an individual record should be reflected in the overview without asking the user to reconstruct the totals.</p>
+  </section>
+
+  <section class="mb-16 prose prose-neutral max-w-3xl dark:prose-invert">
+    <h2>The difficult part was the contract between layers</h2>
+    <p>The original learning goal was a simple tracker using Vue, GraphQL, and Tailwind. The scope grew to include CRUD API design, Express, MongoDB, Passport sessions, and password hashing. I worked through both sides of the application to understand how a form becomes a stored transaction and then returns as dashboard data.</p>
+    <p>The report identifies schema, type-definition, and mutation mismatches as a recurring debugging problem: small inconsistencies could surface as null or undefined data in the interface. I traced requests through those layers and manually defined TypeScript types to bridge the untyped JavaScript responses. That was a workable learning-stage solution, with duplicated contracts left as a maintenance tradeoff.</p>
+    <p>Authentication also affected navigation. Reviewing Apollo and Vue Router documentation helped resolve the route-guard behavior around signed-in and signed-out users. The engineering story is therefore about connecting interfaces, data, and account state, rather than the dashboard layout alone.</p>
+  </section>
+
+  <figure class="mb-16">
+    <img src="/photos/projects/VueFinance/entry.webp" alt="Vue Finance transaction form with description, payment type, category, amount, and date fields" class="w-full rounded-xl" loading="lazy" decoding="async" />
+    <figcaption class="mt-3 text-sm text-neutral-500 dark:text-neutral-400">Original interface rendered with illustrative local data for this portfolio. The amounts are demonstration values.</figcaption>
+  </figure>
+
+  <section class="mb-16 grid gap-8 md:grid-cols-2">
+    <div class="prose prose-neutral max-w-none dark:prose-invert">
+      <h2>A deliberately narrow workflow</h2>
+      <p>Manual entry captures a description, payment type, category, amount, and date. The project also includes sign-up and sign-in screens, session-based authentication, and transaction storage through a GraphQL backend.</p>
+      <p>The table provides loading and error states, and disables its delete action while the request is pending. These small states make the connection between an interface and an asynchronous service visible.</p>
+    </div>
+    <div class="prose prose-neutral max-w-none dark:prose-invert">
+      <h2>Where the MVP stops</h2>
+      <p>The import menu represents future functionality; CSV, spreadsheet, and bank imports are outside the implemented workflow. The prototype uses simplified categories and currency presentation rather than a complete budgeting model.</p>
+      <p>The report prioritizes a stronger shared type contract, cleaner code, session-security review, and deployment as follow-up work. Automated imports remain a proposed extension to the manual-entry workflow.</p>
+    </div>
+  </section>
+
+  <section class="mb-16 rounded-2xl bg-neutral-50 p-8 dark:bg-neutral-900">
+    <h2 class="mb-4 text-2xl font-bold text-neutral-800 dark:text-neutral-100">Outcome & documented verification</h2>
+    <p>The deliverable connects a Vue interface to transaction operations and category aggregation. The report documents a manual verification path: sign in, add a transaction, refresh, inspect the chart and table, then change or delete a record and refresh again. It records a repeatable check for the application flow, rather than a participant study or a quantified usability result.</p>
+    <p class="mt-4">My main learning was how much frontend reliability depends on explicit API contracts. A future evaluation would check failed requests, category interpretation, and persistence as carefully as the happy path.</p>
+  </section>
+
+  <a href="https://github.com/synku20777/vue-finance" class="inline-flex rounded-lg border border-neutral-300 px-5 py-3 font-medium text-neutral-800 underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 dark:border-neutral-700 dark:text-neutral-100">Explore Vue Finance on GitHub</a>
+</div>

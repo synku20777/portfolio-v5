@@ -1,6 +1,6 @@
 ---
 title: "UxUnite Design System"
-description: "Developing a design system that helps teams work together, follow brand guidelines, and create outstanding software experiences."
+description: "A design system for UxUnite: audited components, a color palette with documented contrast ratios, and a modular type scale."
 category: "Design System"
 client: "UxUnite"
 duration: "2022"
@@ -8,16 +8,17 @@ role: "Design System Lead"
 year: "2022"
 tools: "Figma, Leonardo Color"
 heroImage: "/photos/projects/UxUnite/1.webp"
+thumbnailImage: "/photos/projects/UxUnite/3.webp"
 outcomes:
   - "Unified Design Language"
-  - "Improved Accessibility"
-  - "Enhanced Collaboration"
+  - "Documented Color Contrast"
+  - "Shared Component Library"
 constraint: "The product had an inconsistent UI kit, accessibility gaps, and a structure that could not scale cleanly."
 keyDecision: "Rebuild the foundation around audited components, WCAG-aware color tokens, and clearer system rules."
-result: "A more coherent design language that improved collaboration and gave teams accessible defaults to build from."
+result: "A shared design language with documented component, type, and color foundations. The effect on team speed or collaboration was not measured."
 featured: true
 tags: ["Design System"]
-order: 0
+order: 3
 bentoSpan: "sm:col-span-4 md:col-span-3 lg:col-span-7"
 themeColor: "blue"
 ---
@@ -32,30 +33,30 @@ themeColor: "blue"
 
     <div class="bg-blue-50 dark:bg-blue-950 p-8 rounded-2xl shadow-sm">
       <h2 class="text-2xl md:text-3xl font-bold mb-6 text-neutral-800 dark:text-neutral-100">The Solution</h2>
-      <p class="text-neutral-600 dark:text-neutral-400">We implemented a comprehensive design system that supports new features, future scaling, and individual contribution. This included a modernized color palette with accessibility considerations using Leonardo Color, a typographic system with a 1.25x modular scale ratio, and a hardened UI kit that covered all edge cases.</p>
+      <p class="text-neutral-600 dark:text-neutral-400">We implemented a comprehensive design system that supports new features, future scaling, and individual contribution. This included a modernized color palette with accessibility considerations using Leonardo Color, a typographic system with a 1.25x modular scale ratio, and a UI kit adjusted for the edge cases the audit found.</p>
     </div>
   </div>
 
   {/* Process with visual timeline */}
-  <section class="mb-24 relative">
+  <section class="case-process mb-24 relative">
     {/* Timeline vertical line - only visible on md+ screens */}
-    <div class="absolute left-1/2 top-28 bottom-0 w-1 bg-neutral-200 dark:bg-neutral-800 -translate-x-1/2 hidden md:block"></div>
+    <div class="case-process-track absolute left-1/2 top-28 bottom-0 w-1 bg-neutral-200 dark:bg-neutral-800 -translate-x-1/2 hidden md:block"></div>
 
     {/* Mobile timeline line - left aligned */}
-    <div class="absolute left-6 top-28 bottom-0 w-1 bg-neutral-200 dark:bg-neutral-800 md:hidden"></div>
+    <div class="case-process-track absolute left-6 top-28 bottom-0 w-1 bg-neutral-200 dark:bg-neutral-800 md:hidden"></div>
 
     <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center text-neutral-800 dark:text-neutral-100">Design Process</h2>
 
-    <div class="space-y-12 relative">
+    <div class="case-process-steps space-y-12 relative">
       {/* Step 1 */}
-      <div class="grid grid-cols-[auto_1fr] md:grid-cols-[1fr_auto_1fr] gap-4 md:gap-8 items-start md:items-center relative">
-        <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white font-bold z-10 md:order-2">1</div>
+      <div class="case-process-step grid grid-cols-[auto_1fr] md:grid-cols-[1fr_auto_1fr] gap-4 md:gap-8 items-start md:items-center relative">
+        <div class="case-process-number inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white font-bold z-10 md:order-2">1</div>
         <div class="grid gap-4 md:contents">
           <div class="order-1 md:order-1 md:text-right">
             <h3 class="text-xl font-bold text-neutral-800 dark:text-neutral-200 mb-2">Design Audit</h3>
             <p class="text-neutral-600 dark:text-neutral-400">Led by a Figma expert to clarify priorities</p>
           </div>
-          <div class="order-2 bg-neutral-50 dark:bg-neutral-900 p-6 rounded-xl shadow-sm md:order-3">
+          <div class="case-process-note order-2 bg-neutral-50 dark:bg-neutral-900 p-6 rounded-xl shadow-sm md:order-3">
             <strong class="block text-neutral-800 dark:text-neutral-200 mb-1">Alignment Workshop</strong>
             <div class="text-sm text-neutral-600 dark:text-neutral-400">Started the design-system process with an audit workshop to establish foundations</div>
           </div>
@@ -63,14 +64,14 @@ themeColor: "blue"
       </div>
 
       {/* Step 2 */}
-      <div class="grid grid-cols-[auto_1fr] md:grid-cols-[1fr_auto_1fr] gap-4 md:gap-8 items-start md:items-center relative">
-        <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white font-bold z-10 md:order-2">2</div>
+      <div class="case-process-step grid grid-cols-[auto_1fr] md:grid-cols-[1fr_auto_1fr] gap-4 md:gap-8 items-start md:items-center relative">
+        <div class="case-process-number inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white font-bold z-10 md:order-2">2</div>
         <div class="grid gap-4 md:contents">
           <div class="order-1 md:order-3">
             <h3 class="text-xl font-bold text-neutral-800 dark:text-neutral-200 mb-2">Structure &amp; UI Kit Hardening</h3>
             <p class="text-neutral-600 dark:text-neutral-400">Breaking down site structure and addressing inconsistencies</p>
           </div>
-          <div class="order-2 bg-neutral-50 dark:bg-neutral-900 p-6 rounded-xl shadow-sm md:order-1">
+          <div class="case-process-note order-2 bg-neutral-50 dark:bg-neutral-900 p-6 rounded-xl shadow-sm md:order-1">
             <strong class="block text-neutral-800 dark:text-neutral-200 mb-1">Component Audit</strong>
             <div class="text-sm text-neutral-600 dark:text-neutral-400">Catalogued inconsistencies and adjusted the existing UI kit to cover edge cases</div>
           </div>
@@ -78,14 +79,14 @@ themeColor: "blue"
       </div>
 
       {/* Step 3 */}
-      <div class="grid grid-cols-[auto_1fr] md:grid-cols-[1fr_auto_1fr] gap-4 md:gap-8 items-start md:items-center relative">
-        <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white font-bold z-10 md:order-2">3</div>
+      <div class="case-process-step grid grid-cols-[auto_1fr] md:grid-cols-[1fr_auto_1fr] gap-4 md:gap-8 items-start md:items-center relative">
+        <div class="case-process-number inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white font-bold z-10 md:order-2">3</div>
         <div class="grid gap-4 md:contents">
           <div class="order-1 md:order-1 md:text-right">
             <h3 class="text-xl font-bold text-neutral-800 dark:text-neutral-200 mb-2">Branding Research</h3>
             <p class="text-neutral-600 dark:text-neutral-400">Analyzing brand values and visual identity</p>
           </div>
-          <div class="order-2 bg-neutral-50 dark:bg-neutral-900 p-6 rounded-xl shadow-sm md:order-3">
+          <div class="case-process-note order-2 bg-neutral-50 dark:bg-neutral-900 p-6 rounded-xl shadow-sm md:order-3">
             <strong class="block text-neutral-800 dark:text-neutral-200 mb-1">Color Analysis</strong>
             <div class="text-sm text-neutral-600 dark:text-neutral-400">Step one in the color workflow to inform palette modernization</div>
           </div>
@@ -93,14 +94,14 @@ themeColor: "blue"
       </div>
 
       {/* Step 4 */}
-      <div class="grid grid-cols-[auto_1fr] md:grid-cols-[1fr_auto_1fr] gap-4 md:gap-8 items-start md:items-center relative">
-        <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white font-bold z-10 md:order-2">4</div>
+      <div class="case-process-step grid grid-cols-[auto_1fr] md:grid-cols-[1fr_auto_1fr] gap-4 md:gap-8 items-start md:items-center relative">
+        <div class="case-process-number inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white font-bold z-10 md:order-2">4</div>
         <div class="grid gap-4 md:contents">
           <div class="order-1 md:order-3">
             <h3 class="text-xl font-bold text-neutral-800 dark:text-neutral-200 mb-2">Color System Development</h3>
             <p class="text-neutral-600 dark:text-neutral-400">Creating accessible, brand-aligned color palettes</p>
           </div>
-          <div class="order-2 bg-neutral-50 dark:bg-neutral-900 p-6 rounded-xl shadow-sm md:order-1">
+          <div class="case-process-note order-2 bg-neutral-50 dark:bg-neutral-900 p-6 rounded-xl shadow-sm md:order-1">
             <strong class="block text-neutral-800 dark:text-neutral-200 mb-1">Leonardo Color Implementation</strong>
             <div class="text-sm text-neutral-600 dark:text-neutral-400">Used Leonardo Color to make accessibility adjustments to palette</div>
           </div>
@@ -108,14 +109,14 @@ themeColor: "blue"
       </div>
 
       {/* Step 5 */}
-      <div class="grid grid-cols-[auto_1fr] md:grid-cols-[1fr_auto_1fr] gap-4 md:gap-8 items-start md:items-center relative">
-        <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white font-bold z-10 md:order-2">5</div>
+      <div class="case-process-step grid grid-cols-[auto_1fr] md:grid-cols-[1fr_auto_1fr] gap-4 md:gap-8 items-start md:items-center relative">
+        <div class="case-process-number inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white font-bold z-10 md:order-2">5</div>
         <div class="grid gap-4 md:contents">
           <div class="order-1 md:order-1 md:text-right">
             <h3 class="text-xl font-bold text-neutral-800 dark:text-neutral-200 mb-2">Typography System</h3>
             <p class="text-neutral-600 dark:text-neutral-400">Building a modular type scale with accessibility focus</p>
           </div>
-          <div class="order-2 bg-neutral-50 dark:bg-neutral-900 p-6 rounded-xl shadow-sm md:order-3">
+          <div class="case-process-note order-2 bg-neutral-50 dark:bg-neutral-900 p-6 rounded-xl shadow-sm md:order-3">
             <strong class="block text-neutral-800 dark:text-neutral-200 mb-1">Typographic Systemization</strong>
             <div class="text-sm text-neutral-600 dark:text-neutral-400">Implemented 1.25x modular scale with accessibility-minded spacing parameters</div>
           </div>
@@ -123,14 +124,14 @@ themeColor: "blue"
       </div>
 
       {/* Step 6 */}
-      <div class="grid grid-cols-[auto_1fr] md:grid-cols-[1fr_auto_1fr] gap-4 md:gap-8 items-start md:items-center relative">
-        <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white font-bold z-10 md:order-2">6</div>
+      <div class="case-process-step grid grid-cols-[auto_1fr] md:grid-cols-[1fr_auto_1fr] gap-4 md:gap-8 items-start md:items-center relative">
+        <div class="case-process-number inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white font-bold z-10 md:order-2">6</div>
         <div class="grid gap-4 md:contents">
           <div class="order-1 md:order-3">
             <h3 class="text-xl font-bold text-neutral-800 dark:text-neutral-200 mb-2">Client Review</h3>
             <p class="text-neutral-600 dark:text-neutral-400">Presenting and refining the design system</p>
           </div>
-          <div class="order-2 bg-neutral-50 dark:bg-neutral-900 p-6 rounded-xl shadow-sm md:order-1">
+          <div class="case-process-note order-2 bg-neutral-50 dark:bg-neutral-900 p-6 rounded-xl shadow-sm md:order-1">
             <strong class="block text-neutral-800 dark:text-neutral-200 mb-1">Collaborative Refinement</strong>
             <div class="text-sm text-neutral-600 dark:text-neutral-400">Making final tweaks to the design system based on client feedback</div>
           </div>
@@ -138,6 +139,13 @@ themeColor: "blue"
       </div>
     </div>
   </section>
+
+  <figure class="mb-24 min-w-0">
+    <img src="/photos/projects/UxUnite/text-input-states-2200.webp" srcSet="/photos/projects/UxUnite/text-input-states-1000.webp 1000w, /photos/projects/UxUnite/text-input-states-2200.webp 2200w" sizes="(max-width: 1279px) calc(100vw - 48px), 1232px" width="2200" height="1083" loading="lazy" decoding="async" alt="Text input variants with icons, helper messages, and error, information, and success treatments" class="w-full h-auto rounded-xl bg-white" />
+    <figcaption>
+      The input sheet shows how field borders, icons, and messages change across states. This documents the UI kit, not production behavior.
+    </figcaption>
+  </figure>
 
   {/* Color system details section */}
   <section class="mb-24 bg-gradient-to-br from-neutral-50 to-blue-50 dark:from-neutral-900 dark:to-blue-950 p-8 md:p-12 rounded-3xl relative overflow-hidden">
@@ -155,7 +163,7 @@ themeColor: "blue"
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
       <div class="col-span-1 md:col-span-2">
-        <p class="text-neutral-600 dark:text-neutral-400 mb-6">We implemented a stepwise color workflow to modernize the palette while ensuring accessibility compliance and alignment with the community-driven product vision.</p>
+        <p class="text-neutral-600 dark:text-neutral-400 mb-6">We used a stepwise color workflow to modernize the palette. We checked contrast at each step and kept the palette close to the community-driven product vision.</p>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
           <div class="flex items-center gap-3 bg-white/80 dark:bg-neutral-800/80 backdrop-blur-sm p-4 rounded-lg">
@@ -216,18 +224,18 @@ themeColor: "blue"
         <div class="space-y-4 mt-6">
           <div class="flex flex-col">
             <span class="text-5xl font-bold text-neutral-800 dark:text-neutral-200">Heading 1</span>
-            <span class="text-sm text-neutral-500 dark:text-neutral-400">31.25px (1.25^5 x 16px)</span>
+            <span class="text-sm text-neutral-500 dark:text-neutral-400">39px (1.25^4 x 16px)</span>
           </div>
           <div class="flex flex-col">
             <span class="text-4xl font-bold text-neutral-800 dark:text-neutral-200">Heading 2</span>
-            <span class="text-sm text-neutral-500 dark:text-neutral-400">25px (1.25^4 x 16px)</span>
+            <span class="text-sm text-neutral-500 dark:text-neutral-400">31px (1.25^3 x 16px)</span>
           </div>
           <div class="flex flex-col">
             <span class="text-3xl font-bold text-neutral-800 dark:text-neutral-200">Heading 3</span>
-            <span class="text-sm text-neutral-500 dark:text-neutral-400">20px (1.25^3 x 16px)</span>
+            <span class="text-sm text-neutral-500 dark:text-neutral-400">25px (1.25^2 x 16px)</span>
           </div>
           <div class="flex flex-col">
-            <span class="text-2xl font-bold text-neutral-800 dark:text-neutral-200">Heading 4</span>
+            <span class="text-2xl font-bold text-neutral-800 dark:text-neutral-200">Body text</span>
             <span class="text-sm text-neutral-500 dark:text-neutral-400">16px (base size)</span>
           </div>
         </div>
@@ -252,10 +260,17 @@ themeColor: "blue"
           </div>
         </div>
 
-        <p class="text-neutral-600 dark:text-neutral-400 mt-6">These parameters ensure readable text across all surfaces and devices, significantly enhancing the user experience for all users, including those with visual impairments.</p>
+        <p class="text-neutral-600 dark:text-neutral-400 mt-6">These values match the text-spacing settings named in WCAG 1.4.12. No user test of readability was recorded.</p>
       </div>
     </div>
   </section>
+
+  <figure class="mb-24 min-w-0">
+    <img src="/photos/projects/UxUnite/type-scale-montserrat-2200.webp" srcSet="/photos/projects/UxUnite/type-scale-montserrat-1000.webp 1000w, /photos/projects/UxUnite/type-scale-montserrat-2200.webp 2200w" sizes="(max-width: 1279px) calc(100vw - 48px), 1232px" width="2200" height="702" loading="lazy" decoding="async" alt="Montserrat type sheet with heading, subheading, body, button, caption, and small text sizes" class="w-full h-auto rounded-xl bg-white" />
+    <figcaption>
+      The type sheet connects the scale to text roles, from headings to captions and button labels.
+    </figcaption>
+  </figure>
 
   {/* Accessibility section */}
   <section class="mb-24">
@@ -272,7 +287,7 @@ themeColor: "blue"
     </div>
 
     <div class="max-w-3xl mx-auto">
-      <p class="text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed mb-8">A key focus of our design system was ensuring WCAG compliance throughout all components. The previous color palette failed to meet contrast standards, so we used Leonardo Color to systematically address these issues.</p>
+      <p class="text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed mb-8">A key focus was color contrast. The previous palette failed WCAG contrast requirements, so we used Leonardo Color to adjust it. The palette sheet below lists a ratio for each tertiary and semantic color. Every listed ratio is 4.5:1 or higher, and some are above 7:1. The sheet shows no ratios for the primary and secondary colors, and this page has no full WCAG conformance audit.</p>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
         <div class="bg-neutral-50 dark:bg-neutral-900 p-6 rounded-xl border border-neutral-200 dark:border-neutral-800">
@@ -289,8 +304,8 @@ themeColor: "blue"
           <h3 class="text-lg font-bold mb-3 text-neutral-800 dark:text-neutral-100">After</h3>
           <ul class="list-disc list-inside space-y-2 text-neutral-600 dark:text-neutral-400">
             <li>Vibrant, modern palette</li>
-            <li>WCAG AA/AAA compliant contrasts</li>
-            <li>Systematic application across components</li>
+            <li>Contrast ratio listed for each tertiary and semantic color</li>
+            <li>Colors grouped by role: primary, secondary, tertiary, semantic</li>
             <li>Aligned with community-driven vision</li>
           </ul>
         </div>
@@ -298,8 +313,15 @@ themeColor: "blue"
     </div>
   </section>
 
+  <figure class="mb-24 min-w-0">
+    <img src="/photos/projects/UxUnite/color-tertiary-semantic-2200.webp" srcSet="/photos/projects/UxUnite/color-tertiary-semantic-1000.webp 1000w, /photos/projects/UxUnite/color-tertiary-semantic-2200.webp 2200w" sizes="(max-width: 1279px) calc(100vw - 48px), 1232px" width="2200" height="1026" loading="lazy" decoding="async" alt="Tertiary and semantic color swatches with role labels, hex values, and listed contrast ratios" class="w-full h-auto rounded-xl bg-white" />
+    <figcaption>
+      The palette sheet records color roles and contrast ratios. These entries do not establish full WCAG conformance.
+    </figcaption>
+  </figure>
+
   {/* Outcomes section with cards */}
-  <section class="mb-24 relative overflow-hidden">
+  <section class="case-outcomes mb-24 relative overflow-hidden">
     <div class="absolute -left-20 -bottom-40 w-80 h-80 bg-blue-100 dark:bg-blue-900 rounded-full opacity-30 blur-3xl"></div>
 
     <h2 class="text-2xl md:text-3xl font-bold mb-12 flex items-center gap-3 text-neutral-800 dark:text-neutral-100 relative z-10">
@@ -309,37 +331,37 @@ themeColor: "blue"
       <span>Outcomes</span>
     </h2>
 
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 relative z-10">
-      <div class="bg-white dark:bg-neutral-900 shadow-lg rounded-xl overflow-hidden transform hover:-translate-y-1 transition-transform">
+    <div class="case-outcome-grid grid grid-cols-1 sm:grid-cols-3 gap-8 relative z-10">
+      <div class="case-outcome bg-white dark:bg-neutral-900 shadow-lg rounded-xl overflow-hidden transform hover:-translate-y-1 transition-transform">
         <div class="h-1 bg-gradient-to-r from-blue-400 to-blue-600"></div>
         <div class="p-6">
           <h3 class="font-bold text-xl mb-3 text-neutral-800 dark:text-neutral-100">Unified Language</h3>
           <p class="text-neutral-600 dark:text-neutral-400">Shared conceptual model and terminology for product components</p>
         </div>
       </div>
-      <div class="bg-white dark:bg-neutral-900 shadow-lg rounded-xl overflow-hidden transform hover:-translate-y-1 transition-transform">
+      <div class="case-outcome bg-white dark:bg-neutral-900 shadow-lg rounded-xl overflow-hidden transform hover:-translate-y-1 transition-transform">
         <div class="h-1 bg-gradient-to-r from-green-400 to-green-600"></div>
         <div class="p-6">
-          <h3 class="font-bold text-xl mb-3 text-neutral-800 dark:text-neutral-100">Faster Execution</h3>
-          <p class="text-neutral-600 dark:text-neutral-400">Shared design resources and code-mapped components</p>
+          <h3 class="font-bold text-xl mb-3 text-neutral-800 dark:text-neutral-100">Shared Resources</h3>
+          <p class="text-neutral-600 dark:text-neutral-400">One set of design resources for the team. Speed gains were not measured.</p>
         </div>
       </div>
-      <div class="bg-white dark:bg-neutral-900 shadow-lg rounded-xl overflow-hidden transform hover:-translate-y-1 transition-transform">
+      <div class="case-outcome bg-white dark:bg-neutral-900 shadow-lg rounded-xl overflow-hidden transform hover:-translate-y-1 transition-transform">
         <div class="h-1 bg-gradient-to-r from-purple-400 to-purple-600"></div>
         <div class="p-6">
-          <h3 class="font-bold text-xl mb-3 text-neutral-800 dark:text-neutral-100">Accessible Foundation</h3>
-          <p class="text-neutral-600 dark:text-neutral-400">Refreshed palette with WCAG-compliant contrasts</p>
+          <h3 class="font-bold text-xl mb-3 text-neutral-800 dark:text-neutral-100">Contrast-Checked Palette</h3>
+          <p class="text-neutral-600 dark:text-neutral-400">Refreshed palette. Listed ratios for tertiary and semantic colors are 4.5:1 or higher.</p>
         </div>
       </div>
     </div>
 
-    <div class="mt-10 p-8 bg-neutral-50 dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-800 relative z-10">
-      <p class="text-neutral-600 dark:text-neutral-400 leading-relaxed">The system's audited structure and hardened UI kit now support new features, edge cases, and individual contributions, setting the stage for sustainable evolution of the product.</p>
+    <div class="case-outcome-summary mt-10 p-8 bg-neutral-50 dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-800 relative z-10">
+      <p class="text-neutral-600 dark:text-neutral-400 leading-relaxed">We built the audited structure and the adjusted UI kit to support new features, future scaling, and individual contribution. This page has no data on how the team used the system after delivery.</p>
     </div>
   </section>
 
   {/* Visual examples section */}
-  <section class="mb-24 bg-neutral-900 dark:from-neutral-900 dark:to-blue-950 rounded-xl -mx-6 px-6 py-16 relative">
+  <section class="case-showcase mb-24 bg-neutral-900 dark:from-neutral-900 dark:to-blue-950 rounded-xl -mx-6 px-6 py-16 relative">
     <div class="max-w-7xl mx-auto">
       <h2 class="text-2xl md:text-3xl font-bold mb-8 flex items-center gap-3 text-neutral-100">
         <svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-500">
@@ -349,13 +371,13 @@ themeColor: "blue"
         <span>Design System in Action</span>
       </h2>
 
-      <p class="text-neutral-400 mb-10 max-w-2xl">The completed design system provides a robust foundation for consistent, accessible, and scalable UI development across all UxUnite products.</p>
+      <p class="text-neutral-400 mb-10 max-w-2xl">These images show the brand workshop, screens from the product, and the component library sheet. They show the delivered foundations. They do not show how widely the team adopted them.</p>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div class="rounded-xl overflow-hidden shadow-2xl">
           <img
             src="/photos/projects/UxUnite/2.webp"
-            alt="Color system example"
+            alt="Whiteboard from the brand workshop, with sticky notes of brand words grouped by tone"
             class="w-full h-auto object-cover"
             loading="lazy"
           />
@@ -363,7 +385,15 @@ themeColor: "blue"
         <div class="rounded-xl overflow-hidden shadow-2xl">
           <img
             src="/photos/projects/UxUnite/3.webp"
-            alt="Component library example"
+            alt="Three UxUnite mobile screens: calendar, job board, and recordings"
+            class="w-full h-auto object-cover"
+            loading="lazy"
+          />
+        </div>
+        <div class="rounded-xl overflow-hidden shadow-2xl md:col-span-2">
+          <img
+            src="/photos/projects/UxUnite/4.webp"
+            alt="Component library sheet: tabs, tooltip, checkbox and radio, chips, spacing, menus, text input states, the type scale, and tertiary and semantic color swatches with contrast ratios"
             class="w-full h-auto object-cover"
             loading="lazy"
           />

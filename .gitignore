@@ -22,3 +22,7 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# unconverted Figma originals (large). Convert to webp, then move what is used into public/ or src/assets/
+src/assets/figma-raw/
+src/assets/figma-webp/

@@ -1,6 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react";
-import { animate, stagger } from "motion";
+import { Fragment, type CSSProperties } from "react";
 import { cn } from "@/lib/utils";
 
 export const TextGenerateEffect = ({
@@ -14,51 +13,25 @@ export const TextGenerateEffect = ({
   filter?: boolean;
   duration?: number;
 }) => {
-  const scope = useRef<HTMLSpanElement>(null);
   const wordsArray = words.split(" ");
 
-  useEffect(() => {
-    const elements = scope.current?.querySelectorAll("span");
-    if (!elements?.length) return;
-
-    const controls = animate(
-      elements,
-      {
-        opacity: 1,
-        filter: filter ? "blur(0px)" : "none",
-      },
-      {
-        duration: duration || 1,
-        delay: stagger(0.2),
-      }
-    );
-
-    return () => controls.stop();
-  }, [duration, filter, words]);
-
-  const renderWords = () => {
-    return (
-      <span ref={scope} className="inline">
-        {wordsArray.map((word, idx) => {
-          return (
-            <span
-              key={word + idx}
-              className="mr-[0.25em] inline-block opacity-0 last:mr-0 dark:text-white"
-              style={{
-                filter: filter ? "blur(10px)" : "none",
-              }}
-            >
-              {word}
-            </span>
-          );
-        })}
-      </span>
-    );
-  };
-
   return (
-    <span className={cn("inline-block", className)}>
-      <span className="tracking-tight dark:text-white">{renderWords()}</span>
+    <span className={cn("inline", className)}>
+      {wordsArray.map((word, idx) => (
+        <Fragment key={word + idx}>
+          <span
+            className="inline-block motion-safe:animate-[word-appear_0.6s_both]"
+            style={{
+              animationDuration: `${duration}s`,
+              animationDelay: `${idx * 0.12}s`,
+              "--word-blur": filter ? "8px" : "0px",
+            } as CSSProperties}
+          >
+            {word}
+          </span>
+          {idx < wordsArray.length - 1 ? " " : null}
+        </Fragment>
+      ))}
     </span>
   );
 };

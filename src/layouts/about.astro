@@ -2,45 +2,47 @@
 import OptimizedImage from "@/components/optimizedImage.astro";
 ---
 
-<section id="about" class="relative overflow-hidden bg-neutral-50 text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100">
-  <div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(60%_40%_at_50%_0%,rgba(255,255,255,.06),transparent)]"></div>
-  <div class="mx-auto max-w-7xl px-6 py-24 sm:py-32">
-    <div class="relative">
-      <div
-        aria-hidden="true"
-        class="pointer-events-none absolute right-0 -top-10 select-none text-right font-black leading-[0.78] tracking-tighter text-neutral-900/5 dark:text-neutral-100/5"
-      >
-        <span class="block text-[18vw]">Developer</span>
-        <span class="block -mt-3 text-[18vw]">Designer</span>
+<section id="about" aria-labelledby="about-heading" class="scroll-mt-8 bg-white text-neutral-900 dark:bg-black dark:text-neutral-100">
+  <div class="mx-auto max-w-7xl border-t border-neutral-200 px-6 py-16 dark:border-neutral-800 sm:py-24">
+    <h2 id="about-heading" class="mb-10 text-4xl font-semibold tracking-tight sm:text-5xl">About me</h2>
+    <div class="grid items-start gap-10 lg:grid-cols-12 lg:gap-12">
+      <div class="lg:col-span-7">
+        <p class="max-w-[38ch] text-balance text-2xl font-semibold leading-snug tracking-tight sm:text-3xl">
+          I work where interface design meets code, connecting product structure, visual detail, and reusable systems.
+        </p>
+        <p class="mt-7 max-w-[52ch] text-base leading-relaxed text-neutral-600 dark:text-neutral-300 sm:text-lg">
+          I am drawn to projects that make complex information easier to use. I move between research,
+          prototyping, and frontend development, using each to inform the next decision. Outside work,
+          I photograph cities and skies and build side projects.
+        </p>
       </div>
-      <div class="grid grid-cols-1 items-start gap-8 sm:gap-12 lg:grid-cols-12">
-        <div class="lg:col-span-5">
-          <figure class="overflow-hidden rounded-2xl shadow-2xl">
-            <OptimizedImage
-              src={import("../../public/photos/IMGA0704_3.webp")}
-              alt="Portrait of Nestor Kulik"
-              class="h-auto w-full object-contain grayscale"
-            />
-          </figure>
+      <figure class="about-portrait w-56 max-w-full lg:col-span-4 lg:col-start-9 lg:w-full lg:max-w-72">
+        <div class="overflow-hidden rounded-2xl border border-neutral-200 dark:border-neutral-800">
+          <OptimizedImage
+            src={import("../../public/photos/IMGA0704_3.webp")}
+            alt="Portrait of Nestor Kulik"
+            sizes="(max-width: 1023px) 224px, 288px"
+            class="h-auto w-full object-contain grayscale"
+          />
         </div>
-        <div class="lg:col-span-7">
-          <p class="max-w-2xl text-2xl font-medium leading-tight tracking-tight text-neutral-800 dark:text-neutral-200 sm:text-3xl lg:text-4xl">
-            I like products that feel composed from the first click: clear structure, quiet confidence, and details that
-            hold up under real use.
-          </p>
-          <div class="mt-12 grid max-w-2xl grid-cols-1 gap-6 md:grid-cols-5">
-            <div class="col-span-1 text-sm tracking-widest text-neutral-600 dark:text-neutral-300 md:col-span-2">
-              <span class="font-mono">( ABOUT ME )</span>
-            </div>
-            <div class="col-span-2 leading-normal text-neutral-700 dark:text-neutral-300 md:col-span-3">
-              My work sits where UX structure, frontend craft, and visual judgment overlap. I care about information
-              architecture, accessible interfaces, restrained motion, and systems that make teams faster instead of
-              noisier. Outside of product work I photograph cities, skies, and quiet details, build side projects, and
-              spend a lot of time looking for better ways to make digital things feel intentional.
-            </div>
-          </div>
-        </div>
-      </div>
+      </figure>
     </div>
   </div>
 </section>
+
+<style>
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .about-portrait {
+        animation: about-portrait-settle linear both;
+        animation-timeline: view();
+        animation-range: entry 0% cover 40%;
+      }
+    }
+  }
+
+  @keyframes about-portrait-settle {
+    from { transform: translateY(20px) rotate(2deg); }
+    to { transform: translateY(0) rotate(0); }
+  }
+</style>

@@ -1,0 +1,134 @@
+---
+title: "Aurora: Design System & Marketplace Launch"
+description: "A graduation project for a Baltic resale startup, connecting design-system foundations, product-flow evaluation, and an Astro and React landing page."
+category: "Design System & Frontend"
+client: "Aurora · University graduation project"
+role: "Design systems, UX research & frontend development"
+year: "2025"
+tools: "Figma, design tokens, prototype testing, Astro, React, TypeScript, Tailwind CSS"
+heroImage: "/photos/projects/AuroraDesignSystem/foundations.webp"
+outcomes: ["3-developer evaluation", "11:39 to 6:05 assembly time", "Buying-flow benchmark"]
+tags: ["University project", "Design System", "Frontend"]
+order: 0
+bentoSpan: "sm:col-span-4 md:col-span-3 lg:col-span-7"
+themeColor: "violet"
+constraint: "Deliver a focused Figma system and a coded landing page within graduation-project scope."
+keyDecision: "Evaluate developer assembly separately from buying flows, and explain the product through a focused landing page."
+result: "Three developers assembled a login page faster. Buying-flow benchmarks lagged, while five think-aloud sessions informed the landing page."
+---
+
+<div class="mx-auto max-w-7xl px-6">
+  <nav aria-label="Aurora project sections" class="mb-12 flex flex-wrap gap-3">
+    <a href="#system" class="inline-flex min-h-11 items-center rounded-full border border-neutral-400 px-5 py-2 text-neutral-800 dark:text-neutral-100">Design system</a>
+    <a href="#launch" class="inline-flex min-h-11 items-center rounded-full border border-neutral-400 px-5 py-2 text-neutral-800 dark:text-neutral-100">Landing page</a>
+  </nav>
+
+  <section id="system" aria-labelledby="system-title" class="scroll-mt-8">
+    <h2 id="system-title" class="mb-8 text-3xl font-semibold tracking-tight text-neutral-800 dark:text-neutral-100 md:text-4xl">Design system</h2>
+  <div class="mb-16 grid gap-8 md:grid-cols-2">
+    <section class="rounded-2xl bg-neutral-50 p-8 dark:bg-neutral-900">
+      <h3 class="mb-4 text-2xl font-bold text-neutral-800 dark:text-neutral-100">The challenge</h3>
+      <p>A Baltic second-hand marketplace needed a common foundation for product screens, developer handoff, and brand communication. The graduation scope focused on Figma foundations, a minimal component subset, a short guide, and selected buying and listing flows.</p>
+    </section>
+    <section class="rounded-2xl bg-violet-50 p-8 dark:bg-violet-950">
+      <h3 class="mb-4 text-2xl font-bold text-neutral-800 dark:text-neutral-100">The response</h3>
+      <p>I organized the work around tokens, components, composed patterns, and pages. The key evaluation task was practical: could a developer without design training assemble a login page faster using the system?</p>
+    </section>
+  </div>
+
+  <section class="mb-16 prose prose-neutral max-w-3xl dark:prose-invert">
+    <h3>Foundations that explain how to build</h3>
+    <p>The Figma structure separates color, typography, size variables, and iconography from the main component file, assembled pages, and brand guidance. A hub links navigation, form controls, cards, badges, and feedback patterns. Component documentation describes anatomy, variants, interaction states, and whether an implementation exists.</p>
+    <p>The scope deliberately stops short of a complete coded library. Token export, Code Connect coverage, Storybook, visual regression, and adoption analytics appear as integration proposals or roadmap work in the report. They are not presented here as a fully delivered pipeline.</p>
+  </section>
+
+  <section class="mb-16">
+    <div class="prose prose-neutral mb-8 max-w-3xl dark:prose-invert">
+      <h3>A product-page decision that changed</h3>
+      <p>In the initial layout, I placed item properties below the image for visual balance. A heuristic review exposed the cost: important buying facts were separated from price and action buttons, while the description-expansion control blended into the surrounding text.</p>
+      <p>The revision moved condition, size, and other key facts into the purchase rail beside the price and primary actions. Seller signals sit together, and quick-message suggestions form a distinct block. That makes the tradeoff visible: the visual composition had to serve the decision someone was trying to make.</p>
+    </div>
+    <div class="grid gap-8 md:grid-cols-2">
+      <figure><img src="/photos/projects/AuroraDesignSystem/product-before.webp" alt="Initial Aurora product-page prototype with item properties separated from the buying actions" class="w-full rounded-xl" loading="lazy" decoding="async" /><figcaption class="mt-3 text-sm text-neutral-500 dark:text-neutral-400">Before: item properties sit below the gallery, away from the buying controls.</figcaption></figure>
+      <figure><img src="/photos/projects/AuroraDesignSystem/product-after.webp" alt="Revised Aurora product-page prototype grouping condition and size with price, actions, and seller information" class="w-full rounded-xl" loading="lazy" decoding="async" /><figcaption class="mt-3 text-sm text-neutral-500 dark:text-neutral-400">After: decision-relevant facts move into the purchase rail. These are original report figures with prototype content.</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="mb-16 grid gap-8 lg:grid-cols-2 lg:items-center">
+    <div class="prose prose-neutral max-w-none dark:prose-invert">
+      <h3>The developer exercise</h3>
+      <p>Three developers without design training completed a login-page assembly exercise. The report records before/after times of 10:40 to 5:20, 8:49 to 7:00, and 15:27 to 5:55. The mean changed from 11:39 to 6:05, approximately 48% less time on this task.</p>
+      <p>This is a small task-specific evaluation, rather than a team-wide productivity claim. Observers also noted more consistent output and greater confidence navigating the system; those observations were qualitative.</p>
+    </div>
+    <figure><img src="/photos/projects/AuroraDesignSystem/developer-timing.webp" alt="Original report chart comparing login-page assembly time before and after using the design system for three developers" class="w-full rounded-xl" loading="lazy" decoding="async" /><figcaption class="mt-3 text-sm text-neutral-500 dark:text-neutral-400">Reported timing exercise, three developers. Times include the assembly task described in the report.</figcaption></figure>
+  </section>
+
+  <section class="mb-16 grid gap-8 lg:grid-cols-2 lg:items-center">
+    <div class="prose prose-neutral max-w-none dark:prose-invert">
+      <h3>Faster assembly did not mean a faster buying flow</h3>
+      <p>The customer-facing benchmark showed the opposite result: the prototype’s average buying-flow time was about 70% slower than SS.lv and 59% slower than Andelemandele, with greater variance. The report explicitly concludes that the end-user experience goal was not reached.</p>
+      <p>That changed the next priority from expanding the library to investigating extra steps, branching decisions, first-click behavior, and copy. The report does not state the buying-flow sample size in its results summary, so these figures remain a directional prototype comparison.</p>
+    </div>
+    <figure><img src="/photos/projects/AuroraDesignSystem/buying-flow.webp" alt="Original buying-flow timing chart showing a longer average task time for the prototype than for SS.lv and Andelemandele" class="w-full rounded-xl" loading="lazy" decoding="async" /><figcaption class="mt-3 text-sm text-neutral-500 dark:text-neutral-400">The buying-flow result is retained alongside the developer gain.</figcaption></figure>
+  </section>
+
+  <section class="mb-16 rounded-2xl bg-neutral-50 p-8 dark:bg-neutral-900">
+    <h3 class="mb-4 text-2xl font-bold text-neutral-800 dark:text-neutral-100">Outcome & next iteration</h3>
+    <p>The project established reusable foundations and a measurable improvement in a bounded developer task. It also identified a customer-flow problem that the system alone did not solve. Focus and keyboard-path checks, a coded component library, and broader adoption measurement remain follow-up work; the report’s accessibility goals are not treated as a complete implementation audit.</p>
+  </section>
+
+  </section>
+
+  <section id="launch" aria-labelledby="launch-title" class="mb-16 scroll-mt-8">
+    <h2 id="launch-title" class="mb-6 text-3xl font-semibold tracking-tight text-neutral-800 dark:text-neutral-100 md:text-4xl">Landing page and launch story</h2>
+    <p class="mb-12 max-w-[68ch]">The landing-page deliverable explains the proposed marketplace before launch. Its scope covers product communication and frontend implementation. The system and landing page have separate reports and evaluations.</p>
+
+    <figure class="mb-12">
+      <img src="/photos/projects/Aurora/landing.webp" alt="Aurora landing page with its launch headline and email waitlist invitation" width="1265" height="712" loading="lazy" decoding="async" class="w-full h-auto rounded-xl" />
+      <figcaption>The landing page introduces the proposition and leads to an email waitlist. The form does not save subscribers.</figcaption>
+    </figure>
+
+    <section class="prose prose-neutral mb-12 max-w-[68ch] dark:prose-invert">
+      <h3>Research before the launch story</h3>
+      <p>I reviewed competing websites, buying flows, user reviews, and forum discussions. SWOT analysis and a Business Model Canvas helped narrow the proposition.</p>
+      <p>Empathy maps, provisional personas, and a service blueprint described the intended experience. These personas were working hypotheses, not established customer segments.</p>
+    </section>
+
+    <section class="mb-12 grid gap-8 lg:grid-cols-2 lg:items-center">
+      <div class="prose prose-neutral max-w-[68ch] dark:prose-invert">
+        <h3>One invitation, several reasons to care</h3>
+        <p>The opening proposition leads to one waitlist invitation. Supporting content explains the proposed transaction journey, from shipping and tracking to payment and support.</p>
+        <p>The explainer makes the intended service concrete. Delivery and payment services remain part of the product concept.</p>
+      </div>
+      <figure>
+        <img src="/photos/projects/Aurora/journey.webp" alt="Aurora concept diagram connecting seller shipping and buyer checkout with tracking, support, and payment" width="1195" height="614" loading="lazy" decoding="async" class="w-full h-auto rounded-xl" />
+        <figcaption>The proposed buyer-and-seller journey explains the service. It does not establish an operational transaction flow.</figcaption>
+      </figure>
+    </section>
+
+    <section class="mb-12 grid gap-8 lg:grid-cols-2 lg:items-center">
+      <div class="prose prose-neutral max-w-[68ch] dark:prose-invert">
+        <h3>From product concept to frontend</h3>
+        <p>The landing page uses Astro sections and React components for navigation and the form. Tailwind supplies the visual rules, and an email schema validates the waitlist field.</p>
+        <p>The form handler does not save subscribers. Search, listings, escrow, and community events remain product ambitions beyond the landing-page scope.</p>
+      </div>
+      <figure class="mx-auto max-w-md">
+        <img src="/photos/projects/Aurora/app-render.webp" alt="Aurora marketplace concept on two mobile screens with illustrative product content" width="772" height="810" loading="lazy" decoding="async" class="w-full h-auto rounded-xl" />
+        <figcaption>The marketplace concept connects the launch story to the proposed product. Screen content is illustrative.</figcaption>
+      </figure>
+    </section>
+
+    <section class="prose prose-neutral mb-12 max-w-[68ch] dark:prose-invert">
+      <h3>What five think-aloud sessions changed</h3>
+      <p>Five participants evaluated the experience in think-aloud sessions. Small creative-business respondents valued local representation beyond occasional markets.</p>
+      <p>Feedback raised doubts about switching platforms, relevance, and delivery. These reactions informed a clearer explanation of the offer and roadmap. They did not establish product-market fit.</p>
+      <p>One participant became disoriented while looking for social links. That led to a persistent social-links island beside navigation.</p>
+      <p>The brief targets 1,000 qualified leads in eight weeks and a 10% signup conversion rate. The report provides no measured results against those targets.</p>
+    </section>
+  </section>
+
+  <div class="flex flex-wrap gap-4">
+    <a href="https://github.com/synku20777/marketplace" class="inline-flex min-h-11 items-center rounded-full border border-neutral-400 px-5 py-3 font-medium text-neutral-800 underline-offset-4 hover:underline dark:text-neutral-100">Marketplace repository</a>
+    <a href="https://github.com/synku20777/hovedopgave-landing" class="inline-flex min-h-11 items-center rounded-full border border-neutral-400 px-5 py-3 font-medium text-neutral-800 underline-offset-4 hover:underline dark:text-neutral-100">Landing-page repository</a>
+  </div>
+</div>

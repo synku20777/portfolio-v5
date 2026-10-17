@@ -1,0 +1,71 @@
+---
+title: "Aurora: A New Way to Sell Old Things"
+description: "A graduation project for a Baltic resale startup, using five think-aloud sessions to refine its launch story and landing page."
+category: "Landing Page"
+client: "University graduation project"
+role: "Product communication & frontend development"
+year: "2025"
+tools: "Astro, React, TypeScript, Tailwind CSS"
+heroImage: "/photos/projects/Aurora/landing.webp"
+outcomes: ["5 think-aloud participants", "Research-led positioning", "Coded landing page"]
+tags: ["University project", "Frontend", "Product storytelling"]
+order: 11
+bentoSpan: "sm:col-span-4 md:col-span-3 lg:col-span-7"
+themeColor: "violet"
+constraint: "Explain a broad marketplace concept within the scope of a graduation landing-page project."
+keyDecision: "Build the story around a single invitation to join, supported by a visual buyer-and-seller journey."
+result: "Five think-aloud sessions informed the launch story and a persistent social-links treatment; the landing page was implemented in Astro and React."
+---
+
+<div class="mx-auto max-w-7xl px-6">
+  <div class="grid grid-cols-1 gap-8 mb-16 md:grid-cols-2">
+    <section class="rounded-2xl bg-neutral-50 p-8 dark:bg-neutral-900">
+      <h2 class="mb-4 text-2xl font-bold text-neutral-800 dark:text-neutral-100">The challenge</h2>
+      <p>Aurora explores a more social approach to second-hand shopping: discovery, selling, creator support, and community in one place. The communication challenge was deciding what a first-time visitor needed to understand before the marketplace itself existed.</p>
+    </section>
+    <section class="rounded-2xl bg-violet-50 p-8 dark:bg-violet-950">
+      <h2 class="mb-4 text-2xl font-bold text-neutral-800 dark:text-neutral-100">The response</h2>
+      <p>A focused landing page introduces the proposition, explains the proposed transaction journey, and leads to an email waitlist. The deliverable is the front door to a product concept, with enough detail to make the intended experience tangible.</p>
+    </section>
+  </div>
+
+  <section class="mb-16 prose prose-neutral max-w-3xl dark:prose-invert">
+    <h2>Research before the launch story</h2>
+    <p>The graduation report situates Aurora within a real Baltic startup in its pre-launch phase. I reviewed competing websites and buying flows, user reviews, and forum discussions, then used a SWOT analysis and Business Model Canvas to narrow the proposition. Empathy mapping, provisional personas, and a service blueprint connected that market work to the intended experience.</p>
+    <p>The initial audience included younger resale shoppers and small creative businesses. The parent and student personas were working hypotheses to refine with future lead data, rather than established customer segments. That made the landing page an early way to investigate interest while the wider marketplace was still being developed.</p>
+  </section>
+
+  <section class="mb-16 grid gap-8 lg:grid-cols-2 lg:items-center">
+    <div class="prose prose-neutral max-w-none dark:prose-invert">
+      <h2>One invitation, several reasons to care</h2>
+      <p>The opening line, “New way of selling old stuff,” introduces the idea in everyday language. “Join the club” links to the waitlist further down the page, keeping the primary action consistent across the story.</p>
+      <p>The supporting content expands from the proposition into practical questions: how an item moves from seller to buyer, when payment happens, and where support fits. This makes the proposed service easier to discuss than a feature list alone.</p>
+    </div>
+    <figure>
+      <img src="/photos/projects/Aurora/journey.webp" alt="Aurora infographic showing the proposed shipping, tracking, support, and payment journey for buyers and sellers" class="w-full rounded-xl" loading="lazy" decoding="async" />
+      <figcaption class="mt-3 text-sm text-neutral-500 dark:text-neutral-400">The original transaction explainer. Delivery and payment services are part of the product concept.</figcaption>
+    </figure>
+  </section>
+
+  <section class="mb-16 prose prose-neutral max-w-3xl dark:prose-invert">
+    <h2>From product concept to frontend</h2>
+    <p>The implementation combines Astro sections with React components for navigation and the form. Tailwind provides the shared visual rules, while an email schema defines the waitlist field’s validation. The form handler remains a frontend demonstration; it does not save subscribers.</p>
+    <p>The main tradeoff was breadth versus delivery. Search, listings, escrow, and community events help describe the ambition, but building those services would exceed the landing-page scope. The case study’s outcome is the communication layer, rather than an operational marketplace.</p>
+  </section>
+
+  <figure class="mb-16">
+    <img src="/photos/projects/Aurora/app-render.webp" alt="Original Aurora product concept showing the intended resale marketplace interface" class="w-full rounded-xl" loading="lazy" decoding="async" />
+    <figcaption class="mt-3 text-sm text-neutral-500 dark:text-neutral-400">Product imagery from the project repository connects the landing page to the intended marketplace.</figcaption>
+  </figure>
+
+  <section class="mb-16 rounded-2xl bg-neutral-50 p-8 dark:bg-neutral-900">
+    <h2 class="mb-4 text-2xl font-bold text-neutral-800 dark:text-neutral-100">What five think-aloud sessions changed</h2>
+    <p>Five participants evaluated the experience. Small creative-business respondents particularly valued the idea of local representation beyond occasional markets. The sessions also exposed doubts about switching from established platforms, the concept’s relevance, and whether the proposed service could be delivered well. This supported a clearer explanation of the offer and roadmap rather than treating positive feedback as proof of product-market fit.</p>
+    <p class="mt-4">One participant became disoriented while looking for social-media links. The documented design response was a persistent social-links island that follows the visitor through the page, alongside navigation. This is the clearest observation-to-decision link from the evaluation.</p>
+    <p class="mt-4">The brief proposed 1,000 qualified leads within eight weeks and a 10% sign-up conversion rate. Those were targets; the report does not provide measured results against them. The repository’s waitlist handler remains a frontend demonstration, so subscriber collection is not claimed as an implemented outcome here.</p>
+  </section>
+
+  <p class="mb-8 text-neutral-600 dark:text-neutral-400">The later <a href="/case-studies/aurora-design-system" class="underline underline-offset-4">Aurora design-system study</a> covers component foundations and developer evaluation as a separate deliverable.</p>
+
+  <a href="https://github.com/synku20777/hovedopgave-landing" class="inline-flex rounded-lg border border-neutral-300 px-5 py-3 font-medium text-neutral-800 underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 dark:border-neutral-700 dark:text-neutral-100">Explore Aurora on GitHub</a>
+</div>

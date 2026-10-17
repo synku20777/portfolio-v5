@@ -1,0 +1,69 @@
+---
+title: "Securita: Learning to Question a Suspicious Email"
+description: "Seven interviews informed a university phishing-awareness game built around decisions, consequences, and contextual feedback."
+category: "Interactive Learning"
+client: "University project"
+role: "Interaction design & frontend development"
+tools: "HTML, JavaScript, SCSS, localStorage"
+heroImage: "/photos/projects/Securita/scenario.webp"
+outcomes: ["7 research interviews", "Contextual feedback", "Branching scenario"]
+tags: ["University project", "Interaction design", "JavaScript"]
+order: 7
+bentoSpan: "sm:col-span-4 md:col-span-3 lg:col-span-4"
+themeColor: "teal"
+constraint: "Teach one security habit through a short browser experience with a limited scenario set."
+keyDecision: "Respond to participants’ preference for interactive learning with immediate explanations tied to each decision."
+result: "Seven interviews shaped a playable scenario with verification feedback, branching pages, and a locally stored score."
+---
+
+<div class="mx-auto max-w-7xl px-6">
+  <div class="grid grid-cols-1 gap-8 mb-16 md:grid-cols-2">
+    <section class="rounded-2xl bg-neutral-50 p-8 dark:bg-neutral-900">
+      <h2 class="mb-4 text-2xl font-bold text-neutral-800 dark:text-neutral-100">The challenge</h2>
+      <p>Knowing the definition of phishing is different from deciding what to do when an urgent message arrives. Securita explores that moment through a fictional bank email asking the recipient to reset a password.</p>
+    </section>
+    <section class="rounded-2xl bg-teal-50 p-8 dark:bg-teal-950">
+      <h2 class="mb-4 text-2xl font-bold text-neutral-800 dark:text-neutral-100">The response</h2>
+      <p>A small browser game lets the player click the link, verify the message, or ignore it. Follow-up pages and feedback turn those choices into an interactive lesson, with the suspicious email kept visible as the object of investigation.</p>
+    </section>
+  </div>
+
+  <section class="mb-16 prose prose-neutral max-w-3xl dark:prose-invert">
+    <h2>Seven interviews narrowed the learning problem</h2>
+    <p>I conducted seven semi-structured, one-to-one interviews, each lasting approximately 25 minutes over an unrecorded video call. The questions covered participants’ understanding of cybersecurity, moments when they felt unsafe online, preferred ways of learning complex material, and reactions to the early interface.</p>
+    <p>Participants generally understood security at a broad level but were less certain about phishing and social engineering. They preferred interactive exercises with immediate feedback, valued visual explanations, and found some terminology confusing. Feedback without context made it difficult to understand how to proceed.</p>
+    <p>Those findings narrowed the job of the prototype: help someone look closely at a message and explain why a choice matters. Plain language and contextual feedback became more useful priorities than expanding the number of security topics.</p>
+  </section>
+
+  <section class="mb-16 prose prose-neutral max-w-3xl dark:prose-invert">
+    <h2>Make the warning sign inspectable</h2>
+    <p>The email presents a sender address, subject, date, and message body. The misspelled bank domain and urgent wording are clues within the scenario. Choosing “Verify the email” reveals feedback that points to the spelling error, connecting the lesson directly to something the player can inspect.</p>
+    <p>The retro desktop styling gives the exercise a self-contained setting: window frames, familiar form fields, and direct action buttons. The emphasis is on making a decision within a simulated email rather than reading a separate list of rules.</p>
+  </section>
+
+  <figure class="mb-16">
+    <img src="/photos/projects/Securita/feedback.webp" alt="Securita showing verification feedback beneath the fictional bank email and decision buttons" class="w-full rounded-xl" loading="lazy" decoding="async" />
+    <figcaption class="mt-3 text-sm text-neutral-500 dark:text-neutral-400">Selecting “Verify the email” exposes the sender-domain clue in the original prototype.</figcaption>
+  </figure>
+
+  <section class="mb-16 grid gap-8 md:grid-cols-2">
+    <div class="prose prose-neutral max-w-none dark:prose-invert">
+      <h2>A lightweight scenario engine</h2>
+      <p>Plain JavaScript handles choices and page transitions. A score stored in localStorage carries progress between the scenario and ending pages. SCSS centralizes the desktop-style colors, borders, and type treatment.</p>
+      <p>This keeps the prototype small enough to build and inspect without an account system or backend. The stored score belongs to the exercise on that browser.</p>
+    </div>
+    <div class="prose prose-neutral max-w-none dark:prose-invert">
+      <h2>The teaching tradeoff</h2>
+      <p>Branching consequences make the exercise concrete, but a short scripted scenario cannot represent every legitimate or malicious message. The game’s score is a progression mechanic, rather than a measure of someone’s security competence.</p>
+      <p>A further iteration would clarify the ending explanations and make scoring consistent across repeated actions, so the feedback teaches the reasoning behind a choice as clearly as the consequence.</p>
+    </div>
+  </section>
+
+  <section class="mb-16 rounded-2xl bg-neutral-50 p-8 dark:bg-neutral-900">
+    <h2 class="mb-4 text-2xl font-bold text-neutral-800 dark:text-neutral-100">Outcome & learning limits</h2>
+    <p>The interviews provided a concrete basis for the interaction pattern: encounter a message, inspect a clue, choose an action, and receive an explanation. The report also describes score-dependent ending feedback and resetting progression when the game restarts.</p>
+    <p class="mt-4">The seven interviews establish research input and early interface reactions. They do not establish a measured improvement in phishing detection. A follow-up would use a new fictional message and ask players to explain their reasoning, checking transfer beyond this single scenario.</p>
+  </section>
+
+  <a href="https://github.com/synku20777/Securita" class="inline-flex rounded-lg border border-neutral-300 px-5 py-3 font-medium text-neutral-800 underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 dark:border-neutral-700 dark:text-neutral-100">Explore Securita on GitHub</a>
+</div>
