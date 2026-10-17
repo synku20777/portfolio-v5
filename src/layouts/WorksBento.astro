@@ -1,7 +1,8 @@
 ---
-import { IconExternalLink } from "@tabler/icons-react";
 import Tooltip from "@/components/tooltip";
 import { getCollection, type CollectionEntry } from "astro:content";
+import { imageMetadata } from "astro/assets/utils";
+import { readFile } from "node:fs/promises";
 
 type CaseStudy = CollectionEntry<"caseStudies">;
 
@@ -13,6 +14,8 @@ interface BentoTile {
   role?: string;
   href?: string;
   image?: string;
+  imageWidth?: number;
+  imageHeight?: number;
   emoji?: string;
   tags: string[];
   span: string;
@@ -25,17 +28,23 @@ const caseStudies: CaseStudy[] = (await getCollection("caseStudies"))
   .filter((study) => study.id !== "aurora")
   .sort((a, b) => a.data.order - b.data.order);
 
-const caseStudyTiles: BentoTile[] = caseStudies.map((study) => ({
+const caseStudyTiles: BentoTile[] = await Promise.all(caseStudies.map(async (study) => {
+  const image = study.data.thumbnailImage || study.data.heroImage;
+  const { width, height } = await imageMetadata(await readFile(`public${image}`), image);
+  return {
   kicker: study.data.client || study.data.category,
   title: study.data.title,
   text: study.data.description,
   role: study.data.role,
   href: study.data.comingSoon ? undefined : `/case-studies/${study.id}`,
-  image: study.data.thumbnailImage || study.data.heroImage,
+  image,
+  imageWidth: width,
+  imageHeight: height,
   emoji: study.data.bentoEmoji,
   tags: study.data.comingSoon ? [...study.data.tags, "Coming soon"] : study.data.tags,
   span: study.data.bentoSpan || "sm:col-span-4 md:col-span-4 lg:col-span-4",
   comingSoon: study.data.comingSoon,
+  };
 }));
 const {
   heading = "Selected work",
@@ -43,88 +52,80 @@ const {
 } = Astro.props;
 
 const caseTileBase =
-  "overflow-hidden rounded-lg bg-neutral-50 px-2 transition-[grid-column,grid-row,width,height,background-color,transform] duration-[400ms] ease-in-out hover:bg-neutral-100 dark:bg-zinc-900 dark:hover:bg-zinc-800";
+  "relative min-w-0 rounded-3xl bg-neutral-50 p-2 transition-[background-color,translate] duration-[400ms] ease-in-out hover:z-10 hover:bg-neutral-100 focus-within:z-10 motion-safe:hover:-translate-y-1 motion-safe:focus-within:-translate-y-1 motion-reduce:transition-none dark:bg-zinc-900 dark:hover:bg-zinc-800";
 const comingSoonTileBase =
-  "overflow-hidden rounded-lg border border-dashed border-neutral-200 bg-neutral-50 px-2 transition-[grid-column,grid-row,width,height,background-color] duration-[400ms] ease-in-out dark:border-zinc-800 dark:bg-zinc-900/70";
-const pillBase = "text-xs font-medium tracking-tight text-neutral-500 dark:text-zinc-400";
+  "min-w-0 rounded-3xl border border-dashed border-neutral-200 bg-neutral-50 p-2 dark:border-zinc-800 dark:bg-zinc-900/70";
 const tagBase =
-  "inline-flex items-center rounded-full border border-neutral-200/80 bg-white px-2.5 py-1 text-xs font-semibold uppercase tracking-tighter text-stone-500 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300";
+  "inline-flex items-center rounded-full border border-neutral-200 px-2.5 py-1 text-xs font-medium text-neutral-600 dark:border-zinc-700 dark:text-neutral-300";
 ---
 
 <section id="works" class="bg-white dark:bg-zinc-950">
   <div class="mx-auto max-w-7xl px-6 pb-16 pt-10">
-    <div class="mb-10">
+    <div class="mb-10 flex flex-wrap items-end justify-between gap-4">
+      <div>
       <h2 class="text-xs font-semibold uppercase tracking-[0.35rem] text-neutral-500 dark:text-zinc-400">
         {heading}
       </h2>
       <p class="mt-3 max-w-2xl text-sm text-neutral-500 dark:text-zinc-400">
         UX/UI, design systems, and frontend projects.
       </p>
+      </div>
+      <button hidden type="button" data-pause-tags class="min-h-11 rounded-full border border-neutral-400 px-4 text-xs font-medium text-neutral-600 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-600 motion-reduce:hidden dark:text-neutral-300 dark:focus-visible:outline-sky-400">Pause tag motion</button>
     </div>
 
-    <div class="grid auto-rows-auto grid-cols-1 gap-1 sm:grid-flow-row-dense sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-12">
+    <div class="grid auto-rows-auto grid-cols-1 gap-4 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-12 lg:gap-6">
       {tiles.map((tile: BentoTile) => {
         const isComingSoon = Boolean(tile.comingSoon);
         const Wrapper = tile.href ? "a" : "div";
+        const tags = tile.role ? [tile.role, ...tile.tags] : tile.tags;
 
-        const card = (
-          <Wrapper class:list={["group flex h-full flex-col", isComingSoon ? "pointer-events-none" : undefined]} href={tile.href} aria-disabled={isComingSoon ? "true" : undefined}>
-            <div class="flex items-center justify-between gap-2 pl-2 pt-2">
-              <div class="flex flex-wrap items-center gap-2">
-                <span class={pillBase}>{tile.kicker}</span>
-                {tile.tags.map((tag) => (
-                  <span class={tagBase}>{tag}</span>
-                ))}
-              </div>
-              {isComingSoon ? (
-                <span class="inline-flex h-8 w-8 items-center justify-center rounded-full text-xs font-semibold uppercase tracking-tighter text-stone-400 dark:text-zinc-500">
-                  Soon
-                </span>
-              ) : (
-                <span class="inline-flex h-8 w-8 items-center justify-center rounded-full text-xs text-stone-500 transition duration-500 group-hover:border group-hover:border-stone-200/80 group-hover:bg-white group-hover:text-stone-800 dark:text-zinc-300 dark:group-hover:border-zinc-700 dark:group-hover:bg-zinc-800 dark:group-hover:text-zinc-100">
-                  <IconExternalLink size={16} />
-                </span>
-              )}
-            </div>
-
-            <div class="relative mt-4 flex min-h-100 w-full items-center justify-center overflow-hidden rounded-2xl">
+        const link = (
+          <Wrapper class:list={["group flex min-h-11 flex-1 flex-col rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-600 dark:focus-visible:outline-sky-400", isComingSoon ? "pointer-events-none" : undefined]} href={tile.href} aria-disabled={isComingSoon ? "true" : undefined}>
+            <div class="relative flex w-full shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-neutral-100 dark:bg-zinc-800">
               {tile.emoji ? (
-                <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-white via-neutral-100 to-neutral-200 text-7xl grayscale dark:from-zinc-900 dark:via-zinc-900 dark:to-zinc-800 sm:text-8xl">
+                <div class="flex aspect-video w-full items-center justify-center bg-gradient-to-br from-white via-neutral-100 to-neutral-200 text-7xl grayscale dark:from-zinc-900 dark:via-zinc-900 dark:to-zinc-800 sm:text-8xl">
                   <span aria-hidden="true">{tile.emoji}</span>
                 </div>
               ) : tile.image ? (
                 <img
                   alt={tile.title}
                   src={tile.image}
+                  width={tile.imageWidth}
+                  height={tile.imageHeight}
                   loading="lazy"
                   decoding="async"
                   class:list={[
-                    "absolute h-full w-full object-cover transition-transform duration-500",
-                    isComingSoon ? "grayscale opacity-75" : "group-hover:scale-[1.03]",
+                    "block h-auto w-full object-contain transition-transform duration-500 motion-reduce:transition-none",
+                    isComingSoon ? "grayscale opacity-75" : "motion-safe:group-hover:scale-[1.03] motion-safe:group-focus-visible:scale-[1.03]",
                   ]}
                 />
               ) : null}
             </div>
 
-            <div class="px-3 pb-3 pl-2 pt-2">
-              <h3 class:list={["text-lg font-semibold leading-[1.25]", isComingSoon ? "text-stone-600 dark:text-zinc-300" : "text-stone-900 dark:text-zinc-100"]}>{tile.title}</h3>
-              {tile.text && <p class="mt-2 text-sm text-stone-600 dark:text-zinc-400">{tile.text}</p>}
-              {tile.role && <p class="mt-2 text-xs font-semibold text-stone-700 dark:text-zinc-300">My role: {tile.role}</p>}
+            <div class="flex flex-1 flex-col px-3 pb-4 pt-5 lg:px-4 lg:pb-5">
+              <h3 class:list={["max-w-[32ch] text-balance text-xl font-semibold leading-tight tracking-tight lg:text-2xl", isComingSoon ? "text-neutral-600 dark:text-neutral-300" : "text-neutral-900 dark:text-neutral-100"]}>{tile.title}</h3>
+              {tile.text && <p class="mt-3 max-w-[64ch] text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">{tile.text}</p>}
             </div>
           </Wrapper>
         );
 
         return (
-          <article class:list={[isComingSoon ? comingSoonTileBase : caseTileBase, isComingSoon ? "cursor-default" : "cursor-pointer", tile.span]} id={tile.id}>
-            {isComingSoon ? (
-              card
-            ) : (
-              <Tooltip
-                client:media="(hover: hover) and (pointer: fine) and (min-width: 769px)"
-                content="Open case"
-                wrapperClassName="w-full items-stretch"
-              >
-                {card}
+          <article class:list={[isComingSoon ? comingSoonTileBase : caseTileBase, "flex flex-col", tile.span]} id={tile.id}>
+            <div class="flex min-h-14 items-center gap-3 px-3 pb-2">
+              <span class="max-w-[65%] shrink-0 break-words text-xs font-medium leading-relaxed text-neutral-600 dark:text-neutral-300">{tile.kicker}</span>
+              <div class="case-tags min-h-11 min-w-0 flex-1 content-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-600 dark:focus-visible:outline-sky-400" tabindex="0" role="region" aria-label={`${tile.title} tags`}>
+                <div class="case-tags-track">
+                  {[false, true].map((duplicate) => (
+                    <div class:list={["case-tags-copy", duplicate && "case-tags-duplicate"]} aria-hidden={duplicate ? "true" : undefined}>
+                      {tags.map((tag, index) => <span class={tagBase}>{index === 0 && tile.role && <span class="sr-only">My role: </span>}{tag}</span>)}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+            {isComingSoon ? link : (
+              <Tooltip client:visible content="Open case" wrapperClassName="flex flex-1 flex-col">
+                {link}
               </Tooltip>
             )}
           </article>
@@ -133,3 +134,94 @@ const tagBase =
     </div>
   </div>
 </section>
+
+<style>
+  .case-tags {
+    overflow-x: auto;
+    scrollbar-width: none;
+    mask-image: linear-gradient(to right, transparent, black 1rem, black calc(100% - 1rem), transparent);
+  }
+
+  .case-tags:focus {
+    mask-image: none;
+  }
+
+  .case-tags-track {
+    display: flex;
+    width: max-content;
+  }
+
+  .case-tags-copy {
+    display: flex;
+    flex-shrink: 0;
+    gap: 0.5rem;
+    padding-inline: 1rem;
+    white-space: nowrap;
+  }
+
+  .case-tags-duplicate {
+    display: none;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .case-tags-track {
+      animation: case-tags-scroll 45s linear infinite paused;
+    }
+
+    .case-tags-duplicate {
+      display: flex;
+    }
+
+    .case-tags.is-in-view .case-tags-track {
+      animation-play-state: running;
+    }
+
+    #works[data-tags-paused] .case-tags-track,
+    .case-tags:hover .case-tags-track {
+      animation-play-state: paused;
+    }
+
+    .case-tags:focus .case-tags-track {
+      animation: none;
+    }
+
+    .case-tags:focus .case-tags-duplicate {
+      display: none;
+    }
+  }
+
+  @keyframes case-tags-scroll {
+    to { transform: translateX(-50%); }
+  }
+</style>
+
+<script>
+  let tagsObserver: IntersectionObserver | undefined;
+
+  function setupTagScroll() {
+    tagsObserver?.disconnect();
+    tagsObserver = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        entry.target.classList.toggle("is-in-view", entry.isIntersecting);
+      }
+    });
+    document.querySelectorAll("#works .case-tags").forEach((strip) => tagsObserver!.observe(strip));
+    const pauseButton = document.querySelector<HTMLButtonElement>("[data-pause-tags]");
+    if (pauseButton) {
+      pauseButton.hidden = false;
+      pauseButton.onclick = () => {
+        const paused = pauseButton.closest("section")!.toggleAttribute("data-tags-paused");
+        pauseButton.textContent = paused ? "Resume tag motion" : "Pause tag motion";
+      };
+    }
+  }
+
+  setupTagScroll();
+  document.addEventListener("astro:page-load", setupTagScroll);
+  document.addEventListener("astro:before-swap", () => tagsObserver?.disconnect());
+  document.addEventListener("focusout", (event) => {
+    if (event.target instanceof HTMLElement && event.target.matches("#works .case-tags")) {
+      event.target.scrollLeft = 0;
+    }
+  });
+</script>
