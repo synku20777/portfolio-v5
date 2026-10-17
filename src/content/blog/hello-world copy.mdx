@@ -1,0 +1,26 @@
+---
+title: "Why I'm Building My Own Design System Builder"
+description: "**TLDR:** Building an adaptive design system for online stores using Web Components and 3-tier tokens. The goal is to give businesses the ability to quickly rebrand their visual style while physically blocking any way to break UX and conversion."
+pubDate: 2026-10-17
+tags: ["personal", "ecommerce"]
+draft: false
+featured: false
+homepageSummary: "The customization problem in e-commerce, and why I'm building my own design system builder."
+---
+
+## I've been annoyed for a long time by one fundamental problem in commercial design.
+
+Any business needs sales and profit above all else. At the same time, every brand wants visual uniqueness, character, and recognition. The problem is that shoppers don't come to an online store to solve an art director's riddles. They want to understand where they are, pick a product in two minutes, check out painlessly, and close the tab.
+
+At the intersection of these two desires, the industry constantly steps on the same rake: in pursuit of a "unique style," basic navigation patterns get broken, filters get hidden, weird checkouts are invented, and dropped metrics are later justified as "innovative user experiences."
+
+I decided to test in practice whether a brand's ego can be reconciled with common sense.
+
+Taking a single ready-made template for all stores doesn't work — it's boring and fails to serve diverse audiences. Giving businesses or designers total freedom to move blocks around is even worse: individual elements might look great in a vacuum, but together on a page they turn into visual clutter. Building a genuinely flexible yet predictable system is a deceptively complex engineering challenge: it sounds easy in words, but in reality, you have to plan dependencies a hundred steps ahead.
+
+1. **Function over form** The internal component structure, safety margins, error states, and purchasing flows are strictly locked down based on Baymard Institute usability research. Shoppers don't have to relearn how to use the site.
+2. **Semantic tokens for shifting character.** All visual presentation — from color palettes and typography to corner geometry and product grid density — is abstracted into a multi-tier variable system. An auto parts store and a clothing brand can run on the exact same codebase while looking like products from different planets.
+
+Right now, the project is in active development. The core is built and the token base are already live and being tested against real brand guidelines. The hardest challenge at this stage is stopping my own perfectionism on time and cutting out unnecessary settings where they start harming the system's simplicity.
+
+This isn't a launch of a finished silver bullet. I am building a working tool while bumping my head on token architecture and style isolation, and I plan to share the process: what worked, which hypotheses failed in code, and why some things had to be rewritten from scratch.

@@ -13,9 +13,21 @@ yarn-error.log*
 pnpm-debug.log*
 
 
-# environment variables
+# environment variables and secrets
 .env
-.env.production
+.env.*
+!.env.example
+*.env
+.figmatoken*
+*.pem
+*.key
+.vercel/
+
+# local agent state and logs
+.claude/settings.local.json
+.claude/worktrees/
+build/
+*.log
 
 # macOS-specific files
 .DS_Store
