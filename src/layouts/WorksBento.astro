@@ -81,9 +81,9 @@ const tagBase =
 
         const link = (
           <Wrapper class:list={["group flex min-h-11 flex-1 flex-col rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-600 dark:focus-visible:outline-sky-400", isComingSoon ? "pointer-events-none" : undefined]} href={tile.href} aria-disabled={isComingSoon ? "true" : undefined}>
-            <div class="relative flex w-full shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-neutral-100 dark:bg-zinc-800">
+            <div class="relative flex h-56 w-full shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-neutral-100 sm:h-64 lg:h-80 dark:bg-zinc-800">
               {tile.emoji ? (
-                <div class="flex aspect-video w-full items-center justify-center bg-gradient-to-br from-white via-neutral-100 to-neutral-200 text-7xl grayscale dark:from-zinc-900 dark:via-zinc-900 dark:to-zinc-800 sm:text-8xl">
+                <div class="flex h-full w-full items-center justify-center bg-gradient-to-br from-white via-neutral-100 to-neutral-200 text-7xl grayscale dark:from-zinc-900 dark:via-zinc-900 dark:to-zinc-800 sm:text-8xl">
                   <span aria-hidden="true">{tile.emoji}</span>
                 </div>
               ) : tile.image ? (
@@ -95,7 +95,9 @@ const tagBase =
                   loading="lazy"
                   decoding="async"
                   class:list={[
-                    "block h-auto w-full object-contain transition-transform duration-500 motion-reduce:transition-none",
+                    "block h-full w-full object-center transition-transform duration-500 motion-reduce:transition-none",
+                    // Panoramic UI screenshots lose too much content when cropped on mobile.
+                    tile.imageWidth && tile.imageHeight && tile.imageWidth > tile.imageHeight * 2 ? "object-contain" : "object-cover",
                     isComingSoon ? "grayscale opacity-75" : "motion-safe:group-hover:scale-[1.03] motion-safe:group-focus-visible:scale-[1.03]",
                   ]}
                 />
