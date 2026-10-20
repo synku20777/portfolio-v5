@@ -44,9 +44,18 @@ The last check-in ended with the items under "Deferred" and "Blocked" left undon
 
 | Item | Reason | When |
 | --- | --- | --- |
-| Export of the UxUnite design-system frames from Figma file `JvMwyWXspEiqHEQawTDAvb` | Figma Starter-plan limit on the REST API and the connector | After about 2026-10-22. The node list is in `docs/figma-assets.md`. Or export by hand. |
-| List of files in Figma folder `197452916` | The token has no Projects: Read scope | Needs a new token with that scope, or links to single files |
+| List of files in Figma folder `197452916` | The token has no Projects: Read scope (still 403 on 2026-10-20) | Needs a new token with that scope, or links to single files |
 | Token cleanup | The token is in `C:\Users\nesto\Documents\GitHub\.figmatoken.md` | Delete the file and revoke the token in Figma when the Figma work ends |
+
+### Update 2026-10-20
+
+The Figma rate limit is gone (education seat). The REST API now works, so the design-system frames from file `JvMwyWXspEiqHEQawTDAvb` are exported. The file holds the Astra pitch, branding, and design-system pages. Full-frame renders of both Figma files are in `src/assets/figma-raw/*-renders/`. A curated set of 47 lossless WebP files is in `src/assets/figma-webp/showcase/`. See "Showcase renders" in `docs/figma-assets.md`.
+
+Used on pages (2026-10-20, after a Codex second opinion): a new Aurora homepage preview (before/after crop of the product page, with a phone-size variant), a paper-wireframe figure in Artsy, a palette sheet in UxUnite, and a button sheet and LinkedIn banner in Astra. Cloud First got no new figure, because Codex found the page already shows structure and wireframes. Astra's four outcome images (`1.jpg` to `4.jpg`) had wrong alt text and now describe the device mockups. Page copies are in `public/photos/projects/`. Source-map rows are added. The faces in three UxUnite frames are not used.
+
+Second pass (2026-10-20, requested by the author, Codex wrote the front end): Astra got a logotype passage with the logo guide (marks, color rules, full-size link), the graphics board in the poster section, and the SMM post in place of the LinkedIn banner. Aurora got a "Pages built from the system" section: a five-frame create-listing gallery, a phone and laptop figure, and a CSS-only parallax scroll of the home page (`src/components/ScrollShowcase.astro`, with a manual-scroll fallback). Claude checked the parallax in headless Chrome at 1280 px and 390 px. Not checked: real devices, Firefox and older Safari (the effect falls back to manual scroll there), and a full light/dark pass.
+
+Open: the Aurora study still has no image of its own component library. Ask the author for the Aurora Figma component hub, a button and input state sheet, and a product section built from them.
 
 ## Start here
 

@@ -6,7 +6,8 @@ client: "Aurora · University graduation project"
 role: "Design systems, UX research & frontend development"
 year: "2025"
 tools: "Figma, design tokens, prototype testing, Astro, React, TypeScript, Tailwind CSS"
-heroImage: "/photos/projects/AuroraDesignSystem/foundations.webp"
+heroImage: "/photos/projects/AuroraDesignSystem/pitch-cover-1920.webp"
+thumbnailImage: "/photos/projects/AuroraDesignSystem/pitch-cover-1920.webp"
 outcomes: ["3-developer evaluation", "11:39 to 6:05 assembly time", "Buying-flow benchmark"]
 tags: ["University project", "Design System", "Frontend"]
 order: 0
@@ -17,9 +18,12 @@ keyDecision: "Evaluate developer assembly separately from buying flows, and expl
 result: "Three developers assembled a login page faster. Buying-flow benchmarks lagged, while five think-aloud sessions informed the landing page."
 ---
 
+import ScrollShowcase from "@/components/ScrollShowcase.astro";
+
 <div class="mx-auto max-w-7xl px-6">
   <nav aria-label="Aurora project sections" class="mb-12 flex flex-wrap gap-3">
     <a href="#system" class="inline-flex min-h-11 items-center rounded-full border border-neutral-400 px-5 py-2 text-neutral-800 dark:text-neutral-100">Design system</a>
+    <a href="#pages" class="inline-flex min-h-11 items-center rounded-full border border-neutral-400 px-5 py-2 text-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-600 dark:text-neutral-100 dark:focus-visible:outline-sky-400">Pages</a>
     <a href="#launch" class="inline-flex min-h-11 items-center rounded-full border border-neutral-400 px-5 py-2 text-neutral-800 dark:text-neutral-100">Landing page</a>
   </nav>
 
@@ -40,6 +44,18 @@ result: "Three developers assembled a login page faster. Buying-flow benchmarks 
     <h3>Foundations that explain how to build</h3>
     <p>The Figma structure separates color, typography, size variables, and iconography from the main component file, assembled pages, and brand guidance. A hub links navigation, form controls, cards, badges, and feedback patterns. Component documentation describes anatomy, variants, interaction states, and whether an implementation exists.</p>
     <p>The scope deliberately stops short of a complete coded library. Token export, Code Connect coverage, Storybook, visual regression, and adoption analytics appear as integration proposals or roadmap work in the report. They are not presented here as a fully delivered pipeline.</p>
+  </section>
+
+  <section class="mb-16 grid items-center gap-8 lg:grid-cols-2" aria-labelledby="brand-application-title">
+    <div class="max-w-[52ch] space-y-4 text-neutral-600 dark:text-neutral-300">
+      <h3 id="brand-application-title" class="text-balance text-2xl font-semibold tracking-tight text-neutral-800 dark:text-neutral-100">The system beyond product screens</h3>
+      <p>The pitch ties blue and violet to the intended brand qualities of competence, sincerity, and trust.</p>
+      <p>The pitch shows the same visual direction in a “Weekly finds” post by the social media manager.</p>
+    </div>
+    <figure class="mx-auto w-full max-w-sm min-w-0">
+      <img src="/photos/projects/AuroraDesignSystem/pitch-weekly-finds-539.webp" width="539" height="690" loading="lazy" decoding="async" alt="Aurora Weekly finds social post with a blue collage of clothing, glasses, furniture, and other illustrative products" class="h-auto w-full rounded-xl" />
+      <figcaption>The pitch notes DALL·E use. Product imagery and brand names are illustrative.</figcaption>
+    </figure>
   </section>
 
   <section class="mb-16">
@@ -79,6 +95,67 @@ result: "Three developers assembled a login page faster. Buying-flow benchmarks 
 
   </section>
 
+  <section id="pages" aria-labelledby="pages-title" class="mb-24 min-w-0 scroll-mt-8">
+    <header class="mb-12 border-t border-neutral-200 pt-10 dark:border-neutral-800">
+      <h2 id="pages-title" class="mb-6 text-balance text-3xl font-semibold tracking-tight text-neutral-800 dark:text-neutral-100 md:text-4xl">Pages built from the system</h2>
+      <div class="max-w-[68ch] space-y-4 text-neutral-600 dark:text-neutral-300">
+        <p>The Figma pages put the system to use. They cover listing creation, the product page on two screen sizes, and the home page.</p>
+        <p>All screens use sample content. The project scope included selected buying and listing flows. The report states no test result for these pages.</p>
+      </div>
+    </header>
+
+    <section class="mb-16 min-w-0" aria-labelledby="listing-title">
+      <div class="mb-6 max-w-[68ch] space-y-4 text-neutral-600 dark:text-neutral-300">
+        <h3 id="listing-title" class="text-balance text-2xl font-semibold tracking-tight text-neutral-800 dark:text-neutral-100">Create a listing in steps</h3>
+        <p>The frames show category choices, item details, and ad options. The header names Category, Details, Review, Ad Type, and Preview.</p>
+        <p>Two frames show category menu states. The progress indicator does not match the step in every frame. The ad options include free, paid, and premium choices.</p>
+        <p id="listing-help" class="text-sm">Swipe through the frames, or focus the gallery and use the arrow keys.</p>
+      </div>
+      <div role="region" aria-label="Aurora listing prototype gallery" aria-describedby="listing-help" tabindex="0" class="flex w-full min-w-0 max-w-full snap-x snap-proximity gap-6 overflow-x-auto rounded-2xl px-1 pb-6 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-600 motion-reduce:snap-none dark:focus-visible:outline-sky-400">
+        <figure class="m-0 w-[calc(100%_-_2rem)] max-w-[52rem] shrink-0 snap-start md:w-[82%]">
+          <img src="/photos/projects/AuroraDesignSystem/create-ad-step-1-1512.webp" width="1512" height="1100" loading="lazy" decoding="async" alt="Listing category screen with category fields, an Electronics to Business Laptops path, and a help panel" class="h-auto w-full rounded-xl border border-neutral-200 bg-white dark:border-neutral-800" />
+          <figcaption>Category selection with a selected path. Sample content.</figcaption>
+        </figure>
+        <figure class="m-0 w-[calc(100%_-_2rem)] max-w-[52rem] shrink-0 snap-start md:w-[82%]">
+          <img src="/photos/projects/AuroraDesignSystem/create-ad-step-2-1512.webp" width="1512" height="1100" loading="lazy" decoding="async" alt="Listing form with title, producer, model, frequency, state, description, and price fields" class="h-auto w-full rounded-xl border border-neutral-200 bg-white dark:border-neutral-800" />
+          <figcaption>Item fields, description, and price inputs. Sample content.</figcaption>
+        </figure>
+        <figure class="m-0 w-[calc(100%_-_2rem)] max-w-[52rem] shrink-0 snap-start md:w-[82%]">
+          <img src="/photos/projects/AuroraDesignSystem/create-ad-step-3-1512.webp" width="1512" height="1100" loading="lazy" decoding="async" alt="Open listing section menu with Women, Men, Electronics, Household, and Other options, with Electronics selected" class="h-auto w-full rounded-xl border border-neutral-200 bg-white dark:border-neutral-800" />
+          <figcaption>Open section menu with Electronics selected. Sample content.</figcaption>
+        </figure>
+        <figure class="m-0 w-[calc(100%_-_2rem)] max-w-[52rem] shrink-0 snap-start md:w-[82%]">
+          <img src="/photos/projects/AuroraDesignSystem/create-ad-step-4-1512.webp" width="1512" height="1100" loading="lazy" decoding="async" alt="Selected listing category fields showing Electronics, Computers, Computer parts, and CPUs" class="h-auto w-full rounded-xl border border-neutral-200 bg-white dark:border-neutral-800" />
+          <figcaption>Selected category fields from Electronics to CPUs. Sample content.</figcaption>
+        </figure>
+        <figure class="m-0 w-[calc(100%_-_2rem)] max-w-[52rem] shrink-0 snap-start md:w-[82%]">
+          <img src="/photos/projects/AuroraDesignSystem/create-ad-step-5-1512.webp" width="1512" height="1100" loading="lazy" decoding="async" alt="Three listing ad options for free, paid, and premium placement, each with placeholder benefits and a Next button" class="h-auto w-full rounded-xl border border-neutral-200 bg-white dark:border-neutral-800" />
+          <figcaption>Free, paid, and premium ad choices with placeholder benefits. Sample content.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="mb-16" aria-labelledby="devices-title">
+      <div class="mb-8 max-w-[68ch] space-y-4 text-neutral-600 dark:text-neutral-300">
+        <h3 id="devices-title" class="text-balance text-2xl font-semibold tracking-tight text-neutral-800 dark:text-neutral-100">One product page, two screen sizes</h3>
+        <p>The product page prototype appears in a phone frame and a laptop frame. Both show a product image, price, and offer and purchase controls.</p>
+      </div>
+      <figure class="min-w-0">
+        <img src="/photos/projects/AuroraDesignSystem/responsive-devices-900.webp" srcSet="/photos/projects/AuroraDesignSystem/responsive-devices-900.webp 900w, /photos/projects/AuroraDesignSystem/responsive-devices-1800.webp 1800w" sizes="(min-width: 1280px) 1232px, calc(100vw - 48px)" width="1800" height="952" loading="lazy" decoding="async" alt="Aurora product-page prototypes in phone and laptop frames, with a stacked phone layout and desktop purchase rail" class="h-auto w-full rounded-2xl bg-neutral-900" />
+        <figcaption>The phone and laptop screens use sample content, including different product images.</figcaption>
+      </figure>
+    </section>
+
+    <section class="min-w-0" aria-labelledby="home-scroll-title">
+      <div class="mb-8 max-w-[68ch] space-y-4 text-neutral-600 dark:text-neutral-300">
+        <h3 id="home-scroll-title" class="text-balance text-2xl font-semibold tracking-tight text-neutral-800 dark:text-neutral-100">The home page, scrolled</h3>
+        <p>Scroll through the home page prototype: banners, weekly finds, brand links, seller collections, and picks.</p>
+        <p>The listings, photos, and brand logos are sample content.</p>
+      </div>
+      <ScrollShowcase />
+    </section>
+  </section>
+
   <section id="launch" aria-labelledby="launch-title" class="mb-16 scroll-mt-8">
     <h2 id="launch-title" class="mb-6 text-3xl font-semibold tracking-tight text-neutral-800 dark:text-neutral-100 md:text-4xl">Landing page and launch story</h2>
     <p class="mb-12 max-w-[68ch]">The landing-page deliverable explains the proposed marketplace before launch. Its scope covers product communication and frontend implementation. The system and landing page have separate reports and evaluations.</p>
@@ -92,6 +169,33 @@ result: "Three developers assembled a login page faster. Buying-flow benchmarks 
       <h3>Research before the launch story</h3>
       <p>I reviewed competing websites, buying flows, user reviews, and forum discussions. SWOT analysis and a Business Model Canvas helped narrow the proposition.</p>
       <p>Empathy maps, provisional personas, and a service blueprint described the intended experience. These personas were working hypotheses, not established customer segments.</p>
+    </section>
+
+    <section class="mb-12" aria-labelledby="pitch-journey-title">
+      <div class="mb-8 max-w-[52ch] space-y-4 text-neutral-600 dark:text-neutral-300">
+        <h3 id="pitch-journey-title" class="text-balance text-2xl font-semibold tracking-tight text-neutral-800 dark:text-neutral-100">The proposed buying journey</h3>
+        <p>The launch pitch groups the proposed journey into discovery, purchase or negotiation, and delivery.</p>
+      </div>
+      <figure class="min-w-0">
+        <ol role="list" class="grid gap-8 md:grid-cols-3">
+          <li class="min-w-0">
+            <img src="/photos/projects/AuroraDesignSystem/pitch-discover-344.webp" width="344" height="268" loading="lazy" decoding="async" alt="Monitor and cursor illustrating product discovery in the Aurora pitch" class="mx-auto h-auto w-full max-w-[21.5rem] rounded-xl" />
+            <h4 class="mt-4 text-lg font-semibold text-neutral-800 dark:text-neutral-100">1. Discover</h4>
+            <p class="mt-2 max-w-[32ch] text-neutral-600 dark:text-neutral-300">Browse items from different resellers.</p>
+          </li>
+          <li class="min-w-0">
+            <img src="/photos/projects/AuroraDesignSystem/pitch-purchase-344.webp" width="344" height="268" loading="lazy" decoding="async" alt="Shopping cart illustrating the proposed purchase step" class="mx-auto h-auto w-full max-w-[21.5rem] rounded-xl" />
+            <h4 class="mt-4 text-lg font-semibold text-neutral-800 dark:text-neutral-100">2. Buy or negotiate</h4>
+            <p class="mt-2 max-w-[32ch] text-neutral-600 dark:text-neutral-300">Buy an item or negotiate with the seller.</p>
+          </li>
+          <li class="min-w-0">
+            <img src="/photos/projects/AuroraDesignSystem/pitch-delivery-344.webp" width="344" height="268" loading="lazy" decoding="async" alt="Parcel illustrating the proposed delivery step" class="mx-auto h-auto w-full max-w-[21.5rem] rounded-xl" />
+            <h4 class="mt-4 text-lg font-semibold text-neutral-800 dark:text-neutral-100">3. Receive</h4>
+            <p class="mt-2 max-w-[32ch] text-neutral-600 dark:text-neutral-300">Receive the item through the proposed delivery service.</p>
+          </li>
+        </ol>
+        <figcaption>The three stages describe a product concept. They do not establish working recommendations, checkout, or delivery.</figcaption>
+      </figure>
     </section>
 
     <section class="mb-12 grid gap-8 lg:grid-cols-2 lg:items-center">

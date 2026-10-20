@@ -231,26 +231,33 @@ result: "A shared brand concept, posters, banner and video material, plus a docu
 
   {/* Logo section */}
   <div class="mb-16">
-    <h3 class="text-xl font-bold mb-6 text-neutral-800 dark:text-neutral-100">Logo</h3>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <div class="bg-white dark:bg-neutral-950 p-8 rounded-xl flex items-center justify-center">
-        <img
-          src="/photos/projects/Astra/Logotype-1.webp"
-          alt="Astra logo"
-          class="w-auto h-auto max-h-48"
-        />
+    <h3 class="mb-6 text-2xl font-semibold tracking-tight text-neutral-800 dark:text-neutral-100">Logotype</h3>
+    <div class="grid items-start gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:gap-12">
+      <div class="space-y-4 text-neutral-600 dark:text-neutral-300">
+        <p class="max-w-[60ch]">We used the logotype as a core part of the Astra Design Bureau identity.</p>
+        <p class="max-w-[60ch]">The guide specifies Neue Haas Grotesk and a severed “t” that resembles a Cyrillic letter. Two lockups read “astra db” and “astra design bureau.”</p>
+        <p class="max-w-[60ch]">The star sets the clear space around each lockup. It also decorates rounded letters such as “a,” “d,” and “b.” The guide places the star between letters to avoid readability problems.</p>
+        <p class="max-w-[60ch]">The guide prohibits changes and distortion.</p>
       </div>
-      <div class="rounded-xl flex items-center justify-center">
-        <img
-          src="/photos/projects/Astra/Logotype.webp"
-          alt="Astra logo rules"
-          class="w-auto h-auto max-h-48"
-        />
-      </div>
-      <div class="md:col-span-2 mt-4">
-        <p class="text-neutral-600 dark:text-neutral-400">The Astra logo combines geometric precision with space-inspired elements, creating a mark that's both modern and timeless. It's designed for versatility across digital and print applications while maintaining strong recognition at various sizes.</p>
-      </div>
+      <figure class="min-w-0">
+        <img src="/photos/projects/Astra/logotype-marks-1400.webp" width="1400" height="440" loading="lazy" decoding="async" alt="Astra db and Astra design bureau lockups with star-based clear-space measurements" class="h-auto w-full rounded-xl bg-white" />
+        <figcaption>The two lockups show the star as a clear-space unit.</figcaption>
+      </figure>
     </div>
+    <dl class="my-10 grid gap-6 border-y border-neutral-200 py-6 text-sm leading-relaxed dark:border-neutral-800 md:grid-cols-3">
+      <div>
+        <dt class="font-semibold text-neutral-900 dark:text-neutral-100">Light backgrounds</dt>
+        <dd class="mt-2 text-neutral-600 dark:text-neutral-300">Use black on white or very light backgrounds.</dd>
+      </div>
+      <div>
+        <dt class="font-semibold text-neutral-900 dark:text-neutral-100">Medium-value backgrounds</dt>
+        <dd class="mt-2 text-neutral-600 dark:text-neutral-300">Choose black or white, whichever gives more contrast.</dd>
+      </div>
+      <div>
+        <dt class="font-semibold text-neutral-900 dark:text-neutral-100">Dark backgrounds</dt>
+        <dd class="mt-2 text-neutral-600 dark:text-neutral-300">Use white on black or very dark backgrounds.</dd>
+      </div>
+    </dl>
   </div>
 
   {/* Typography section */}
@@ -276,6 +283,17 @@ result: "A shared brand concept, posters, banner and video material, plus a docu
         </div>
       </div>
     </div>
+  </div>
+
+  {/* Interface documentation */}
+  <div class="my-16">
+    <h3 class="text-xl font-bold mb-6 text-neutral-800 dark:text-neutral-100">Interface documentation</h3>
+    <figure class="min-w-0">
+      <img src="/photos/projects/Astra/button-states-800.webp" srcSet="/photos/projects/Astra/button-states-800.webp 800w, /photos/projects/Astra/button-states-1600.webp 1600w" sizes="(max-width: 1279px) calc(100vw - 48px), 1232px" width="1600" height="564" loading="lazy" decoding="async" alt="Astra button variants in outline, filled, muted, and text styles, grouped under default, pressed or focus, and keyboard-focus labels" class="w-full h-auto rounded-xl" />
+      <figcaption class="mt-3 text-sm text-neutral-500 dark:text-neutral-400">
+        The Figma sheet documents button variants and states. It does not establish a coded library or tested keyboard behavior.
+      </figcaption>
+    </figure>
   </div>
 
   {/* Color Palette section */}
@@ -312,15 +330,31 @@ result: "A shared brand concept, posters, banner and video material, plus a docu
 
   {/* Photography section */}
   <div class="mb-16">
-    <h3 class="text-xl font-bold mb-6 text-neutral-800 dark:text-neutral-100">Photography Style</h3>
-    <div>
-      <img
-        src="/photos/projects/Astra/Images&Photography.webp"
-        alt="Astra photography style example 1"
-        class="w-full h-auto object-cover rounded-xl"
-      />
+    <h3 class="mb-6 text-xl font-semibold tracking-tight text-neutral-800 dark:text-neutral-100">Photography Style</h3>
+    <div class="grid items-start gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:gap-12">
+      <div class="text-neutral-600 dark:text-neutral-300">
+        <p class="max-w-[52ch]">The guide uses constructivist references to show familiar subjects from unusual angles.</p>
+        <dl class="mt-6 space-y-6">
+          <div>
+            <dt class="font-semibold text-neutral-900 dark:text-neutral-100">Composition</dt>
+            <dd class="mt-2 max-w-[52ch]">Use perspective, diagonal compositions, and foreground elements to give ordinary subjects a different visual emphasis.</dd>
+          </div>
+          <div>
+            <dt class="font-semibold text-neutral-900 dark:text-neutral-100">Viewpoint</dt>
+            <dd class="mt-2 max-w-[52ch]">Use views from above and below to change how familiar subjects appear.</dd>
+          </div>
+        </dl>
+      </div>
+      <figure class="min-w-0">
+        <div class="grid grid-cols-3 items-end gap-3 sm:gap-4">
+          <img src="/photos/projects/Astra/photography-reference-ladder.webp" width="202" height="258" loading="lazy" decoding="async" alt="Black-and-white reference photo looking up at a person on a ladder" class="h-auto w-full rounded-xl" />
+          <img src="/photos/projects/Astra/photography-reference-yard.webp" width="530" height="400" loading="lazy" decoding="async" alt="Black-and-white reference photo of a person seated outside a wooden house" class="col-span-2 h-auto w-full rounded-xl" />
+          <img src="/photos/projects/Astra/photography-reference-low-angle.webp" width="235" height="275" loading="lazy" decoding="async" alt="Black-and-white reference photo of a face seen from below" class="h-auto w-full self-start rounded-xl" />
+          <img src="/photos/projects/Astra/photography-reference-stairs.webp" width="850" height="375" loading="lazy" decoding="async" alt="Black-and-white reference photo of a person crossing diagonal light and dark stripes" class="col-span-2 h-auto w-full self-start rounded-xl" />
+        </div>
+        <figcaption>Photography references from the project guide.</figcaption>
+      </figure>
     </div>
-    <p class="mt-6 text-neutral-600 dark:text-neutral-400">The photography style emphasizes clean lines, geometric compositions, and a carefully controlled color palette that complements the brand's core colors. Images feature a mix of abstract patterns, architectural elements, and minimalist workspaces that reflect the brand's technical yet sophisticated aesthetic.</p>
   </div>
 
   {/* Brand Vision */}
@@ -400,6 +434,11 @@ result: "A shared brand concept, posters, banner and video material, plus a docu
     <span>Poster Designs</span>
   </h2>
 
+  <figure class="mb-10 min-w-0">
+    <img src="/photos/projects/Astra/graphics-board-1200.webp" srcSet="/photos/projects/Astra/graphics-board-1200.webp 1200w, /photos/projects/Astra/graphics-board-2400.webp 2400w" sizes="(min-width: 1280px) 1232px, calc(100vw - 48px)" width="2400" height="948" loading="lazy" decoding="async" alt="Astra black and white poster concepts beside illustrative wall-mounted conference display mockups" class="h-auto w-full rounded-xl bg-white" />
+    <figcaption>Illustrative concepts for conference displays, not a live campaign.</figcaption>
+  </figure>
+
   <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
     <div class="bg-neutral-50 dark:bg-neutral-900 p-4 rounded-xl shadow-md">
       <img
@@ -416,14 +455,14 @@ result: "A shared brand concept, posters, banner and video material, plus a docu
         alt="Astra white poster design"
         class="w-full h-auto rounded-lg"
       />
-      <p class="mt-4 text-center text-sm text-neutral-200 dark:text-neutral-600">White Version</p>
+      <p class="mt-4 text-center text-sm text-neutral-600 dark:text-neutral-400">White Version</p>
     </div>
 
     <div class="bg-neutral-50 dark:bg-neutral-900 p-4 rounded-xl shadow-md">
       <img
         src="/photos/projects/Astra/wrinkled-poster.webp"
         alt="Astra wrinkled poster mockup"
-        class="w-auto h-auto object-cover rounded-lg"
+        class="w-full aspect-[5/4] object-cover rounded-lg"
       />
       <p class="mt-4 text-center text-sm text-neutral-600 dark:text-neutral-400">Wrinkled Poster Application</p>
     </div>
@@ -552,6 +591,12 @@ result: "A shared brand concept, posters, banner and video material, plus a docu
       <div class="bg-neutral-50 dark:bg-neutral-900 p-6 rounded-xl shadow-sm">
         <h3 class="text-lg font-bold mb-3 text-neutral-800 dark:text-neutral-100">Digital Advertising</h3>
         <p class="text-neutral-600 dark:text-neutral-400">To target our audience on social media, LinkedIn, and web forums, we created engaging advertisement banners with clear calls-to-action (CTAs) and stylish animations. This approach was designed to capture the attention of industry representatives and inspire interaction with our brand.</p>
+        <figure class="mt-4 min-w-0">
+          <img src="/photos/projects/Astra/smm-post-960.webp" srcSet="/photos/projects/Astra/smm-post-960.webp 960w, /photos/projects/Astra/smm-post-1920.webp 1920w" sizes="(min-width: 1280px) 552px, (min-width: 1024px) calc((100vw - 176px) / 2), calc(100vw - 96px)" width="1920" height="1080" loading="lazy" decoding="async" alt="Astra social media concept with curved lines, the bureau logo, and the message Your new innovative partner for growth?" class="w-full h-auto rounded-lg" />
+          <figcaption class="mt-2 text-sm text-neutral-500 dark:text-neutral-400">
+            Illustrative social media post concept for the university project. The project has no measured campaign results.
+          </figcaption>
+        </figure>
       </div>
 
       <div class="bg-neutral-50 dark:bg-neutral-900 p-6 rounded-xl shadow-sm">
@@ -583,22 +628,22 @@ result: "A shared brand concept, posters, banner and video material, plus a docu
     <div class="grid grid-cols-2 md:grid-cols-12 gap-4 md:gap-6">
       {/* First large image spanning 7 columns */}
       <div class="col-span-2 md:col-span-7 rounded-2xl overflow-hidden shadow-lg transform hover:scale-[1.02] transition-transform duration-300">
-        <img src="/photos/projects/Astra/1.jpg" alt="Information architecture diagram" class="w-full h-full object-cover" />
+        <img src="/photos/projects/Astra/1.jpg" alt="Two phones showing the dark Astra website, one with the Astra logo and one with an IT workshop page" class="w-full h-full object-cover" />
       </div>
 
       {/* Second image */}
       <div class="col-span-2 md:col-span-5 rounded-2xl overflow-hidden shadow-lg md:mt-12 transform hover:scale-[1.02] transition-transform duration-300">
-        <img src="/photos/projects/Astra/2.jpg" alt="Portal wireframe" class="w-full h-full object-cover" />
+        <img src="/photos/projects/Astra/2.jpg" alt="Phone showing the dark Astra Services page under the heading What we excel at" class="w-full h-full object-cover" />
       </div>
 
       {/* Third image */}
       <div class="col-span-1 md:col-span-5 rounded-2xl overflow-hidden shadow-lg transform hover:scale-[1.02] transition-transform duration-300">
-        <img src="/photos/projects/Astra/3.jpg" alt="Final portal design" class="w-full h-full object-cover" />
+        <img src="/photos/projects/Astra/3.jpg" alt="Laptop showing the dark Astra Services page" class="w-full h-full object-cover" />
       </div>
 
       {/* Fourth image */}
       <div class="col-span-1 md:col-span-7 rounded-2xl overflow-hidden shadow-lg transform hover:scale-[1.02] transition-transform duration-300">
-        <img src="/photos/projects/Astra/4.jpg" alt="Final portal design" class="w-full h-full object-cover" />
+        <img src="/photos/projects/Astra/4.jpg" alt="Laptop showing a dark Astra page with phone and tablet previews of a graphic design article" class="w-full h-full object-cover" />
       </div>
     </div>
 

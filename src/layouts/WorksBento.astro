@@ -14,6 +14,8 @@ interface BentoTile {
   role?: string;
   href?: string;
   image?: string;
+  imageAlt?: string;
+  mobileImage?: string;
   imageWidth?: number;
   imageHeight?: number;
   emoji?: string;
@@ -38,6 +40,10 @@ const caseStudyTiles: BentoTile[] = await Promise.all(caseStudies.map(async (stu
   role: study.data.role,
   href: study.data.comingSoon ? undefined : `/case-studies/${study.id}`,
   image,
+  ...(study.id === "aurora-design-system" && {
+    imageAlt: "Aurora desktop and phone prototypes with illustrative marketplace cards",
+    mobileImage: "/photos/projects/AuroraDesignSystem/pitch-cover-960.webp",
+  }),
   imageWidth: width,
   imageHeight: height,
   emoji: study.data.bentoEmoji,
@@ -87,20 +93,23 @@ const tagBase =
                   <span aria-hidden="true">{tile.emoji}</span>
                 </div>
               ) : tile.image ? (
-                <img
-                  alt={tile.title}
-                  src={tile.image}
-                  width={tile.imageWidth}
-                  height={tile.imageHeight}
-                  loading="lazy"
-                  decoding="async"
-                  class:list={[
-                    "block h-full w-full object-center transition-transform duration-500 motion-reduce:transition-none",
-                    // Panoramic UI screenshots lose too much content when cropped on mobile.
-                    tile.imageWidth && tile.imageHeight && tile.imageWidth > tile.imageHeight * 2 ? "object-contain" : "object-cover",
-                    isComingSoon ? "grayscale opacity-75" : "motion-safe:group-hover:scale-[1.03] motion-safe:group-focus-visible:scale-[1.03]",
-                  ]}
-                />
+                <picture class="block h-full w-full">
+                  {tile.mobileImage && <source media="(max-width: 639px)" srcset={tile.mobileImage} />}
+                  <img
+                    alt={tile.imageAlt ?? tile.title}
+                    src={tile.image}
+                    width={tile.imageWidth}
+                    height={tile.imageHeight}
+                    loading="lazy"
+                    decoding="async"
+                    class:list={[
+                      "block h-full w-full object-center transition-transform duration-500 motion-reduce:transition-none",
+                      // Panoramic UI screenshots lose too much content when cropped on mobile.
+                      (tile.imageWidth && tile.imageHeight && tile.imageWidth > tile.imageHeight * 2) ? "object-contain" : "object-cover",
+                      isComingSoon ? "grayscale opacity-75" : "motion-safe:group-hover:scale-[1.03] motion-safe:group-focus-visible:scale-[1.03]",
+                    ]}
+                  />
+                </picture>
               ) : null}
             </div>
 

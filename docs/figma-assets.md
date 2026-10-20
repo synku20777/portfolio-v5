@@ -57,7 +57,7 @@ All 91 raw images are converted to lossless WebP in `src/assets/figma-webp/` (sa
 
 The page holds one image fill and is mostly vector layout. The image (`001-Teamember.png`, 1024 px) is an AI-generated sci-fi scene used as sample content in the `Teammember` component. It does not fit the portfolio. Do not use it.
 
-The useful assets are renders of the documentation frames. They are **not saved yet**, because the Figma REST API and the connector both hit their Starter-plan limits (REST `Retry-After` was 399185 s, about 4.6 days from 2026-10-17). Export these as PNG when the limit resets, or export them by hand in Figma:
+The useful assets are renders of the documentation frames. They were blocked on 2026-10-17 by the Starter-plan limit. They were exported on 2026-10-20 after the account moved to an education seat (see "Showcase renders" below). These are the nodes:
 
 | Node | Name | Size | Scale |
 | --- | --- | --- | --- |
@@ -70,7 +70,7 @@ The useful assets are renders of the documentation frames. They are **not saved 
 | `396:4145` | Buttons component set | 2084×693 | 2× |
 | `369:4641`, `547:3877`, `547:3892`, `657:2900`, `657:2934`, `657:2947`, `657:2927` | Measure line, unordered list, ordered list, switch, radio, progress, slider | small | 2× |
 
-To resume, run `figma-export.js` (it lives in the session scratch folder and is easy to rewrite: `GET /v1/images/:key?ids=…&format=png&scale=…`).
+To export again, call `GET /v1/images/:key?ids=…&format=png&scale=…` with the token.
 
 ### `Main-zmHLsi/` (IT-Workshoppen)
 
@@ -96,6 +96,27 @@ To resume, run `figma-export.js` (it lives in the session scratch folder and is 
 | 021, 023–030 | Line drawings of the device and installation steps | Good. Own work, readable. |
 | 022 | Firefly logo, 338 px | Small. Find the vector. |
 | 013–017, 020 | Screenshots of Figma plugins and a font pairing page. 020 is nearly blank. | Do not use. |
+
+## Showcase renders (2026-10-20)
+
+Finished frames and slides, not loose image fills. They look better on a page than the raw fills because they keep the layout, type, and annotation. Rendered with the REST API as PNG, then saved as lossless WebP. Git ignores all of it.
+
+- **Renders (PNG):** `src/assets/figma-raw/Portfolio-v2-renders/` (32 frames of Portfolio-v2 page "Finals"), `Design-JvMwyW-renders/` (design-system frames), `Astra-Presentation-renders/`, `Astra-Prototype-renders/`, `Astra-Branding-renders/`, `Astra-Wireframe-renders/`, `Astra-overview-renders/` (large boards at 0.3×), `Astra-boards-renders/` (the same boards at about 4000 px wide). Each folder with a `manifest.json` lists node IDs.
+- **Curated set (47 WebP, 21 MB):** `src/assets/figma-webp/showcase/<project>/`. The folders are `cloud-first` (6), `artsy` (8), `uxunite` (10), `astra-design-system` (6), and `astra` (17: pitch slides, branding, banners, and six large boards).
+- The `Design` file (`JvMwyWXspEiqHEQawTDAvb`) has the pages Digital Design System, Branding, Wireframe, Prototype, Presentation, and Moodboard. The pitch slides and boards are Danish-language Astra work.
+
+- **Requested renders (2026-10-20):** `src/assets/figma-raw/Astra-requested/` (graphics board `1258:1894`, SMM post `1270:2277`, logotype guide `370:4821`) and `src/assets/figma-raw/Aurora-Pages/` (file `Pages`, key `F3mMlFvMBZQf6nN5JzGI0u`: create-listing frames, the device frames `7:20612` and `7:20613`, and the home page `2:10139`, 1920x6488). Page copies built from these are in `public/photos/projects/Astra/` and `AuroraDesignSystem/`. The Aurora home page has a profane hero headline, so only the strip below it is used.
+
+- **Firefly requested frames (2026-10-20):** `Design` (`cAellCAbSDpMlC9EvOB5Ch`), color sheet `52:753` and manual section `2002:26`. Ignored source copies are in `src/assets/figma-webp/showcase/firefly/`. Public copies are five color-column crops and nine individual A4 page exports under `public/photos/projects/Firefly/`. The manual page IDs and evidence limits are in `case-study-report-sources.md`.
+- **Aurora pitch material (2026-10-20):** Slides decks `xBboFyRVp5EhRHjtXy7DId` and `IMD3fhkPx7624HmPMasiLA`. Ignored source copies are in `src/assets/figma-webp/showcase/aurora-pitch/`. Public crops under `public/photos/projects/AuroraDesignSystem/` show the Weekly finds post (`93:1135`) and three buying-journey illustrations (`14:368`). The homepage and case-study hero use the updated landscape cover slide (`1:30`), exported as `pitch-cover-1920.webp` and `pitch-cover-960.webp`. Images cover their frames. Brand-rationale copy also refers to slide `1:279`. Original deck text does not override the report's measured results.
+
+Check before use:
+
+- **Faces.** `uxunite/why-design-system`, `uxunite/design-audit-and-bug-off`, and `uxunite/case-overview` contain workshop photos. Some faces are blurred and some are not. Check consent or blur them.
+- **Sample content.** The Cloud First and Artsy overview frames hold mockup text. The Artsy overview shows a reproduction of an artwork. Say "illustrative" in the caption.
+- **Stock-style portraits and photos** appear in the Astra persona frame and boards. Confirm they are stock and label them.
+- **Not in the curated set:** the `Teammember` frame (an AI-generated image), banners with placeholder text ("change here", "Interactive Content"), empty device frames, the CV and Self Reflection frames (personal data, low value), and the long scroll captures in `Astra-Prototype-renders/`.
+- Files are large (boards are about 4000 px wide and 2 MB). Make a resized lossy copy before use on a page. Never copy them into `public/` as-is.
 
 ## Not yet pulled
 

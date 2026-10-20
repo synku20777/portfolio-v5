@@ -1,0 +1,157 @@
+<figure class="home-showcase min-w-0">
+  <div class="showcase-scene">
+    <div class="showcase-stage">
+      <div class="mb-4 flex min-h-11 flex-wrap items-center justify-between gap-3">
+        <p id="aurora-scroll-help" class="text-sm text-neutral-600 dark:text-neutral-300">
+          <span class="manual-hint">Scroll inside the frame, or focus it and use the arrow keys.</span>
+          <span class="page-hint">Scroll the page to explore. Choose manual scroll to use the frame.</span>
+        </p>
+        <label class="manual-control rounded-full border border-neutral-400 px-4 text-sm text-neutral-800 dark:text-neutral-100">
+          <input type="checkbox" class="manual-input size-4 accent-neutral-900 dark:accent-neutral-100" />
+          Manual scroll
+        </label>
+      </div>
+      <div class="showcase-display">
+        <div class="showcase-depth" aria-hidden="true"></div>
+        <div class="showcase-browser relative overflow-hidden rounded-2xl border border-neutral-300 bg-white dark:border-neutral-700 dark:bg-neutral-950">
+          <div class="flex min-h-11 items-center gap-3 border-b border-neutral-200 bg-neutral-100 px-4 text-xs text-neutral-600 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-300">
+            <span aria-hidden="true" class="flex shrink-0 gap-1.5">
+              <span class="size-1.5 rounded-full bg-neutral-500"></span>
+              <span class="size-1.5 rounded-full bg-neutral-500"></span>
+              <span class="size-1.5 rounded-full bg-neutral-500"></span>
+            </span>
+            <span>Aurora / Home page prototype</span>
+          </div>
+          <div class="showcase-viewport focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-sky-600 dark:focus-visible:outline-sky-400" role="region" aria-label="Scrollable Aurora home page prototype" aria-describedby="aurora-scroll-help" tabindex="0">
+            <img src="/photos/projects/AuroraDesignSystem/home-scroll-1280.webp" srcset="/photos/projects/AuroraDesignSystem/home-scroll-1280.webp 1280w, /photos/projects/AuroraDesignSystem/home-scroll-1920.webp 1920w" sizes="(min-width: 1280px) 1230px, calc(100vw - 50px)" width="1920" height="4860" loading="lazy" decoding="async" alt="Illustrative Aurora home page with banners, weekly finds, interesting items, popular brands, seller collections, and product picks" class="showcase-image block h-auto w-full bg-white" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <figcaption>Home page prototype with illustrative listings, photos, and brand logos. The report states no test result for this page.</figcaption>
+</figure>
+
+<style>
+  .home-showcase {
+    --showcase-height: clamp(15rem, 50svh, 32rem);
+  }
+
+  .showcase-display {
+    position: relative;
+    padding-bottom: 1rem;
+  }
+
+  .showcase-depth {
+    position: absolute;
+    inset: 3rem 0 0 0.75rem;
+    border-radius: 1.25rem;
+    background: #e5e5e5;
+  }
+
+  :global(.dark) .showcase-depth {
+    background: #262626;
+  }
+
+  .showcase-viewport {
+    height: var(--showcase-height);
+    overflow-y: auto;
+  }
+
+  .manual-control,
+  .page-hint {
+    display: none;
+  }
+
+  .manual-control:has(input:focus-visible) {
+    outline: 2px solid #0284c7;
+    outline-offset: 4px;
+  }
+
+  :global(.dark) .manual-control:has(input:focus-visible) {
+    outline-color: #38bdf8;
+  }
+
+  @supports (animation-timeline: view()) and (animation-range: contain 0% contain 100%) {
+    @media (prefers-reduced-motion: no-preference) {
+      .showcase-scene {
+        /* Give the tall desktop image enough page travel without enlarging its frame. */
+        height: max(180svh, min(180vw, 144rem));
+        view-timeline: --aurora-home block;
+      }
+
+      .showcase-stage {
+        position: sticky;
+        top: 1rem;
+      }
+
+      .showcase-viewport {
+        overflow-y: clip;
+      }
+
+      .showcase-image {
+        animation: aurora-home-pan 1s linear both;
+        animation-timeline: --aurora-home;
+        animation-range: contain 0% contain 100%;
+      }
+
+      .showcase-depth {
+        animation: aurora-home-depth 1s linear both;
+        animation-timeline: --aurora-home;
+        animation-range: contain 0% contain 100%;
+      }
+
+      .manual-control {
+        display: inline-flex;
+        min-height: 2.75rem;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .page-hint {
+        display: inline;
+      }
+
+      .manual-hint {
+        display: none;
+      }
+
+      .home-showcase:has(.manual-input:checked) .showcase-scene {
+        height: auto;
+      }
+
+      .home-showcase:has(.manual-input:checked) .showcase-stage {
+        position: relative;
+        top: auto;
+      }
+
+      .home-showcase:has(.manual-input:checked) .showcase-viewport,
+      .showcase-viewport:focus {
+        overflow-y: auto;
+      }
+
+      .home-showcase:has(.manual-input:checked) .showcase-image,
+      .home-showcase:has(.manual-input:checked) .showcase-depth,
+      .showcase-viewport:focus .showcase-image {
+        animation: none;
+      }
+
+      .home-showcase:has(.manual-input:checked) .manual-hint {
+        display: inline;
+      }
+
+      .home-showcase:has(.manual-input:checked) .page-hint {
+        display: none;
+      }
+    }
+  }
+
+  @keyframes aurora-home-pan {
+    to { transform: translateY(calc(-100% + var(--showcase-height))); }
+  }
+
+  @keyframes aurora-home-depth {
+    from { transform: translateY(0.75rem); }
+    to { transform: translateY(-0.75rem); }
+  }
+</style>
