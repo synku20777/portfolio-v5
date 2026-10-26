@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 import {
   AnimatePresence,
   type MotionValue,
@@ -45,7 +45,7 @@ export function FloatingDockDesktop({ className }: FloatingDockDesktopProps) {
       )}
     >
       {items.map((item) => (
-        <DockDesktopIcon key={item.title} item={item} mouseX={mouseX} />
+        <DockDesktopIcon key={item.href} item={item} mouseX={mouseX} />
       ))}
     </motion.div>
   );
@@ -92,11 +92,16 @@ function DockDesktopIcon({ item, mouseX }: DockDesktopIconProps) {
 
   const [hovered, setHovered] = useState(false);
   const Icon = item.icon;
+  const Control = item.onClick ? "button" : "a";
 
   return (
-    <a
-      href={item.href}
-      onClick={(event) => handleDockLinkClick(event, item.href, item.onClick)}
+    <Control
+      type={item.onClick ? "button" : undefined}
+      href={item.onClick ? undefined : item.href}
+      onClick={(event: MouseEvent<HTMLElement>) => handleDockLinkClick(event, item.href, item.onClick)}
+      onFocus={() => setHovered(true)}
+      onBlur={() => setHovered(false)}
+      className="flex min-h-11 min-w-11 items-center justify-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-600 dark:focus-visible:outline-sky-400"
       aria-label={item.title}
       title={item.title}
     >
@@ -126,6 +131,6 @@ function DockDesktopIcon({ item, mouseX }: DockDesktopIconProps) {
           <Icon className={item.iconClassName} />
         </motion.div>
       </motion.div>
-    </a>
+    </Control>
   );
 }

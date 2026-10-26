@@ -7,6 +7,22 @@ html {
   scroll-behavior: smooth;
 }
 
+:focus-visible {
+  transition-duration: 0s;
+}
+
+main :is(a[href], button):focus-visible,
+footer :is(a[href], button):focus-visible {
+  scroll-margin-block: 1rem 12rem;
+}
+
+@media (min-width: 768px) {
+  main :is(a[href], button):focus-visible,
+  footer :is(a[href], button):focus-visible {
+    scroll-margin-bottom: 7rem;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
