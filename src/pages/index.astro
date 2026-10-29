@@ -6,6 +6,7 @@ import { BackgroundRippleEffectDemo } from "@/components/ui/abf";
 import { getCollection, type CollectionEntry } from "astro:content";
 import { getReadingTime } from "@/lib/reading-time";
 import { siteConfig } from "@/lib/site";
+import Analytics from '@vercel/analytics/astro'
 
 type BlogPost = CollectionEntry<"blog">;
 
