@@ -83,3 +83,15 @@ Claims were checked against code by Codex (read-only, `before` checkout against 
 | Next steps (edit, search and filter, bar chart, hosted demo) | Plans | `docs/SHOWCASE.md` "What I would do next". | Labeled "not built yet" on the page. |
 
 Images: `public/photos/projects/VueFinance/` `after-dashboard-1600`, `before-dashboard-1600`, `after-dashboard-dark-1600`, `before-login-1200`, `after-login-1200`, `before-add-transaction-640`, `after-add-transaction-640`, `delete-confirm-800`, `empty-state-1200`, `mobile-dashboard-480`, `mobile-add-transaction-480`, and `after-dashboard-1600-tile-720`. They come from the repository's `docs/screenshots/*.png` (2880 by 1800, mobile 780 wide), converted to WebP at quality 82. The two add-transaction images and the delete dialog are crops. All data in them is generated demo data. The login panel shows an example figure ("Example month") that is placeholder content in the app. The older `dashboard.webp`, `entry.webp`, and `dashboard-tile-720.webp` were deleted on 2026-10-29 with Nestor's approval.
+
+## IT-Workshoppen website screenshots, 2026-10-29
+
+Source: the author's local site `C:\Users\nesto\Documents\itworkshop` (static HTML and CSS, commit `de622c2`, "Redesign site with new markup, styles, and local dev server") and its `screenshots/` folder (`home-desktop.png` 1440x1100, `home-mobile.png` 500x1100, `home-full.png` 1440x3000). Nestor asked for these screenshots to replace the old device mockups and said to keep the content otherwise the same.
+
+| Page image | Built from | Replaces | Supported description | Limits |
+| --- | --- | --- | --- | --- |
+| `It-Workshop/site-hero-1920.webp` (hero and homepage tile, `site-hero-1920-tile-720.webp`) | `home-desktop.png` and `home-mobile.png` on a pale background with a soft shadow | `1.webp` as hero | The coded home page on desktop and on a phone | A composite of two real screenshots, not a device photo. |
+| `It-Workshop/site-services-1200.webp` | Crop of `home-full.png` (y 740 to 2505) | `2.webp` in Visual Showcase | Welcome statement, course and workshop cards, and the three-step approach | Danish text. Copy on the page is unchanged. |
+| `It-Workshop/site-responsive-2200.webp` | `home-desktop.png` and `home-mobile.png` side by side at native size | `1.webp` in Visual Showcase | Desktop and mobile views of the coded home page | The caption no longer says "tablet", because no tablet view exists in the new screenshots. |
+
+The screenshots contain stock photos (a man with a laptop, two technology images). Their license is not confirmed, as in the earlier Figma notes. The page text for the study did not change. `5.webp` and `4.webp` are report slides and stay. The old `1.webp`, `1-tile-720.webp`, and `2.webp` are unused and stay on disk until Nestor approves deletion.
