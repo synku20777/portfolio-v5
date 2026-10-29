@@ -4,6 +4,14 @@ Updated: 2026-10-17. This document records the current work and next steps; insp
 
 > Durable rules, the app map and commands live in `/AGENTS.md` and `docs/case-study-guide.md`. The work log, validation notes and Codex thread details further down are a snapshot from 2026-10-16. **The status section below replaces the "Recommended next tasks" section at the end of this file.**
 
+## Update 2026-10-29: Vue Finance rebuilt, tile images resized
+
+- **Vue Finance** now describes the 2026 redesign of the 2024 university app, from the repository at `C:\Users\nesto\Documents\GitHub\vue-finance` (commit `93c34b1`). Claims were checked against code by Codex (before and after) and agy (CSS and templates). The source map has the claim table. Corrections made on the way: the README and SHOWCASE claims about raw dates, "every data view has loading, empty, and error states", signs on every category, and net balance were not repeated because the code does not support them. Net is income minus expenses. Investments carry no sign. The table already had loading and error states in 2024.
+- **Orchestration:** Codex checked the claims (read-only), then wrote the page layout in `vue-finance.mdx` from copy that Claude wrote. agy linted the copy and reviewed the markup from pasted text, because headless agy cannot read files without a shell permission unless it starts inside the repo with `--add-dir` (even then it asked for a command permission on the larger prompt). Claude computed the contrast ratios, built the images, and ran the build and browser checks.
+- **Homepage tiles** load one `-tile-720.webp` copy per study when it exists (`WorksBento.astro`, `tileImage`). The originals stay for the case-study pages. The React runtime (`client.*.js`, about 56 KiB gzipped) is shared by the nav dock, footer, hero background, and tile tooltips. It cannot shrink while any of them stays in React.
+- **Deleted with approval:** `VueFinance/dashboard.webp`, `entry.webp`, `dashboard-tile-720.webp`.
+- **Decision (Nestor, 2026-10-29):** the page does not mention the security gaps in the repository's `docs/PROJECT.md`. It states the good parts that code supports (bcrypt hashing, HTTP-only session cookie). The login and dashboard "example" captions stay as written.
+
 ## Status on 2026-10-17
 
 The last check-in ended with the items under "Deferred" and "Blocked" left undone on purpose. Start the next session there. Nothing is committed.

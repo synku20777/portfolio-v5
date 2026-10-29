@@ -1,70 +1,227 @@
 ---
-title: "Vue Finance: From Transactions to an Overview"
-description: "A university MVP connecting manual transaction entry, category totals, and a financial dashboard with Vue and GraphQL."
+title: "Vue Finance: Redesigning a Student MVP"
+description: "A full-stack finance tracker from a university course. In 2026 I redesigned the interface, added light and dark themes, and fixed usability gaps in the first version."
 category: "Web Application"
 client: "University project"
 role: "Interface design & full-stack development"
-year: "2024"
-tools: "Vue 3, TypeScript, Tailwind CSS, Apollo GraphQL, Node.js, MongoDB"
-heroImage: "/photos/projects/VueFinance/dashboard.webp"
-outcomes: ["Transaction entry", "Category summaries", "GraphQL integration"]
-tags: ["University project", "Vue", "Dashboard"]
+year: "2024, redesign 2026"
+tools: "Vue 3, TypeScript, Tailwind CSS, shadcn-vue, Apollo GraphQL, Node.js, MongoDB, Docker"
+heroImage: "/photos/projects/VueFinance/after-dashboard-1600.webp"
+outcomes: ["Redesigned interface", "Light and dark themes", "Docker setup with demo data"]
+tags: ["University project", "Redesign", "Vue"]
 order: 3
 bentoSpan: "sm:col-span-4 md:col-span-3 lg:col-span-7"
 themeColor: "emerald"
-constraint: "A Vue learning exercise expanded into a full-stack MVP, with a JavaScript backend and a TypeScript frontend."
-keyDecision: "Connect transaction entry, a readable table, and category summaries around the same underlying records."
-result: "A dashboard implementation with manual entry, transaction deletion, category totals, and account screens."
+constraint: "A working student MVP with template leftovers, dead controls, and unformatted money values."
+keyDecision: "Remove what was unfinished, then build one token set that drives light mode, dark mode, and the chart."
+result: "A smaller app with one dashboard, EUR formatting, a delete confirmation, and a Docker setup with demo data. No user testing."
 ---
 
-<div class="mx-auto max-w-7xl px-6">
-  <div class="grid grid-cols-1 gap-8 mb-16 md:grid-cols-2">
-    <section class="rounded-2xl bg-neutral-50 p-8 dark:bg-neutral-900">
-      <h2 class="mb-4 text-2xl font-bold text-neutral-800 dark:text-neutral-100">The challenge</h2>
-      <p>A transaction list records activity, but it does not immediately explain the bigger picture. This university MVP explores how someone entering their finances manually could move between individual records and an overview of income, expenses, and investments.</p>
+<div class="mx-auto max-w-7xl min-w-0 px-6 text-neutral-600 dark:text-neutral-300">
+  <div class="mb-20 grid gap-6 md:grid-cols-2 md:gap-8">
+    <section aria-labelledby="vf-challenge" class="rounded-2xl bg-neutral-50 p-8 dark:bg-neutral-900">
+      <h2 id="vf-challenge" class="mb-4 text-balance text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">The challenge</h2>
+      <p class="max-w-[52ch]">In 2024 I built this app for a university course. A Vue interface stored income, expenses, and investments through a GraphQL API. It worked, but it looked unfinished. In October 2026 I returned to it. I wanted a small finished app instead of a large unfinished one.</p>
     </section>
-    <section class="rounded-2xl bg-emerald-50 p-8 dark:bg-emerald-950">
-      <h2 class="mb-4 text-2xl font-bold text-neutral-800 dark:text-neutral-100">The response</h2>
-      <p>A compact dashboard combines a category chart, summary cards, and a transaction table. An “Add transaction” panel keeps entry close to the overview, so the central workflow stays within one workspace.</p>
+    <section aria-labelledby="vf-response" class="rounded-2xl bg-sky-50 p-8 dark:bg-sky-950/40">
+      <h2 id="vf-response" class="mb-4 text-balance text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">The response</h2>
+      <p class="max-w-[52ch]">I checked every screen and removed what had no function. Then I rebuilt the dashboard, the forms, and the sign-in screens on one set of design tokens. The API did not change. I added a Docker setup and a seed script for demo data.</p>
     </section>
   </div>
-
-  <section class="mb-16 prose prose-neutral max-w-3xl dark:prose-invert">
-    <h2>One record, three ways to read it</h2>
-    <p>The table answers “What happened?” with dates, descriptions, categories, and amounts. Summary cards answer “How much?” and a donut chart shows the category distribution. These views share transaction queries rather than being independent decorative widgets.</p>
-    <p>Creating or deleting a transaction requests fresh table and statistics data. That connection is the main implementation decision: a change to an individual record should be reflected in the overview without asking the user to reconstruct the totals.</p>
-  </section>
-
-  <section class="mb-16 prose prose-neutral max-w-3xl dark:prose-invert">
-    <h2>The difficult part was the contract between layers</h2>
-    <p>The original learning goal was a simple tracker using Vue, GraphQL, and Tailwind. The scope grew to include CRUD API design, Express, MongoDB, Passport sessions, and password hashing. I worked through both sides of the application to understand how a form becomes a stored transaction and then returns as dashboard data.</p>
-    <p>The report identifies schema, type-definition, and mutation mismatches as a recurring debugging problem: small inconsistencies could surface as null or undefined data in the interface. I traced requests through those layers and manually defined TypeScript types to bridge the untyped JavaScript responses. That was a workable learning-stage solution, with duplicated contracts left as a maintenance tradeoff.</p>
-    <p>Authentication also affected navigation. Reviewing Apollo and Vue Router documentation helped resolve the route-guard behavior around signed-in and signed-out users. The engineering story is therefore about connecting interfaces, data, and account state, rather than the dashboard layout alone.</p>
-  </section>
-
-  <figure class="mb-16">
-    <img src="/photos/projects/VueFinance/entry.webp" alt="Vue Finance transaction form with description, payment type, category, amount, and date fields" class="w-full rounded-xl" loading="lazy" decoding="async" />
-    <figcaption class="mt-3 text-sm text-neutral-500 dark:text-neutral-400">Original interface rendered with illustrative local data for this portfolio. The amounts are demonstration values.</figcaption>
-  </figure>
-
-  <section class="mb-16 grid gap-8 md:grid-cols-2">
-    <div class="prose prose-neutral max-w-none dark:prose-invert">
-      <h2>A deliberately narrow workflow</h2>
-      <p>Manual entry captures a description, payment type, category, amount, and date. The project also includes sign-up and sign-in screens, session-based authentication, and transaction storage through a GraphQL backend.</p>
-      <p>The table provides loading and error states, and disables its delete action while the request is pending. These small states make the connection between an interface and an asynchronous service visible.</p>
-    </div>
-    <div class="prose prose-neutral max-w-none dark:prose-invert">
-      <h2>Where the MVP stops</h2>
-      <p>The import menu represents future functionality; CSV, spreadsheet, and bank imports are outside the implemented workflow. The prototype uses simplified categories and currency presentation rather than a complete budgeting model.</p>
-      <p>The report prioritizes a stronger shared type contract, cleaner code, session-security review, and deployment as follow-up work. Automated imports remain a proposed extension to the manual-entry workflow.</p>
+  <section aria-labelledby="vf-comparison" class="mb-20 min-w-0 md:mb-24">
+    <header class="mb-8 max-w-[68ch] space-y-4">
+      <h2 id="vf-comparison" class="text-balance text-3xl md:text-4xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">Same app, two versions</h2>
+      <p>Both screenshots use demo data. Both come from the same app. The 2024 version is on the left.</p>
+    </header>
+    <div class="grid items-start gap-8 md:grid-cols-2">
+      <figure class="min-w-0">
+        <p class="mb-3 text-lg font-semibold">Before</p>
+        <div class="rounded-2xl border border-neutral-200 bg-neutral-50 p-2 dark:border-neutral-800 dark:bg-neutral-900 sm:p-3">
+          <img src="/photos/projects/VueFinance/before-dashboard-1600.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="2024 dashboard. The donut center reads 17635.909999999996, and one card shows a cut-off 5435.9099999. Every table row has a red delete button." class="block h-auto w-full rounded-xl" />
+        </div>
+        <figcaption>Before: the 2024 dashboard.</figcaption>
+      </figure>
+      <figure class="min-w-0">
+        <p class="mb-3 text-lg font-semibold">After</p>
+        <div class="rounded-2xl border border-neutral-200 bg-neutral-50 p-2 dark:border-neutral-800 dark:bg-neutral-900 sm:p-3">
+          <img src="/photos/projects/VueFinance/after-dashboard-1600.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="2026 dashboard. Three euro cards show income, expenses, and investments. A donut chart shows Net 5,764.09 euros with a legend. A table lists transactions." class="block h-auto w-full rounded-xl" />
+        </div>
+        <figcaption>After: the 2026 dashboard with demo data.</figcaption>
+      </figure>
     </div>
   </section>
-
-  <section class="mb-16 rounded-2xl bg-neutral-50 p-8 dark:bg-neutral-900">
-    <h2 class="mb-4 text-2xl font-bold text-neutral-800 dark:text-neutral-100">Outcome & documented verification</h2>
-    <p>The deliverable connects a Vue interface to transaction operations and category aggregation. The report documents a manual verification path: sign in, add a transaction, refresh, inspect the chart and table, then change or delete a record and refresh again. It records a repeatable check for the application flow, rather than a participant study or a quantified usability result.</p>
-    <p class="mt-4">My main learning was how much frontend reliability depends on explicit API contracts. A future evaluation would check failed requests, category interpretation, and persistence as carefully as the happy path.</p>
+  <section aria-labelledby="vf-changes" class="mb-20 md:mb-24">
+    <header class="mb-8 max-w-[68ch] space-y-4">
+      <h2 id="vf-changes" class="text-balance text-3xl md:text-4xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">What I found and changed</h2>
+      <p>I went through each screen in the 2024 version and listed what was wrong. These are the main changes.</p>
+    </header>
+    <div aria-hidden="true" class="hidden gap-12 border-b border-neutral-200 pb-3 text-sm font-medium text-neutral-600 dark:border-neutral-800 dark:text-neutral-300 md:grid md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
+      <span>Problem</span>
+      <span>Change</span>
+    </div>
+    <dl class="divide-y divide-neutral-200 dark:divide-neutral-800">
+      <div class="grid gap-4 py-7 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] md:gap-12">
+        <dt class="max-w-[55ch]"><strong class="mb-2 block font-semibold text-neutral-900 dark:text-neutral-100">Template leftovers.</strong> The header said "Welcome, User" for every account. The logout button had a hardcoded color. Settings and About held placeholder text. A mock Import menu had no handlers. A "View All" link pointed to "#".</dt>
+        <dd class="max-w-[48ch]">I removed the placeholder pages and the dead controls. The header shows the signed-in username.</dd>
+      </div>
+      <div class="grid gap-4 py-7 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] md:gap-12">
+        <dt class="max-w-[55ch]"><strong class="mb-2 block font-semibold text-neutral-900 dark:text-neutral-100">Money values.</strong> Totals showed raw numbers such as 5435.909999999. Dollar signs sat next to a euro icon.</dt>
+        <dd class="max-w-[48ch]">One formatter now shows euros with two decimals. One date formatter shows dates the same way everywhere.</dd>
+      </div>
+      <div class="grid gap-4 py-7 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] md:gap-12">
+        <dt class="max-w-[55ch]"><strong class="mb-2 block font-semibold text-neutral-900 dark:text-neutral-100">The donut chart.</strong> The center added income, expenses, and investments into one number. The slices used the words red, green, and blue.</dt>
+        <dd class="max-w-[48ch]">The center shows Net, which is income minus expenses. A legend lists each total. The slices use theme tokens.</dd>
+      </div>
+      <div class="grid gap-4 py-7 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] md:gap-12">
+        <dt class="max-w-[55ch]"><strong class="mb-2 block font-semibold text-neutral-900 dark:text-neutral-100">The add form.</strong> The amount field rejected 12.50. Type, payment method, and date were optional. Labels did not focus their inputs.</dt>
+        <dd class="max-w-[48ch]">The amount accepts cents. All fields are required. The date defaults to today. Labels point to their inputs.</dd>
+      </div>
+      <div class="grid gap-4 py-7 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] md:gap-12">
+        <dt class="max-w-[55ch]"><strong class="mb-2 block font-semibold text-neutral-900 dark:text-neutral-100">Delete.</strong> A click removed a row with no warning.</dt>
+        <dd class="max-w-[48ch]">A dialog asks first. A toast reports the result. The delete button is disabled while the request runs.</dd>
+      </div>
+      <div class="grid gap-4 py-7 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] md:gap-12">
+        <dt class="max-w-[55ch]"><strong class="mb-2 block font-semibold text-neutral-900 dark:text-neutral-100">Sign up.</strong> The form sent the email address as the username.</dt>
+        <dd class="max-w-[48ch]">The form has a separate username field.</dd>
+      </div>
+      <div class="grid gap-4 py-7 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] md:gap-12">
+        <dt class="max-w-[55ch]"><strong class="mb-2 block font-semibold text-neutral-900 dark:text-neutral-100">Empty accounts.</strong> The table had no empty state.</dt>
+        <dd class="max-w-[48ch]">A new account sees a short message in the table and in the chart.</dd>
+      </div>
+    </dl>
   </section>
-
-  <a href="https://github.com/synku20777/vue-finance" class="inline-flex rounded-lg border border-neutral-300 px-5 py-3 font-medium text-neutral-800 underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 dark:border-neutral-700 dark:text-neutral-100">Explore Vue Finance on GitHub</a>
+  <section aria-labelledby="vf-tokens" class="mb-20 min-w-0 md:mb-24">
+    <div class="mb-8 max-w-[28ch]">
+      <h2 id="vf-tokens" class="text-balance text-3xl md:text-4xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">One token set, three money colors</h2>
+    </div>
+    <div class="mb-8 grid gap-6 lg:grid-cols-2 lg:gap-12">
+      <div class="max-w-[60ch] space-y-4">
+        <p>The 2026 style is white and blue, with flat cards, hairline borders, and light type. The style is inspired by Ubiquiti UniFi and iOS 7 to 10. A translucent top bar stays in view while the page scrolls.</p>
+        <p>Colors, radii, and fonts live in CSS variables in one file. The dark theme changes the values, not the components. The chart reads the same variables, so the donut follows the theme without extra code.</p>
+      </div>
+      <div class="max-w-[60ch] space-y-4">
+        <p>Income is green, expenses are red, and investments are purple. Investments use purple so they never look like the brand blue. Plus Jakarta Sans is bundled with the app. Apple system fonts are the fallback. Money uses tabular numerals so amounts line up in columns.</p>
+        <p>Color is never the only signal. Every category has a label. Income rows carry a plus sign and expense rows carry a minus sign. Investment rows have no sign yet.</p>
+      </div>
+    </div>
+    <div class="mb-8 border-l-2 border-neutral-300 pl-5 dark:border-neutral-700">
+      <p class="max-w-[68ch]">I computed contrast ratios from the token values. In light mode, body text on the page background is about 15 to 1. Muted text is 5.3 to 1. White text on the brand blue is 5.6 to 1. In dark mode, muted text on a card is 7.7 to 1. Every pair I checked is above 4.5 to 1. These numbers come from the tokens, not from measured pixels. I did not test with a screen reader.</p>
+    </div>
+    <figure class="min-w-0">
+      <img src="/photos/projects/VueFinance/after-dashboard-dark-1600.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="The same 2026 dashboard in dark mode. The donut chart and category badges use lighter red, green, and purple." class="block h-auto w-full rounded-2xl border border-neutral-200 dark:border-neutral-800" />
+      <figcaption>The same dashboard in dark mode.</figcaption>
+    </figure>
+  </section>
+  <section aria-labelledby="vf-flows" class="mb-20 min-w-0 md:mb-24">
+    <div class="mb-12">
+      <h2 id="vf-flows" class="text-balance text-3xl md:text-4xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">The flows that changed most</h2>
+    </div>
+    <section aria-labelledby="vf-add" class="mb-16">
+      <div class="mb-8 max-w-[68ch] space-y-4">
+        <h3 id="vf-add" class="text-balance text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">Add transaction</h3>
+        <p>The 2024 form opened in a side sheet. The date was empty and the amount was in dollars. The 2026 form has native validation. The amount accepts decimals, and the date defaults to today.</p>
+      </div>
+      <div class="mx-auto max-w-4xl">
+        <div class="grid items-start gap-8 md:grid-cols-2">
+          <figure class="min-w-0">
+            <p class="mb-3 text-lg font-semibold">Before</p>
+            <div class="aspect-[640/883] overflow-hidden rounded-xl border border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-900">
+              <img src="/photos/projects/VueFinance/before-add-transaction-640.webp" width="640" height="883" loading="lazy" decoding="async" alt="The 2024 add transaction sheet with Transaction, Payment Type, Category, Amount in dollars, and an empty date field." class="block h-full w-full object-contain object-top" />
+            </div>
+            <figcaption>Before: the date is empty and the amount is in dollars.</figcaption>
+          </figure>
+          <figure class="min-w-0">
+            <p class="mb-3 text-lg font-semibold">After</p>
+            <div class="aspect-[640/883] overflow-hidden rounded-xl border border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-900">
+              <img src="/photos/projects/VueFinance/after-add-transaction-640.webp" width="640" height="793" loading="lazy" decoding="async" alt="The 2026 add transaction form with Type, Amount in euros, Description, Paid with, and a date set to today." class="block h-full w-full object-contain object-top" />
+            </div>
+            <figcaption>After: the date is set to today and the amount is in euros.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+    <section aria-labelledby="vf-delete" class="mb-16 grid items-center gap-8 lg:grid-cols-12 lg:gap-12">
+      <div class="max-w-[52ch] space-y-4 lg:col-span-5">
+        <h3 id="vf-delete" class="text-balance text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">Delete</h3>
+        <p>I chose a confirmation dialog over an undo action because the API cannot restore a deleted transaction. The dialog names the transaction. Focus starts on Keep, so pressing Enter keeps the record.</p>
+      </div>
+      <figure class="min-w-0 lg:col-span-7">
+        <img src="/photos/projects/VueFinance/delete-confirm-800.webp" width="800" height="467" loading="lazy" decoding="async" alt="A dialog asks Delete this transaction. It names the transaction and says the action cannot be undone. Buttons read Keep and Delete." class="block h-auto w-full rounded-xl border border-neutral-200 dark:border-neutral-800" />
+        <figcaption>The delete dialog. Focus starts on Keep.</figcaption>
+      </figure>
+    </section>
+    <section aria-labelledby="vf-empty" class="mb-16">
+      <div class="mb-8 max-w-[68ch] space-y-4">
+        <h3 id="vf-empty" class="text-balance text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">Empty state</h3>
+        <p>A new account has no data. The totals show 0.00 euros, and the chart and table each explain the next step.</p>
+      </div>
+      <figure class="min-w-0 mx-auto max-w-5xl">
+        <img src="/photos/projects/VueFinance/empty-state-1200.webp" width="1200" height="550" loading="lazy" decoding="async" alt="Dashboard for a new account. All totals show 0.00 euros. The chart and the table each ask the user to add a transaction." class="block h-auto w-full rounded-xl border border-neutral-200 dark:border-neutral-800" />
+        <figcaption>The empty state for a new account.</figcaption>
+      </figure>
+    </section>
+    <section aria-labelledby="vf-login">
+      <div class="mb-8 max-w-[68ch] space-y-4">
+        <h3 id="vf-login" class="text-balance text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">Login</h3>
+        <p>The sign-in screen is a two-column layout with a soft blue panel. Sign up uses the same layout.</p>
+      </div>
+      <div class="grid items-start gap-8 md:grid-cols-2">
+        <figure class="min-w-0">
+          <p class="mb-3 text-lg font-semibold">Before</p>
+          <img src="/photos/projects/VueFinance/before-login-1200.webp" width="1200" height="750" loading="lazy" decoding="async" alt="Login screen in the 2024 version, with a plain form and no brand panel." class="block h-auto w-full rounded-xl border border-neutral-200 dark:border-neutral-800" />
+          <figcaption>Before.</figcaption>
+        </figure>
+        <figure class="min-w-0">
+          <p class="mb-3 text-lg font-semibold">After</p>
+          <img src="/photos/projects/VueFinance/after-login-1200.webp" width="1200" height="750" loading="lazy" decoding="async" alt="Login screen in the 2026 version. A brand panel on the left carries an example figure and a tagline. A login form sits on the right." class="block h-auto w-full rounded-xl border border-neutral-200 dark:border-neutral-800" />
+          <figcaption>After. The panel shows an example figure, not real data.</figcaption>
+        </figure>
+      </div>
+    </section>
+  </section>
+  <section aria-labelledby="vf-phones" class="mb-20 min-w-0 border-y border-neutral-200 py-10 dark:border-neutral-800 md:mb-24 md:py-12">
+    <div class="mb-8 max-w-[68ch] space-y-4">
+      <h2 id="vf-phones" class="text-balance text-3xl md:text-4xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">At phone width</h2>
+      <p>I checked the layout from 360 px wide. At 390 px it uses one column. The table hides its separate Date and Category columns and shows them under the description.</p>
+      <p>I did this check by hand. I did not use a device lab.</p>
+      <p id="vf-phone-help" class="text-sm">Scroll inside the dashboard, or focus it and use the arrow keys.</p>
+    </div>
+    <div class="mx-auto grid max-w-[42rem] grid-cols-1 items-start sm:grid-cols-2 gap-4 sm:gap-8">
+      <figure class="mx-auto w-full max-w-[20rem] min-w-0">
+        <div role="region" aria-label="Scrollable mobile dashboard" aria-describedby="vf-phone-help" tabindex="0" class="h-[26rem] max-h-[70svh] overflow-y-auto rounded-xl border border-neutral-200 bg-neutral-50 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-600 dark:border-neutral-800 dark:bg-neutral-900 dark:focus-visible:outline-sky-400">
+          <img src="/photos/projects/VueFinance/mobile-dashboard-480.webp" width="480" height="2271" loading="lazy" decoding="async" alt="Dashboard at 390 pixels wide, in one column. Cards stack above the chart and the table. Table rows show details under the description." class="block h-auto w-full" />
+        </div>
+        <figcaption>The dashboard at 390 px wide.</figcaption>
+      </figure>
+      <figure class="min-w-0 mx-auto w-full max-w-[20rem]">
+        <img src="/photos/projects/VueFinance/mobile-add-transaction-480.webp" width="480" height="1039" loading="lazy" decoding="async" alt="The add transaction form at 390 pixels wide." class="block h-auto w-full rounded-xl border border-neutral-200 dark:border-neutral-800" />
+        <figcaption>The add form at 390 px wide.</figcaption>
+      </figure>
+    </div>
+  </section>
+  <section aria-labelledby="vf-contract" class="mb-20 md:mb-24">
+    <div class="mb-8 max-w-[28ch]">
+      <h2 id="vf-contract" class="text-balance text-3xl md:text-4xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">The hard part was the contract between layers</h2>
+    </div>
+    <div class="max-w-[68ch] space-y-5">
+      <p>The 2024 goal was a simple tracker with Vue, GraphQL, and Tailwind. The scope grew to include API design, Express, MongoDB, Passport sessions, and password hashing. I worked on both sides, so I could follow a form entry into the database and back into the dashboard.</p>
+      <p>The 2024 report names schema, type-definition, and mutation mismatches as the main debugging cost. A small mismatch showed up as null or undefined in the interface. I traced requests through the layers and wrote TypeScript types by hand for the untyped JavaScript responses. That worked for a small project. It also duplicates the contract, which is a maintenance cost.</p>
+      <p>Creating or deleting a transaction asks the server for fresh table data and fresh category totals. The table and the chart update without a manual reload.</p>
+      <p>Sign-up and login use Passport sessions. Passwords are hashed with bcrypt before they reach the database. The session lives in an HTTP-only cookie.</p>
+      <p>For the 2026 pass I added a Docker Compose file for MongoDB and the API, and a seed script. The script creates one demo user and 45 sample transactions. The amounts are generated sample data.</p>
+    </div>
+  </section>
+  <section aria-labelledby="vf-limits" class="mb-12 border-t border-neutral-200 pt-10 dark:border-neutral-800">
+    <div class="mb-6">
+      <h2 id="vf-limits" class="text-balance text-3xl md:text-4xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">Where it stops</h2>
+    </div>
+    <ul class="max-w-[68ch] list-disc space-y-4 pl-5 marker:text-neutral-500 dark:marker:text-neutral-400">
+      <li>There is no edit screen. The update mutation has a type mismatch between the client and the server. I left it out on purpose until it is fixed.</li>
+      <li>Net ignores investments. The legend lists them, but they do not change the Net figure.</li>
+      <li>The table has loading, empty, and error states. The cards and the chart have a loading state but no error state.</li>
+      <li>There are no automated tests. I checked the interface by hand at 360 px and 1280 px, in light and dark mode. I did not check Safari. I ran no user tests, so I report no usability result.</li>
+    </ul>
+    <p class="mt-8 max-w-[68ch]">Next steps, not built yet: edit a transaction, a transactions page with search and filters, a monthly income and expense bar chart, and a hosted demo.</p>
+  </section>
+  <a href="https://github.com/synku20777/vue-finance" class="inline-flex min-h-11 items-center rounded-full border border-neutral-400 px-5 py-3 font-medium text-neutral-800 underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-600 dark:text-neutral-100 dark:focus-visible:outline-sky-400">Explore Vue Finance on GitHub</a>
 </div>
