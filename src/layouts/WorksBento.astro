@@ -14,7 +14,6 @@ interface BentoTile {
   role?: string;
   href?: string;
   image?: string;
-  srcset?: string;
   imageAlt?: string;
   mobileImage?: string;
   imageWidth?: number;
@@ -31,18 +30,17 @@ const caseStudies: CaseStudy[] = (await getCollection("caseStudies"))
   .filter((study) => study.id !== "aurora")
   .sort((a, b) => a.data.order - b.data.order);
 
-// public/ images get no Astro optimization, so tiles use pre-sized "-tile-<width>" copies when they exist.
-const tileSrcset = async (image: string) => {
-  const base = image.replace(/\.\w+$/, "");
-  const found = await Promise.all([720, 1400].map((w) => access(`public${base}-tile-${w}.webp`).then(() => `${base}-tile-${w}.webp ${w}w`, () => "")));
-  return found.filter(Boolean).join(", ") || undefined;
+// public/ images get no Astro optimization, so tiles use a pre-sized "-tile-720" copy (tiles display at up to ~700px) when it exists.
+const tileImage = async (image: string) => {
+  const tile = image.replace(/\.\w+$/, "-tile-720.webp");
+  return access(`public${tile}`).then(() => tile, () => image);
 };
 
 const caseStudyTiles: BentoTile[] = await Promise.all(caseStudies.map(async (study) => {
-  const image = study.data.thumbnailImage || study.data.heroImage;
+  const source = study.data.thumbnailImage || study.data.heroImage;
+  const image = source.startsWith("/") ? await tileImage(source) : source;
   const { width, height } = await imageMetadata(await readFile(`public${image}`), image);
   return {
-  srcset: image.startsWith("/") ? await tileSrcset(image) : undefined,
   kicker: study.data.client || study.data.category,
   title: study.data.title,
   text: study.data.description,
@@ -121,8 +119,6 @@ const tagBase =
                   <img
                     alt={tile.imageAlt ?? tile.title}
                     src={tile.image}
-                    srcset={tile.srcset}
-                    sizes={tile.srcset ? "(min-width: 1024px) 50vw, 100vw" : undefined}
                     width={tile.imageWidth}
                     height={tile.imageHeight}
                     loading="lazy"
