@@ -6,7 +6,7 @@ client: "University team project"
 role: "Frontend collaboration & shared navigation"
 year: "2023"
 tools: "Figma, HTML, CSS, Leonardo Color"
-heroImage: "/photos/projects/GreyWolf/storefront.webp"
+heroImage: "/photos/projects/GreyWolf/home-pdf-cover.webp"
 outcomes: ["Three page types", "Mobile navigation", "Product option controls"]
 tags: ["University project", "Ecommerce", "Mobile UI"]
 order: 10
@@ -16,6 +16,8 @@ constraint: "A four-person team had limited time for a 390px storefront and coul
 keyDecision: "Bring material and production information into the shopping journey, supported by a shared visual system and navigation."
 result: "A coded mobile storefront with linked browsing pages, size and color controls, and expandable product information."
 ---
+
+import DeviceFrame from "@/components/DeviceFrame.astro";
 
 <div class="mx-auto max-w-7xl px-6">
   <div class="grid grid-cols-1 gap-8 mb-16 md:grid-cols-2">
@@ -42,10 +44,24 @@ result: "A coded mobile storefront with linked browsing pages, size and color co
     <p>That shared navigation gives the separately built pages a common starting point. The implemented Basics link connects to the category page, and product breadcrumbs provide a route back through the collection.</p>
   </section>
 
-  <figure class="mb-16">
-    <img src="/photos/projects/GreyWolf/product.webp" alt="Grey Wolf mobile product page showing bamboo socks, size and color options, and material-information sections" class="mx-auto w-full max-w-sm rounded-xl border border-neutral-200 dark:border-neutral-800" loading="lazy" decoding="async" />
-    <figcaption class="mt-3 text-center text-sm text-neutral-500 dark:text-neutral-400">The original product page at the assignment’s 390px viewport.</figcaption>
-  </figure>
+  <section class="mb-16" aria-labelledby="grey-wolf-screens-title">
+    <h2 id="grey-wolf-screens-title" class="mb-4 text-2xl font-semibold tracking-tight text-neutral-800 dark:text-neutral-100">The mobile storefront</h2>
+    <p id="grey-wolf-screens-help" class="mb-6 max-w-[68ch] text-neutral-600 dark:text-neutral-300">These prototype screens use illustrative images and placeholder reviews. Focus a phone to scroll it manually.</p>
+    <div class="grid gap-8 md:grid-cols-3">
+      <figure class="mx-auto w-full max-w-[26rem] min-w-0">
+        <DeviceFrame class="grey-wolf-pan" device="phone" hasStatusBar scrollLabel="Scrollable Grey Wolf home page prototype" describedby="grey-wolf-screens-help" src="/photos/projects/GreyWolf/home-pdf-780.webp" width={780} height={6942} alt="Grey Wolf home page prototype with a clothing collection, category links, and a sustainability section" />
+        <figcaption class="mt-3 text-sm text-neutral-600 dark:text-neutral-300">Home page</figcaption>
+      </figure>
+      <figure class="mx-auto w-full max-w-[26rem] min-w-0">
+        <DeviceFrame class="grey-wolf-pan" device="phone" hasStatusBar scrollLabel="Scrollable Grey Wolf category page prototype" describedby="grey-wolf-screens-help" src="/photos/projects/GreyWolf/category-pdf-780.webp" width={780} height={4432} alt="Grey Wolf Basics category prototype with a grid of clothing products" />
+        <figcaption class="mt-3 text-sm text-neutral-600 dark:text-neutral-300">Category page</figcaption>
+      </figure>
+      <figure class="mx-auto w-full max-w-[26rem] min-w-0">
+        <DeviceFrame class="grey-wolf-pan" device="phone" hasStatusBar scrollLabel="Scrollable Grey Wolf product page prototype" describedby="grey-wolf-screens-help" src="/photos/projects/GreyWolf/product-pdf-780.webp" width={780} height={3998} alt="Grey Wolf bamboo socks prototype with size and color choices, placeholder reviews, and product suggestions" />
+        <figcaption class="mt-3 text-sm text-neutral-600 dark:text-neutral-300">Product page</figcaption>
+      </figure>
+    </div>
+  </section>
 
   <section class="mb-16 grid gap-8 md:grid-cols-2">
     <div class="prose prose-neutral max-w-none dark:prose-invert">

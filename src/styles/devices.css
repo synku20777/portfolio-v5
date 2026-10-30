@@ -1,0 +1,378 @@
+/*! Subset of Devices.css v0.2.0 (github.com/picturepan2/devices.css). Only iPhone 14 Pro and MacBook Pro 2018 (default colors) are kept, with local additions at the end.
+
+MIT License
+
+Copyright (c) 2017 Yan Zhu
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE. */
+.device,
+.device::before,
+.device::after,
+.device *,
+.device *::before,
+.device *::after {
+  box-sizing: border-box;
+  display: block;
+}
+
+.device {
+  position: relative;
+  z-index: 1;
+}
+
+.device .device-frame {
+  z-index: 1;
+}
+
+.device .device-screen {
+  background-color: #000;
+  background-position: center center;
+  background-size: cover;
+  object-fit: cover;
+  position: relative;
+}
+
+.device-iphone-14-pro {
+  height: 868px;
+  width: 428px;
+}
+
+.device-iphone-14-pro .device-frame {
+  background: #010101;
+  border: 1px solid #1b1721;
+  border-radius: 68px;
+  box-shadow: inset 0 0 4px 2px #c0b7cd, inset 0 0 0 6px #342c3f;
+  height: 868px;
+  padding: 19px;
+  position: relative;
+  width: 428px;
+}
+
+.device-iphone-14-pro .device-frame::after {
+  border: 19px solid #010101;
+  border-radius: 68px;
+  box-shadow: inset 0 0 4px 2px #c0b7cd, inset 0 0 0 6px #342c3f;
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 2;
+}
+
+.device-iphone-14-pro .device-screen {
+  border-radius: 49px;
+  height: 830px;
+  width: 390px;
+}
+
+.device-iphone-14-pro .device-stripe::after,
+.device-iphone-14-pro .device-stripe::before {
+  border: solid rgba(1, 1, 1, .25);
+  border-width: 0 7px;
+  content: "";
+  height: 7px;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  z-index: 9;
+}
+
+.device-iphone-14-pro .device-stripe::after {
+  top: 85px;
+}
+
+.device-iphone-14-pro .device-stripe::before {
+  bottom: 85px;
+}
+
+.device-iphone-14-pro .device-header {
+  background: #010101;
+  border-radius: 20px;
+  height: 35px;
+  left: 50%;
+  margin-left: -60px;
+  position: absolute;
+  top: 29px;
+  width: 120px;
+  z-index: 2;
+}
+
+.device-iphone-14-pro .device-sensors::after,
+.device-iphone-14-pro .device-sensors::before {
+  content: "";
+  position: absolute;
+  z-index: 3;
+}
+
+.device-iphone-14-pro .device-sensors::after {
+  background: #010101;
+  border-radius: 17px;
+  height: 33px;
+  left: 50%;
+  margin-left: -60px;
+  top: 30px;
+  width: 74px;
+}
+
+.device-iphone-14-pro .device-sensors::before {
+  background: radial-gradient(farthest-corner at 20% 20%, #6074bf 0, transparent 40%), radial-gradient(farthest-corner at 80% 80%, #513785 0, #24555e 20%, transparent 50%);
+  border-radius: 50%;
+  box-shadow: 0 0 1px 1px rgba(255, 255, 255, .05);
+  height: 9px;
+  left: 50%;
+  margin-left: 36px;
+  top: 42px;
+  width: 9px;
+}
+
+.device-iphone-14-pro .device-btns {
+  background: #1b1721;
+  border-radius: 2px;
+  height: 32px;
+  left: -2px;
+  position: absolute;
+  top: 115px;
+  width: 3px;
+}
+
+.device-iphone-14-pro .device-btns::after,
+.device-iphone-14-pro .device-btns::before {
+  background: #1b1721;
+  border-radius: 2px;
+  content: "";
+  height: 62px;
+  left: 0;
+  position: absolute;
+  width: 3px;
+}
+
+.device-iphone-14-pro .device-btns::after {
+  top: 60px;
+}
+
+.device-iphone-14-pro .device-btns::before {
+  top: 140px;
+}
+
+.device-iphone-14-pro .device-power {
+  background: #1b1721;
+  border-radius: 2px;
+  height: 100px;
+  position: absolute;
+  right: -2px;
+  top: 200px;
+  width: 3px;
+}
+
+.device-iphone-14-pro .device-home::after,
+.device-iphone-14-pro .device-home::before {
+  border: solid rgba(1, 1, 1, .25);
+  border-width: 6px 0;
+  content: "";
+  height: 6px;
+  position: absolute;
+  width: 6px;
+  z-index: 9;
+}
+
+.device-iphone-14-pro .device-home::after {
+  right: 86px;
+  top: 0;
+}
+
+.device-iphone-14-pro .device-home::before {
+  bottom: 0;
+  left: 86px;
+}
+
+.device-macbook-pro-2018 {
+  height: 425px;
+  width: 740px;
+}
+
+.device-macbook-pro-2018 .device-frame {
+  background: #0d0d0d;
+  border-radius: 20px;
+  box-shadow: inset 0 0 0 2px #c8cacb;
+  height: 409px;
+  margin: 0 auto;
+  padding: 12px 10px 26px;
+  position: relative;
+  width: 614px;
+}
+
+.device-macbook-pro-2018 .device-frame::after {
+  background: #272727;
+  border-radius: 0 0 20px 20px;
+  bottom: 2px;
+  content: "";
+  height: 26px;
+  left: 2px;
+  position: absolute;
+  width: 610px;
+}
+
+.device-macbook-pro-2018 .device-frame::before {
+  bottom: 10px;
+  color: #c8cacb;
+  content: "MacBook Pro";
+  content: "MacBook Pro" / "";
+  font-size: 12px;
+  height: 16px;
+  left: 50%;
+  line-height: 16px;
+  margin-left: -100px;
+  position: absolute;
+  text-align: center;
+  width: 200px;
+  z-index: 1;
+}
+
+.device-macbook-pro-2018 .device-screen {
+  border: 2px solid #121212;
+  border-radius: 2px;
+  height: 371px;
+  width: 594px;
+}
+
+.device-macbook-pro-2018 .device-power {
+  background: #e2e3e4;
+  border: solid #d5d6d8;
+  border-radius: 2px 2px 0 0;
+  border-width: 2px 4px 0 4px;
+  height: 14px;
+  margin-top: -10px;
+  position: relative;
+  width: 740px;
+  z-index: 9;
+}
+
+.device-macbook-pro-2018 .device-power::after,
+.device-macbook-pro-2018 .device-power::before {
+  content: "";
+  position: absolute;
+}
+
+.device-macbook-pro-2018 .device-power::after {
+  background: #d5d6d8;
+  border-radius: 0 0 10px 10px;
+  box-shadow: inset 0 0 4px 2px #babdbf;
+  height: 10px;
+  left: 50%;
+  margin-left: -60px;
+  top: -2px;
+  width: 120px;
+}
+
+.device-macbook-pro-2018 .device-power::before {
+  background: #a0a3a7;
+  border-radius: 0 0 180px 180px/ 0 0 12px 12px;
+  box-shadow: inset 0 -2px 6px 0 #474a4d;
+  height: 12px;
+  left: -4px;
+  margin: 0 auto;
+  top: 10px;
+  width: 740px;
+}
+
+/* Local additions: fit-to-container scaling and the scrollable phone screen (see DeviceFrame.astro). */
+.device-fit {
+  container-type: inline-size;
+  margin-inline: auto;
+  overflow: hidden;
+}
+
+.device-fit > .device {
+  transform: scale(tan(atan2(100cqw, var(--w))));
+  transform-origin: top left;
+}
+
+/* Without trig functions or container units (before Chrome 111, Firefox 110, Safari 16) the device keeps its natural size and scrolls sideways. */
+@supports not (transform: scale(tan(atan2(1cqw, 1px)))) {
+  .device-fit {
+    aspect-ratio: auto !important;
+    overflow-x: auto;
+  }
+
+  .device-fit > .device {
+    transform: none;
+  }
+}
+
+/* Keep the Dynamic Island off the capture: a fixed status-bar gap above it. The capture fits whole inside the rest of the screen. */
+.device-fit .device-iphone-14-pro .device-screen {
+  background-color: var(--bg, #fff);
+  border-top: 46px solid var(--bg, #fff);
+}
+
+.device-fit.screen-has-status-bar .device-iphone-14-pro .device-screen {
+  border-top: 0;
+}
+
+.device-fit .device-iphone-14-pro img.device-screen {
+  object-fit: contain;
+  object-position: top;
+}
+
+.device-scroll {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.device-scroll img {
+  display: block;
+  height: auto;
+  width: 100%;
+}
+
+/* The screen is light in both themes, so the darker blue (4.1 to 1 on white) stays in dark mode too. */
+.device-scroll:focus-visible {
+  outline: 2px solid #0284c7;
+  outline-offset: -4px;
+}
+
+.grey-wolf-pan .device-scroll {
+  scrollbar-width: none;
+}
+
+.grey-wolf-pan .device-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .grey-wolf-pan {
+      view-timeline: --grey-wolf-screen block;
+    }
+
+    .grey-wolf-pan .device-scroll:not(:focus) {
+      overflow-y: clip;
+    }
+
+    .grey-wolf-pan .device-scroll:not(:focus) img {
+      animation: grey-wolf-scroll linear both;
+      animation-timeline: --grey-wolf-screen;
+      animation-range: cover 0% cover 100%;
+    }
+  }
+}
+
+@keyframes grey-wolf-scroll {
+  to { transform: translateY(calc(-100% + 830px)); }
+}

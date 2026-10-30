@@ -1,0 +1,70 @@
+---
+import "@/styles/devices.css";
+
+// Pure CSS device frame (subset of Devices.css, MIT). The frame is a fixed-size
+// device, so it scales with its container up to `maxWidth` (default: natural size).
+// Pass `scrollLabel` to make the screen a keyboard-scrollable region for a tall capture.
+interface Props {
+  device: "laptop" | "phone";
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  maxWidth?: number;
+  screenBg?: string;
+  hasStatusBar?: boolean;
+  scrollLabel?: string;
+  describedby?: string;
+  class?: string;
+}
+
+// On a phone, `screenBg` fills the status-bar gap above the capture. Match the capture's top edge.
+const { device, src, alt, width, height, maxWidth, screenBg, hasStatusBar, scrollLabel, describedby, class: className } = Astro.props;
+const laptop = device === "laptop";
+const [w, h] = laptop ? [740, 425] : [428, 868];
+const img = {
+  src,
+  width,
+  height,
+  loading: "lazy" as const,
+  decoding: "async" as const,
+};
+---
+
+<div
+  class:list={["device-fit w-full", { "screen-has-status-bar": hasStatusBar }, className]}
+  style={`--w:${w}px;aspect-ratio:${w}/${h};max-width:${maxWidth ?? w}px${screenBg ? `;--bg:${screenBg}` : ""}`}
+>
+  <div class={`device ${laptop ? "device-macbook-pro-2018" : "device-iphone-14-pro"}`}>
+    <div class="device-frame">
+      {
+        scrollLabel ? (
+          <div
+            class="device-screen device-scroll"
+            role="region"
+            aria-label={scrollLabel}
+            aria-describedby={describedby}
+            tabindex="0"
+          >
+            <img {...img} alt={alt} />
+          </div>
+        ) : (
+          <img {...img} alt={alt} class="device-screen" />
+        )
+      }
+    </div>
+    {
+      !laptop && (
+        <>
+          <div class="device-stripe" />
+          <div class="device-header" />
+          <div class="device-sensors" />
+          <div class="device-btns" />
+          <div class="device-power" />
+          <div class="device-home" />
+        </>
+      )
+    }
+    {laptop && <div class="device-power" />}
+  </div>
+</div>

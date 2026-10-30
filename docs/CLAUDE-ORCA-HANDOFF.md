@@ -12,6 +12,14 @@ Updated: 2026-10-17. This document records the current work and next steps; insp
 - **Deleted with approval:** `VueFinance/dashboard.webp`, `entry.webp`, `dashboard-tile-720.webp`.
 - **Decision (Nestor, 2026-10-29):** the page does not mention the security gaps in the repository's `docs/PROJECT.md`. It states the good parts that code supports (bcrypt hashing, HTTP-only session cookie). The login and dashboard "example" captions stay as written.
 
+## Update 2026-10-30: CSS device frames
+
+- **`DeviceFrame.astro`** shows a screenshot in an iPhone 14 Pro (`device="phone"`) or MacBook Pro 2018 (`device="laptop"`) frame. The frame rules in `src/styles/devices.css` are a trimmed copy of Devices.css v0.2.0 (MIT, attribution kept in the file header, no npm dependency). The frame scales to its container with `transform: scale(tan(atan2(100cqw, var(--w))))`. Pass `maxWidth` to render larger than natural size. Pass `scrollLabel` for a keyboard-scrollable tall capture. Pass `screenBg` to match the status-bar gap above a phone capture to the screenshot's top edge. A phone capture is fitted whole (`object-fit: contain`, top aligned) so nothing is cropped; Codex found the first version cut the submit button on the Vue Finance add form.
+- **Used in:** Vue Finance (dark dashboard in a laptop, two phone captures), Grey Wolf (product page), IT-Workshoppen (wide Visual Showcase tile: `site-desktop-1152.webp` and `site-mobile-780.webp`). Not used where a device is already in the image (Astra photos, Aurora `app-render`, `responsive-devices`), in the before/after pairs (frames cost legibility side by side), or in hero images (hero is `aspect-square` and must stay an image).
+- **HTML budget:** a `<style>` block in a component is inlined into every page that uses it and counts toward the 14,000-byte limit. IT-Workshoppen failed the Brotli limit by 68 bytes until the component CSS moved into the external `devices.css`. Keep component CSS there. IT-Workshoppen now measures 13,806 bytes (Brotli).
+- **Unused now:** `It-Workshop/site-responsive-2200.webp`, plus `1.webp`, `1-tile-720.webp`, `2.webp`. Deletion needs Nestor's approval.
+- **Orchestration:** Codex could not take the IT-Workshoppen tile (model at capacity, nothing written), so Claude built it. Codex reviewed the change read-only.
+
 ## Status on 2026-10-17
 
 The last check-in ended with the items under "Deferred" and "Blocked" left undone on purpose. Start the next session there. Nothing is committed.

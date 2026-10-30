@@ -1,3 +1,7 @@
+---
+import "@/styles/devices.css";
+---
+
 <figure class="home-showcase min-w-0">
   <div class="showcase-scene">
     <div class="showcase-stage">
@@ -11,20 +15,14 @@
           Manual scroll
         </label>
       </div>
-      <div class="showcase-display">
-        <div class="showcase-depth" aria-hidden="true"></div>
-        <div class="showcase-browser relative overflow-hidden rounded-2xl border border-neutral-300 bg-white dark:border-neutral-700 dark:bg-neutral-950">
-          <div class="flex min-h-11 items-center gap-3 border-b border-neutral-200 bg-neutral-100 px-4 text-xs text-neutral-600 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-300">
-            <span aria-hidden="true" class="flex shrink-0 gap-1.5">
-              <span class="size-1.5 rounded-full bg-neutral-500"></span>
-              <span class="size-1.5 rounded-full bg-neutral-500"></span>
-              <span class="size-1.5 rounded-full bg-neutral-500"></span>
-            </span>
-            <span>Aurora / Home page prototype</span>
+      <div class="device-fit w-full" style="--w:740px;aspect-ratio:740/425;max-width:1232px">
+        <div class="device device-macbook-pro-2018">
+          <div class="device-frame">
+            <div class="device-screen showcase-viewport focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-sky-600 dark:focus-visible:outline-sky-400" role="region" aria-label="Scrollable Aurora home page prototype" aria-describedby="aurora-scroll-help" tabindex="0">
+              <img src="/photos/projects/AuroraDesignSystem/home-scroll-1280.webp" srcset="/photos/projects/AuroraDesignSystem/home-scroll-1280.webp 1280w, /photos/projects/AuroraDesignSystem/home-scroll-1920.webp 1920w" sizes="(min-width: 1280px) 990px, 80vw" width="1920" height="4860" loading="lazy" decoding="async" alt="Illustrative Aurora home page with banners, weekly finds, interesting items, popular brands, seller collections, and product picks" class="showcase-image block h-auto w-full bg-white" />
+            </div>
           </div>
-          <div class="showcase-viewport focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-sky-600 dark:focus-visible:outline-sky-400" role="region" aria-label="Scrollable Aurora home page prototype" aria-describedby="aurora-scroll-help" tabindex="0">
-            <img src="/photos/projects/AuroraDesignSystem/home-scroll-1280.webp" srcset="/photos/projects/AuroraDesignSystem/home-scroll-1280.webp 1280w, /photos/projects/AuroraDesignSystem/home-scroll-1920.webp 1920w" sizes="(min-width: 1280px) 1230px, calc(100vw - 50px)" width="1920" height="4860" loading="lazy" decoding="async" alt="Illustrative Aurora home page with banners, weekly finds, interesting items, popular brands, seller collections, and product picks" class="showcase-image block h-auto w-full bg-white" />
-          </div>
+          <div class="device-power"></div>
         </div>
       </div>
     </div>
@@ -33,28 +31,7 @@
 </figure>
 
 <style>
-  .home-showcase {
-    --showcase-height: clamp(15rem, 50svh, 32rem);
-  }
-
-  .showcase-display {
-    position: relative;
-    padding-bottom: 1rem;
-  }
-
-  .showcase-depth {
-    position: absolute;
-    inset: 3rem 0 0 0.75rem;
-    border-radius: 1.25rem;
-    background: #e5e5e5;
-  }
-
-  :global(.dark) .showcase-depth {
-    background: #262626;
-  }
-
   .showcase-viewport {
-    height: var(--showcase-height);
     overflow-y: auto;
   }
 
@@ -95,12 +72,6 @@
         animation-range: contain 0% contain 100%;
       }
 
-      .showcase-depth {
-        animation: aurora-home-depth 1s linear both;
-        animation-timeline: --aurora-home;
-        animation-range: contain 0% contain 100%;
-      }
-
       .manual-control {
         display: inline-flex;
         min-height: 2.75rem;
@@ -131,7 +102,6 @@
       }
 
       .home-showcase:has(.manual-input:checked) .showcase-image,
-      .home-showcase:has(.manual-input:checked) .showcase-depth,
       .showcase-viewport:focus .showcase-image {
         animation: none;
       }
@@ -147,11 +117,6 @@
   }
 
   @keyframes aurora-home-pan {
-    to { transform: translateY(calc(-100% + var(--showcase-height))); }
-  }
-
-  @keyframes aurora-home-depth {
-    from { transform: translateY(0.75rem); }
-    to { transform: translateY(-0.75rem); }
+    to { transform: translateY(calc(-100% + 367px)); }
   }
 </style>

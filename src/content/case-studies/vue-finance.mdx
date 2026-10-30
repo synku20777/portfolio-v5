@@ -17,6 +17,8 @@ keyDecision: "Remove what was unfinished, then build one token set that drives l
 result: "A smaller app with one dashboard, EUR formatting, a delete confirmation, and a Docker setup with demo data. No user testing."
 ---
 
+import DeviceFrame from "@/components/DeviceFrame.astro";
+
 <div class="mx-auto max-w-7xl min-w-0 px-6 text-neutral-600 dark:text-neutral-300">
   <div class="mb-20 grid gap-6 md:grid-cols-2 md:gap-8">
     <section aria-labelledby="vf-challenge" class="rounded-2xl bg-neutral-50 p-8 dark:bg-neutral-900">
@@ -108,8 +110,8 @@ result: "A smaller app with one dashboard, EUR formatting, a delete confirmation
       <p class="max-w-[68ch]">I computed contrast ratios from the token values. In light mode, body text on the page background is about 15 to 1. Muted text is 5.3 to 1. White text on the brand blue is 5.6 to 1. In dark mode, muted text on a card is 7.7 to 1. Every pair I checked is above 4.5 to 1. These numbers come from the tokens, not from measured pixels. I did not test with a screen reader.</p>
     </div>
     <figure class="min-w-0">
-      <img src="/photos/projects/VueFinance/after-dashboard-dark-1600.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="The same 2026 dashboard in dark mode. The donut chart and category badges use lighter red, green, and purple." class="block h-auto w-full rounded-2xl border border-neutral-200 dark:border-neutral-800" />
-      <figcaption>The same dashboard in dark mode.</figcaption>
+      <DeviceFrame device="laptop" maxWidth={1000} src="/photos/projects/VueFinance/after-dashboard-dark-1600.webp" width={1600} height={1000} alt="The same 2026 dashboard in dark mode. The donut chart and category badges use lighter red, green, and purple." />
+      <figcaption class="mx-auto text-center">The same dashboard in dark mode.</figcaption>
     </figure>
   </section>
   <section aria-labelledby="vf-flows" class="mb-20 min-w-0 md:mb-24">
@@ -186,16 +188,14 @@ result: "A smaller app with one dashboard, EUR formatting, a delete confirmation
       <p>I did this check by hand. I did not use a device lab.</p>
       <p id="vf-phone-help" class="text-sm">Scroll inside the dashboard, or focus it and use the arrow keys.</p>
     </div>
-    <div class="mx-auto grid max-w-[42rem] grid-cols-1 items-start sm:grid-cols-2 gap-4 sm:gap-8">
-      <figure class="mx-auto w-full max-w-[20rem] min-w-0">
-        <div role="region" aria-label="Scrollable mobile dashboard" aria-describedby="vf-phone-help" tabindex="0" class="h-[26rem] max-h-[70svh] overflow-y-auto rounded-xl border border-neutral-200 bg-neutral-50 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-600 dark:border-neutral-800 dark:bg-neutral-900 dark:focus-visible:outline-sky-400">
-          <img src="/photos/projects/VueFinance/mobile-dashboard-480.webp" width="480" height="2271" loading="lazy" decoding="async" alt="Dashboard at 390 pixels wide, in one column. Cards stack above the chart and the table. Table rows show details under the description." class="block h-auto w-full" />
-        </div>
-        <figcaption>The dashboard at 390 px wide.</figcaption>
+    <div class="mx-auto grid max-w-[52rem] grid-cols-1 items-start gap-10 sm:grid-cols-2 sm:gap-8">
+      <figure class="mx-auto w-full max-w-[22rem] min-w-0">
+        <DeviceFrame device="phone" scrollLabel="Scrollable mobile dashboard" describedby="vf-phone-help" src="/photos/projects/VueFinance/mobile-dashboard-480.webp" width={480} height={2271} alt="Dashboard at 390 pixels wide, in one column. Cards stack above the chart and the table. Table rows show details under the description." />
+        <figcaption class="mx-auto text-center">The dashboard at 390 px wide.</figcaption>
       </figure>
-      <figure class="min-w-0 mx-auto w-full max-w-[20rem]">
-        <img src="/photos/projects/VueFinance/mobile-add-transaction-480.webp" width="480" height="1039" loading="lazy" decoding="async" alt="The add transaction form at 390 pixels wide." class="block h-auto w-full rounded-xl border border-neutral-200 dark:border-neutral-800" />
-        <figcaption>The add form at 390 px wide.</figcaption>
+      <figure class="mx-auto w-full max-w-[22rem] min-w-0">
+        <DeviceFrame device="phone" screenBg="#d0d0d0" src="/photos/projects/VueFinance/mobile-add-transaction-480.webp" width={480} height={1039} alt="The add transaction form at 390 pixels wide." />
+        <figcaption class="mx-auto text-center">The add form at 390 px wide.</figcaption>
       </figure>
     </div>
   </section>

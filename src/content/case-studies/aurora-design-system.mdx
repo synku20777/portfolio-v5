@@ -19,6 +19,7 @@ result: "Three developers assembled a login page faster. Buying-flow benchmarks 
 ---
 
 import ScrollShowcase from "@/components/ScrollShowcase.astro";
+import DeviceFrame from "@/components/DeviceFrame.astro";
 
 <div class="mx-auto max-w-7xl px-6">
   <nav aria-label="Aurora project sections" class="mb-12 flex flex-wrap gap-3">
@@ -161,7 +162,7 @@ import ScrollShowcase from "@/components/ScrollShowcase.astro";
     <p class="mb-12 max-w-[68ch]">The landing-page deliverable explains the proposed marketplace before launch. Its scope covers product communication and frontend implementation. The system and landing page have separate reports and evaluations.</p>
 
     <figure class="mb-12">
-      <img src="/photos/projects/Aurora/landing.webp" alt="Aurora landing page with its launch headline and email waitlist invitation" width="1265" height="712" loading="lazy" decoding="async" class="w-full h-auto rounded-xl" />
+      <DeviceFrame device="laptop" maxWidth={1232} src="/photos/projects/Aurora/landing.webp" alt="Aurora landing page with its launch headline and email waitlist invitation" width={1265} height={712} />
       <figcaption>The landing page introduces the proposition and leads to an email waitlist. The form does not save subscribers.</figcaption>
     </figure>
 
